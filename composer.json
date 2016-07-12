@@ -1,5 +1,6 @@
 {
 	"license": "MIT",
+	"description": "Mall marketplace API client",
 	"authors": [
 		{
 			"name": "Jan Blaha",
