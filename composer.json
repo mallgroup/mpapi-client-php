@@ -9,8 +9,7 @@
 		}
 	],
 	"support": {
-		"email": "it.helpdesk@mall.cz",
-		"docs": ""
+		"email": "it.helpdesk@mall.cz"
 	},
 	"require-dev" : {
 		"codeception/codeception": "~2.1"
