@@ -1,5 +1,6 @@
 {
   "description" : "Mall marketplace API client",
+  "type": "library",
   "require" : {
     "php" : "^5.5 || ^7.0",
     "monolog/monolog" : "~1.20.0",
@@ -18,9 +19,9 @@
   "support" : {
     "email" : "it.helpdesk@mall.cz"
   },
-  "authors" : [ {
+  "authors" : [{
     "name" : "Jan Blaha",
     "email" : "jan.blaha@mall.cz",
     "role" : "Developer"
-  } ]
+  }]
 }
