@@ -1,22 +1,26 @@
 {
-	"license": "MIT",
-	"description": "Mall marketplace API client",
-	"authors": [
-		{
-			"name": "Jan Blaha",
-			"email": "jan.blaha@mall.cz",
-			"role": "Developer"
-		}
-	],
-	"support": {
-		"email": "it.helpdesk@mall.cz"
-	},
-	"require-dev" : {
-		"codeception/codeception": "~2.1"
-	},
-	"require": {
-		"php": "^5.5 || ^7.0",
-		"monolog/monolog": "~1.20.0",
-		"guzzlehttp/guzzle": "~6.2.0"
-	}
+  "description" : "Mall marketplace API client",
+  "require" : {
+    "php" : "^5.5 || ^7.0",
+    "monolog/monolog" : "~1.20.0",
+    "guzzlehttp/guzzle" : "~6.2.0",
+    "psr/log" : "~1.0.0"
+  },
+  "require-dev" : {
+    "codeception/codeception" : "~2.1"
+  },
+  "license" : "MIT",
+  "autoload" : {
+    "psr-4" : {
+      "MPAPI\\" : "src/"
+    }
+  },
+  "support" : {
+    "email" : "it.helpdesk@mall.cz"
+  },
+  "authors" : [ {
+    "name" : "Jan Blaha",
+    "email" : "jan.blaha@mall.cz",
+    "role" : "Developer"
+  } ]
 }
