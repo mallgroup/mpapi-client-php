@@ -1,7 +1,9 @@
 <?php
 namespace MPAPI\Services;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Exception\ClientException;
 use Psr\Log\LoggerInterface;
 use MPAPI\Lib\Logger;
 
@@ -29,6 +31,18 @@ class Client
 	 *
 	 * @var string
 	 */
+	const CONFIG_FILE = '/../config/config.ini';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const API_URL_PATTERN = '%s?client_id=%s';
+
+	/**
+	 *
+	 * @var string
+	 */
 	private $clientId;
 
 	/**
@@ -51,23 +65,36 @@ class Client
 
 	/**
 	 *
+	 * @var array
+	 */
+	private $config;
+
+	/**
+	 *
 	 * @param string $clientId
 	 */
 	public function __construct($clientId)
 	{
 		$this->clientId = $clientId;
+		$this->environment = self::ENVIRONMENT_TEST;
 	}
 
 	/**
 	 * Setter for logger
 	 *
 	 * @param LoggerInterface $logger
+	 * @return Client
 	 */
 	public function setLogger(LoggerInterface $logger)
 	{
 		$this->logger = $logger;
+		return $this;
 	}
 
+	/**
+	 *
+	 * @return LoggerInterface
+	 */
 	public function getLogger()
 	{
 		if (!$this->logger instanceof LoggerInterface) {
@@ -77,20 +104,81 @@ class Client
 	}
 
 	/**
+	 * Set custom user handler
+	 *
+	 * @param callback $errorHandler
+	 * @return Client
+	 */
+	public function setErrorHandler(callback $errorHandler)
+	{
+		return $this;
+	}
+
+	/**
 	 * Get client for network communication
 	 *
-	 * @return GuzzleHttp\Client
+	 * @return HttpClient
 	 */
-	public function getHttpClient()
+	private function getHttpClient()
 	{
 		if (!$this->httpClient instanceof Client) {
+			$config = $this->getConfig($this->environment);
 			/* @var GuzzleHttp\Client */
-			$this->httpClient = new Client([
-				'base_uri' => 'http://marketplace-api.mall.test/v1/',
+			$this->httpClient = new HttpClient([
+				'base_uri' => $config['url'],
 				'timeout' => 0,
 				'allow_redirects' => false
 			]);
 		}
 		return $this->httpClient;
+	}
+
+	/**
+	 *
+	 * @param string $path
+	 * @param string $method
+	 * @param array $body
+	 * @param array $args
+	 * @return Response|null
+	 */
+	public function sendRequest($path, $method, array $body = [], array $args = [])
+	{
+		$response = null;
+		try {
+			/* @var Response $response */
+			$response = $this->getHttpClient()->request($method, $path, [
+				'json' => $body,
+				'query' => [
+					'client_id' => $this->clientId
+				]
+			]);
+		} catch (ClientException $e) {
+			$this->logger->error($e->getMessage(), [
+				'method' => $method,
+				'path' => $path,
+				'body' => $body,
+				'client_id' => $this->clientId
+			]);
+		}
+		return $response;
+	}
+
+	/**
+	 * Get configuration
+	 *
+	 * @param string $environment
+	 * @return string
+	 */
+	private function getConfig($environment)
+	{
+		$retval = null;
+		if (file_exists(__DIR__ . self::CONFIG_FILE)) {
+			$this->config = parse_ini_file(__DIR__ . self::CONFIG_FILE, true);
+		}
+		
+		if (isset($this->config[$environment])) {
+			$retval = $this->config[$environment];
+		}
+		return $retval;
 	}
 }
