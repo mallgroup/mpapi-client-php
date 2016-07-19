@@ -102,25 +102,6 @@ class Client
 	}
 
 	/**
-	 * Get client for network communication
-	 *
-	 * @return HttpClient
-	 */
-	private function getHttpClient()
-	{
-		if (!$this->httpClient instanceof Client) {
-			$config = $this->getConfig($this->environment);
-			/* @var GuzzleHttp\Client */
-			$this->httpClient = new HttpClient([
-				'base_uri' => $config['url'],
-				'timeout' => 0,
-				'allow_redirects' => false
-			]);
-		}
-		return $this->httpClient;
-	}
-
-	/**
 	 *
 	 * @param string $path
 	 * @param string $method
@@ -162,10 +143,34 @@ class Client
 		if (file_exists(__DIR__ . self::CONFIG_FILE)) {
 			$this->config = parse_ini_file(__DIR__ . self::CONFIG_FILE, true);
 		}
-		
+
 		if (isset($this->config[$environment])) {
 			$retval = $this->config[$environment];
 		}
 		return $retval;
+	}
+
+	/**
+	 * Get client for network communication
+	 *
+	 * @return HttpClient
+	 */
+	private function getHttpClient()
+	{
+		if (!$this->httpClient instanceof Client) {
+			$config = $this->getConfig($this->environment);
+			/* @var GuzzleHttp\Client */
+			$this->httpClient = new HttpClient([
+				'base_uri' => $config['url'],
+				'timeout' => 0,
+				'allow_redirects' => false
+			]);
+		}
+		return $this->httpClient;
+	}
+
+	private function getEncryptor()
+	{
+
 	}
 }
