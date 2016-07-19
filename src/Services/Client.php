@@ -4,6 +4,7 @@ namespace MPAPI\Services;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Exception\ClientException;
+use Psr\Log\LoggerInterface;
 use MPAPI\Lib\Logger;
 
 /**
@@ -46,7 +47,7 @@ class Client
 
 	/**
 	 *
-	 * @var Logger $logger
+	 * @var LoggerInterface $logger
 	 */
 	private $logger;
 
@@ -81,13 +82,25 @@ class Client
 	/**
 	 * Setter for logger
 	 *
-	 * @param Logger $logger
+	 * @param LoggerInterface $logger
 	 * @return Client
 	 */
-	public function setLogger(Logger $logger)
+	public function setLogger(LoggerInterface $logger)
 	{
 		$this->logger = $logger;
 		return $this;
+	}
+
+	/**
+	 *
+	 * @return LoggerInterface
+	 */
+	public function getLogger()
+	{
+		if (!$this->logger instanceof LoggerInterface) {
+			$this->logger = new Logger();
+		}
+		return $this->logger;
 	}
 
 	/**
