@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use MPAPI\Lib\Logger;
 use MPAPI\Lib\ClientIdParser;
 use MPAPI\Exceptions\ClientIdException;
+use MPAPI\Lib\Handlers\ExceptionHandler;
 
 /**
  * Marketplace API client
@@ -78,6 +79,14 @@ class Client
 	private $errors = [];
 
 	/**
+	 * @var array
+	 */
+	private $allowedEnvironment = [
+		self::ENVIRONMENT_TEST,
+		self::ENVIRONMENT_PRODUCTION
+	];
+
+	/**
 	 *
 	 * @param string $clientId
 	 */
@@ -88,6 +97,9 @@ class Client
 		}
 		$this->clientId = $clientId;
 		$this->environment = self::ENVIRONMENT_TEST;
+
+		// set default exception handler
+		$this->setExceptionHandler(new ExceptionHandler($this->getLogger()));
 	}
 
 	/**
@@ -117,22 +129,25 @@ class Client
 	/**
 	 * Set custom user handler
 	 *
-	 * @param callback $errorHandler
-	 * @return Client
+	 * @param $errorHandler
+	 * @param $errorTypes
+	 * @return \MPAPI\Services\Client
 	 */
-	public function setErrorHandler(callback $errorHandler)
+	public function setErrorHandler($handler, $errorTypes)
 	{
+		set_error_handler($handler, $errorTypes);
 		return $this;
 	}
 
 	/**
-	 * Get list of errors
 	 *
-	 * @return array
+	 * @param object $handler
+	 * @return \MPAPI\Services\Client
 	 */
-	public function getErrors()
+	public function setExceptionHandler($handler)
 	{
-		return $this->errors;
+		set_exception_handler($handler);
+		return $this;
 	}
 
 	/**
@@ -155,16 +170,10 @@ class Client
 				]
 			]);
 		} catch (ClientException $e) {
-			$this->errors[] = $e->getMessage();
 			$this->getLogger()->error($e->getMessage(), [
 				'method' => $method,
 				'path' => $path,
 				'body' => $body,
-				'client_id' => $this->clientId
-			]);
-		} catch (ClientIdException $e) {
-			$this->errors[] = $e->getMessage();
-			$this->getLogger()->error($e->getMessage(), [
 				'client_id' => $this->clientId
 			]);
 		}
@@ -182,6 +191,10 @@ class Client
 		$retval = null;
 		if (file_exists(__DIR__ . self::CONFIG_FILE)) {
 			$this->config = parse_ini_file(__DIR__ . self::CONFIG_FILE, true);
+		}
+
+		if (!in_array($environment, $this->allowedEnvironment)) {
+			throw new ClientIdException(sprintf(ClientIdException::MSG_UNKNOWN_ENVIRONMENT, $environment));
 		}
 
 		if (isset($this->config[$environment])) {
