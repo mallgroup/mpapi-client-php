@@ -4,7 +4,7 @@ namespace MPAPI\Services;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Exception\ClientException;
-use Psr\Log\LoggerInterface;
+use MPAPI\Lib\Logger;
 
 /**
  * Marketplace API client
@@ -13,6 +13,7 @@ use Psr\Log\LoggerInterface;
  */
 class Client
 {
+
 	/**
 	 *
 	 * @var string
@@ -45,7 +46,7 @@ class Client
 
 	/**
 	 *
-	 * @var LoggerInterface $logger
+	 * @var Logger $logger
 	 */
 	private $logger;
 
@@ -80,10 +81,10 @@ class Client
 	/**
 	 * Setter for logger
 	 *
-	 * @param LoggerInterface $logger
+	 * @param Logger $logger
 	 * @return Client
 	 */
-	public function setLogger(LoggerInterface $logger)
+	public function setLogger(Logger $logger)
 	{
 		$this->logger = $logger;
 		return $this;
@@ -132,15 +133,12 @@ class Client
 		$response = null;
 		try {
 			/* @var Response $response */
-			$response = $this->getHttpClient()->request(
-				$method,
-				$path,
-				[
-					'json' => $body,
-					'query' => [
-						'client_id' => $this->clientId
-					]
-				]);
+			$response = $this->getHttpClient()->request($method, $path, [
+				'json' => $body,
+				'query' => [
+					'client_id' => $this->clientId
+				]
+			]);
 		} catch (ClientException $e) {
 			$this->logger->error($e->getMessage(), [
 				'method' => $method,
@@ -164,7 +162,7 @@ class Client
 		if (file_exists(__DIR__ . self::CONFIG_FILE)) {
 			$this->config = parse_ini_file(__DIR__ . self::CONFIG_FILE, true);
 		}
-
+		
 		if (isset($this->config[$environment])) {
 			$retval = $this->config[$environment];
 		}

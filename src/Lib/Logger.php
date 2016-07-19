@@ -1,5 +1,5 @@
 <?php
-namespace MPAPI\Lib\Logger;
+namespace MPAPI\Lib;
 
 use Psr\Log\LogLevel;
 use Psr\Log\AbstractLogger;
