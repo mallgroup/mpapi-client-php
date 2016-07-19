@@ -1,6 +1,8 @@
 <?php
 namespace MPAPI\Lib;
 
+use MPAPI\Exceptions\ClientIdException;
+
 /**
  * Parser for client id
  *
@@ -18,7 +20,19 @@ class ClientIdParser
 	 *
 	 * @var string
 	 */
+	const HASH_DELIMITER = '|';
+
+	/**
+	 *
+	 * @var string
+	 */
 	private $clientId;
+
+	/**
+	 *
+	 * @var string
+	 */
+	private $environment;
 
 	/**
 	 *
@@ -27,16 +41,7 @@ class ClientIdParser
 	public function __construct($clientId)
 	{
 		$this->clientId = $clientId;
-	}
-
-	/**
-	 * Check if client id contain environment
-	 *
-	 * @return boolean
-	 */
-	public function containEnvironment()
-	{
-
+		$this->parse();
 	}
 
 	/**
@@ -46,7 +51,7 @@ class ClientIdParser
 	 */
 	public function getEnvironment()
 	{
-
+		return $this->environment;
 	}
 
 	/**
@@ -57,6 +62,13 @@ class ClientIdParser
 	private function parse()
 	{
 		$hash = substr(strrchr($this->clientId, self::DELIMITER), 1);
+		$hashDecode = base64_decode($hash);
+
+		if (empty($hashDecode)) {
+			throw new ClientIdException(ClientIdException::MSG_CLIENT_ID_NOT_CONTAIN_ENVIRONMENT);
+		}
+
+		$this->environment = explode(self::HASH_DELIMITER, $hashDecode)[0];
 		return $this;
 	}
 }

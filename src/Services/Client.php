@@ -6,6 +6,8 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Exception\ClientException;
 use Psr\Log\LoggerInterface;
 use MPAPI\Lib\Logger;
+use MPAPI\Lib\ClientIdParser;
+use MPAPI\Exceptions\ClientIdException;
 
 /**
  * Marketplace API client
@@ -71,10 +73,19 @@ class Client
 
 	/**
 	 *
+	 * @var array
+	 */
+	private $errors = [];
+
+	/**
+	 *
 	 * @param string $clientId
 	 */
 	public function __construct($clientId)
 	{
+		if (empty($clientId)) {
+			throw new ClientIdException(ClientIdException::MSG_MISSING_CLIENT_ID);
+		}
 		$this->clientId = $clientId;
 		$this->environment = self::ENVIRONMENT_TEST;
 	}
@@ -115,6 +126,16 @@ class Client
 	}
 
 	/**
+	 * Get list of errors
+	 *
+	 * @return array
+	 */
+	public function getErrors()
+	{
+		return $this->errors;
+	}
+
+	/**
 	 *
 	 * @param string $path
 	 * @param string $method
@@ -134,10 +155,16 @@ class Client
 				]
 			]);
 		} catch (ClientException $e) {
-			$this->logger->error($e->getMessage(), [
+			$this->errors[] = $e->getMessage();
+			$this->getLogger()->error($e->getMessage(), [
 				'method' => $method,
 				'path' => $path,
 				'body' => $body,
+				'client_id' => $this->clientId
+			]);
+		} catch (ClientIdException $e) {
+			$this->errors[] = $e->getMessage();
+			$this->getLogger()->error($e->getMessage(), [
 				'client_id' => $this->clientId
 			]);
 		}
@@ -171,7 +198,7 @@ class Client
 	private function getHttpClient()
 	{
 		if (!$this->httpClient instanceof Client) {
-			$config = $this->getConfig($this->environment);
+			$config = $this->getConfig($this->getEnvironment());
 			/* @var GuzzleHttp\Client */
 			$this->httpClient = new HttpClient([
 				'base_uri' => $config['url'],
@@ -182,8 +209,14 @@ class Client
 		return $this->httpClient;
 	}
 
-	private function getEncryptor()
+	/**
+	 * Get environment from client id
+	 *
+	 * @return string
+	 */
+	private function getEnvironment()
 	{
-
+		$parser = new ClientIdParser($this->clientId);
+		return $parser->getEnvironment();
 	}
 }
