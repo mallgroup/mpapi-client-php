@@ -13,12 +13,6 @@ class Product
 	 *
 	 * @var string
 	 */
-	const KEY_PARTNER_ID = 'partner_id';
-
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_ID = 'id';
 
 	/**
@@ -56,18 +50,6 @@ class Product
 	 * @var string
 	 */
 	const KEY_BRAND_ID = 'brand_id';
-
-	/**
-	 *
-	 * @var string
-	 */
-	const KEY_PARAM1_ID = 'param1_id';
-
-	/**
-	 *
-	 * @var string
-	 */
-	const KEY_PARAM2_ID = 'param2_id';
 
 	/**
 	 *
@@ -151,12 +133,6 @@ class Product
 	 *
 	 * @var string
 	 */
-	const KEY_DELIVERY_SETUP_EXTERNAL_ID = 'delivery_setup_external_id';
-
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_DELIVERY_SETUP = 'delivery_setup';
 
 	/**
@@ -181,19 +157,7 @@ class Product
 	 *
 	 * @var string
 	 */
-	const KEY_ON_WEB = 'on_web';
-
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_VARIANTS = 'variants';
-
-	/**
-	 *
-	 * @var string
-	 */
-	const KEY_FORCE_TOKEN = 'force_token';
 
 	/**
 	 *
@@ -259,30 +223,6 @@ class Product
 	}
 
 	/**
-	 * Get partner ID of product
-	 *
-	 * @return integer
-	 */
-	public function getPartnerId()
-	{
-		return (int) $this->data[self::KEY_PARTNER_ID];
-	}
-
-	/**
-	 * Set partner ID of product
-	 *
-	 * @param integer $value
-	 * @return Product
-	 */
-	public function setPartnerId($value)
-	{
-		if ($value !== $this->getPartnerId()) {
-			$this->data[self::KEY_PARTNER_ID] = $value;
-		}
-		return $this;
-	}
-
-	/**
 	 * Get partner product ID
 	 *
 	 * @return string
@@ -307,7 +247,7 @@ class Product
 	}
 
 	/**
-	 * Get partner product ID
+	 * Get category ID
 	 *
 	 * @return integer
 	 */
@@ -317,7 +257,7 @@ class Product
 	}
 
 	/**
-	 * Set partner product ID
+	 * Set category ID
 	 *
 	 * @param string $value
 	 * @return Product
@@ -422,54 +362,6 @@ class Product
 	{
 		if ($value !== $this->getAdultOnly()) {
 			$this->data[self::KEY_ADULT_ONLY] = $value;
-		}
-		return $this;
-	}
-
-	/**
-	 * Get variable parameters 1
-	 *
-	 * @return string
-	 */
-	public function getParam1Id()
-	{
-		return $this->data[self::KEY_PARAM1_ID];
-	}
-
-	/**
-	 * Set variable parameters 1
-	 *
-	 * @param sring $value
-	 * @return Product
-	 */
-	public function setParam1Id($value)
-	{
-		if ($value !== $this->getParam1Id()) {
-			$this->data[self::KEY_PARAM1_ID] = $value;
-		}
-		return $this;
-	}
-
-	/**
-	 * Get variable parameters 2
-	 *
-	 * @return string
-	 */
-	public function getParam2Id()
-	{
-		return $this->data[self::KEY_PARAM2_ID];
-	}
-
-	/**
-	 * Set variable parameters 2
-	 *
-	 * @param sring $value
-	 * @return Product
-	 */
-	public function setParam2Id($value)
-	{
-		if ($value !== $this->getParam2Id()) {
-			$this->data[self::KEY_PARAM2_ID] = $value;
 		}
 		return $this;
 	}
@@ -619,25 +511,25 @@ class Product
 	}
 
 	/**
-	 * Get delivery setup external id
+	 * Get delivery setup
 	 *
 	 * @return string
 	 */
-	public function getDeliverySetupExternalId()
+	public function getDeliverySetup()
 	{
-		return $this->data[self::KEY_DELIVERY_SETUP_EXTERNAL_ID];
+		return $this->data[self::KEY_DELIVERY_SETUP];
 	}
 
 	/**
-	 * Set availability status
+	 * Set delivery setup
 	 *
 	 * @param string $value
 	 * @return Product
 	 */
-	public function setDeliverySetupExternalId($value)
+	public function setDeliverySetup($value)
 	{
-		if ($value !== $this->getDeliverySetupExternalId()) {
-			$this->data[self::KEY_DELIVERY_SETUP_EXTERNAL_ID] = $value;
+		if ($value !== $this->getDeliverySetup()) {
+			$this->data[self::KEY_DELIVERY_SETUP] = $value;
 		}
 		return $this;
 	}
