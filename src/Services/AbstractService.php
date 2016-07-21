@@ -4,12 +4,13 @@ namespace MPAPI\Services;
 use MPAPI\Interfaces\ServiceInterface;
 
 /**
- * Labels interface
+ * Abstract service
  *
  * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  */
 abstract class AbstractService implements ServiceInterface
 {
+
 	/**
 	 *
 	 * @var string

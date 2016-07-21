@@ -6,8 +6,8 @@ use Psr\Log\LoggerInterface;
 /**
  * Default dummy logger
  *
- * @author jonas.habr@mall.cz
- * @author jan.blaha@mall.cz
+ * @author Jonas Habr <jonas.habr@mall.cz>
+ * @author Jan Blaha <jan.blaha@mall.cz>
  */
 class Logger implements LoggerInterface
 {
