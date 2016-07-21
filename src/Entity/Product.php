@@ -605,6 +605,75 @@ class Product
 	}
 
 	/**
+	 * Get parameters
+	 *
+	 * @return array
+	 */
+	public function getParameters()
+	{
+		return $this->data[self::KEY_PARAMETERS];
+	}
+
+	/**
+	 * Set parameters
+	 *
+	 * @return Product
+	 */
+	public function setParameters($value)
+	{
+		if ((int) $value !== $this->getParameters()) {
+			$this->data[self::KEY_PARAMETERS] = $value;
+		}
+		return $this;
+	}
+
+	/**
+	 * Get variable parameters
+	 *
+	 * @return array
+	 */
+	public function getVariableParameters()
+	{
+		return $this->data[self::KEY_VARIABLE_PARAMETERS];
+	}
+
+	/**
+	 * Set variable parameters
+	 *
+	 * @return Product
+	 */
+	public function setVariableParameters($value)
+	{
+		if ((int) $value !== $this->getVariableParameters()) {
+			$this->data[self::KEY_VARIABLE_PARAMETERS] = $value;
+		}
+		return $this;
+	}
+
+	/**
+	 * Get labels
+	 *
+	 * @return array
+	 */
+	public function getLabels()
+	{
+		return $this->data[self::KEY_VARIABLE_PARAMETERS];
+	}
+
+	/**
+	 * Set labels
+	 *
+	 * @return Product
+	 */
+	public function setLabels($value)
+	{
+		if ((int) $value !== $this->getLabels()) {
+			$this->data[self::KEY_VARIABLE_PARAMETERS] = $value;
+		}
+		return $this;
+	}
+
+	/**
 	 * Get data for output
 	 *
 	 * @return array
