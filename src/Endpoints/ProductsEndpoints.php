@@ -35,4 +35,15 @@ class ProductsEndpoints
 	{
 		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS, 'GET');
 	}
+
+	/**
+	 * Get product detail
+	 *
+	 * @param integer $productId
+	 * @return Response
+	 */
+	public function getDetail($productId)
+	{
+		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId, 'GET');
+	}
 }
