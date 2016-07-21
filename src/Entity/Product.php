@@ -657,7 +657,7 @@ class Product
 	 */
 	public function getLabels()
 	{
-		return $this->data[self::KEY_VARIABLE_PARAMETERS];
+		return $this->data[self::KEY_LABELS];
 	}
 
 	/**
@@ -668,7 +668,7 @@ class Product
 	public function setLabels($value)
 	{
 		if ((int) $value !== $this->getLabels()) {
-			$this->data[self::KEY_VARIABLE_PARAMETERS] = $value;
+			$this->data[self::KEY_LABELS] = $value;
 		}
 		return $this;
 	}
