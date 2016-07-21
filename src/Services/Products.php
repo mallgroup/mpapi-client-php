@@ -54,6 +54,7 @@ class Products extends AbstractService
 	 * Delete data
 	 *
 	 * @param integer $productId
+	 * @return Response
 	 */
 	public function delete($productId = null)
 	{

@@ -46,4 +46,15 @@ class ProductsEndpoints
 	{
 		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId, 'GET');
 	}
+
+	/**
+	 * Delete product
+	 *
+	 * @param $productId
+	 * @return Response
+	 */
+	public function deleteProduct($productId)
+	{
+		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId, 'DELETE');
+	}
 }
