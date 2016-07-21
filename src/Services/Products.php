@@ -5,7 +5,7 @@ use GuzzleHttp\Psr7\Response;
 use MPAPI\Endpoints\ProductsEndpoints;
 
 /**
- * Marketplace API client
+ * Products service
  *
  * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  */
@@ -24,7 +24,8 @@ class Products extends AbstractService
 	private $productsEndpoints;
 
 	/**
-	 * Labels constructor.
+	 * Products constructor.
+	 *
 	 * @param Client $client
 	 */
 	public function __construct(Client $client)
@@ -34,7 +35,7 @@ class Products extends AbstractService
 	}
 
 	/**
-	 * Get Data
+	 * Get data
 	 *
 	 * @param integer $productId
 	 * @return Response
