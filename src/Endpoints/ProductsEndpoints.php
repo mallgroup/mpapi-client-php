@@ -67,4 +67,16 @@ class ProductsEndpoints
 	{
 		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS, 'POST', $data);
 	}
+
+	/**
+	 * Put product
+	 *
+	 * @param string $productId
+	 * @param array $data
+	 * @return Response
+	 */
+	public function putProduct($productId, $data)
+	{
+		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId, 'PUT', $data);
+	}
 }

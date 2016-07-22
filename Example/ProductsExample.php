@@ -91,3 +91,7 @@ $data = [
 // Create new product
 $response = $products->post($data);
 var_dump($response);
+
+// Update product
+$response = $products->put(29237, $data);
+var_dump($response);
