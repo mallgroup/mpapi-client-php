@@ -535,9 +535,34 @@ class Product
 	}
 
 	/**
+	 * Get availability
+	 *
+	 * @return array
+	 */
+	public function getAvailability()
+	{
+		return $this->data[self::KEY_AVAILABILITY];
+	}
+
+	/**
+	 * Set availability
+	 *
+	 * @param array $value
+	 * @return Product
+	 */
+	public function setAvailability($value)
+	{
+		if ($value !== $this->getAvailability()) {
+			$this->data[self::KEY_AVAILABILITY] = $value;
+		}
+		return $this;
+	}
+
+	/**
 	 * Get availability status
 	 *
 	 * @return string
+	 * @todo this will go to Availability entity
 	 */
 	public function getStatus()
 	{
@@ -549,6 +574,7 @@ class Product
 	 *
 	 * @param string $value
 	 * @return Product
+	 * @todo this will go to Availability entity
 	 */
 	public function setStatus($value)
 	{
@@ -562,6 +588,7 @@ class Product
 	 * Get in stock quantity
 	 *
 	 * @return integer
+	 * @todo this will go to Availability entity
 	 */
 	public function getInStock()
 	{
@@ -573,6 +600,7 @@ class Product
 	 *
 	 * @param double $value
 	 * @return Product
+	 * @todo this will go to Availability entity
 	 */
 	public function setInStock($value)
 	{
@@ -593,7 +621,9 @@ class Product
 	}
 
 	/**
+	 * Set recommended products
 	 *
+	 * @param array $value
 	 * @return Product
 	 */
 	public function setRecommended($value)
@@ -617,6 +647,7 @@ class Product
 	/**
 	 * Set parameters
 	 *
+	 * @param array $value
 	 * @return Product
 	 */
 	public function setParameters($value)
@@ -640,6 +671,7 @@ class Product
 	/**
 	 * Set variable parameters
 	 *
+	 * @param array $value
 	 * @return Product
 	 */
 	public function setVariableParameters($value)
@@ -657,68 +689,54 @@ class Product
 	 */
 	public function getLabels()
 	{
-		return $this->data[self::KEY_VARIABLE_PARAMETERS];
+		return $this->data[self::KEY_LABELS];
 	}
 
 	/**
 	 * Set labels
 	 *
+	 * @param array $value
 	 * @return Product
 	 */
 	public function setLabels($value)
 	{
 		if ((int) $value !== $this->getLabels()) {
-			$this->data[self::KEY_VARIABLE_PARAMETERS] = $value;
+			$this->data[self::KEY_LABELS] = $value;
 		}
 		return $this;
 	}
 
 	/**
-	 * Get data for output
+	 * Get promotions
 	 *
 	 * @return array
 	 */
-	public function getOutputData()
+	public function getPromotions()
 	{
-		$outputData = [
-			'id' => $this->data[self::KEY_ID],
-			'category_id' => $this->data[self::KEY_CATEGORY_ID],
-			'title' => $this->data[self::KEY_TITLE],
-			'shortdesc' => $this->data[self::KEY_SHORTDESC],
-			'longdesc' => $this->data[self::KEY_LONGDESC],
-			'priority' => $this->data[self::KEY_PRIORITY],
-			'price' => $this->data[self::KEY_PRICE],
-			'vat' => $this->data[self::KEY_VAT],
-			'parameters' => $this->data[self::KEY_PARAMETERS],
-			'media' => $this->data[self::KEY_MEDIA],
-			'promotions' => $this->data[self::KEY_PROMOTIONS],
-			'labels' => $this->data[self::KEY_LABELS],
-			'variants' => [],
-			'variable_parameters' => $this->data[self::KEY_VARIABLE_PARAMETERS],
-			'availability' => [
-				'status' => $this->data[self::KEY_STATUS],
-				'in_stock' => $this->data[self::KEY_IN_STOCK]
-			],
-			'delivery_setup' => $this->data[self::KEY_DELIVERY_SETUP],
-			'recommended' => $this->data[self::KEY_RECOMMENDED]
-		];
-		
-		if (!empty($this->getBarcode())) {
-			$outputData['barcode'] = $this->data[self::KEY_BARCODE];
+		return $this->data[self::KEY_PROMOTIONS];
+	}
+
+	/**
+	 * Set promotions
+	 *
+	 * @param array $value
+	 * @return Product
+	 */
+	public function setPromotions($value)
+	{
+		if ((int) $value !== $this->getPromotions()) {
+			$this->data[self::KEY_PROMOTIONS] = $value;
 		}
-		
-		if (!empty($this->getRrpPrice())) {
-			$outputData['rrp'] = $this->data[self::KEY_RRP_PRICE];
-		}
-		
-		if (!empty($this->getBrandId())) {
-			$outputData['brand_id'] = $this->data[self::KEY_BRAND_ID];
-		}
-		
-		if (!empty($variants)) {
-			$outputData['variants'] = $this->data[self::KEY_VARIANTS];
-		}
-		
-		return $outputData;
+		return $this;
+	}
+
+	/**
+	 * Get product data
+	 *
+	 * @return array
+	 */
+	public function getData()
+	{
+		return $this->data;
 	}
 }
