@@ -39,7 +39,7 @@ class ProductsEndpoints
 	/**
 	 * Get product detail
 	 *
-	 * @param integer $productId
+	 * @param string $productId
 	 * @return Response
 	 */
 	public function getDetail($productId)
@@ -50,11 +50,21 @@ class ProductsEndpoints
 	/**
 	 * Delete product
 	 *
-	 * @param $productId
+	 * @param string $productId
 	 * @return Response
 	 */
 	public function deleteProduct($productId)
 	{
 		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId, 'DELETE');
+	}
+
+	/**
+	 * POST product
+	 *
+	 * @return Response
+	 */
+	public function postProduct($data)
+	{
+		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS, 'POST', $data);
 	}
 }

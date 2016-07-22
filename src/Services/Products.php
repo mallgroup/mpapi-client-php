@@ -37,7 +37,7 @@ class Products extends AbstractService
 	/**
 	 * Get data
 	 *
-	 * @param integer $productId
+	 * @param string $productId
 	 * @return Response
 	 */
 	public function get($productId = null)
@@ -53,7 +53,7 @@ class Products extends AbstractService
 	/**
 	 * Delete data
 	 *
-	 * @param integer $productId
+	 * @param string $productId
 	 * @return Response
 	 */
 	public function delete($productId = null)
@@ -71,18 +71,6 @@ class Products extends AbstractService
 	public function post(array $data = [])
 	{
 		$response = $this->productsEndpoints->postProduct($data);
-		return json_decode($response->getBody(), true);
-	}
-
-	/**
-	 * Put data
-	 *
-	 * @param array $data
-	 * @return Response
-	 */
-	public function put(array $data = [])
-	{
-		$response = $this->productsEndpoints->putProduct($data);
-		return json_decode($response->getBody(), true);
+		return !is_null($response)? json_decode($response->getBody(), true) : null;
 	}
 }
