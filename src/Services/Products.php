@@ -71,6 +71,19 @@ class Products extends AbstractService
 	public function post(array $data = [])
 	{
 		$response = $this->productsEndpoints->postProduct($data);
-		return !is_null($response)? json_decode($response->getBody(), true) : null;
+		return !is_null($response) ? json_decode($response->getBody(), true) : null;
+	}
+
+	/**
+	 * Put data
+	 *
+	 * @param string $productId
+	 * @param array $data
+	 * @return Response
+	 */
+	public function put($productId = null, array $data = [])
+	{
+		$response = $this->productsEndpoints->putProduct($productId, $data);
+		return !is_null($response) ? json_decode($response->getBody(), true) : null;
 	}
 }
