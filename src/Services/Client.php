@@ -196,6 +196,7 @@ class Client
 				'body' => $body,
 				'client_id' => $this->clientId
 			]);
+			throw $e;
 		}
 		return $response;
 	}

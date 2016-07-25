@@ -2,6 +2,7 @@
 namespace MPAPI\Services;
 
 use MPAPI\Interfaces\ServiceInterface;
+use MPAPI\Entity\AbstractEntity;
 
 /**
  * Abstract service
@@ -63,6 +64,16 @@ abstract class AbstractService implements ServiceInterface
 	 * @see ServiceInterface::delete()
 	 */
 	public function delete()
+	{
+		user_error(sprintf(self::MSG_NOT_IMPLEMENTED, __METHOD__), E_USER_WARNING);
+	}
+
+	/**
+	 * Add data for batch operation
+	 *
+	 * @see \MPAPI\Interfaces\ServiceInterface::add()
+	 */
+	public function add(AbstractEntity $entity)
 	{
 		user_error(sprintf(self::MSG_NOT_IMPLEMENTED, __METHOD__), E_USER_WARNING);
 	}

@@ -6,7 +6,7 @@ namespace MPAPI\Entity;
  *
  * @author Jonas Habr <jonas.habr@mall.cz>
  */
-class Product
+class Product extends AbstractEntity
 {
 
 	/**
@@ -211,16 +211,8 @@ class Product
 	 *
 	 * @var string
 	 */
-	private $data;
+	protected $data;
 
-	/**
-	 *
-	 * @param array $productData
-	 */
-	public function __construct($productData)
-	{
-		$this->data = $productData;
-	}
 
 	/**
 	 * Get partner product ID

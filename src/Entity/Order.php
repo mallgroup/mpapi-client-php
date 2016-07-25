@@ -6,7 +6,7 @@ namespace MAPI\Entity;
  *
  * @author Jan Blaha <jan.blaha@mall.cz>
  */
-class Order
+class Order extends AbstractEntity
 {
 
 	/**
@@ -247,24 +247,13 @@ class Order
 	 *
 	 * @var array
 	 */
-	private $data;
-
-	/**
-	 * Constructor
-	 *
-	 * @param array $orderData
-	 */
-	public function __construct($orderData)
-	{
-		$this->data = $orderData;
-	}
-
+	protected $data;
 	/**
 	 * Get data for output
 	 *
 	 * @return array
 	 */
-	public function getOutputData()
+	public function getData()
 	{
 		return [
 			'id' => (int)$this->getOrderId(),

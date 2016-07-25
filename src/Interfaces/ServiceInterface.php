@@ -1,6 +1,8 @@
 <?php
 namespace MPAPI\Interfaces;
 
+use MPAPI\Entity\AbstractEntity;
+
 /**
  * Service interface
  *
@@ -15,12 +17,12 @@ interface ServiceInterface
 	public function get();
 
 	/**
-	 * Put data
+	 * Put entity
 	 */
 	public function put();
 
 	/**
-	 * Post data
+	 * Post entity
 	 */
 	public function post();
 
@@ -30,7 +32,12 @@ interface ServiceInterface
 	public function search();
 
 	/**
-	 * Delete data
+	 * Delete entity
 	 */
 	public function delete();
+
+	/**
+	 * Add entity for batch operation
+	 */
+	public function add(AbstractEntity $entity);
 }
