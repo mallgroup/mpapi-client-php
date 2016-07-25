@@ -388,7 +388,7 @@ class Variant
 	 * @param array $value
 	 * @return Variant
 	 */
-	public function setAvailability($value)
+	public function setAvailability(array $value)
 	{
 		if ($value !== $this->getAvailability()) {
 			$this->data[self::KEY_AVAILABILITY] = $value;
@@ -412,7 +412,6 @@ class Variant
 	 *
 	 * @param string $value
 	 * @return Variant
-	 * @todo this will go to Availability entity
 	 */
 	public function setStatus($value)
 	{
@@ -438,7 +437,6 @@ class Variant
 	 *
 	 * @param double $value
 	 * @return Variant
-	 * @todo this will go to Availability entity
 	 */
 	public function setInStock($value)
 	{
