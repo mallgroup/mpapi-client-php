@@ -46,6 +46,18 @@ class Client
 	 *
 	 * @var string
 	 */
+	const LOGGER_REQUEST = 'Request %s %s';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const LOGGER_RESPONSE = 'Response for %s %s';
+
+	/**
+	 *
+	 * @var string
+	 */
 	private $clientId;
 
 	/**
@@ -162,6 +174,9 @@ class Client
 	{
 		$response = null;
 		try {
+			// log request parameters
+			$this->getLogger()->info(sprintf(self::LOGGER_REQUEST, $method, $path), $body);
+
 			/* @var Response $response */
 			$response = $this->getHttpClient()->request($method, $path, [
 				'json' => $body,
@@ -169,6 +184,11 @@ class Client
 					'client_id' => $this->clientId
 				]
 			]);
+
+			// log response
+			$this->getLogger()->info(sprintf(self::LOGGER_RESPONSE, $method, $path), json_decode($response->getBody(), true));
+		} catch (ClientIdException $e) {
+			$this->getLogger()->error(sprintf(self::LOGGER_RESPONSE, $method, $path), ['message' => $e->getMessage()]);
 		} catch (ClientException $e) {
 			$this->getLogger()->error($e->getMessage(), [
 				'method' => $method,

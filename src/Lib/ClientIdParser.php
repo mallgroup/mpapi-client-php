@@ -63,12 +63,12 @@ class ClientIdParser
 	{
 		$hash = substr(strrchr($this->clientId, self::DELIMITER), 1);
 		$hashDecode = base64_decode($hash);
-
-		if (empty($hashDecode)) {
+		$hashParts = explode(self::HASH_DELIMITER, $hashDecode);
+		if (empty($hashDecode) || count($hashParts) !== 2) {
 			throw new ClientIdException(ClientIdException::MSG_CLIENT_ID_NOT_CONTAIN_ENVIRONMENT);
 		}
 
-		$this->environment = explode(self::HASH_DELIMITER, $hashDecode)[0];
+		$this->environment = $hashParts[0];
 		return $this;
 	}
 }
