@@ -389,7 +389,7 @@ class Product extends AbstractEntity
 	 */
 	public function getPriority()
 	{
-		return (int) $this->data[self::KEY_PRIORITY];
+		return (int)$this->data[self::KEY_PRIORITY];
 	}
 
 	/**
@@ -400,7 +400,7 @@ class Product extends AbstractEntity
 	 */
 	public function setPriority($value)
 	{
-		if ((int) $value !== $this->getPriority()) {
+		if ((int)$value !== $this->getPriority()) {
 			$this->data[self::KEY_PRIORITY] = $value;
 		}
 		return $this;
@@ -437,7 +437,7 @@ class Product extends AbstractEntity
 	 */
 	public function getPrice()
 	{
-		return (float) $this->data[self::KEY_PRICE];
+		return (float)$this->data[self::KEY_PRICE];
 	}
 
 	/**
@@ -461,7 +461,7 @@ class Product extends AbstractEntity
 	 */
 	public function getVat()
 	{
-		return (float) $this->data[self::KEY_VAT];
+		return (float)$this->data[self::KEY_VAT];
 	}
 
 	/**
@@ -485,7 +485,7 @@ class Product extends AbstractEntity
 	 */
 	public function getRrpPrice()
 	{
-		return (float) $this->data[self::KEY_RRP_PRICE];
+		return (float)$this->data[self::KEY_RRP_PRICE];
 	}
 
 	/**
@@ -542,7 +542,7 @@ class Product extends AbstractEntity
 	 * @param array $value
 	 * @return Product
 	 */
-	public function setAvailability($value)
+	public function setAvailability(array $value)
 	{
 		if ($value !== $this->getAvailability()) {
 			$this->data[self::KEY_AVAILABILITY] = $value;
@@ -551,10 +551,29 @@ class Product extends AbstractEntity
 	}
 
 	/**
+	 * @param string $status
+	 * @return Product
+	 */
+	public function setStatus($status = self::STATUS_ACTIVE)
+	{
+		$this->data[self::KEY_AVAILABILITY][self::KEY_STATUS] = $status;
+		return $this;
+	}
+
+	/**
+	 * @param integer $amount
+	 * @return Product
+	 */
+	public function setInStock($amount)
+	{
+		$this->data[self::KEY_AVAILABILITY][self::KEY_IN_STOCK] = $amount;
+		return $this;
+	}
+
+	/**
 	 * Get availability status
 	 *
 	 * @return string
-	 * @todo this will go to Availability entity
 	 */
 	public function getStatus()
 	{
@@ -562,44 +581,13 @@ class Product extends AbstractEntity
 	}
 
 	/**
-	 * Set availability status
-	 *
-	 * @param string $value
-	 * @return Product
-	 * @todo this will go to Availability entity
-	 */
-	public function setStatus($value)
-	{
-		if ($value !== $this->getStatus()) {
-			$this->data[self::KEY_STATUS] = $value;
-		}
-		return $this;
-	}
-
-	/**
 	 * Get in stock quantity
 	 *
 	 * @return integer
-	 * @todo this will go to Availability entity
 	 */
 	public function getInStock()
 	{
-		return (int) $this->data[self::KEY_IN_STOCK];
-	}
-
-	/**
-	 * Set in stock quantity
-	 *
-	 * @param double $value
-	 * @return Product
-	 * @todo this will go to Availability entity
-	 */
-	public function setInStock($value)
-	{
-		if ((int) $value !== $this->getInStock()) {
-			$this->data[self::KEY_IN_STOCK] = $value;
-		}
-		return $this;
+		return (int)$this->data[self::KEY_IN_STOCK];
 	}
 
 	/**
@@ -618,10 +606,25 @@ class Product extends AbstractEntity
 	 * @param array $value
 	 * @return Product
 	 */
-	public function setRecommended($value)
+	public function setRecommended(array $value)
 	{
-		if ((int) $value !== $this->getRecommended()) {
+		if ($value !== $this->getRecommended()) {
 			$this->data[self::KEY_RECOMMENDED] = $value;
+		}
+		return $this;
+	}
+
+	/**
+	 * Add recommended products
+	 * @param array $value
+	 * @return $this
+	 */
+	public function addRecommended(array $value)
+	{
+		if (!isset($this->data[self::KEY_RECOMMENDED])) {
+			$this->data[self::KEY_RECOMMENDED] = $value;
+		} else {
+			$this->data[self::KEY_RECOMMENDED] = array_unique(array_merge($this->data[self::KEY_RECOMMENDED], $value));
 		}
 		return $this;
 	}
@@ -637,15 +640,37 @@ class Product extends AbstractEntity
 	}
 
 	/**
-	 * Set parameters
+	 * Set parameter value(s)
 	 *
-	 * @param array $value
+	 * @param $paramId
+	 * @param $values
 	 * @return Product
 	 */
-	public function setParameters($value)
+	public function setParameter($paramId, $values)
 	{
-		if ((int) $value !== $this->getParameters()) {
-			$this->data[self::KEY_PARAMETERS] = $value;
+		$this->data[self::KEY_PARAMETERS][$paramId] = $values;
+		return $this;
+	}
+
+	/**
+	 * Add parameter
+	 *
+	 * @param string $paramId
+	 * @param string|number $value
+	 * @return Product
+	 */
+	public function addParameter($paramId, $value)
+	{
+		if (!isset($this->data[self::KEY_PARAMETERS][$paramId])) {
+			$this->data[self::KEY_PARAMETERS][$paramId] = $value;
+		} elseif (isset($this->data[self::KEY_PARAMETERS][$paramId]) &&
+			!is_array($this->data[self::KEY_PARAMETERS][$paramId]) &&
+			$this->data[self::KEY_PARAMETERS][$paramId] !== $value
+		) {
+			$this->data[self::KEY_PARAMETERS][$paramId] = [$this->data[self::KEY_PARAMETERS][$paramId], $value];
+		} else {
+			$this->data[self::KEY_PARAMETERS][$paramId][] = $value;
+			$this->data[self::KEY_PARAMETERS][$paramId] = array_unique($this->data[self::KEY_PARAMETERS][$paramId]);
 		}
 		return $this;
 	}
@@ -668,8 +693,24 @@ class Product extends AbstractEntity
 	 */
 	public function setVariableParameters($value)
 	{
-		if ((int) $value !== $this->getVariableParameters()) {
+		if ($value !== $this->getVariableParameters()) {
 			$this->data[self::KEY_VARIABLE_PARAMETERS] = $value;
+		}
+		return $this;
+	}
+
+	/**
+	 * Add variable parameters products
+	 * 
+	 * @param array $value
+	 * @return $this
+	 */
+	public function addVariableParameters(array $value)
+	{
+		if (!isset($this->data[self::KEY_VARIABLE_PARAMETERS])) {
+			$this->data[self::KEY_VARIABLE_PARAMETERS] = $value;
+		} else {
+			$this->data[self::KEY_VARIABLE_PARAMETERS] = array_unique(array_merge($this->data[self::KEY_VARIABLE_PARAMETERS], $value));
 		}
 		return $this;
 	}
@@ -690,11 +731,46 @@ class Product extends AbstractEntity
 	 * @param array $value
 	 * @return Product
 	 */
-	public function setLabels($value)
+	public function setLabels(array $value)
 	{
-		if ((int) $value !== $this->getLabels()) {
+		if ($value !== $this->getLabels()) {
 			$this->data[self::KEY_LABELS] = $value;
 		}
+		return $this;
+	}
+
+	/**
+	 * Add label
+	 *
+	 * @param string $labelName
+	 * @param string $from
+	 * @param string $from
+	 * @return Product
+	 */
+	public function addLabel($labelName, $from, $to)
+	{
+		$labelCurrent = [
+			self::KEY_LABEL => $labelName,
+			self::KEY_FROM => $from,
+			self::KEY_TO => $to
+		];
+
+		if (!isset($this->data[self::KEY_LABELS])) {
+			$this->data[self::KEY_LABELS][] = $labelCurrent;
+		} else {
+			$updated = false;
+			foreach ($this->data[self::KEY_LABELS] as $key => $label)
+			{
+				if ($labelCurrent[self::KEY_LABEL] === $label[self::KEY_LABEL]) {
+					$this->data[self::KEY_LABELS][$key] = $labelCurrent;
+					$updated = true;
+				}
+			}
+			if ($updated === false) {
+				$this->data[self::KEY_LABELS][] = $labelCurrent;
+			}
+		}
+
 		return $this;
 	}
 
@@ -716,9 +792,151 @@ class Product extends AbstractEntity
 	 */
 	public function setPromotions($value)
 	{
-		if ((int) $value !== $this->getPromotions()) {
+		if ($value !== $this->getPromotions()) {
 			$this->data[self::KEY_PROMOTIONS] = $value;
 		}
+		return $this;
+	}
+
+	/**
+	 * Add promotion
+	 *
+	 * @param double $price
+	 * @param string $from
+	 * @param string $to
+	 */
+	public function addPromotion($price, $from, $to)
+	{
+		$promotionCurrent = [
+			self::KEY_PRICE => $price,
+			self::KEY_FROM => $from,
+			self::KEY_TO => $to
+		];
+
+		if (!isset($this->data[self::KEY_PROMOTIONS])) {
+			$this->data[self::KEY_PROMOTIONS][] = $promotionCurrent;
+		} else {
+			$updated = false;
+			foreach ($this->data[self::KEY_PROMOTIONS] as $key => $media)
+			{
+				if ($promotionCurrent[self::KEY_FROM] === $media[self::KEY_FROM] &&
+					$promotionCurrent[self::KEY_TO] === $media[self::KEY_TO] ) {
+					$this->data[self::KEY_PROMOTIONS][$key] = $promotionCurrent;
+					$updated = true;
+				}
+			}
+			if ($updated === false) {
+				$this->data[self::KEY_PROMOTIONS][] = $promotionCurrent;
+			}
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Get media
+	 *
+	 * @return array
+	 */
+	public function getMedia()
+	{
+		return $this->data[self::KEY_MEDIA];
+	}
+
+	/**
+	 * Set media
+	 *
+	 * @param array $value
+	 * @return Product
+	 */
+	public function setMedia(array $value)
+	{
+		if ($value !== $this->getMedia()) {
+			$this->data[self::KEY_MEDIA] = $value;
+		}
+		return $this;
+	}
+
+	/**
+	 * Add media
+	 *
+	 * @param string $url
+	 * @param boolean $main
+	 */
+	public function addMedia($url, $main)
+	{
+		$mediaCurrent = [
+			self::KEY_URL => $url,
+			self::KEY_MAIN => $main
+		];
+		if (!isset($this->data[self::KEY_MEDIA])) {
+			$this->data[self::KEY_MEDIA][] = $mediaCurrent;
+		} else {
+			$updated = false;
+			foreach ($this->data[self::KEY_MEDIA] as $key => $media)
+			{
+				if ($mediaCurrent[self::KEY_URL] === $media[self::KEY_URL]) {
+					$this->data[self::KEY_MEDIA][$key] = $mediaCurrent;
+					$updated = true;
+				}
+			}
+			if ($updated === false) {
+				$this->data[self::KEY_MEDIA][] = $mediaCurrent;
+			}
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Get variants
+	 *
+	 * @return array
+	 */
+	public function getVariants()
+	{
+		return $this->data[self::KEY_VARIANTS];
+	}
+
+	/**
+	 * Set variants
+	 *
+	 * @param array $value
+	 * @return Product
+	 */
+	public function setVariants(array $value)
+	{
+		if ($value !== $this->getVariants()) {
+			$this->data[self::KEY_VARIANTS] = $value;
+		}
+		return $this;
+	}
+
+	/**
+	 * Add variant
+	 *
+	 * @param Variant $variantCurrent
+	 * @return Product
+	 */
+	public function addVariant(Variant $variantCurrent)
+	{
+
+		if (!isset($this->data[self::KEY_VARIANTS])) {
+			$this->data[self::KEY_VARIANTS][] = $variantCurrent->getData();
+		} else {
+			$updated = false;
+			foreach ($this->data[self::KEY_VARIANTS] as $key => $variant)
+			{
+				if ($variantCurrent[self::KEY_ID] === $variant[self::KEY_ID]) {
+					$this->data[self::KEY_VARIANTS][$key] = $variantCurrent->getData();
+					$updated = true;
+				}
+			}
+			if ($updated === false) {
+				$this->data[self::KEY_VARIANTS][] = $variantCurrent->getData();
+			}
+		}
+
 		return $this;
 	}
 

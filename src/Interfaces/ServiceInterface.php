@@ -23,8 +23,9 @@ interface ServiceInterface
 
 	/**
 	 * Post entity
+	 * @param array|AbstractEntity $data
 	 */
-	public function post();
+	public function post($data);
 
 	/**
 	 * Search data

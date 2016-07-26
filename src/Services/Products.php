@@ -74,10 +74,10 @@ class Products extends AbstractService
 	/**
 	 * Post data
 	 *
-	 * @param array $data
+	 * @param array|Product $data
 	 * @return Response
 	 */
-	public function post(array $data = [])
+	public function post($data = null)
 	{
 		$errors = [];
 		if (empty($data) && !empty($this->entities)) {
