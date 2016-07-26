@@ -1,20 +1,20 @@
 {
-  "description" : "Mall marketplace API client",
+  "description": "Mall marketplace API client",
   "type": "library",
   "require" : {
     "php" : "^5.5 || ^7.0",
     "monolog/monolog" : "~1.20.0",
     "guzzlehttp/guzzle" : "~6.2.0",
     "psr/log" : "~1.0.0"
-  },
-  "require-dev" : {
-    "codeception/codeception" : "~2.1"
-  },
+	},
+	"require-dev" : {
+		"codeception/codeception": "~2.1"
+	},
   "license" : "MIT",
   "autoload" : {
     "psr-4" : {
       "MPAPI\\" : "src/"
-    }
+	}
   },
   "support" : {
     "email" : "it.helpdesk@mall.cz"
