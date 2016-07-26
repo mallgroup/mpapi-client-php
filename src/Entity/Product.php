@@ -6,7 +6,7 @@ namespace MPAPI\Entity;
  *
  * @author Jonas Habr <jonas.habr@mall.cz>
  */
-class Product
+class Product extends AbstractEntity
 {
 
 	/**
@@ -211,16 +211,8 @@ class Product
 	 *
 	 * @var string
 	 */
-	private $data;
+	protected $data;
 
-	/**
-	 *
-	 * @param array $productData
-	 */
-	public function __construct(array $productData = [])
-	{
-		$this->data = $productData;
-	}
 
 	/**
 	 * Get partner product ID
@@ -701,8 +693,24 @@ class Product
 	 */
 	public function setVariableParameters($value)
 	{
-		if (!in_array($value, $this->getVariableParameters())) {
+		if ($value !== $this->getVariableParameters()) {
 			$this->data[self::KEY_VARIABLE_PARAMETERS] = $value;
+		}
+		return $this;
+	}
+
+	/**
+	 * Add variable parameters products
+	 * 
+	 * @param array $value
+	 * @return $this
+	 */
+	public function addVariableParameters(array $value)
+	{
+		if (!isset($this->data[self::KEY_VARIABLE_PARAMETERS])) {
+			$this->data[self::KEY_VARIABLE_PARAMETERS] = $value;
+		} else {
+			$this->data[self::KEY_VARIABLE_PARAMETERS] = array_unique(array_merge($this->data[self::KEY_VARIABLE_PARAMETERS], $value));
 		}
 		return $this;
 	}
@@ -799,13 +807,27 @@ class Product
 	 */
 	public function addPromotion($price, $from, $to)
 	{
-		$promotion = [
+		$promotionCurrent = [
 			self::KEY_PRICE => $price,
 			self::KEY_FROM => $from,
 			self::KEY_TO => $to
 		];
-		if ($promotion !== $this->getPromotions()) {
-			$this->data[self::KEY_PROMOTIONS] = $promotion;
+
+		if (!isset($this->data[self::KEY_PROMOTIONS])) {
+			$this->data[self::KEY_PROMOTIONS][] = $promotionCurrent;
+		} else {
+			$updated = false;
+			foreach ($this->data[self::KEY_PROMOTIONS] as $key => $media)
+			{
+				if ($promotionCurrent[self::KEY_FROM] === $media[self::KEY_FROM] &&
+					$promotionCurrent[self::KEY_TO] === $media[self::KEY_TO] ) {
+					$this->data[self::KEY_PROMOTIONS][$key] = $promotionCurrent;
+					$updated = true;
+				}
+			}
+			if ($updated === false) {
+				$this->data[self::KEY_PROMOTIONS][] = $promotionCurrent;
+			}
 		}
 
 		return $this;
@@ -843,16 +865,84 @@ class Product
 	 */
 	public function addMedia($url, $main)
 	{
-		$media = [
+		$mediaCurrent = [
 			self::KEY_URL => $url,
 			self::KEY_MAIN => $main
 		];
-		if ($media !== $this->getMedia()) {
-			$this->data[self::KEY_PROMOTIONS] = $media;
+		if (!isset($this->data[self::KEY_MEDIA])) {
+			$this->data[self::KEY_MEDIA][] = $mediaCurrent;
+		} else {
+			$updated = false;
+			foreach ($this->data[self::KEY_MEDIA] as $key => $media)
+			{
+				if ($mediaCurrent[self::KEY_URL] === $media[self::KEY_URL]) {
+					$this->data[self::KEY_MEDIA][$key] = $mediaCurrent;
+					$updated = true;
+				}
+			}
+			if ($updated === false) {
+				$this->data[self::KEY_MEDIA][] = $mediaCurrent;
+			}
 		}
 
 		return $this;
 	}
+
+	/**
+	 * Get variants
+	 *
+	 * @return array
+	 */
+	public function getVariants()
+	{
+		return $this->data[self::KEY_VARIANTS];
+	}
+
+	/**
+	 * Set variants
+	 *
+	 * @param array $value
+	 * @return Product
+	 */
+	public function setVariants(array $value)
+	{
+		if ($value !== $this->getVariants()) {
+			$this->data[self::KEY_VARIANTS] = $value;
+		}
+		return $this;
+	}
+
+	/**
+	 * Add variant
+	 *
+	 * @param string $url
+	 * @param boolean $main
+	 */
+	public function addVariant($url, $main)
+	{
+		$mediaCurrent = [
+			self::KEY_URL => $url,
+			self::KEY_MAIN => $main
+		];
+		if (!isset($this->data[self::KEY_MEDIA])) {
+			$this->data[self::KEY_MEDIA][] = $mediaCurrent;
+		} else {
+			$updated = false;
+			foreach ($this->data[self::KEY_MEDIA] as $key => $media)
+			{
+				if ($mediaCurrent[self::KEY_URL] === $media[self::KEY_URL]) {
+					$this->data[self::KEY_MEDIA][$key] = $mediaCurrent;
+					$updated = true;
+				}
+			}
+			if ($updated === false) {
+				$this->data[self::KEY_MEDIA][] = $mediaCurrent;
+			}
+		}
+
+		return $this;
+	}
+
 	/**
 	 * Get product data
 	 *

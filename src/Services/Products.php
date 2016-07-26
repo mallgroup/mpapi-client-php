@@ -3,6 +3,9 @@ namespace MPAPI\Services;
 
 use GuzzleHttp\Psr7\Response;
 use MPAPI\Endpoints\ProductsEndpoints;
+use MPAPI\Entity\Product;
+use MPAPI\Entity\AbstractEntity;
+use MPAPI\Exceptions\ApplicationException;
 
 /**
  * Products service
@@ -22,6 +25,12 @@ class Products extends AbstractService
 	 * @var ProductsEndpoints
 	 */
 	private $productsEndpoints;
+
+	/**
+	 *
+	 * @var Product[]
+	 */
+	private $entities = [];
 
 	/**
 	 * Products constructor.
@@ -65,13 +74,35 @@ class Products extends AbstractService
 	/**
 	 * Post data
 	 *
-	 * @param array $data
+	 * @param array|Product $data
 	 * @return Response
 	 */
-	public function post(array $data = [])
+	public function post($data = null)
 	{
-		$response = $this->productsEndpoints->postProduct($data);
-		return !is_null($response) ? json_decode($response->getBody(), true) : null;
+		$errors = [];
+		if (empty($data) && !empty($this->entities)) {
+			foreach ($this->entities as $index => $productEntity) {
+				$response = $this->productsEndpoints->postProduct($productEntity->getData());
+				unset($this->entities[$index]);
+				if ($response->getStatusCode() !== 201) {
+					$errors[$index] = [
+						'entity' => $productEntity->getData(),
+						'response' => json_decode($response->getBody(), true)
+					];
+				}
+			}
+		} else {
+			$response = $this->productsEndpoints->postProduct($data);
+		}
+
+		if (!empty($errors)) {
+			$this->client->getLogger()->error('Error during post products', $errors);
+			$exception = new ApplicationException();
+			$exception->setData($errors);
+			throw $exception;
+		}
+
+		return true;
 	}
 
 	/**
@@ -83,7 +114,40 @@ class Products extends AbstractService
 	 */
 	public function put($productId = null, array $data = [])
 	{
-		$response = $this->productsEndpoints->putProduct($productId, $data);
-		return !is_null($response) ? json_decode($response->getBody(), true) : null;
+		$errors = [];
+		if (empty($data) && !empty($this->entities)) {
+			foreach ($this->entities as $index => $productEntity) {
+				$response = $this->productsEndpoints->putProduct($productEntity->getId(), $productEntity->getData());
+				unset($this->entities[$index]);
+				if ($response->getStatusCode() !== 201) {
+					$errors[$index] = [
+						'entity' => $productEntity->getData(),
+						'response' => json_decode($response->getBody(), true)
+					];
+				}
+			}
+		} else {
+			$response = $this->productsEndpoints->putProduct($productId, $data);
+		}
+
+		if (!empty($errors)) {
+			$this->client->getLogger()->error('Error during post products', $errors);
+			$exception = new ApplicationException();
+			$exception->setData($errors);
+			throw $exception;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Add product for batch operation
+	 *
+	 * @see \MPAPI\Services\AbstractService::add()
+	 */
+	public function add(AbstractEntity $entity)
+	{
+		$this->entities[] = $entity;
+		return $this;
 	}
 }

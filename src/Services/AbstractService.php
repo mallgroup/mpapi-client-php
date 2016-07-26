@@ -1,7 +1,9 @@
 <?php
 namespace MPAPI\Services;
 
+use MPAPI\Entity\Product;
 use MPAPI\Interfaces\ServiceInterface;
+use MPAPI\Entity\AbstractEntity;
 
 /**
  * Abstract service
@@ -40,9 +42,11 @@ abstract class AbstractService implements ServiceInterface
 	/**
 	 * Post data
 	 *
+	 * @param array|Product $data
 	 * @see ServiceInterface::post()
+	 * @SuppressWarnings("PMD")
 	 */
-	public function post()
+	public function post($data)
 	{
 		user_error(sprintf(self::MSG_NOT_IMPLEMENTED, __METHOD__), E_USER_WARNING);
 	}
@@ -63,6 +67,18 @@ abstract class AbstractService implements ServiceInterface
 	 * @see ServiceInterface::delete()
 	 */
 	public function delete()
+	{
+		user_error(sprintf(self::MSG_NOT_IMPLEMENTED, __METHOD__), E_USER_WARNING);
+	}
+
+	/**
+	 * Add data for batch operation
+	 *
+	 * @param AbstractEntity $entity
+	 * @see \MPAPI\Interfaces\ServiceInterface::add()
+	 * @SuppressWarnings("PMD")
+	 */
+	public function add(AbstractEntity $entity)
 	{
 		user_error(sprintf(self::MSG_NOT_IMPLEMENTED, __METHOD__), E_USER_WARNING);
 	}

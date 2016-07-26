@@ -6,7 +6,7 @@ namespace MPAPI\Entity;
  *
  * @author Jonas Habr <jonas.habr@mall.cz>
  */
-class Variant
+class Variant extends AbstractEntity
 {
 
 	/**
@@ -145,16 +145,7 @@ class Variant
 	 *
 	 * @var string
 	 */
-	private $data;
-
-	/**
-	 *
-	 * @param array $variantData
-	 */
-	public function __construct($variantData)
-	{
-		$this->data = $variantData;
-	}
+	protected $data;
 
 	/**
 	 * Get variant ID
