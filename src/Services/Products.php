@@ -47,16 +47,19 @@ class Products extends AbstractService
 	 * Get data
 	 *
 	 * @param string $productId
-	 * @return Response
+	 * @return Product
 	 */
 	public function get($productId = null)
 	{
 		if (is_null($productId)) {
 			$response = $this->productsEndpoints->getProducts();
+			$retval = json_decode($response->getBody(), true)['data'];
 		} else {
 			$response = $this->productsEndpoints->getDetail($productId);
+			$retval = new Product(json_decode($response->getBody(), true)['data']);
 		}
-		return json_decode($response->getBody(), true)['data'];
+
+		return $retval;
 	}
 
 	/**
@@ -119,7 +122,7 @@ class Products extends AbstractService
 			foreach ($this->entities as $index => $productEntity) {
 				$response = $this->productsEndpoints->putProduct($productEntity->getId(), $productEntity->getData());
 				unset($this->entities[$index]);
-				if ($response->getStatusCode() !== 201) {
+				if ($response->getStatusCode() !== 200) {
 					$errors[$index] = [
 						'entity' => $productEntity->getData(),
 						'response' => json_decode($response->getBody(), true)
