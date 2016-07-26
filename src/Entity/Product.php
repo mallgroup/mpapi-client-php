@@ -413,7 +413,11 @@ class Product extends AbstractEntity
 	 */
 	public function getBarcode()
 	{
-		return $this->data[self::KEY_BARCODE];
+		$retval = null;
+		if (isset($this->data[self::KEY_BARCODE])) {
+			$retval = $this->data[self::KEY_BARCODE];
+		}
+		return $retval;
 	}
 
 	/**
@@ -437,7 +441,11 @@ class Product extends AbstractEntity
 	 */
 	public function getPrice()
 	{
-		return (float)$this->data[self::KEY_PRICE];
+		$retval = null;
+		if (isset($this->data[self::KEY_PRICE])) {
+			$retval = (float)$this->data[self::KEY_PRICE];
+		}
+		return $retval;
 	}
 
 	/**
@@ -485,7 +493,11 @@ class Product extends AbstractEntity
 	 */
 	public function getRrpPrice()
 	{
-		return (float)$this->data[self::KEY_RRP_PRICE];
+		$retval = null;
+		if (isset($this->data[self::KEY_RRP_PRICE])) {
+			$retval = (float)$this->data[self::KEY_RRP_PRICE];
+		}
+		return $retval;
 	}
 
 	/**
@@ -701,7 +713,7 @@ class Product extends AbstractEntity
 
 	/**
 	 * Add variable parameters products
-	 * 
+	 *
 	 * @param array $value
 	 * @return $this
 	 */
