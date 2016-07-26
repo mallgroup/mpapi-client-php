@@ -915,28 +915,25 @@ class Product extends AbstractEntity
 	/**
 	 * Add variant
 	 *
-	 * @param string $url
-	 * @param boolean $main
+	 * @param Variant $variantCurrent
+	 * @return Product
 	 */
-	public function addVariant($url, $main)
+	public function addVariant(Variant $variantCurrent)
 	{
-		$mediaCurrent = [
-			self::KEY_URL => $url,
-			self::KEY_MAIN => $main
-		];
-		if (!isset($this->data[self::KEY_MEDIA])) {
-			$this->data[self::KEY_MEDIA][] = $mediaCurrent;
+
+		if (!isset($this->data[self::KEY_VARIANTS])) {
+			$this->data[self::KEY_VARIANTS][] = $variantCurrent->getData();
 		} else {
 			$updated = false;
-			foreach ($this->data[self::KEY_MEDIA] as $key => $media)
+			foreach ($this->data[self::KEY_VARIANTS] as $key => $variant)
 			{
-				if ($mediaCurrent[self::KEY_URL] === $media[self::KEY_URL]) {
-					$this->data[self::KEY_MEDIA][$key] = $mediaCurrent;
+				if ($variantCurrent[self::KEY_ID] === $variant[self::KEY_ID]) {
+					$this->data[self::KEY_VARIANTS][$key] = $variantCurrent->getData();
 					$updated = true;
 				}
 			}
 			if ($updated === false) {
-				$this->data[self::KEY_MEDIA][] = $mediaCurrent;
+				$this->data[self::KEY_VARIANTS][] = $variantCurrent->getData();
 			}
 		}
 
