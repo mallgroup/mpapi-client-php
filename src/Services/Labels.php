@@ -1,8 +1,6 @@
 <?php
 namespace MPAPI\Services;
 
-use GuzzleHttp\Psr7\Response;
-
 /**
  * Marketplace API client
  *
@@ -35,7 +33,7 @@ class Labels extends AbstractService
 	/**
 	 * Get Data
 	 *
-	 * @return Response
+	 * @return array
 	 */
 	public function get()
 	{
