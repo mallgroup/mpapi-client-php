@@ -1,5 +1,5 @@
 {
-	"description": "Mall marketplace API client",
+  "description": "Mall marketplace API client",
   "type": "library",
   "require" : {
     "php" : "^5.5 || ^7.0",
