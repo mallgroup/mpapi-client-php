@@ -73,7 +73,7 @@ class Products extends AbstractService
 
 	/**
 	 * Post data
-	 *ů
+	 *
 	 * @param array $data
 	 * @return Response
 	 */
