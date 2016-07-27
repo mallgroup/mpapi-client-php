@@ -159,7 +159,8 @@ class Products extends AbstractService
 		$errors = [];
 		if (empty($entity) && !empty($this->entities)) {
 			foreach ($this->entities as $index => $productEntity) {
-				$response = $this->productsEndpoints->putProduct($productEntity->getId(), $productEntity->getData());
+				list($endpoint, $method) = $this->getEndpoint($productEntity, __METHOD__);
+				$response = $endpoint->$method($productEntity->getId(), $productEntity->getData());
 				unset($this->entities[$index]);
 				if ($response->getStatusCode() !== 200) {
 					$errors[$index] = [
