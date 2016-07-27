@@ -71,8 +71,36 @@ class Products extends AbstractService
 	 */
 	public function delete($productId = null)
 	{
-		$response = $this->productsEndpoints->deleteProduct($productId);
-		return json_decode($response->getBody(), true);
+		$errors = [];
+		if (empty($productId) && !empty($this->entities)) {
+			foreach ($this->entities as $index => $productEntity) {
+				$response = $this->productsEndpoints->deleteProduct($productEntity->getId());
+				unset($this->entities[$index]);
+				if ($response->getStatusCode() !== 200) {
+					$errors[$index] = [
+						'entity' => $productEntity->getData(),
+						'response' => json_decode($response->getBody(), true)
+					];
+				}
+			}
+		} else {
+			$response = $this->productsEndpoints->deleteProduct($productId);
+			if ($response->getStatusCode() !== 200) {
+				$errors[] = [
+					'entity' => $productEntity->getData(),
+					'response' => json_decode($response->getBody(), true)
+				];
+			}
+		}
+
+		if (!empty($errors)) {
+			$this->client->getLogger()->error('Error during post products', $errors);
+			$exception = new ApplicationException();
+			$exception->setData($errors);
+			throw $exception;
+		}
+
+		return true;
 	}
 
 	/**

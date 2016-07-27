@@ -82,4 +82,14 @@ class ProductTest extends \Codeception\Test\Unit
 	{
 		$this->assertEmpty($this->object->getRrpPrice());
 	}
+
+	public function testGetVariants()
+	{
+		$this->assertNotEmpty($this->object->getVariants());
+	}
+
+	public function testGetData()
+	{
+		$this->assertNotEmpty($this->object->getData());
+	}
 }
