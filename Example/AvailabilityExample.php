@@ -19,4 +19,4 @@ $products = new Products($mpapiClient);
 // create availability entity
 $availability = new Availability('test2', 10, Availability::STATUS_ACTIVE);
 // send update availability into MP API
-$products->put($availability);
+$products->put('test2', $availability);
