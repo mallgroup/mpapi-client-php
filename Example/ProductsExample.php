@@ -73,7 +73,7 @@ var_dump($response);
 
 // Update product
 $products->add($product);
-$response = $products->put();
+$response = $products->put('pTU00_test');
 var_dump($response);
 
 // Delete product

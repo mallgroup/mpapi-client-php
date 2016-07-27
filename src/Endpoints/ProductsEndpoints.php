@@ -21,6 +21,10 @@ class ProductsEndpoints
 	 */
 	private $client;
 
+	/**
+	 *
+	 * @param Client $client
+	 */
 	public function __construct(Client $client)
 	{
 		$this->client = $client;
@@ -63,7 +67,7 @@ class ProductsEndpoints
 	 *
 	 * @return Response
 	 */
-	public function postProduct($data)
+	public function postProduct(array $data)
 	{
 		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS, 'POST', $data);
 	}
@@ -75,7 +79,7 @@ class ProductsEndpoints
 	 * @param array $data
 	 * @return Response
 	 */
-	public function putProduct($productId, $data)
+	public function putProduct($productId, array $data)
 	{
 		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId, 'PUT', $data);
 	}

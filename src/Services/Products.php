@@ -6,6 +6,8 @@ use MPAPI\Endpoints\ProductsEndpoints;
 use MPAPI\Entity\Product;
 use MPAPI\Entity\AbstractEntity;
 use MPAPI\Exceptions\ApplicationException;
+use MPAPI\Exceptions\EndpointNotfoundException;
+use MPAPI\Exceptions\EndpointNotContainMethod;
 
 /**
  * Products service
@@ -14,6 +16,12 @@ use MPAPI\Exceptions\ApplicationException;
  */
 class Products extends AbstractService
 {
+	/**
+	 *
+	 * @var string
+	 */
+	const ENDPOINT_NAME_PATTERN = 'MPAPI\Endpoints\%sEndpoints';
+
 	/**
 	 *
 	 * @var Client
@@ -144,12 +152,17 @@ class Products extends AbstractService
 	 * @param array $data
 	 * @return Response
 	 */
-	public function put($productId = null, array $data = [])
+	public function put($productId = null, AbstractEntity $entity = null, $variantId = null)
 	{
+		if ($entity !== null) {
+			list($endpoint, $method) = $this->getEndpoint($entity, __METHOD__);
+		}
+
 		$errors = [];
-		if (empty($data) && !empty($this->entities)) {
+		if (empty($entity) && !empty($this->entities)) {
 			foreach ($this->entities as $index => $productEntity) {
-				$response = $this->productsEndpoints->putProduct($productEntity->getId(), $productEntity->getData());
+				list($endpoint, $method) = $this->getEndpoint($productEntity, __METHOD__);
+				$response = $endpoint->$method($productEntity->getId(), $productEntity->getData());
 				unset($this->entities[$index]);
 				if ($response->getStatusCode() !== 200) {
 					$errors[$index] = [
@@ -159,7 +172,7 @@ class Products extends AbstractService
 				}
 			}
 		} else {
-			$response = $this->productsEndpoints->putProduct($productId, $data);
+			$response = $endpoint->$method($productId, $entity->getData(), $variantId);
 		}
 
 		if (!empty($errors)) {
@@ -181,5 +194,55 @@ class Products extends AbstractService
 	{
 		$this->entities[] = $entity;
 		return $this;
+	}
+
+	/**
+	 * Get base class name
+	 *
+	 * @param object $object
+	 * @return string
+	 */
+	private function getClassBasename($object)
+	{
+		$className = get_class($object);
+		return (substr($className, strrpos($className, '\\') + 1));
+	}
+
+	/**
+	 * Get base method name
+	 *
+	 * @param string $methodName
+	 * @return string
+	 */
+	private function getMethodBasename($methodName)
+	{
+		return (substr($methodName, strrpos($methodName, ':') + 1));
+	}
+
+	/**
+	 * Get endpoint for specific entity
+	 *
+	 * @param AbstractEntity $entity
+	 * @throws \Exception
+	 * @return Object
+	 */
+	private function getEndpoint(AbstractEntity $entity, $method)
+	{
+		$classBasename = $this->getClassBasename($entity);
+		$endpointClass = sprintf(self::ENDPOINT_NAME_PATTERN, $classBasename);
+		$methodName = $this->getMethodBasename($method) . $classBasename;
+		if (!class_exists($endpointClass)) {
+			throw new EndpointNotfoundException($classBasename);
+		}
+
+		$endpoint = new $endpointClass($this->client);
+		if (!method_exists($endpoint, $methodName)) {
+			throw new EndpointNotContainMethod($classBasename, $methodName);
+		}
+		return [
+			$endpoint,
+			$methodName
+		];
+
 	}
 }

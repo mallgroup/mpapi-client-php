@@ -1,6 +1,5 @@
 <?php
 // Here you can initialize variables that will be available to your tests
-
 $product = [
 	'id' => 'cdcept0123456',
 	'title' => 'Testing Product',
@@ -42,6 +41,9 @@ $media = [
 		'main' => false
 	]
 ];
+
+Codeception\Util\Fixtures::add('inStock', $product['availability']['in_stock']);
+Codeception\Util\Fixtures::add('status', $product['availability']['status']);
 Codeception\Util\Fixtures::add('media', $media);
 
 $variants = [
