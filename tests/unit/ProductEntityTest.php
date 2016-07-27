@@ -1,5 +1,5 @@
 <?php
-namespace MPAPI\Tests\Unit\LabelTest;
+namespace MPAPI\Tests\Unit;
 
 use MPAPI\Entity\Product;
 use Codeception\Util\Fixtures;
@@ -128,7 +128,9 @@ class ProductTest extends \Codeception\Test\Unit
 	public function testAddRecommended()
 	{
 		$this->assertEmpty($this->object->getRecommended());
-		$this->object->addRecommended(['cdcept-v0123']);
+		$this->object->addRecommended([
+			'cdcept-v0123'
+		]);
 		$this->assertNotEmpty($this->object->getRecommended());
 	}
 
@@ -159,7 +161,7 @@ class ProductTest extends \Codeception\Test\Unit
 	{
 		$this->object->addLabel('SALE', '2016-12-31 00:00:00', '2020-12-31 00:00:00');
 		$labels = $this->object->getLabels();
-
+		
 		$found = false;
 		foreach ($labels as $label) {
 			if ($label['label'] == 'SALE') {
@@ -167,7 +169,7 @@ class ProductTest extends \Codeception\Test\Unit
 				break;
 			}
 		}
-
+		
 		$this->assertTrue($found);
 	}
 }

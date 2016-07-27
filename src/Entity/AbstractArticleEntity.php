@@ -7,6 +7,7 @@ namespace MPAPI\Entity;
  */
 abstract class AbstractArticleEntity extends AbstractEntity
 {
+
 	/**
 	 *
 	 * @var string
@@ -223,7 +224,6 @@ abstract class AbstractArticleEntity extends AbstractEntity
 		return $this;
 	}
 
-
 	/**
 	 * Get long description of variant
 	 *
@@ -255,7 +255,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getPriority()
 	{
-		return (int)$this->data[self::KEY_PRIORITY];
+		return (int) $this->data[self::KEY_PRIORITY];
 	}
 
 	/**
@@ -266,7 +266,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function setPriority($value)
 	{
-		if ((int)$value !== $this->getPriority()) {
+		if ((int) $value !== $this->getPriority()) {
 			$this->data[self::KEY_PRIORITY] = $value;
 		}
 		return $this;
@@ -309,7 +309,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	{
 		$retval = null;
 		if (isset($this->data[self::KEY_PRICE])) {
-			$retval = (float)$this->data[self::KEY_PRICE];
+			$retval = (float) $this->data[self::KEY_PRICE];
 		}
 		return $retval;
 	}
@@ -337,7 +337,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	{
 		$retval = null;
 		if (isset($this->data[self::KEY_RRP_PRICE])) {
-			$retval = (float)$this->data[self::KEY_RRP_PRICE];
+			$retval = (float) $this->data[self::KEY_RRP_PRICE];
 		}
 		return $retval;
 	}
@@ -363,18 +363,18 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getInStock()
 	{
-		return (int)$this->data[self::KEY_AVAILABILITY][self::KEY_IN_STOCK];
+		return (int) $this->data[self::KEY_AVAILABILITY][self::KEY_IN_STOCK];
 	}
 
 	/**
 	 * Set in stock quantity
 	 *
-	 * @param double $value
+	 * @param integer $value
 	 * @return AbstractArticleEntity
 	 */
 	public function setInStock($value)
 	{
-		if ((int)$value !== $this->getInStock()) {
+		if ((int) $value !== $this->getInStock()) {
 			$this->data[self::KEY_AVAILABILITY][self::KEY_IN_STOCK] = $value;
 		}
 		return $this;
@@ -434,7 +434,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 				$this->data[self::KEY_MEDIA][] = $mediaCurrent;
 			}
 		}
-
+		
 		return $this;
 	}
 
@@ -477,15 +477,13 @@ abstract class AbstractArticleEntity extends AbstractEntity
 			self::KEY_FROM => $from,
 			self::KEY_TO => $to
 		];
-
+		
 		if (!isset($this->data[self::KEY_PROMOTIONS])) {
 			$this->data[self::KEY_PROMOTIONS][] = $promotionCurrent;
 		} else {
 			$updated = false;
 			foreach ($this->data[self::KEY_PROMOTIONS] as $key => $media) {
-				if ($promotionCurrent[self::KEY_FROM] === $media[self::KEY_FROM] &&
-					$promotionCurrent[self::KEY_TO] === $media[self::KEY_TO]
-				) {
+				if ($promotionCurrent[self::KEY_FROM] === $media[self::KEY_FROM] && $promotionCurrent[self::KEY_TO] === $media[self::KEY_TO]) {
 					$this->data[self::KEY_PROMOTIONS][$key] = $promotionCurrent;
 					$updated = true;
 				}
@@ -494,7 +492,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 				$this->data[self::KEY_PROMOTIONS][] = $promotionCurrent;
 			}
 		}
-
+		
 		return $this;
 	}
 
@@ -540,6 +538,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	}
 
 	/**
+	 *
 	 * @param string $status
 	 * @return AbstractArticleEntity
 	 */
@@ -591,7 +590,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function setRecommended($value)
 	{
-		if ((int)$value !== $this->getRecommended()) {
+		if ((int) $value !== $this->getRecommended()) {
 			$this->data[self::KEY_RECOMMENDED] = $value;
 		}
 		return $this;
@@ -612,7 +611,6 @@ abstract class AbstractArticleEntity extends AbstractEntity
 		}
 		return $this;
 	}
-
 
 	/**
 	 * Get labels
@@ -653,7 +651,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 			self::KEY_FROM => $from,
 			self::KEY_TO => $to
 		];
-
+		
 		if (!isset($this->data[self::KEY_LABELS])) {
 			$this->data[self::KEY_LABELS][] = $labelCurrent;
 		} else {
@@ -668,7 +666,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 				$this->data[self::KEY_LABELS][] = $labelCurrent;
 			}
 		}
-
+		
 		return $this;
 	}
 }
