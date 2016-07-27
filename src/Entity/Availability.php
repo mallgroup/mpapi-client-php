@@ -96,7 +96,7 @@ class Availability extends AbstractEntity
 	public function setStatus($status)
 	{
 		if (!in_array($status, $this->allowedStatuses)) {
-			throw new AvailabilityBadStatusException();
+			throw new AvailabilityBadStatusException($status, $this->allowedStatuses);
 		}
 
 		$this->data[self::KEY_STATUS] = $status;

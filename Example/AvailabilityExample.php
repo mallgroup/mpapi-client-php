@@ -13,7 +13,10 @@ $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
 
 // set logger into MP API client
 $mpapiClient->setLogger($logger);
-
+// initialize products synchronizer
 $products = new Products($mpapiClient);
 
-$availability = new Availability('test2', 30, 'F');
+// create availability entity
+$availability = new Availability('test2', 10, Availability::STATUS_ACTIVE);
+// send update availability into MP API
+$products->put($availability);
