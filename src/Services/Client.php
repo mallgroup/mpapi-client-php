@@ -189,6 +189,7 @@ class Client
 			$this->getLogger()->info(sprintf(self::LOGGER_RESPONSE, $method, $path), json_decode($response->getBody(), true));
 		} catch (ClientIdException $e) {
 			$this->getLogger()->error(sprintf(self::LOGGER_RESPONSE, $method, $path), ['message' => $e->getMessage()]);
+			throw $e;
 		} catch (ClientException $e) {
 			$this->getLogger()->error($e->getMessage(), [
 				'method' => $method,

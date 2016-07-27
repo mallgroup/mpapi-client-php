@@ -4,7 +4,7 @@ use MPAPI\Services\Labels;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('api_marketplace_test_client_id');
+$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
 $labels = new Labels($mpapiClient);
 $response = $labels->get();
 

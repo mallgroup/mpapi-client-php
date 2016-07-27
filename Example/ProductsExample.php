@@ -22,9 +22,6 @@ var_dump($response);
 // Get detail products
 $response = $products->get(32059);
 var_dump($response->getData());
-// Delete product
-$response = $products->delete('pTU00_test');
-var_dump($response);
 
 $data = [
 	"id" => "pTU00_test",
@@ -148,5 +145,10 @@ $response = $products->post();
 var_dump($response);
 
 // Update product
-$response = $products->put('pTU00_test');
+$products->add($product);
+$response = $products->put();
+var_dump($response);
+
+// Delete product
+$response = $products->delete('pTU00_test');
 var_dump($response);

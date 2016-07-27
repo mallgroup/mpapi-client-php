@@ -47,10 +47,11 @@ class Products extends AbstractService
 	 * Get data
 	 *
 	 * @param string $productId
-	 * @return Product
+	 * @return Product|array|null
 	 */
 	public function get($productId = null)
 	{
+		$retval = null;
 		if (is_null($productId)) {
 			$response = $this->productsEndpoints->getProducts();
 			$retval = json_decode($response->getBody(), true)['data'];
