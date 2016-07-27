@@ -2,6 +2,7 @@
 namespace MPAPI\Endpoints;
 
 use MPAPI\Services\Client;
+use MPAPI\Lib\DataCollector;
 
 /**
  *
@@ -47,7 +48,8 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 */
 	public function getCategories()
 	{
-		return $this->client->sendRequest(self::ENDPOINT_PATH, 'GET');
+		$response = $this->client->sendRequest(self::ENDPOINT_PATH, 'GET');
+		return new DataCollector($this->client, $response);
 	}
 
 	/**

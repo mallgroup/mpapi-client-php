@@ -9,6 +9,7 @@ use MPAPI\Lib\Logger;
 use MPAPI\Lib\ClientIdParser;
 use MPAPI\Exceptions\ClientIdException;
 use MPAPI\Lib\Handlers\ExceptionHandler;
+use GuzzleHttp\Psr7\Request;
 
 /**
  * Marketplace API client
@@ -100,6 +101,12 @@ class Client
 
 	/**
 	 *
+	 * @var Request
+	 */
+	private $lastRequest;
+
+	/**
+	 *
 	 * @param string $clientId
 	 */
 	public function __construct($clientId)
@@ -173,15 +180,27 @@ class Client
 	public function sendRequest($path, $method, array $body = [], array $args = [])
 	{
 		$response = null;
+		$query = [];
 		try {
 			// log request parameters
 			$this->getLogger()->info(sprintf(self::LOGGER_REQUEST, $method, $path), $body);
+			// save request params into history
+			$this->lastRequest = [
+				'path' => $path,
+				'method' => $method,
+				'body' => $body,
+				'args' => $args
+			];
+
+			// set query params
+			$query['client_id'] = $this->clientId;
+			$query = array_merge($query, $args);
 
 			/* @var Response $response */
 			$response = $this->getHttpClient()->request($method, $path, [
 				'json' => $body,
 				'query' => [
-					'client_id' => $this->clientId
+					$query
 				]
 			]);
 
@@ -200,6 +219,23 @@ class Client
 			throw $e;
 		}
 		return $response;
+	}
+
+	/**
+	 * Repeat last request
+	 *
+	 * @param array $args
+	 * @return Response|null
+	 */
+	public function repeatLastRequest(array $args = [])
+	{
+		$args = array_merge($this->lastRequest['args'], $args);
+		return $this->sendRequest(
+			$this->lastRequest['path'],
+			$this->lastRequest['method'],
+			$this->lastRequest['body'],
+			$args
+		);
 	}
 
 	/**
