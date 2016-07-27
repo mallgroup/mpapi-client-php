@@ -9,6 +9,7 @@ use MPAPI\Services\Client;
  */
 class CategoriesEndpoints extends AbstractEndpoints
 {
+
 	/**
 	 *
 	 * @var string
@@ -39,7 +40,6 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 */
 	protected $client;
 
-
 	/**
 	 * Get list of categories
 	 *
@@ -47,7 +47,8 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 */
 	public function getCategories()
 	{
-		return $this->client->sendRequest(self::ENDPOINT_PATH, 'GET');
+		$retval = $this->client->sendRequest(self::ENDPOINT_PATH, 'GET');
+		return json_decode($retval->getBody());
 	}
 
 	/**
@@ -58,7 +59,9 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 */
 	public function getSearchCategories($phrase)
 	{
-		return $this->client->sendRequest(sprintf(self::ENDPOINT_SEARCH,  self::ENDPOINT_PATH, $phrase), 'GET');
+		// $retval = $this->client->sendRequest(sprintf(self::ENDPOINT_SEARCH, self::ENDPOINT_PATH, $phrase), 'GET');
+		// return json_decode($retval->getBody());
+		return $this->client->sendRequest(sprintf(self::ENDPOINT_SEARCH, self::ENDPOINT_PATH, $phrase), 'GET');
 	}
 
 	/**
@@ -69,7 +72,8 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 */
 	public function getCategoriesByPrefix($prefix)
 	{
-		return $this->client->sendRequest(sprintf(self::ENDPOINT_PREFIX,  self::ENDPOINT_PATH, $prefix), 'GET');
+		$retval = $this->client->sendRequest(sprintf(self::ENDPOINT_PREFIX, self::ENDPOINT_PATH, $prefix), 'GET');
+		return json_decode($retval->getBody());
 	}
 
 	/**
@@ -80,6 +84,7 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 */
 	public function getCategoryParameters($categoryId)
 	{
-		return $this->client->sendRequest(sprintf(self::ENDPOINT_PARAMETERS,  self::ENDPOINT_PATH, $categoryId), 'GET');
+		$retval = $this->client->sendRequest(sprintf(self::ENDPOINT_PARAMETERS, self::ENDPOINT_PATH, $categoryId), 'GET');
+		return json_decode($retval->getBody());
 	}
 }
