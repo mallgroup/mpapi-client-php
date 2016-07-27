@@ -84,6 +84,16 @@ class DataCollector
 			$this->isSeekable = false;
 		}
 
-		return $this->client->repeatLastRequest(['page' => $this->currentPage]);
+		return $this->processResponse($this->client->repeatLastRequest(['page' => $this->currentPage]));
+	}
+
+	/**
+	 * Get response data
+	 *
+	 * @return array
+	 */
+	public function getData()
+	{
+		return $this->data;
 	}
 }

@@ -15,20 +15,20 @@ $mpapiClient->setLogger($logger);
 $categories = new Categories($mpapiClient);
 
 // // get all categories
-// $response = $categories->get()->getCategories();
+$response = $categories->get()->getCategories();
 // // var_dump($response);
 
 // get categories by prefix
 $prefix = 'MP';
-$response = $categories->get()->getCategoriesByPrefix($prefix);
+//$response = $categories->get()->getCategoriesByPrefix($prefix);
 var_dump($response);
 
 // get categories by phrase
 $phrase = 'book';
-$response = $categories->get()->getSearchCategories($phrase);
+// $response = $categories->get()->getSearchCategories($phrase);
 var_dump($response);
 
 // get category parameters
 $categoryId = 'MP002PL';
-$response = $categories->get()->getCategoryParameters($categoryId);
+// $response = $categories->get()->getCategoryParameters($categoryId);
 var_dump($response);

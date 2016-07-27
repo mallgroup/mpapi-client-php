@@ -199,13 +199,14 @@ class Client
 			/* @var Response $response */
 			$response = $this->getHttpClient()->request($method, $path, [
 				'json' => $body,
-				'query' => [
-					$query
-				]
+				'query' => $query
 			]);
 
-			// log response
-			$this->getLogger()->info(sprintf(self::LOGGER_RESPONSE, $method, $path), json_decode($response->getBody(), true));
+			$responseData = json_decode((string)$response->getBody(), true);
+			if (empty($responseData)) {
+				$responseData = [];
+			}
+			$this->getLogger()->info(sprintf(self::LOGGER_RESPONSE, $method, $path), $responseData);
 		} catch (ClientIdException $e) {
 			$this->getLogger()->error(sprintf(self::LOGGER_RESPONSE, $method, $path), ['message' => $e->getMessage()]);
 			throw $e;

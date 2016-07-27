@@ -49,7 +49,8 @@ class CategoriesEndpoints extends AbstractEndpoints
 	public function getCategories()
 	{
 		$response = $this->client->sendRequest(self::ENDPOINT_PATH, 'GET');
-		return new DataCollector($this->client, $response);
+		$dataCollector = new DataCollector($this->client, $response);
+		return $dataCollector->getData();
 	}
 
 	/**
