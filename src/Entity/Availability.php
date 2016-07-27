@@ -11,6 +11,7 @@ use MPAPI\Exceptions\AvailabilityBadInStockValueException;
  */
 class Availability extends AbstractEntity
 {
+
 	/**
 	 *
 	 * @var string
@@ -58,18 +59,17 @@ class Availability extends AbstractEntity
 
 	/**
 	 *
-	 * @param string $productId
 	 * @param integer $inStock
 	 * @param string $status
 	 */
-	public function __construct($productId, $inStock, $status = self::STATUS_ACTIVE)
+	public function __construct($inStock, $status = self::STATUS_ACTIVE)
 	{
-		$this->productId = $productId;
 		$this->setInStock($inStock);
 		$this->setStatus($status);
 	}
 
 	/**
+	 *
 	 * @see \MPAPI\Entity\AbstractEntity::getData()
 	 */
 	public function getData()
@@ -98,7 +98,7 @@ class Availability extends AbstractEntity
 		if (!in_array($status, $this->allowedStatuses)) {
 			throw new AvailabilityBadStatusException($status, $this->allowedStatuses);
 		}
-
+		
 		$this->data[self::KEY_STATUS] = $status;
 		return $this;
 	}
@@ -110,7 +110,7 @@ class Availability extends AbstractEntity
 	 */
 	public function getInStock()
 	{
-		return (int)$this->data[self::KEY_IN_STOCK];
+		return (int) $this->data[self::KEY_IN_STOCK];
 	}
 
 	/**
@@ -123,9 +123,9 @@ class Availability extends AbstractEntity
 		if (!is_numeric($amount)) {
 			throw new AvailabilityBadInStockValueException();
 		}
-
+		
 		$this->data[self::KEY_IN_STOCK] = $amount;
-
+		
 		return $this;
 	}
 
