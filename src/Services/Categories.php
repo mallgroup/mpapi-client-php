@@ -6,8 +6,7 @@ use MPAPI\Endpoints\CategoriesEndpoints;
 /**
  * Category service
  *
- * @author
- *
+ * @author Jonas Habr <jonas.habr@mall.cz>
  */
 class Categories extends AbstractService
 {
