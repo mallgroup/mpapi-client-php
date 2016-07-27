@@ -17,6 +17,9 @@ $mpapiClient->setLogger($logger);
 $products = new Products($mpapiClient);
 
 // create availability entity
-$availability = new Availability('test2', 10, Availability::STATUS_ACTIVE);
-// send update availability into MP API
-$products->put('test2', $availability);
+$availability = new Availability(10, Availability::STATUS_ACTIVE);
+// send update product availability into MP API
+$products->put(29237, $availability);
+
+// send update variant availability into MP API
+$products->put(29237, $availability, 29239);

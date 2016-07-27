@@ -19,6 +19,10 @@ class AvailabilityEndpoints
 	 */
 	const ENDPOINT_PATH = 'products/%s/availability';
 
+	/**
+	 *
+	 * @var string
+	 */
 	const ENDPOINT_PATH_VARIANT = 'products/%s/variants/%s/availability';
 
 	/**
@@ -44,12 +48,12 @@ class AvailabilityEndpoints
 	 * @param string $variantId
 	 * @return Response
 	 */
-	public function putAvailability($productId, Availability $availability, $variantId = null)
+	public function putAvailability($productId, array $availability, $variantId = null)
 	{
-		if (variantId == null) {
-			return $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $productId), 'PUT', $availability->getData());
+		if ($variantId == null) {
+			return $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $productId), 'PUT', $availability);
 		} else {
-			return $this->client->sendRequest(sprintf(self::ENDPOINT_PATH_VARIANT, $productId, $variantId), 'PUT', $availability->getData());
+			return $this->client->sendRequest(sprintf(self::ENDPOINT_PATH_VARIANT, $productId, $variantId), 'PUT', $availability);
 		}
 	}
 }

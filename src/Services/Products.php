@@ -152,7 +152,9 @@ class Products extends AbstractService
 	 */
 	public function put($productId = null, AbstractEntity $entity = null, $variantId = null)
 	{
-		list($endpoint, $method) = $this->getEndpoint($entity);
+		if ($entity !== null) {
+			list($endpoint, $method) = $this->getEndpoint($entity, __METHOD__);
+		}
 
 		$errors = [];
 		if (empty($entity) && !empty($this->entities)) {
@@ -221,16 +223,16 @@ class Products extends AbstractService
 	 * @throws \Exception
 	 * @return Object
 	 */
-	private function getEndpoint(AbstractEntity $entity)
+	private function getEndpoint(AbstractEntity $entity, $method)
 	{
 		$baseClassName = $this->getClassBasename($entity);
 		$endpointClass = sprintf(self::ENDPOINT_NAME_PATTERN, $baseClassName);
-		$methodName = $this->getMethodBasename(__METHOD__) . $baseClassName;
+		$methodName = $this->getMethodBasename($method) . $baseClassName;
 		if (!class_exists($endpointClass)) {
 			throw new \Exception(sprintf('Endpoint %s not exist.', $baseClassName));
 		}
 
-		$endpoint = new $endpointClass;
+		$endpoint = new $endpointClass($this->client);
 		if (!method_exists($endpoint, $methodName)) {
 			throw new \Exception(sprintf('Object %s does not contain method %s.', $baseClassName, $methodName));
 		}
