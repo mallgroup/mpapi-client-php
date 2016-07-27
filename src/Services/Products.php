@@ -6,6 +6,8 @@ use MPAPI\Endpoints\ProductsEndpoints;
 use MPAPI\Entity\Product;
 use MPAPI\Entity\AbstractEntity;
 use MPAPI\Exceptions\ApplicationException;
+use MPAPI\Exceptions\EndpointNotfoundException;
+use MPAPI\Exceptions\EndpointNotContainMethod;
 
 /**
  * Products service
@@ -207,9 +209,9 @@ class Products extends AbstractService
 	}
 
 	/**
-	 * Get base class name
+	 * Get base method name
 	 *
-	 * @param object $object
+	 * @param string $methodName
 	 * @return string
 	 */
 	private function getMethodBasename($methodName)
@@ -226,16 +228,16 @@ class Products extends AbstractService
 	 */
 	private function getEndpoint(AbstractEntity $entity, $method)
 	{
-		$baseClassName = $this->getClassBasename($entity);
-		$endpointClass = sprintf(self::ENDPOINT_NAME_PATTERN, $baseClassName);
-		$methodName = $this->getMethodBasename($method) . $baseClassName;
+		$classBasename = $this->getClassBasename($entity);
+		$endpointClass = sprintf(self::ENDPOINT_NAME_PATTERN, $classBasename);
+		$methodName = $this->getMethodBasename($method) . $classBasename;
 		if (!class_exists($endpointClass)) {
-			throw new \Exception(sprintf('Endpoint %s not exist.', $baseClassName));
+			throw new EndpointNotfoundException($classBasename);
 		}
 
 		$endpoint = new $endpointClass($this->client);
 		if (!method_exists($endpoint, $methodName)) {
-			throw new \Exception(sprintf('Object %s does not contain method %s.', $baseClassName, $methodName));
+			throw new EndpointNotContainMethod($classBasename, $methodName);
 		}
 		return [
 			$endpoint,
