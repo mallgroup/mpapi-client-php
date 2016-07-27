@@ -129,86 +129,6 @@ class Product extends AbstractArticleEntity
 	}
 
 	/**
-	 * Get product priority
-	 *
-	 * @return integer
-	 */
-	public function getPriority()
-	{
-		return (int)$this->data[self::KEY_PRIORITY];
-	}
-
-	/**
-	 * Set product priority
-	 *
-	 * @param integer $value
-	 * @return Product
-	 */
-	public function setPriority($value)
-	{
-		if ((int)$value !== $this->getPriority()) {
-			$this->data[self::KEY_PRIORITY] = $value;
-		}
-		return $this;
-	}
-
-	/**
-	 * Get barcode
-	 *
-	 * @return string
-	 */
-	public function getBarcode()
-	{
-		$retval = null;
-		if (isset($this->data[self::KEY_BARCODE])) {
-			$retval = $this->data[self::KEY_BARCODE];
-		}
-		return $retval;
-	}
-
-	/**
-	 * Set barcode
-	 *
-	 * @param string $value
-	 * @return Product
-	 */
-	public function setBarcode($value)
-	{
-		if ($value !== $this->getBarcode()) {
-			$this->data[self::KEY_BARCODE] = $value;
-		}
-		return $this;
-	}
-
-	/**
-	 * Get price
-	 *
-	 * @return float
-	 */
-	public function getPrice()
-	{
-		$retval = null;
-		if (isset($this->data[self::KEY_PRICE])) {
-			$retval = (float)$this->data[self::KEY_PRICE];
-		}
-		return $retval;
-	}
-
-	/**
-	 * Set price
-	 *
-	 * @param float $value
-	 * @return Product
-	 */
-	public function setPrice($value)
-	{
-		if (bccomp($value, $this->getPrice(), self::PRICE_PRECISION) !== 0) {
-			$this->data[self::KEY_PRICE] = $value;
-		}
-		return $this;
-	}
-
-	/**
 	 * Get VAT
 	 *
 	 * @return float
@@ -228,34 +148,6 @@ class Product extends AbstractArticleEntity
 	{
 		if (bccomp($value, $this->getVat(), self::PRICE_PRECISION) !== 0) {
 			$this->data[self::KEY_VAT] = $value;
-		}
-		return $this;
-	}
-
-	/**
-	 * Get RRP price
-	 *
-	 * @return float
-	 */
-	public function getRrpPrice()
-	{
-		$retval = null;
-		if (isset($this->data[self::KEY_RRP_PRICE])) {
-			$retval = (float)$this->data[self::KEY_RRP_PRICE];
-		}
-		return $retval;
-	}
-
-	/**
-	 * Set rrp price
-	 *
-	 * @param float $value
-	 * @return Product
-	 */
-	public function setRrpPrice($value)
-	{
-		if (bccomp($value, $this->getRrpPrice(), self::PRICE_PRECISION) !== 0) {
-			$this->data[self::KEY_RRP_PRICE] = $value;
 		}
 		return $this;
 	}
@@ -331,7 +223,11 @@ class Product extends AbstractArticleEntity
 	 */
 	public function getVariants()
 	{
-		return $this->data[self::KEY_VARIANTS];
+		$retval = null;
+		if (isset($this->data[self::KEY_VARIANTS])) {
+			$retval = $this->data[self::KEY_VARIANTS];
+		}
+		return $retval;
 	}
 
 	/**

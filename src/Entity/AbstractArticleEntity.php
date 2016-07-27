@@ -293,7 +293,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getBarcode()
 	{
-		return $this->data[self::KEY_BARCODE];
+		$retval = null;
+		if (isset($this->data[self::KEY_BARCODE])) {
+			$retval = $this->data[self::KEY_BARCODE];
+		}
+		return $retval;
 	}
 
 	/**
@@ -303,7 +307,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getPrice()
 	{
-		return (float)$this->data[self::KEY_PRICE];
+		$retval = null;
+		if (isset($this->data[self::KEY_PRICE])) {
+			$retval = (float)$this->data[self::KEY_PRICE];
+		}
+		return $retval;
 	}
 
 	/**
@@ -327,7 +335,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getRrpPrice()
 	{
-		return (float)$this->data[self::KEY_RRP_PRICE];
+		$retval = null;
+		if (isset($this->data[self::KEY_RRP_PRICE])) {
+			$retval = (float)$this->data[self::KEY_RRP_PRICE];
+		}
+		return $retval;
 	}
 
 	/**
@@ -375,7 +387,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getMedia()
 	{
-		return $this->data[self::KEY_MEDIA];
+		$retval = null;
+		if (isset($this->data[self::KEY_MEDIA])) {
+			$retval = $this->data[self::KEY_MEDIA];
+		}
+		return $retval;
 	}
 
 	/**
@@ -560,7 +576,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getRecommended()
 	{
-		return $this->data[self::KEY_RECOMMENDED];
+		$retval = null;
+		if (isset($this->data[self::KEY_RECOMMENDED])) {
+			$retval = $this->data[self::KEY_RECOMMENDED];
+		}
+		return $retval;
 	}
 
 	/**
