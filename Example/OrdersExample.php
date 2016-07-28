@@ -17,19 +17,19 @@ $mpapiClient->setLogger($logger);
 $orders = new Orders($mpapiClient);
 
 // get all open orders
-$openOrders = $orders->get()->openOrders();
+$openOrders = $orders->get()->open();
 // print of open orders
 var_dump($openOrders);
 
 // get all open orders
-$unconfirmedOrders = $orders->get()->unconfirmedOrders();
+$unconfirmedOrders = $orders->get()->unconfirmed();
 // print list of unconfirmed orders
 var_dump($unconfirmedOrders);
 
 if (!empty($openOrders)) {
 	// get order detail
 	/* @var $order MPAPI\Entity\Order */
-	$order = $orders->get()->orderDetail($openOrders[0]);
+	$order = $orders->get()->detail($openOrders[0]);
 	// print order detail
 	var_dump($order->getData());
 

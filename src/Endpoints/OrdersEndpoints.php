@@ -46,7 +46,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	 *
 	 * @return array|null
 	 */
-	public function openOrders()
+	public function open()
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_OPEN, self::ENDPOINT_PATH), 'GET');
 		$dataCollector = new DataCollector($this->client, $response, false);
@@ -58,7 +58,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	 *
 	 * @return array|null
 	 */
-	public function unconfirmedOrders()
+	public function unconfirmed()
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_UNCONFIRMED, self::ENDPOINT_PATH), 'GET');
 		$dataCollector = new DataCollector($this->client, $response, false);
@@ -71,7 +71,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	 *
 	 * @return Order|null
 	 */
-	public function orderDetail($orderId)
+	public function detail($orderId)
 	{
 		$retval = [];
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_DETAIL, self::ENDPOINT_PATH, $orderId), 'GET');
