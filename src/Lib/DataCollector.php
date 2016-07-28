@@ -3,6 +3,7 @@ namespace MPAPI\Lib;
 
 use GuzzleHttp\Psr7\Response;
 use MPAPI\Services\Client;
+use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  *
@@ -42,18 +43,58 @@ class DataCollector
 
 	/**
 	 *
+	 * @var string
+	 */
+	private $section;
+
+	/**
+	 *
+	 * @var Response
+	 */
+	private $response;
+
+	/**
+	 *
 	 * @param Client $client
 	 * @param Response $response
 	 */
-	public function __construct(Client $client, Response $response)
+	public function __construct(Client $client, Response $response, $autoStart = true)
 	{
 		$this->client = $client;
-		// process response body
-		$this->processResponse($response);
+		$this->response = $response;
 
+		if ($autoStart === true) {
+			// collect request data
+			$this->collect();
+		}
+	}
+
+	/**
+	 * Collect request data
+	 *
+	 * @return boolean
+	 */
+	public function collect()
+	{
+		// process response body
+		$this->processResponse($this->response);
+		// load next request data
 		while ($this->isSeekable === true) {
 			$this->nextPage();
 		}
+		return true;
+	}
+
+	/**
+	 * Set data section
+	 *
+	 * @param string $section
+	 * @return DataCollector
+	 */
+	public function setDataSection($section)
+	{
+		$this->section = $section;
+		return $this;
 	}
 
 	/**
@@ -72,7 +113,13 @@ class DataCollector
 		}
 
 		if (isset($body['data']) && !empty($body['data'])) {
-			$this->data = array_merge($this->data, $body['data']);
+			$data = $body['data'];
+			if (!empty($this->section) && isset($data[$this->section])) {
+				$this->data = array_merge($this->data, $data[$this->section]);
+			} else {
+				$this->data = array_merge($this->data, $data);
+			}
+
 		}
 		return $this->data;
 	}
@@ -99,6 +146,10 @@ class DataCollector
 	 */
 	public function getData()
 	{
+		if (empty($this->data)) {
+			$this->collect();
+		}
+
 		return $this->data;
 	}
 }

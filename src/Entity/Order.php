@@ -1,5 +1,7 @@
 <?php
-namespace MAPI\Entity;
+namespace MPAPI\Entity;
+
+use MPAPI\Entity\AbstractEntity;
 
 /**
  * Order entity
@@ -11,19 +13,25 @@ class Order extends AbstractEntity
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_ORDER_ID = 'order_id';
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
+	 */
+	const KEY_ID = 'id';
+
+	/**
+	 *
+	 * @var string
 	 */
 	const KEY_PARTNER_ID = 'partner_id';
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_PURCHASE_ID = 'purchase_id';
 
@@ -31,11 +39,11 @@ class Order extends AbstractEntity
 	 *
 	 * @var string
 	 */
-	const KEY_CURRENCY_ID = 'currency_id';
+	const KEY_CURRENCY_ID = 'currency';
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_DELIVERY_PRICE = 'delivery_price';
 
@@ -68,6 +76,12 @@ class Order extends AbstractEntity
 	 * @var string
 	 */
 	const KEY_COD_PRICE = 'cod_price';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_ADDRESS = 'address';
 
 	/**
 	 *
@@ -131,7 +145,7 @@ class Order extends AbstractEntity
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_DELIVERY_COD_PRICE = 'delivery_cod_price';
 
@@ -143,7 +157,7 @@ class Order extends AbstractEntity
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_TRANSPORT_ID = 'transport_id';
 
@@ -155,19 +169,19 @@ class Order extends AbstractEntity
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_EXTERNAL_ORDER_ID = 'external_order_id';
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_DISCOUNT = 'discount';
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_PAYMENT_TYPE = 'payment_type';
 
@@ -179,7 +193,7 @@ class Order extends AbstractEntity
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_CUSTOMER_ID = 'customer_id';
 
@@ -280,7 +294,7 @@ class Order extends AbstractEntity
 			],
 			'confirmed' => $this->getConfirmed(),
 			'status' => $this->getStatus(),
-			'items' => $this->getItemsOutput()
+			'items' => $this->getItems()
 		];
 	}
 
@@ -291,7 +305,13 @@ class Order extends AbstractEntity
 	 */
 	public function getOrderId()
 	{
-		return $this->data[self::KEY_ORDER_ID];
+		$retval = null;
+		if (isset($this->data[self::KEY_ORDER_ID])) {
+			$retval = $this->data[self::KEY_ORDER_ID];
+		} else {
+			$retval = $this->data[self::KEY_ID];
+		}
+		return $retval;
 	}
 
 	/**
@@ -302,20 +322,6 @@ class Order extends AbstractEntity
 	public function getItems()
 	{
 		return $this->data[self::KEY_ITEMS];
-	}
-
-	/**
-	 *
-	 * @return array
-	 */
-	public function getItemsOutput()
-	{
-		$retval = [];
-		/* @var OrderItemsIterator $items */
-		foreach ($this->data[self::KEY_ITEMS] as $items) {
-			$retval[] = $items->getOutputData();
-		}
-		return $retval;
 	}
 
 	/**
@@ -405,7 +411,7 @@ class Order extends AbstractEntity
 	 */
 	public function getName()
 	{
-		return $this->data[self::KEY_NAME];
+		return $this->data[self::KEY_ADDRESS][self::KEY_NAME];
 	}
 
 	/**
@@ -413,7 +419,7 @@ class Order extends AbstractEntity
 	 */
 	public function getCompany()
 	{
-		return $this->data[self::KEY_COMPANY];
+		return $this->data[self::KEY_ADDRESS][self::KEY_COMPANY];
 	}
 
 	/**
@@ -421,7 +427,7 @@ class Order extends AbstractEntity
 	 */
 	public function getPhone()
 	{
-		return $this->data[self::KEY_PHONE];
+		return $this->data[self::KEY_ADDRESS][self::KEY_PHONE];
 	}
 
 	/**
@@ -429,7 +435,7 @@ class Order extends AbstractEntity
 	 */
 	public function getEmail()
 	{
-		return $this->data[self::KEY_EMAIL];
+		return $this->data[self::KEY_ADDRESS][self::KEY_EMAIL];
 	}
 
 	/**
@@ -437,7 +443,7 @@ class Order extends AbstractEntity
 	 */
 	public function getStreet()
 	{
-		return $this->data[self::KEY_STREET];
+		return $this->data[self::KEY_ADDRESS][self::KEY_STREET];
 	}
 
 	/**
@@ -445,7 +451,7 @@ class Order extends AbstractEntity
 	 */
 	public function getCity()
 	{
-		return $this->data[self::KEY_CITY];
+		return $this->data[self::KEY_ADDRESS][self::KEY_CITY];
 	}
 
 	/**
@@ -453,7 +459,7 @@ class Order extends AbstractEntity
 	 */
 	public function getZip()
 	{
-		return $this->data[self::KEY_ZIP];
+		return $this->data[self::KEY_ADDRESS][self::KEY_ZIP];
 	}
 
 	/**
@@ -461,7 +467,7 @@ class Order extends AbstractEntity
 	 */
 	public function getCountry()
 	{
-		return $this->data[self::KEY_COUNTRY];
+		return $this->data[self::KEY_ADDRESS][self::KEY_COUNTRY];
 	}
 
 	/**
@@ -574,25 +580,5 @@ class Order extends AbstractEntity
 	{
 		$this->data[self::KEY_CONFIRMED] = $confirmed;
 		return $this;
-	}
-
-	/**
-	 * Check order changes
-	 *
-	 * @return boolean
-	 */
-	public function isChanged()
-	{
-		return !empty($this->changes);
-	}
-
-	/**
-	 * Get all order changes
-	 *
-	 * @return array
-	 */
-	public function getChanges()
-	{
-		return $this->changes;
 	}
 }
