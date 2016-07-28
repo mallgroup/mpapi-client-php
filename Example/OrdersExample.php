@@ -19,12 +19,16 @@ $orders = new Orders($mpapiClient);
 // get all open orders
 $openOrders = $orders->get()->open();
 // print of open orders
-var_dump($openOrders);
+foreach ($openOrders as $orderId) {
+	print('Open order: ' . $orderId . PHP_EOL);
+}
 
 // get all open orders
 $unconfirmedOrders = $orders->get()->unconfirmed();
 // print list of unconfirmed orders
-var_dump($unconfirmedOrders);
+foreach ($unconfirmedOrders as $orderId) {
+	print('Unconfirmed order: ' . $orderId . PHP_EOL);
+}
 
 if (!empty($openOrders)) {
 	// get order detail
