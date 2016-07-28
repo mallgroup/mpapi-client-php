@@ -2,12 +2,13 @@
 namespace MPAPI\Services;
 
 /**
- * Marketplace API client
+ * Labels service
  *
  * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  */
 class Labels extends AbstractService
 {
+
 	/**
 	 *
 	 * @var Client
@@ -20,9 +21,9 @@ class Labels extends AbstractService
 	 */
 	const PATH = 'labels';
 
-
 	/**
 	 * Labels constructor.
+	 * 
 	 * @param Client $client
 	 */
 	public function __construct(Client $client)
