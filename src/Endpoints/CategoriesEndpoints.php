@@ -10,7 +10,6 @@ use MPAPI\Lib\DataCollector;
  */
 class CategoriesEndpoints extends AbstractEndpoints
 {
-
 	/**
 	 *
 	 * @var string
