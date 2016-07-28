@@ -16,19 +16,16 @@ $categories = new Categories($mpapiClient);
 
 // // get all categories
 $response = $categories->get()->getCategories();
-// // var_dump($response);
+var_dump($response);
 
 // get categories by prefix
-$prefix = 'MP';
-//$response = $categories->get()->getCategoriesByPrefix($prefix);
+$response = $categories->get()->getCategoriesByPrefix('Lam');
 var_dump($response);
 
 // get categories by phrase
-$phrase = 'book';
-// $response = $categories->get()->getSearchCategories($phrase);
+$response = $categories->get()->getSearchCategories('desky');
 var_dump($response);
 
 // get category parameters
-$categoryId = 'MP002PL';
-// $response = $categories->get()->getCategoryParameters($categoryId);
+$response = $categories->get()->getCategoryParameters('MP002PL');
 var_dump($response);

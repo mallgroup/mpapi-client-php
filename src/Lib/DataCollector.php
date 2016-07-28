@@ -60,6 +60,7 @@ class DataCollector
 	 * Process response data
 	 *
 	 * @param Response $response
+	 * @return array
 	 */
 	private function processResponse(Response $response)
 	{
@@ -69,7 +70,11 @@ class DataCollector
 			$this->pages = (int)$body['paging']['pages'];
 			$this->isSeekable =  $this->pages > 1;
 		}
-		$this->data = $body['data'];
+
+		if (isset($body['data']) && !empty($body['data'])) {
+			$this->data = array_merge($this->data, $body['data']);
+		}
+		return $this->data;
 	}
 
 	/**

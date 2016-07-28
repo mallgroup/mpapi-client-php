@@ -44,7 +44,7 @@ class CategoriesEndpoints extends AbstractEndpoints
 	/**
 	 * Get list of categories
 	 *
-	 * @return \GuzzleHttp\Psr7\Response|NULL
+	 * @return array|null
 	 */
 	public function getCategories()
 	{
@@ -57,36 +57,38 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 * Search categories
 	 *
 	 * @param string $phrase
-	 * @return \GuzzleHttp\Psr7\Response|NULL
+	 * @return array|null
 	 */
 	public function getSearchCategories($phrase)
 	{
-		// $retval = $this->client->sendRequest(sprintf(self::ENDPOINT_SEARCH, self::ENDPOINT_PATH, $phrase), 'GET');
-		// return json_decode($retval->getBody());
-		return $this->client->sendRequest(sprintf(self::ENDPOINT_SEARCH, self::ENDPOINT_PATH, $phrase), 'GET');
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_SEARCH, self::ENDPOINT_PATH, $phrase), 'GET');
+		$dataCollector = new DataCollector($this->client, $response);
+		return $dataCollector->getData();
 	}
 
 	/**
 	 * Search categories by prefix
 	 *
 	 * @param string $prefix
-	 * @return \GuzzleHttp\Psr7\Response|NULL
+	 * @return array|null
 	 */
 	public function getCategoriesByPrefix($prefix)
 	{
-		$retval = $this->client->sendRequest(sprintf(self::ENDPOINT_PREFIX, self::ENDPOINT_PATH, $prefix), 'GET');
-		return json_decode($retval->getBody());
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PREFIX, self::ENDPOINT_PATH, $prefix), 'GET');
+		$dataCollector = new DataCollector($this->client, $response);
+		return $dataCollector->getData();
 	}
 
 	/**
 	 * Get list of parameters for specific category
 	 *
 	 * @param string $categoryId
-	 * @return \GuzzleHttp\Psr7\Response|NULL
+	 * @return array|null
 	 */
 	public function getCategoryParameters($categoryId)
 	{
-		$retval = $this->client->sendRequest(sprintf(self::ENDPOINT_PARAMETERS, self::ENDPOINT_PATH, $categoryId), 'GET');
-		return json_decode($retval->getBody());
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PARAMETERS, self::ENDPOINT_PATH, $categoryId), 'GET');
+		$dataCollector = new DataCollector($this->client, $response);
+		return $dataCollector->getData();
 	}
 }
