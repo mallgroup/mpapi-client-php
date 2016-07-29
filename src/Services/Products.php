@@ -16,6 +16,7 @@ use MPAPI\Exceptions\EndpointNotContainMethod;
  */
 class Products extends AbstractService
 {
+
 	/**
 	 *
 	 * @var string
@@ -67,7 +68,7 @@ class Products extends AbstractService
 			$response = $this->productsEndpoints->getDetail($productId);
 			$retval = new Product(json_decode($response->getBody(), true)['data']);
 		}
-
+		
 		return $retval;
 	}
 
@@ -100,14 +101,14 @@ class Products extends AbstractService
 				];
 			}
 		}
-
+		
 		if (!empty($errors)) {
 			$this->client->getLogger()->error('Error during post products', $errors);
 			$exception = new ApplicationException();
 			$exception->setData($errors);
 			throw $exception;
 		}
-
+		
 		return true;
 	}
 
@@ -132,16 +133,19 @@ class Products extends AbstractService
 				}
 			}
 		} else {
+			if ($data instanceof Product) {
+				$data = $data->getData();
+			}
 			$response = $this->productsEndpoints->postProduct($data);
 		}
-
+		
 		if (!empty($errors)) {
 			$this->client->getLogger()->error('Error during post products', $errors);
 			$exception = new ApplicationException();
 			$exception->setData($errors);
 			throw $exception;
 		}
-
+		
 		return true;
 	}
 
@@ -155,13 +159,13 @@ class Products extends AbstractService
 	public function put($productId = null, AbstractEntity $entity = null, $variantId = null)
 	{
 		if ($entity !== null) {
-			list($endpoint, $method) = $this->getEndpoint($entity, __METHOD__);
+			list ($endpoint, $method) = $this->getEndpoint($entity, __METHOD__);
 		}
-
+		
 		$errors = [];
 		if (empty($entity) && !empty($this->entities)) {
 			foreach ($this->entities as $index => $productEntity) {
-				list($endpoint, $method) = $this->getEndpoint($productEntity, __METHOD__);
+				list ($endpoint, $method) = $this->getEndpoint($productEntity, __METHOD__);
 				$response = $endpoint->$method($productEntity->getId(), $productEntity->getData());
 				unset($this->entities[$index]);
 				if ($response->getStatusCode() !== 200) {
@@ -174,14 +178,14 @@ class Products extends AbstractService
 		} else {
 			$response = $endpoint->$method($productId, $entity->getData(), $variantId);
 		}
-
+		
 		if (!empty($errors)) {
 			$this->client->getLogger()->error('Error during post products', $errors);
 			$exception = new ApplicationException();
 			$exception->setData($errors);
 			throw $exception;
 		}
-
+		
 		return true;
 	}
 
@@ -234,7 +238,7 @@ class Products extends AbstractService
 		if (!class_exists($endpointClass)) {
 			throw new EndpointNotfoundException($classBasename);
 		}
-
+		
 		$endpoint = new $endpointClass($this->client);
 		if (!method_exists($endpoint, $methodName)) {
 			throw new EndpointNotContainMethod($classBasename, $methodName);
@@ -243,6 +247,5 @@ class Products extends AbstractService
 			$endpoint,
 			$methodName
 		];
-
 	}
 }

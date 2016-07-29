@@ -1,6 +1,6 @@
 {
   "description": "Mall marketplace API client",
-  "name" : "nrholding/MPAPI",
+  "name" : "mallgroup/mpapi-client",
   "type": "library",
   "require" : {
     "php" : "^5.5 || ^7.0",

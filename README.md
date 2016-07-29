@@ -3,8 +3,9 @@
 ##Description 
 MPAPI client is a tool created to help Internet Mall partners to easily connect to marketplace catalogue and order processing at Mall environment such as Mall.cz or Mall.sk. 
 ##Get MPAPI client 
-We recommend to use [Composer](https://getcomposer.org/doc/00-intro.md "see https://getcomposer.org/doc/00-intro.md , if you have it not installed yet"). Once you have composer installed,  you can execute the following command in your project root to get the library: 
-composer require nrholding/mpapi 
+We recommend to use [Composer](https://getcomposer.org/doc/00-intro.md "see https://getcomposer.org/doc/00-intro.md , if you have it not installed yet"). Once you have composer installed,  you can execute the following command in your project root to get the library:  
+`composer require mallgroup/mpapi-client `
+
 To check successful installation go to the vendor folder. You should see the nrholding folder there.  
 Be sure you include the autoloader: 
  
@@ -29,10 +30,10 @@ See more in /path/to/your-project/Example/LoggerExample.php.
  
 ```
 <?php 
-use MPAPI\Services\Client; 
-use MPAPI\Services\NameOfService; 
 use Monolog\Logger; 
-use Monolog\Handler\StreamHandler; 
+use Monolog\Handler\StreamHandler;
+use MPAPI\Services\Client;
+use MPAPI\Services\NameOfService; // replace this with relevant service name
  
 // include your composer dependencies 
 require __DIR__ . '/../vendor/autoload.php'; 
@@ -44,39 +45,16 @@ $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
  
 // set logger into MP API client 
 $mpapiClient->setLogger($logger); 
+
+// create instance of the required service
 $exampleService = new NameOfService($mpapiClient); 
 ...
 ```
+For more examples how to use specific services se following links:  
+* [Products](docs/PRODUCTS) – create, update, delete or get data.  
+* [Availability](docs/AVAILABILITY) – update product or variant.  
+* [Orders](docs/ORDERS) - get information about specific order, get all order IDs of open or unconfirmed orders, change order status.  
+* [Deliveries](docs/DELIVERIES) - get, create or update delivery setup list.  
+* [Labels](docs/LABELS) - get list of available labels.  
+* [Categories](docs/CATEGORIES) - get all categories, search title with phrase or prefix, get available parameters for specific category.
     
-##Product 
-```
-<?php 
-use MPAPI\Entity\Product; 
-use MPAPI\Entity\Variant; 
-... 
-$productsServiceExample = new Products($mpapiClient); 
-$productEntityExample = new Product(); 
-...
-``` 
- 
-####Available methods: 
-GET   
-You can either send request with product ID as a parameter and get product detail: 
-`$response = $products->get('123abc');`
-Or without any parameter and receive all your products list: 
-`$response = $products->get();`
- 
-DELETE  
-`$response = $products->delete('123abc');`
- 
-POST  
-`$response = $products->post();`
- 
-PUT (update product data) 
-`$response = $products->put('pTU00_test', $productEntityExample);`
- 
- 
- 
- 
- 
- 

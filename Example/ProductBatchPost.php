@@ -21,7 +21,7 @@ $mpApiClient->setLogger($logger);
 // initialize product synchronization
 $productSynchronizer = new Products($mpApiClient);
 
-// create entity for first product
+// create entity for the first product
 $product1 = new Product();
 $product1->setId('pTU00_test')
 	->setTitle('Testing product title')
@@ -49,7 +49,7 @@ $product1->setId('pTU00_test')
 	->setStatus(Product::STATUS_ACTIVE)
 	->setInstock(10);
 
-// create entity for second product
+// create entity for the second product
 $product2 = new Product();
 $product2->setId('pTU00_test2')
 	->setTitle('Testing product title 2')
@@ -79,7 +79,7 @@ $product2->setId('pTU00_test2')
 
 /**
  * During synchronization (POST, PUT, DELETE)
- * are queues cleared
+ * queues are cleared
  */
 
 // add products into batch queue and send them

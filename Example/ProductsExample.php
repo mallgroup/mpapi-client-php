@@ -2,7 +2,7 @@
 use MPAPI\Services\Client;
 use MPAPI\Services\Products;
 use MPAPI\Entity\Product;
-use \MPAPI\Entity\Variant;
+use MPAPI\Entity\Variant;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
@@ -37,7 +37,9 @@ $product->setRrpPrice(0);
 $product->addMedia('http://i.cdn.nrholding.net/15880228', true);
 $product->addPromotion(1700, '2015-07-19 00:00:00', '2016-11-15 23:59:59');
 $product->addParameter("MP_COLOR", "blue");
-$product->addVariableParameters(["MP_COLOR"]);
+$product->addVariableParameters([
+	"MP_COLOR"
+]);
 $product->setStatus(Product::STATUS_ACTIVE);
 $product->setInStock(10);
 $product->addLabel('SALE', '2015-07-19 00:00:00', '2018-11-14 23:59:59');
@@ -65,15 +67,13 @@ $variant->setInStock(10);
 $variant->setRecommended([]);
 
 $product->addVariant($variant);
-$products->add($product);
 
 // Create new product
-$response = $products->post();
+$response = $products->post($product);
 var_dump($response);
 
 // Update product
-$products->add($product);
-$response = $products->put('pTU00_test');
+$response = $products->put('pTU00_test', $product);
 var_dump($response);
 
 // Delete product
