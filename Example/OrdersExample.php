@@ -3,6 +3,7 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use MPAPI\Services\Client;
 use MPAPI\Services\Orders;
+use MPAPI\Entity\Order;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -38,7 +39,7 @@ if (!empty($openOrders)) {
 	var_dump($order->getData());
 
 	// update order status
-	$responseStatus = $orders->put()->status($order->getOrderId(), 'open');
+	$responseStatus = $orders->put()->status($order->getOrderId(), Order::STATUS_SHIPPING);
 	// true or exception
 	var_dump($responseStatus);
 }

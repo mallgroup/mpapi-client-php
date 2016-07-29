@@ -253,6 +253,43 @@ class Order extends AbstractEntity
 
 	/**
 	 *
+	 * @var string
+	 */
+	const STATUS_OPEN = 'open';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const STATUS_SHIPPING = 'shipping';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const STATUS_SHIPPED = 'shipped';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const STATUS_DELIVERED = 'delivered';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const STATUS_RETURNED = 'returned';
+
+
+	/**
+	 *
+	 * @var string
+	 */
+	const STATUS_CANCELLED = 'cancelled';
+
+	/**
+	 *
 	 * @var array
 	 */
 	private $changes = [];
