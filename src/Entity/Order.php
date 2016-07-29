@@ -325,6 +325,8 @@ class Order extends AbstractEntity
 	}
 
 	/**
+	 * Get partner id
+	 *
 	 * return integer
 	 */
 	public function getPartnerId()
@@ -333,13 +335,15 @@ class Order extends AbstractEntity
 	}
 
 	/**
+	 * Set partner id
 	 *
 	 * @param integer $partnerId
 	 * @return Order
 	 */
 	public function setPartnerId($partnerId)
 	{
-		return $this->data[self::KEY_PARTNER_ID] = $partnerId;
+		$this->data[self::KEY_PARTNER_ID] = $partnerId;
+		return $this;
 	}
 
 	/**
@@ -573,7 +577,7 @@ class Order extends AbstractEntity
 	/**
 	 * Set confirmed
 	 *
-	 * @param string $confirmed
+	 * @param boolean $confirmed
 	 * @return Order
 	 */
 	public function setConfirmed($confirmed = false)

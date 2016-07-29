@@ -67,7 +67,7 @@ class OrdersEndpoints extends AbstractEndpoints
 
 
 	/**
-	 * Get list of unconfirmed orders
+	 * Get order detail
 	 *
 	 * @return Order|null
 	 */

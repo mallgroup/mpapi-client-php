@@ -57,6 +57,7 @@ class DataCollector
 	 *
 	 * @param Client $client
 	 * @param Response $response
+	 * @param boolean $autoStart
 	 */
 	public function __construct(Client $client, Response $response, $autoStart = true)
 	{

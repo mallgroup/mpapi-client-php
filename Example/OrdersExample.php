@@ -23,7 +23,7 @@ foreach ($openOrders as $orderId) {
 	print('Open order: ' . $orderId . PHP_EOL);
 }
 
-// get all open orders
+// get all unconfirmed orders
 $unconfirmedOrders = $orders->get()->unconfirmed();
 // print list of unconfirmed orders
 foreach ($unconfirmedOrders as $orderId) {

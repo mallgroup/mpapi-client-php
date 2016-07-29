@@ -19,7 +19,7 @@ class Orders extends AbstractService
 	private $client;
 
 	/**
-	 * Category constructor.
+	 * Orders constructor.
 	 *
 	 * @param Client $client
 	 */
@@ -31,7 +31,7 @@ class Orders extends AbstractService
 	/**
 	 * Get Data
 	 *
-	 * @return array
+	 * @return OrdersEndpoints
 	 */
 	public function get()
 	{
@@ -39,8 +39,9 @@ class Orders extends AbstractService
 	}
 
 	/**
+	 * Put data
 	 *
-	 * @see \MPAPI\Services\AbstractService::put()
+	 * @return OrderUpdateEndpoints
 	 */
 	public function put()
 	{
