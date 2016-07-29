@@ -368,7 +368,11 @@ class Order extends AbstractEntity
 	 */
 	public function getPartnerId()
 	{
-		return (int)$this->data[self::KEY_PARTNER_ID];
+		$retval = 0;
+		if (isset($this->data[self::KEY_PARTNER_ID])) {
+			$retval = (int)$this->data[self::KEY_PARTNER_ID];
+		}
+		return $retval;
 	}
 
 	/**
@@ -460,7 +464,11 @@ class Order extends AbstractEntity
 	 */
 	public function getCompany()
 	{
-		return $this->data[self::KEY_ADDRESS][self::KEY_COMPANY];
+		$retval = '';
+		if (!empty($this->data[self::KEY_ADDRESS][self::KEY_COMPANY])) {
+			$retval = $this->data[self::KEY_ADDRESS][self::KEY_COMPANY];
+		}
+		return $retval;
 	}
 
 	/**
@@ -532,7 +540,11 @@ class Order extends AbstractEntity
 	 */
 	public function getDeliveryCodPrice()
 	{
-		return $this->data[self::KEY_DELIVERY_COD_PRICE];
+		$retval = 0;
+		if (!empty($this->data[self::KEY_DELIVERY_COD_PRICE])) {
+			$retval = $this->data[self::KEY_DELIVERY_COD_PRICE];
+		}
+		return $retval;
 	}
 
 	/**
@@ -540,7 +552,11 @@ class Order extends AbstractEntity
 	 */
 	public function getExternalDeliveryMethodId()
 	{
-		return $this->data[self::KEY_EXTERNAL_DELIVERY_METHOD_ID];
+		$retval = '';
+		if (!empty($this->data[self::KEY_EXTERNAL_DELIVERY_METHOD_ID])) {
+			$retval = $this->data[self::KEY_EXTERNAL_DELIVERY_METHOD_ID];
+		}
+		return $retval;
 	}
 
 	/**
