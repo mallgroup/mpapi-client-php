@@ -154,6 +154,7 @@ class Products extends AbstractService
 	 *
 	 * @param string $productId
 	 * @param array $data
+	 * @param string $variantId
 	 * @return Response
 	 */
 	public function put($productId = null, AbstractEntity $entity = null, $variantId = null)
