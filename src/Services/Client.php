@@ -240,6 +240,21 @@ class Client
 	}
 
 	/**
+	 * Validate partner
+	 *
+	 * @return \GuzzleHttp\Psr7\Response|null
+	 */
+	public function validatePartner()
+	{
+		$retval = false;
+		$response = $this->sendRequest('partners/validate', 'GET');
+		if ($response->getStatusCode() == 200) {
+			$retval = true;
+		}
+		return $retval;
+	}
+
+	/**
 	 * Get configuration
 	 *
 	 * @param string $environment
