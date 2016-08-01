@@ -45,7 +45,7 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 *
 	 * @return array|null
 	 */
-	public function getCategories()
+	public function categories()
 	{
 		$response = $this->client->sendRequest(self::ENDPOINT_PATH, 'GET');
 		$dataCollector = new DataCollector($this->client, $response);
@@ -58,7 +58,7 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 * @param string $phrase
 	 * @return array|null
 	 */
-	public function getSearchCategories($phrase)
+	public function searchCategories($phrase)
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_SEARCH, self::ENDPOINT_PATH, $phrase), 'GET');
 		$dataCollector = new DataCollector($this->client, $response);
@@ -71,7 +71,7 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 * @param string $prefix
 	 * @return array|null
 	 */
-	public function getCategoriesByPrefix($prefix)
+	public function categoriesByPrefix($prefix)
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PREFIX, self::ENDPOINT_PATH, $prefix), 'GET');
 		$dataCollector = new DataCollector($this->client, $response);
@@ -84,7 +84,7 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 * @param string $categoryId
 	 * @return array|null
 	 */
-	public function getCategoryParameters($categoryId)
+	public function categoryParameters($categoryId)
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PARAMETERS, self::ENDPOINT_PATH, $categoryId), 'GET');
 		$dataCollector = new DataCollector($this->client, $response);

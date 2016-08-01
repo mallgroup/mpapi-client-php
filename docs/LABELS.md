@@ -21,13 +21,16 @@ Response contains array of available labels:
 ```
 [
   [
-    ["id"] => "LBLID1"
+    ["id"] => "LBLID1",
     ["title"] => "Label ID 1 - title"
   ],
   [
-    ["id"] => "LBLID1"
+    ["id"] => "LBLID1",
     ["title"] => "Label ID 2 - title"
   ]
   ...
 ]
 ```
+
+#####Example
+> **/root/vendor/mallgroup/mpapi-client/Example/LabelsExample.php**

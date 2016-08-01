@@ -15,17 +15,17 @@ $mpapiClient->setLogger($logger);
 $categories = new Categories($mpapiClient);
 
 // // get all categories
-$response = $categories->get()->getCategories();
+$response = $categories->get()->categories();
 var_dump($response);
 
 // get categories by prefix
-$response = $categories->get()->getCategoriesByPrefix('Lam');
+$response = $categories->get()->categoriesByPrefix('Lam');
 var_dump($response);
 
 // get categories by phrase
-$response = $categories->get()->getSearchCategories('desky');
+$response = $categories->get()->searchCategories('desky');
 var_dump($response);
 
 // get category parameters
-$response = $categories->get()->getCategoryParameters('MP002PL');
+$response = $categories->get()->categoryParameters('MP002PL');
 var_dump($response);
