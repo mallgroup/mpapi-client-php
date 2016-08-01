@@ -1,6 +1,6 @@
 ## CATEGORIES
 
-#### Available methods:
+### Available methods:
 **GET**
 This service have only one method, this method serve list of available labels.
 ```
@@ -82,7 +82,7 @@ Response contains array of found categories:
 
 ```
 
-#### Get all parameters for category
+#### Get all category parameters
 Get all available parameters for specific category.
 ```
 ...
@@ -110,5 +110,5 @@ Response contains array of found parameters:
 
 ```
 
-#####Example
+##### Example
 > **/root/vendor/mallgroup/mpapi-client/Example/CategoriesExample.php**
