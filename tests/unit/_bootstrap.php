@@ -116,6 +116,45 @@ $variants = [
 ];
 
 Codeception\Util\Fixtures::add('product', $product);
-
 Codeception\Util\Fixtures::add('variantData', $variants[0]);
 
+$orderData = [
+	'id' => 8888888801,
+	'purchase_id' => 88888888,
+	'external_order_id' => 11,
+	'currency' => 'CZK',
+	'delivery_price' => 0,
+	'cod_price' => 0,
+	'discount' => 0,
+	'delivery_method' => 'partner_delivery_id',
+	'delivery_method_id' => 1111,
+	'ship_date' => '2016-03-16',
+	'delivery_date' => '2016-03-16',
+	'cod' => 71.98,
+	'address' => [
+		'name' => 'Fisrtname Lastname',
+		'phone' => '720000000',
+		'email' => 'info@mall.cz',
+		'street' => 'Street',
+		'city' => 'City',
+		'zip' => '10000',
+		'country' => 'CZ',
+	],
+	'confirmed' => true,
+	'status' => 'returned',
+	'items' => [
+		[
+			'id' => 'productId1',
+			'quantity' => 1,
+			'price' => 35.07,
+			'vat' => 21,
+		],
+		[
+			'id' => 'productID2',
+			'quantity' => 1,
+			'price' => 36.91,
+			'vat' => 21,
+		]
+	]
+];
+Codeception\Util\Fixtures::add('orderData', $orderData);
