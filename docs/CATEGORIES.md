@@ -1,6 +1,6 @@
-##CATEGORIES
+## CATEGORIES
 
-####Available methods:
+#### Available methods:
 **GET**
 This service have only one method, this method serve list of available labels.
 ```
@@ -14,7 +14,7 @@ $categories = new Categories($mpapiClient);
 ...
 ``` 
 
-##### All partner categories
+#### All partner categories
 Get all partner available categories.
 ```
 ...
@@ -38,7 +38,7 @@ Response contains array of available categories:
 
 ```
 
-##### Search category by prefix
+#### Search category by prefix
 Search categories by title prefix
 ```
 ...
@@ -58,7 +58,7 @@ Response contains array of found categories:
 
 ```
 
-##### Search in categories
+#### Search in categories
 Search categories by title prefix
 ```
 ...
@@ -82,7 +82,7 @@ Response contains array of found categories:
 
 ```
 
-##### Get all parameters for category
+#### Get all parameters for category
 Get all available parameters for specific category.
 ```
 ...
