@@ -3,7 +3,7 @@
 
 #### Available methods:
 **GET**  
-This service have only one method, this method provides list of available labels.
+This service has only one method that provides list of all available labels.
 ```
 <?php 
 ...

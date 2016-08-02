@@ -15,7 +15,7 @@ $categories = new Categories($mpapiClient);
 ``` 
 
 #### All partner categories
-Get all partner available categories.
+Get all categories available  for the partner.  
 ```
 ...
 $response = $categories->get()->categories(); 
@@ -39,14 +39,14 @@ The response contains array of available categories:
 ```
 
 #### Search category by prefix
-Search categories by title prefix
+Search categories by title prefix:
 ```
 ...
 $response = $categories->get()->categoriesByPrefix('Categ'); 
 ... 
 ```
 
-The response contains array of found categories:
+The response contains an array of found categories:
 ```
  [
    [
@@ -59,7 +59,7 @@ The response contains array of found categories:
 ```
 
 #### Search in categories
-Search categories by title prefix
+Search categories by title prefix:
 ```
 ...
 $response = $categories->get()->searchCategories('Categ'); 
@@ -83,7 +83,7 @@ The response contains an array of found categories:
 ```
 
 #### Get all category parameters
-Get all available parameters for specific category.
+Get all available parameters for specific category:
 ```
 ...
 $response = $categories->get()->categoryParameters('MPCAT01'); 
