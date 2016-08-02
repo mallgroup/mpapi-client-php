@@ -1,5 +1,7 @@
 <?php
-namespace MAPI\Entity;
+namespace MPAPI\Entity;
+
+use MPAPI\Entity\AbstractEntity;
 
 /**
  * Order entity
@@ -11,19 +13,25 @@ class Order extends AbstractEntity
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_ORDER_ID = 'order_id';
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
+	 */
+	const KEY_ID = 'id';
+
+	/**
+	 *
+	 * @var string
 	 */
 	const KEY_PARTNER_ID = 'partner_id';
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_PURCHASE_ID = 'purchase_id';
 
@@ -31,11 +39,11 @@ class Order extends AbstractEntity
 	 *
 	 * @var string
 	 */
-	const KEY_CURRENCY_ID = 'currency_id';
+	const KEY_CURRENCY_ID = 'currency';
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_DELIVERY_PRICE = 'delivery_price';
 
@@ -68,6 +76,12 @@ class Order extends AbstractEntity
 	 * @var string
 	 */
 	const KEY_COD_PRICE = 'cod_price';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_ADDRESS = 'address';
 
 	/**
 	 *
@@ -131,7 +145,7 @@ class Order extends AbstractEntity
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_DELIVERY_COD_PRICE = 'delivery_cod_price';
 
@@ -143,7 +157,7 @@ class Order extends AbstractEntity
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_TRANSPORT_ID = 'transport_id';
 
@@ -155,19 +169,19 @@ class Order extends AbstractEntity
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_EXTERNAL_ORDER_ID = 'external_order_id';
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_DISCOUNT = 'discount';
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_PAYMENT_TYPE = 'payment_type';
 
@@ -179,7 +193,7 @@ class Order extends AbstractEntity
 
 	/**
 	 *
-	 * @var integer
+	 * @var string
 	 */
 	const KEY_CUSTOMER_ID = 'customer_id';
 
@@ -239,6 +253,43 @@ class Order extends AbstractEntity
 
 	/**
 	 *
+	 * @var string
+	 */
+	const STATUS_OPEN = 'open';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const STATUS_SHIPPING = 'shipping';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const STATUS_SHIPPED = 'shipped';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const STATUS_DELIVERED = 'delivered';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const STATUS_RETURNED = 'returned';
+
+
+	/**
+	 *
+	 * @var string
+	 */
+	const STATUS_CANCELLED = 'cancelled';
+
+	/**
+	 *
 	 * @var array
 	 */
 	private $changes = [];
@@ -280,7 +331,7 @@ class Order extends AbstractEntity
 			],
 			'confirmed' => $this->getConfirmed(),
 			'status' => $this->getStatus(),
-			'items' => $this->getItemsOutput()
+			'items' => $this->getItems()
 		];
 	}
 
@@ -291,7 +342,13 @@ class Order extends AbstractEntity
 	 */
 	public function getOrderId()
 	{
-		return $this->data[self::KEY_ORDER_ID];
+		$retval = null;
+		if (isset($this->data[self::KEY_ORDER_ID])) {
+			$retval = $this->data[self::KEY_ORDER_ID];
+		} else {
+			$retval = $this->data[self::KEY_ID];
+		}
+		return $retval;
 	}
 
 	/**
@@ -305,35 +362,29 @@ class Order extends AbstractEntity
 	}
 
 	/**
+	 * Get partner id
 	 *
-	 * @return array
+	 * return integer
 	 */
-	public function getItemsOutput()
+	public function getPartnerId()
 	{
-		$retval = [];
-		/* @var OrderItemsIterator $items */
-		foreach ($this->data[self::KEY_ITEMS] as $items) {
-			$retval[] = $items->getOutputData();
+		$retval = 0;
+		if (isset($this->data[self::KEY_PARTNER_ID])) {
+			$retval = (int)$this->data[self::KEY_PARTNER_ID];
 		}
 		return $retval;
 	}
 
 	/**
-	 * return integer
-	 */
-	public function getPartnerId()
-	{
-		return (int)$this->data[self::KEY_PARTNER_ID];
-	}
-
-	/**
+	 * Set partner id
 	 *
 	 * @param integer $partnerId
 	 * @return Order
 	 */
 	public function setPartnerId($partnerId)
 	{
-		return $this->data[self::KEY_PARTNER_ID] = $partnerId;
+		$this->data[self::KEY_PARTNER_ID] = $partnerId;
+		return $this;
 	}
 
 	/**
@@ -405,7 +456,7 @@ class Order extends AbstractEntity
 	 */
 	public function getName()
 	{
-		return $this->data[self::KEY_NAME];
+		return $this->data[self::KEY_ADDRESS][self::KEY_NAME];
 	}
 
 	/**
@@ -413,7 +464,11 @@ class Order extends AbstractEntity
 	 */
 	public function getCompany()
 	{
-		return $this->data[self::KEY_COMPANY];
+		$retval = '';
+		if (!empty($this->data[self::KEY_ADDRESS][self::KEY_COMPANY])) {
+			$retval = $this->data[self::KEY_ADDRESS][self::KEY_COMPANY];
+		}
+		return $retval;
 	}
 
 	/**
@@ -421,7 +476,7 @@ class Order extends AbstractEntity
 	 */
 	public function getPhone()
 	{
-		return $this->data[self::KEY_PHONE];
+		return $this->data[self::KEY_ADDRESS][self::KEY_PHONE];
 	}
 
 	/**
@@ -429,7 +484,7 @@ class Order extends AbstractEntity
 	 */
 	public function getEmail()
 	{
-		return $this->data[self::KEY_EMAIL];
+		return $this->data[self::KEY_ADDRESS][self::KEY_EMAIL];
 	}
 
 	/**
@@ -437,7 +492,7 @@ class Order extends AbstractEntity
 	 */
 	public function getStreet()
 	{
-		return $this->data[self::KEY_STREET];
+		return $this->data[self::KEY_ADDRESS][self::KEY_STREET];
 	}
 
 	/**
@@ -445,7 +500,7 @@ class Order extends AbstractEntity
 	 */
 	public function getCity()
 	{
-		return $this->data[self::KEY_CITY];
+		return $this->data[self::KEY_ADDRESS][self::KEY_CITY];
 	}
 
 	/**
@@ -453,7 +508,7 @@ class Order extends AbstractEntity
 	 */
 	public function getZip()
 	{
-		return $this->data[self::KEY_ZIP];
+		return $this->data[self::KEY_ADDRESS][self::KEY_ZIP];
 	}
 
 	/**
@@ -461,7 +516,7 @@ class Order extends AbstractEntity
 	 */
 	public function getCountry()
 	{
-		return $this->data[self::KEY_COUNTRY];
+		return $this->data[self::KEY_ADDRESS][self::KEY_COUNTRY];
 	}
 
 	/**
@@ -485,7 +540,11 @@ class Order extends AbstractEntity
 	 */
 	public function getDeliveryCodPrice()
 	{
-		return $this->data[self::KEY_DELIVERY_COD_PRICE];
+		$retval = 0;
+		if (!empty($this->data[self::KEY_DELIVERY_COD_PRICE])) {
+			$retval = $this->data[self::KEY_DELIVERY_COD_PRICE];
+		}
+		return $retval;
 	}
 
 	/**
@@ -493,7 +552,11 @@ class Order extends AbstractEntity
 	 */
 	public function getExternalDeliveryMethodId()
 	{
-		return $this->data[self::KEY_EXTERNAL_DELIVERY_METHOD_ID];
+		$retval = '';
+		if (!empty($this->data[self::KEY_EXTERNAL_DELIVERY_METHOD_ID])) {
+			$retval = $this->data[self::KEY_EXTERNAL_DELIVERY_METHOD_ID];
+		}
+		return $retval;
 	}
 
 	/**
@@ -567,32 +630,12 @@ class Order extends AbstractEntity
 	/**
 	 * Set confirmed
 	 *
-	 * @param string $confirmed
+	 * @param boolean $confirmed
 	 * @return Order
 	 */
 	public function setConfirmed($confirmed = false)
 	{
 		$this->data[self::KEY_CONFIRMED] = $confirmed;
 		return $this;
-	}
-
-	/**
-	 * Check order changes
-	 *
-	 * @return boolean
-	 */
-	public function isChanged()
-	{
-		return !empty($this->changes);
-	}
-
-	/**
-	 * Get all order changes
-	 *
-	 * @return array
-	 */
-	public function getChanges()
-	{
-		return $this->changes;
 	}
 }
