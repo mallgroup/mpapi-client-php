@@ -9,7 +9,7 @@ class DeliveryMethodTest extends \Codeception\Test\Unit
 {
 	/**
 	 *
-	 * @var Availability
+	 * @var DeliveryMethod
 	 */
 	private $object;
 

@@ -8,7 +8,7 @@ class DeliverySetupTest extends \Codeception\Test\Unit
 {
 	/**
 	 *
-	 * @var Availability
+	 * @var DeliverySetup
 	 */
 	private $object;
 
