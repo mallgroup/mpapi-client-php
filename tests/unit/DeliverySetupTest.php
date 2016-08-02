@@ -4,7 +4,7 @@ namespace MPAPI\Tests\Unit;
 use MPAPI\Entity\DeliverySetup;
 use Codeception\Util\Fixtures;
 
-class DeliveryMethodTest extends \Codeception\Test\Unit
+class DeliverySetupTest extends \Codeception\Test\Unit
 {
 	/**
 	 *
