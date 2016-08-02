@@ -102,7 +102,7 @@ $deliveryMethod2->setId('partnerDeliveryId2')
 				->setDeliveryDelay(2) // delivery delay (in days)
 				->setAsPickupPoint(false); // delivery method is not a pickup point 
 
-// Create or update delivery methods or settings
+// Create or update delivery methods or setups
 $response = $deliveryMethods->add($deliveryMethod1)
 							->add($deliveryMethod2)
 							->put();
