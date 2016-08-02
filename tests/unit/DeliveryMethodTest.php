@@ -7,7 +7,6 @@ use MPAPI\Entity\DeliverySetup;
 
 class DeliveryMethodTest extends \Codeception\Test\Unit
 {
-
 	/**
 	 *
 	 * @var Availability

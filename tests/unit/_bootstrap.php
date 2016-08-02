@@ -186,4 +186,10 @@ $deliverySetupData = [
 	'free_limit' => 650,
 	'delivery_delay' => 4
 ];
+
 Codeception\Util\Fixtures::add('deliverySetupData', $deliverySetupData);
+Codeception\Util\Fixtures::add('updatedDeliverySetupId', 'updatedDeliverSetupId');
+Codeception\Util\Fixtures::add('updatedDeliverySetupPrice', 200);
+Codeception\Util\Fixtures::add('updatedDeliverySetupCodPrice', 10);
+Codeception\Util\Fixtures::add('updatedDeliverySetupFreeLimit', 0);
+Codeception\Util\Fixtures::add('updatedDeliverySetupDeliveryDelay', 8);
