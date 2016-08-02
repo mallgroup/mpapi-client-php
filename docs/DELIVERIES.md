@@ -2,7 +2,7 @@
 
 
 #### Available methods:
-**GET**
+**GET**  
 This method load all created delivery methods and setups
 ```
 <?php 
@@ -60,8 +60,8 @@ The response contains array of available labels:
 ]
 ```
 
-**PUT**
-Method for create or update delivery methods and setups.
+**PUT**  
+Method for create or update delivery methods and setups.  
 For creating or updating delivery methods and setups it is have to create entity for delivery method and setups.
 ```
 // Create delivery method entity
