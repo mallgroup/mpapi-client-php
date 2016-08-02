@@ -72,7 +72,7 @@ $order = $orders->get()->detail('yourOrderId');
 ```
 You can use following statuses: open | cancelled | shipping | shipped | delivered | returned
 ```
-$responseStatus = $orders->put()->status(1000000000, Order::STATUS_SHIPPING);
+$responseStatus = $orders->put()->status('yourOrderId', Order::STATUS_SHIPPING);
 ```
 
 ##### Example
