@@ -3,7 +3,7 @@
 
 #### Available methods:
 **GET**  
-This method load all created delivery methods and setups
+This method loads all created delivery methods and setups
 ```
 <?php 
 ...
@@ -51,6 +51,13 @@ The response contains array of available labels:
             "cod_price": 21,
             "free_limit": 1000,
             "delivery_delay": 3
+         ],
+         [
+            "id": "testDelivery2",
+            "price": 110,
+            "cod_price": 10,
+            "free_limit": 1200,
+            "delivery_delay": 4
          ]
          ...
         ]
