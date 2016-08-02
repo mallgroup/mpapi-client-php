@@ -65,7 +65,8 @@ The response contains order details:
 ```
 
 **PUT**  
-You can confirm a specific order or set new order status. Use the following constants for relevant statuses:  
+You can confirm a specific order or set new order status. 
+The order entity has following constants for relevant statuses:  
 STATUS_OPEN  
 STATUS_CANCELLED  
 STATUS_SHIPPING  
