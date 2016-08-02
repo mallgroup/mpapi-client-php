@@ -59,10 +59,10 @@ The response contains an array of found categories:
 ```
 
 #### Search in categories
-Search categories by title prefix:
+Search categories by phrase in title:
 ```
 ...
-$response = $categories->get()->searchCategories('Categ'); 
+$response = $categories->get()->searchCategories('gory'); 
 ... 
 ```
 
