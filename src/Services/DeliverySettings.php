@@ -1,8 +1,7 @@
 <?php
 namespace MPAPI\Services;
 
-use MPAPI\Endpoints\DeliverySettingsEndpoints;
-use MPAPI\Entity\DeliverySettings;
+use MPAPI\Entity\DeliveryMethod;
 
 /**
  * Delivery settings
@@ -48,12 +47,12 @@ class DeliverySettings extends AbstractService
 	/**
 	 * Put delivery settings
 	 *
-	 * @param DeliverySettings $data
+	 * @param DeliveryMethod $deliveryMethods
 	 * @return array
 	 */
-	public function put($data = null)
+	public function put(DeliveryMethod $deliveryMethods = null)
 	{
-		$response = $this->client->sendRequest(self::PATH, 'PUT', $data);
+		$response = $this->client->sendRequest(self::PATH, 'PUT', $deliveryMethods->getData());
 		return $response->getStatusCode() == 200;
 	}
 }
