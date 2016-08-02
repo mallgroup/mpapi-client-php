@@ -269,7 +269,7 @@ class DeliveryMethod extends AbstractEntity
 	 */
 	public function hasSetups()
 	{
-		return count($this->data[self::KEY_SETUPS]) > 0;
+		return count($this->getDeliverySetups()) > 0;
 	}
 
 	/**
@@ -279,7 +279,11 @@ class DeliveryMethod extends AbstractEntity
 	 */
 	public function getDeliverySetups()
 	{
-		return $this->data[self::KEY_SETUPS];
+		$retval = [];
+		if (isset($this->data[self::KEY_SETUPS])) {
+			$retval = $this->data[self::KEY_SETUPS];
+		}
+		return $retval;
 	}
 
 	/**
