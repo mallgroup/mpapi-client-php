@@ -35,6 +35,12 @@ class Client
 	 *
 	 * @var string
 	 */
+	const APPLICATION_NAME = 'mpapic';
+
+	/**
+	 *
+	 * @var string
+	 */
 	const CONFIG_FILE = '/../config/config.ini';
 
 	/**
@@ -198,6 +204,9 @@ class Client
 
 			/* @var Response $response */
 			$response = $this->getHttpClient()->request($method, $path, [
+				'headers' => [
+					'X-Application-Name' => self::APPLICATION_NAME
+				],
 				'json' => $body,
 				'query' => $query
 			]);
