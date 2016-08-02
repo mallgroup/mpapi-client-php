@@ -128,7 +128,7 @@ class DeliveryMethod extends AbstractEntity
 	}
 
 	/**
-	 * Set delivery methdo title
+	 * Set delivery method title
 	 *
 	 * @param string $title
 	 * @return \MPAPI\Entity\DeliveryMethod
@@ -218,7 +218,7 @@ class DeliveryMethod extends AbstractEntity
 	/**
 	 * Get delivery delay
 	 *
-	 * @return string
+	 * @return integer
 	 */
 	public function getDeliveryDelay()
 	{
@@ -227,6 +227,7 @@ class DeliveryMethod extends AbstractEntity
 
 	/**
 	 * Set delivery delay (in days)
+	 *
 	 * @param integer $daysDelay
 	 * @return \MPAPI\Entity\DeliveryMethod
 	 */
@@ -237,6 +238,7 @@ class DeliveryMethod extends AbstractEntity
 	}
 
 	/**
+	 * Mark delivery method as pickup point
 	 *
 	 * @param boolean $status
 	 * @return \MPAPI\Entity\DeliveryMethod

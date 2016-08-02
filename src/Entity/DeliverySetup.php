@@ -69,6 +69,7 @@ class DeliverySetup extends AbstractEntity
 	}
 
 	/**
+	 * Set delivery setup id
 	 *
 	 * @param string $id
 	 * @return \MPAPI\Entity\DeliverySetup
@@ -158,7 +159,7 @@ class DeliverySetup extends AbstractEntity
 	/**
 	 * Get delivery delay
 	 *
-	 * @return string
+	 * @return integer
 	 */
 	public function getDeliveryDelay()
 	{
