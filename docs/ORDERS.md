@@ -43,7 +43,7 @@ The response contains order details:
     "cod": 409,
     "address": [
         "name": "John Doe",
-        "company": "Company J. D."
+        "company": "Company J. D.",
         "phone": "+420296245025",
         "email": "john@doe.tld",
         "street": "U Garáží 1611/1",

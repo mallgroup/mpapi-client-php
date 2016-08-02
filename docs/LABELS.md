@@ -2,7 +2,7 @@
 
 
 #### Available methods:
-**GET**
+**GET**  
 This service have only one method, this method provides list of available labels.
 ```
 <?php 
@@ -17,7 +17,7 @@ $response = $labels->get();
 ... 
 ```
 
-The response contains array of available labels:
+The response contains an array of all available labels:
 ```
 [
   [

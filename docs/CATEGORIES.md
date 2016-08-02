@@ -1,7 +1,7 @@
 ## CATEGORIES
 
 ### Available methods:
-**GET**
+**GET**  
 This service have only one method, this method provides list of available categories.
 ```
 <?php 
@@ -66,7 +66,7 @@ $response = $categories->get()->searchCategories('Categ');
 ... 
 ```
 
-The response contains array of found categories:
+The response contains an array of found categories:
 ```
  [
    [
@@ -90,7 +90,7 @@ $response = $categories->get()->categoryParameters('MPCAT01');
 ... 
 ```
 
-The response contains array of found parameters:
+The response contains an array of found parameters:
 ```
  [
   [
@@ -110,5 +110,5 @@ The response contains array of found parameters:
 
 ```
 
-##### Example
+##### See more:
 > **/root/vendor/mallgroup/mpapi-client/Example/CategoriesExample.php**
