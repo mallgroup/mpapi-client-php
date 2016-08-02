@@ -256,6 +256,9 @@ class DeliveryMethod extends AbstractEntity
 	 */
 	public function isPickupPoint()
 	{
+		if (!isset($this->data[self::KEY_PICKUP_POINT])) {
+			$this->setPickupPoint(false);
+		}
 		return (boolean)$this->data[self::KEY_PICKUP_POINT];
 	}
 
