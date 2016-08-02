@@ -5,12 +5,13 @@
 use MPAPI\Services\Orders;
 use MPAPI\Entity\Order;
 ...
+...
 // initialize orders synchronizer
 $orders = new Orders($mpapiClient);
 ```
 
 #### Available methods:
-**GET**
+**GET**  
 You can get either information about specific order or information about all open/unconfirmed orders:
 ```
 ...
@@ -63,17 +64,21 @@ The response contains order details:
 ]
 ```
 
-**PUT**
-You can set order status or confirm order:
+**PUT**  
+You can confirm a specific order or set new order status. Use the following constants for relevant statuses:  
+STATUS_OPEN  
+STATUS_CANCELLED  
+STATUS_SHIPPING  
+STATUS_SHIPPED  
+STATUS_DELIVERED  
+STATUS_RETURNED  
+
+You will change the status of the order with its order ID as the first and status constant as the second parameter:
 ```
 ...
-// update order status
-$order = $orders->get()->detail('yourOrderId');
-```
-You can use following statuses: open | cancelled | shipping | shipped | delivered | returned
-```
 $responseStatus = $orders->put()->status('yourOrderId', Order::STATUS_SHIPPING);
+...
 ```
 
-##### Example
+##### See more:
 > **/root/vendor/mallgroup/mpapi-client/Example/OrdersExample.php**
