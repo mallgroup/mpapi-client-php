@@ -1,9 +1,9 @@
-##LABELS
+## LABELS
 
 
-####Available methods:
+#### Available methods:
 **GET**
-This service have only one method, this method serve list of available labels.
+This service have only one method, this method provides list of available labels.
 ```
 <?php 
 ...
@@ -12,25 +12,25 @@ use MPAPI\Services\Labels;
 ...
 
 $labels = new Labels($mpapiClient); 
-// Get all available lables
+// Get all available labels
 $response = $labels->get(); 
 ... 
 ```
 
-Response contains array of available labels:
+The response contains array of available labels:
 ```
 [
   [
-    ["id"] => "LBLID1",
-    ["title"] => "Label ID 1 - title"
+    "id" => "LBLID1",
+    "title" => "Label ID 1 - title"
   ],
   [
-    ["id"] => "LBLID1",
-    ["title"] => "Label ID 2 - title"
+    "id" => "LBLID1",
+    "title" => "Label ID 2 - title"
   ]
   ...
 ]
 ```
 
-#####Example
+##### Example
 > **/root/vendor/mallgroup/mpapi-client/Example/LabelsExample.php**

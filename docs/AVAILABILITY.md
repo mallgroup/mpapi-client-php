@@ -1,4 +1,4 @@
-#AVAILABILITY
+## AVAILABILITY
 ```
 <?php 
 ...
@@ -8,20 +8,21 @@ use MPAPI\Entity\Availability;
 ...
 ```
 
-####Available methods: 
+#### Available methods: 
 **PUT**  
 You can update availability either for product or for variant of the product:
 ```
 // initialize products synchronizer
 $products = new Products($mpapiClient);
+
 // create availability entity
 $availability = new Availability(10, Availability::STATUS_ACTIVE);
 
 // update product availability into MP API
-$products->put(29237, $availability);
+$products->put('productId', $availability);
 
 // update variant availability into MP API
-$products->put(29237, $availability, 29239);
+$products->put('productId', $availability, 'variantId');
 
 ``` 
 

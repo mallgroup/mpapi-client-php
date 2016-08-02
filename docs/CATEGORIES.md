@@ -2,7 +2,7 @@
 
 ### Available methods:
 **GET**
-This service have only one method, this method serve list of available labels.
+This service have only one method, this method provides list of available categories.
 ```
 <?php 
 ...
@@ -22,16 +22,16 @@ $response = $categories->get()->categories();
 ... 
 ```
 
-Response contains array of available categories:
+The response contains array of available categories:
 ```
  [
    [
-    ["title"] => "Category 1 - title",
-    ["category_id"] => "MPCAT01"
+    "title" => "Category 1 - title",
+    "category_id" => "MPCAT01"
   ],
   [
-    ["title"] => "MP Category 2 - title",
-    ["category_id"] => "MPCAT01"
+    "title" => "MP Category 2 - title",
+    "category_id" => "MPCAT01"
   ],
   ...
 ]
@@ -46,12 +46,12 @@ $response = $categories->get()->categoriesByPrefix('Categ');
 ... 
 ```
 
-Response contains array of found categories:
+The response contains array of found categories:
 ```
  [
    [
-    ["title"] => "Category 1 - title",
-    ["category_id"] => "MPCAT01"
+    "title" => "Category 1 - title",
+    "category_id" => "MPCAT01"
   ],
   ...
 ]
@@ -66,16 +66,16 @@ $response = $categories->get()->searchCategories('Categ');
 ... 
 ```
 
-Response contains array of found categories:
+The response contains array of found categories:
 ```
  [
    [
-    ["title"] => "Category 1 - title",
-    ["category_id"] => "MPCAT01"
+    "title" => "Category 1 - title",
+    "category_id" => "MPCAT01"
   ],
   [
-    ["title"] => "MP Category 2 - title",
-    ["category_id"] => "MPCAT01"
+    "title" => "MP Category 2 - title",
+    "category_id" => "MPCAT01"
   ],
   ...
 ]
@@ -90,20 +90,20 @@ $response = $categories->get()->categoryParameters('MPCAT01');
 ... 
 ```
 
-Response contains array of found parameters:
+The response contains array of found parameters:
 ```
  [
   [
-    ["title"] => "Barva",
-    ["param_id"] => "MP_COLOR"
+    "title" => "Barva",
+    "param_id" => "MP_COLOR"
   ],
   [
-    ["title"] => "Velikost",
-    ["param_id"] => "MP_SIZE"
+    "title" => "Velikost",
+    "param_id" => "MP_SIZE"
   ],
   [
-    ["title"] => "Určení produktu",
-    ["param_id"] => "MP_DETERMINATION_PRODUCT"
+    "title" => "Určení produktu",
+    "param_id" => "MP_DETERMINATION_PRODUCT"
   ]
   ...
 ]
