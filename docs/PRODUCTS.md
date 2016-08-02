@@ -1,4 +1,4 @@
-##PRODUCTS
+## PRODUCTS
 ```
 <?php 
 ...
@@ -8,7 +8,7 @@ use MPAPI\Entity\Variant;
 ...
 ``` 
  
-####Available methods: 
+#### Available methods: 
 **GET**  
 You can send request either with product ID as a parameter and get product detail or without any parameter and receive all your products list: 
 ```

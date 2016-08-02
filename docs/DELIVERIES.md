@@ -10,14 +10,15 @@ This method loads all created delivery methods and setups
 use MPAPI\Services\DeliveryMethods;
 
 ...
-// create instance of delivery methods service
-$deliveryMethods = new DeliveryMethods($mpapiClient); 
+// create an instance of delivery methods service
+$deliveryMethods = new DeliveryMethods($mpapiClient);  
+
 // Get all delivery methods
 $response = $deliveryMethods->get();
 ... 
 ```
 
-The response contains array of available labels:
+The response contains an array of available delivery methods:
 ```
 [
     "delivery_methods": [
@@ -68,18 +69,18 @@ The response contains array of available labels:
 ```
 
 **PUT**  
-Method for create or update delivery methods and setups.  
-For creating or updating delivery methods and setups it is have to create entity for delivery method and setups.
+Method for creating or updating delivery methods and setups.  
+You need to create entities for specific delivery method and relevant setup(s).
 ```
 // Create delivery method entity
 $deliveryMethod1 = new MPAPI\Entity\DeliveryMethod();
 $deliveryMethod1->setId('partnerDeliveryId')
-				->setTitle('Delivery method title') // it will show on mall website
-				->setPrice('100') // delivery price
+				->setTitle('Delivery method title') // it will be shown on mall website
+				->setPrice('100') // price of delivery
 				->setCodPrice('30') // cash on delivery surcharge
 				->setFreeLimit('1000') // limit for allowing free delivery (0 for disable free delivery)
 				->setDeliveryDelay(3) // delivery delay (in days)
-				->setAsPickupPoint(true); // marking delivery method as pickup point
+				->setAsPickupPoint(true); // delivery method is marked as a pickup point
 
 // Create delivery setups entity
 $deliverySetup = new DeliverySetup();
@@ -94,12 +95,12 @@ $deliveryMethod1->addSetup($deliverySetup);
 				
 $deliveryMethod2 = new MPAPI\Entity\DeliveryMethod();
 $deliveryMethod2->setId('partnerDeliveryId2')
-				->setTitle('Delivery method 2 title') // it will show on mall website
-				->setPrice('60') // delivery price
+				->setTitle('Delivery method 2 title') // it will be shown on mall website
+				->setPrice('60') // price of delivery
 				->setCodPrice('15') // cash on delivery surcharge
 				->setFreeLimit('1500') // limit for allowing free delivery (0 for disable free delivery)
 				->setDeliveryDelay(2) // delivery delay (in days)
-				->setAsPickupPoint(false); // marking delivery method as pickup point 
+				->setAsPickupPoint(false); // delivery method is not a pickup point 
 
 // Create or update delivery methods or settings
 $response = $deliveryMethods->add($deliveryMethod1)
