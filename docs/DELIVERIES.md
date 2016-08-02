@@ -110,5 +110,5 @@ $response = $deliveryMethods->add($deliveryMethod1)
 ```
 
 
-##### Example
+##### See more:
 > **/root/vendor/mallgroup/mpapi-client/Example/DeliveriesExample.php**

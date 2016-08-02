@@ -3,7 +3,7 @@
 ## Description 
 MPAPI client is a tool created to help Internet Mall partners to easily connect to marketplace catalogue and order processing at Mall environment such as Mall.cz or Mall.sk. 
 ## Get MPAPI client 
-We recommend to use [Composer](https://getcomposer.org/doc/00-intro.md "see https://getcomposer.org/doc/00-intro.md , if you have it not installed yet"). Once you have composer installed,  you can execute the following command in your project root to get the library:  
+We recommend to use [Composer](https://getcomposer.org/doc/00-intro.md "see https://getcomposer.org/doc/00-intro.md , if you have it not installed yet"). Once you have composer installed,  you can execute the following command in your project root to get the mpapi-client library:  
 `composer require mallgroup/mpapi-client `
 
 To check successful installation go to the vendor folder. You should see the mallgroup folder there.  
