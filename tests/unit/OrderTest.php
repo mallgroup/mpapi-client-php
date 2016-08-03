@@ -110,9 +110,21 @@ class OrderTest extends \Codeception\Test\Unit
 		$this->assertTrue(is_bool($this->object->getConfirmed()));
 	}
 
+	public function testSetConfirmed()
+	{
+		$this->object->setConfirmed(true);
+		$this->assertTrue($this->object->getConfirmed());
+	}
+
 	public function testGetStatus()
 	{
 		$this->assertNotEmpty($this->object->getStatus());
+	}
+
+	public function testSetStatus()
+	{
+		$this->object->setStatus(Order::STATUS_SHIPPED);
+		$this->assertEquals(Order::STATUS_SHIPPED, $this->object->getStatus());
 	}
 
 	public function testGetDeliveryCodPrice()
@@ -123,5 +135,35 @@ class OrderTest extends \Codeception\Test\Unit
 	public function testGetExternalDeliveryMethodId()
 	{
 		$this->assertEmpty($this->object->getExternalDeliveryMethodId());
+	}
+
+	public function testGetTransportId()
+	{
+		$this->assertEmpty($this->object->getTransportId());
+	}
+
+	public function testGetTrackingNumber()
+	{
+		$this->assertEmpty($this->object->getTrackingNumber());
+	}
+
+	public function testGetDiscount()
+	{
+		$this->assertEmpty($this->object->getDiscount());
+	}
+
+	public function testGetPaymentType()
+	{
+		$this->assertEmpty($this->object->getPaymentType());
+	}
+
+	public function testGetCreated()
+	{
+		$this->assertEmpty($this->object->getCreated());
+	}
+
+	public function testGetCustomerId()
+	{
+		$this->assertEmpty($this->object->getCustomerId());
 	}
 }

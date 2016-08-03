@@ -140,7 +140,7 @@ $orderData = [
 		'zip' => '10000',
 		'country' => 'CZ',
 	],
-	'confirmed' => true,
+	'confirmed' => false,
 	'status' => 'returned',
 	'items' => [
 		[
