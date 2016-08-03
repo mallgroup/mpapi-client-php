@@ -71,7 +71,7 @@ class DeliveryPricing extends AbstractEntity
 	 * Set delivery setup id
 	 *
 	 * @param string $id
-	 * @return \MPAPI\Entity\DeliverySetup
+	 * @return \MPAPI\Entity\DeliveryPricing
 	 */
 	public function setId($id)
 	{
@@ -93,7 +93,7 @@ class DeliveryPricing extends AbstractEntity
 	 * Set delivery method price
 	 *
 	 * @param integer $price
-	 * @return \MPAPI\Entity\DeliverySetup
+	 * @return \MPAPI\Entity\DeliveryPricing
 	 */
 	public function setPrice($price)
 	{
@@ -115,7 +115,7 @@ class DeliveryPricing extends AbstractEntity
 	 * Set cash on delivery price
 	 *
 	 * @param integer $price
-	 * @return \MPAPI\Entity\DeliverySetup
+	 * @return \MPAPI\Entity\DeliveryPricing
 	 */
 	public function setCodPrice($price)
 	{
@@ -137,7 +137,7 @@ class DeliveryPricing extends AbstractEntity
 	 * Set free delivery limit
 	 *
 	 * @param integer $limit
-	 * @return \MPAPI\Entity\DeliverySetup
+	 * @return \MPAPI\Entity\DeliveryPricing
 	 */
 	public function setFreeLimit($limit)
 	{
@@ -169,7 +169,7 @@ class DeliveryPricing extends AbstractEntity
 	 * Set delivery delay (in days)
 	 *
 	 * @param integer $daysDelay
-	 * @return \MPAPI\Entity\DeliverySetup
+	 * @return \MPAPI\Entity\DeliveryPricing
 	 */
 	public function setDeliveryDelay($delay)
 	{
