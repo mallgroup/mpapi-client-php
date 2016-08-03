@@ -564,7 +564,11 @@ class Order extends AbstractEntity
 	 */
 	public function getTransportId()
 	{
-		return $this->data[self::KEY_TRANSPORT_ID];
+		$retval = [];
+		if (isset($this->data[self::KEY_TRANSPORT_ID])) {
+			$retval = $this->data[self::KEY_TRANSPORT_ID];
+		}
+		return $retval;
 	}
 
 	/**
@@ -572,7 +576,11 @@ class Order extends AbstractEntity
 	 */
 	public function getTrackingNumber()
 	{
-		return $this->data[self::KEY_TRACKING_NO];
+		$retval = [];
+		if (isset($this->data[self::KEY_TRACKING_NO])) {
+			$retval = $this->data[self::KEY_TRACKING_NO];
+		}
+		return $retval;
 	}
 
 	/**
@@ -588,7 +596,11 @@ class Order extends AbstractEntity
 	 */
 	public function getDiscount()
 	{
-		return $this->data[self::KEY_DISCOUNT];
+		$retval = 0;
+		if (isset($this->data[self::KEY_DISCOUNT])) {
+			$retval = $this->data[self::KEY_DISCOUNT];
+		}
+		return $retval;
 	}
 
 	/**
@@ -596,7 +608,11 @@ class Order extends AbstractEntity
 	 */
 	public function getPaymentType()
 	{
-		return $this->data[self::KEY_PAYMENT_TYPE];
+		$retval = null;
+		if (isset($this->data[self::KEY_PAYMENT_TYPE])) {
+			$retval = $this->data[self::KEY_PAYMENT_TYPE];
+		}
+		return $retval;
 	}
 
 	/**
@@ -604,7 +620,11 @@ class Order extends AbstractEntity
 	 */
 	public function getCreated()
 	{
-		return $this->data[self::KEY_CREATED];
+		$retval = null;
+		if (isset($this->data[self::KEY_CREATED])) {
+			$retval = $this->data[self::KEY_CREATED];
+		}
+		return $retval;
 	}
 
 	/**
@@ -612,7 +632,11 @@ class Order extends AbstractEntity
 	 */
 	public function getCustomerId()
 	{
-		return $this->data[self::KEY_CUSTOMER_ID];
+		$retval = null;
+		if (isset($this->data[self::KEY_CUSTOMER_ID])) {
+			$retval = $this->data[self::KEY_CUSTOMER_ID];
+		}
+		return $retval;
 	}
 
 	/**
