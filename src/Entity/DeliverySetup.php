@@ -50,7 +50,7 @@ class DeliverySetup extends AbstractEntity
 	 * Add delivery pricing into delivery setup
 	 *
 	 * @param DeliveryPricing $pricing
-	 * @return MPAPI\Entity\DeliverySetup
+	 * @return DeliverySetup
 	 */
 	public function addPricing(DeliveryPricing $pricing)
 	{
@@ -72,7 +72,7 @@ class DeliverySetup extends AbstractEntity
 
 		/* @var DeliveryPricing $deliveryPricing */
 		foreach ($this->data[self::KEY_PRICING] as $deliveryPricing) {
-			$retval[] = $deliveryPricing->getData();
+			$retval[self::KEY_PRICING][] = $deliveryPricing->getData();
 		}
 
 		return $retval;

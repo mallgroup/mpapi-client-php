@@ -1,6 +1,6 @@
 <?php
 use MPAPI\Services\Client;
-use MPAPI\Services\DeliverySettings;
+use MPAPI\Services\DeliveryMethods;
 use MPAPI\Entity\DeliveryMethod;
 use MPAPI\Entity\DeliverySetup;
 use MPAPI\Entity\DeliveryPricing;
@@ -8,10 +8,10 @@ use MPAPI\Entity\DeliveryPricing;
 require __DIR__ . '/../vendor/autoload.php';
 
 // initialize API client
-$mpApiClient = new Client('mp_vivantis_sk_dGVzc3R8MzAw');
+$mpApiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
 
 // initialize delivery settings service
-$deliverySettings = new DeliverySettings($mpApiClient);
+$deliverySettings = new DeliveryMethods($mpApiClient);
 
 // load all existing delivery settings
 $response = $deliverySettings->get();
@@ -42,7 +42,7 @@ $deliveryMethod2->setId('deliveryMethod2Id')
 $deliverySetup = new DeliverySetup('deliverySetupId1');
 // create delivery pricing entity
 $deliveryPricing = new DeliveryPricing();
-$deliveryPricing->setId('deliveryMethod2Id')
+$deliveryPricing->setId('deliveryMethod1Id')
 				->setPrice(100)
 				->setCodPrice(0)
 				->setFreeLimit(500)
@@ -50,13 +50,13 @@ $deliveryPricing->setId('deliveryMethod2Id')
 // add delivery pricing into delivery setup
 $deliverySetup->addPricing($deliveryPricing);
 // add delivery pricing instance directly into delivery setup
-$deliverySetup->addPricing([
+$deliverySetup->addPricing(new DeliveryPricing([
 	DeliveryPricing::KEY_ID => 'deliveryMethod2Id',
 	DeliveryPricing::KEY_PRICE => 200,
 	DeliveryPricing::KEY_COD_PRICE => 20,
 	DeliveryPricing::KEY_FREE_LIMIT => 1500,
 	DeliveryPricing::KEY_DELIVERY_DELAY => 2
-]);
+]));
 
 // include delivery setup into delivery methods
 $deliveryMethod2->addDeliverySetup($deliverySetup);
