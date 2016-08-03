@@ -3,6 +3,7 @@ use MPAPI\Services\Client;
 use MPAPI\Services\DeliverySettings;
 use MPAPI\Entity\DeliveryMethod;
 use MPAPI\Entity\DeliverySetup;
+use MPAPI\Entity\DeliveryPricing;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -38,23 +39,27 @@ $deliveryMethod2->setId('deliveryMethod2Id')
 				->setDeliveryDelay(1)
 				->setPickupPoint(false);
 // create delivery setup
-$deliverySetup1 = new DeliverySetup();
-$deliverySetup1->setId('deliverySetupId1')
+$deliverySetup = new DeliverySetup('deliverySetupId1');
+// create delivery pricing entity
+$deliveryPricing = new DeliveryPricing();
+$deliveryPricing->setId('deliveryMethod2Id')
 				->setPrice(100)
 				->setCodPrice(0)
 				->setFreeLimit(500)
 				->setDeliveryDelay(3);
-$deliverySetup2 = new DeliverySetup();
-$deliverySetup2->setId('deliverySetupId2')
-				->setPrice(200)
-				->setCodPrice(20)
-				->setFreeLimit(1500)
-				->setDeliveryDelay(2);
+// add delivery pricing into delivery setup
+$deliverySetup->addPricing($deliveryPricing);
+// add delivery pricing instance directly into delivery setup
+$deliverySetup->addPricing([
+	DeliveryPricing::KEY_ID => 'deliveryMethod2Id',
+	DeliveryPricing::KEY_PRICE => 200,
+	DeliveryPricing::KEY_COD_PRICE => 20,
+	DeliveryPricing::KEY_FREE_LIMIT => 1500,
+	DeliveryPricing::KEY_DELIVERY_DELAY => 2
+]);
 
-// include delivery setups into delivery methods
-$deliveryMethod2->addDeliverySetup($deliverySetup1)
-				->addDeliverySetup($deliverySetup2);
-
+// include delivery setup into delivery methods
+$deliveryMethod2->addDeliverySetup($deliverySetup);
 
 // include delivery method into delivery settings service
 $deliverySettings->add($deliveryMethod1)

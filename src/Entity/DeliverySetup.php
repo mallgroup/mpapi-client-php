@@ -9,6 +9,7 @@ namespace MPAPI\Entity;
 class DeliverySetup extends AbstractEntity
 {
 	/**
+	 *
 	 * @var string
 	 */
 	const KEY_ID = 'id';
@@ -17,49 +18,26 @@ class DeliverySetup extends AbstractEntity
 	 *
 	 * @var string
 	 */
-	const KEY_PRICE = 'price';
+	const KEY_PRICING = 'pricing';
 
 	/**
 	 *
 	 * @var string
 	 */
-	const KEY_COD_PRICE = 'cod_price';
+	protected $data;
 
 	/**
+	 * Construct
 	 *
-	 * @var string
+	 * @param string $deliverySetupId
 	 */
-	const KEY_FREE_LIMIT = 'free_limit';
-
-	/**
-	 *
-	 * @var string
-	 */
-	const KEY_DELIVERY_DELAY = 'delivery_delay';
-
-	/**
-	 *
-	 * @var array
-	 */
-	protected $data = [];
-
-	/**
-	 * @see \MPAPI\Entity\AbstractEntity::getData()
-	 */
-	public function getData()
+	public function __construct($deliverySetupId)
 	{
-		return [
-			self::KEY_ID => $this->getId(),
-			self::KEY_PRICE => $this->getPrice(),
-			self::KEY_COD_PRICE => $this->getCodPrice(),
-			self::KEY_FREE_LIMIT => $this->getFreeLimit(),
-			self::KEY_DELIVERY_DELAY => $this->getDeliveryDelay(),
-		];
+		parent::__construct([self::KEY_ID => $deliverySetupId]);
 	}
 
-
 	/**
-	 * Get delivery method ID
+	 * Get delivery setup id
 	 *
 	 * @return string
 	 */
@@ -69,112 +47,34 @@ class DeliverySetup extends AbstractEntity
 	}
 
 	/**
-	 * Set delivery setup id
+	 * Add delivery pricing into delivery setup
 	 *
-	 * @param string $id
-	 * @return \MPAPI\Entity\DeliverySetup
+	 * @param DeliveryPricing $pricing
+	 * @return MPAPI\Entity\DeliverySetup
 	 */
-	public function setId($id)
+	public function addPricing(DeliveryPricing $pricing)
 	{
-		$this->data[self::KEY_ID] = $id;
+		if (!isset($this->data[self::KEY_PRICING])) {
+			$this->data[self::KEY_PRICING] = [];
+		}
+		$this->data[self::KEY_PRICING][] = $pricing;
 		return $this;
 	}
 
 	/**
-	 * Get delivery price
-	 *
-	 * @return integer
+	 * @see \MPAPI\Entity\AbstractEntity::getData()
 	 */
-	public function getPrice()
+	public function getData()
 	{
-		return $this->data[self::KEY_PRICE];
-	}
+		$retval = [
+			self::KEY_ID => $this->getId()
+		];
 
-	/**
-	 * Set delivery method price
-	 *
-	 * @param integer $price
-	 * @return \MPAPI\Entity\DeliverySetup
-	 */
-	public function setPrice($price)
-	{
-		$this->data[self::KEY_PRICE] = $price;
-		return $this;
-	}
+		/* @var DeliveryPricing $deliveryPricing */
+		foreach ($this->data[self::KEY_PRICING] as $deliveryPricing) {
+			$retval[] = $deliveryPricing->getData();
+		}
 
-	/**
-	 * Get cash on delivery price
-	 *
-	 * @return integer
-	 */
-	public function getCodPrice()
-	{
-		return $this->data[self::KEY_COD_PRICE];
-	}
-
-	/**
-	 * Set cash on delivery price
-	 *
-	 * @param integer $price
-	 * @return \MPAPI\Entity\DeliverySetup
-	 */
-	public function setCodPrice($price)
-	{
-		$this->data[self::KEY_COD_PRICE] = $price;
-		return $this;
-	}
-
-	/**
-	 * Get free limit
-	 *
-	 * @return integer
-	 */
-	public function getFreeLimit()
-	{
-		return $this->data[self::KEY_FREE_LIMIT];
-	}
-
-	/**
-	 * Set free delivery limit
-	 *
-	 * @param integer $limit
-	 * @return \MPAPI\Entity\DeliverySetup
-	 */
-	public function setFreeLimit($limit)
-	{
-		$this->data[self::KEY_FREE_LIMIT] = $limit;
-		return $this;
-	}
-
-	/**
-	 * Check free limit setup
-	 *
-	 * @return boolean
-	 */
-	public function hasFreeLimit()
-	{
-		return $this->getFreeLimit() > 0;
-	}
-
-	/**
-	 * Get delivery delay
-	 *
-	 * @return integer
-	 */
-	public function getDeliveryDelay()
-	{
-		return $this->data[self::KEY_DELIVERY_DELAY];
-	}
-
-	/**
-	 * Set delivery delay (in days)
-	 *
-	 * @param integer $daysDelay
-	 * @return \MPAPI\Entity\DeliverySetup
-	 */
-	public function setDeliveryDelay($delay)
-	{
-		$this->data[self::KEY_DELIVERY_DELAY] = (int)$delay;
-		return $this;
+		return $retval;
 	}
 }
