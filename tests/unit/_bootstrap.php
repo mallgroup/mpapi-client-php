@@ -187,7 +187,22 @@ $deliverySetupData = [
 	'delivery_delay' => 4
 ];
 
+Codeception\Util\Fixtures::add('deliverySetupId', 'deliverySetupId1');
 Codeception\Util\Fixtures::add('deliverySetupData', $deliverySetupData);
+
+$deliverySetupFinalStructure = [
+	'id' => Codeception\Util\Fixtures::get('deliverySetupId'),
+	'pricing' => [
+		[
+			'id' => 'deliverySetupId',
+			'price' => 150,
+			'cod_price' => 22,
+			'free_limit' => 650,
+			'delivery_delay' => 4
+		]
+	]
+];
+Codeception\Util\Fixtures::add('deliverySetupFinalStructure', $deliverySetupFinalStructure);
 Codeception\Util\Fixtures::add('updatedDeliverySetupId', 'updatedDeliverSetupId');
 Codeception\Util\Fixtures::add('updatedDeliverySetupPrice', 200);
 Codeception\Util\Fixtures::add('updatedDeliverySetupCodPrice', 10);
