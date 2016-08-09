@@ -51,10 +51,10 @@ $exampleService = new NameOfService($mpapiClient);
 ...
 ```
 For more examples how to use specific services see following links:  
-* [Products](/blob/master/docs/PRODUCTS.md) – create, update, delete or get data.  
-* [Availability](/blob/master/docs/AVAILABILITY.md) – update product or variant.  
-* [Orders](/blob/master/docs/ORDERS.md) - get information about specific order, get all order IDs of open or unconfirmed orders, change order status.  
-* [Deliveries](/blob/master/docs/DELIVERIES.md) - get, create or update delivery setup list.  
-* [Labels](/blob/master/docs/LABELS.md) - get list of available labels.  
-* [Categories](/blob/master/docs/CATEGORIES.md) - get all categories, search title with phrase or prefix, get available parameters for specific category.
+* [Products](https://gitlab.com/mallgroup/mpapi-client/blob/master/doc/PRODUCTS.md) – create, update, delete or get data.  
+* [Availability](https://gitlab.com/mallgroup/mpapi-client/blob/master/doc/AVAILABILITY.md) – update product or variant.  
+* [Orders](https://gitlab.com/mallgroup/mpapi-client/blob/master/doc/ORDERS.md) - get information about specific order, get all order IDs of open or unconfirmed orders, change order status.  
+* [Deliveries](https://gitlab.com/mallgroup/mpapi-client/blob/master/doc/DELIVERIES.md) - get, create or update delivery setup list.  
+* [Labels](https://gitlab.com/mallgroup/mpapi-client/blob/master/doc/LABELS.md) - get list of available labels.  
+* [Categories](https://gitlab.com/mallgroup/mpapi-client/blob/master/doc/CATEGORIES.md) - get all categories, search title with phrase or prefix, get available parameters for specific category.
     
