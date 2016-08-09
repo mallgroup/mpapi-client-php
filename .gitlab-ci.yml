@@ -1,6 +1,5 @@
 stages:
   - master
-  - deploy
 
 test:
   stage: master
@@ -14,10 +13,3 @@ test:
     - ./vendor/bin/codecept run unit
   tags:
     - php
-  
-deploy:
-  stage: deploy
-  script:
-    - git push $DEPLOY_REMOTE_REP HEAD:master
-  only:
-    - tags
