@@ -9,10 +9,11 @@ test:
       - vendor/
   before_script:
     # Install composer dependencies
-    - curl -sS https://getcomposer.org/installer | php
-    - php composer.phar install
+    - composer install
   script:
     - ./vendor/bin/codecept run unit
+  tags:
+    - php
   
 deploy:
   stage: deploy
