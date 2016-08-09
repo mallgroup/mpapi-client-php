@@ -1,22 +1,22 @@
 stages:
   - master
   - deploy
+
+test:
+  stage: master
+  cache:
+    paths:
+      - vendor/
+  before_script:
+    # Install composer dependencies
+    - curl -sS https://getcomposer.org/installer | php
+    - php composer.phar install
+  script:
+    - vendor/bin/codecept run unit
   
-  test:
-    stage: master
-    cache:
-      paths:
-        - vendor/
-    before_script:
-      # Install composer dependencies
-      - curl -sS https://getcomposer.org/installer | php
-      - php composer.phar install
-    script:
-      - vendor/bin/codecept run unit
-  
-  deploy:
-    stage: deploy
-    script:
-      - git push "${DEPLOY_REMOTE_REPO}" HEAD:master
-    only:
-      - tags
+deploy:
+  stage: deploy
+  script:
+    - git push "${DEPLOY_REMOTE_REPO}" HEAD:master
+  only:
+    - tags
