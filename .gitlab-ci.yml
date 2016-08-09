@@ -12,7 +12,7 @@ test:
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
   script:
-    - vendor/bin/codecept run unit ./tests
+    - ./vendor/bin/codecept run unit
   
 deploy:
   stage: deploy
