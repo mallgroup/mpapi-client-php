@@ -51,10 +51,10 @@ $exampleService = new NameOfService($mpapiClient);
 ...
 ```
 For more examples how to use specific services see following links:  
-* [Products](/blob/master/docs/PRODUCTS) – create, update, delete or get data.  
-* [Availability](/blob/master/docs/AVAILABILITY) – update product or variant.  
-* [Orders](/blob/master/docs/ORDERS) - get information about specific order, get all order IDs of open or unconfirmed orders, change order status.  
-* [Deliveries](/blob/master/docs/DELIVERIES) - get, create or update delivery setup list.  
-* [Labels](/blob/master/docs/LABELS) - get list of available labels.  
-* [Categories](/blob/master/docs/CATEGORIES) - get all categories, search title with phrase or prefix, get available parameters for specific category.
+* [Products](/docs/PRODUCTS) – create, update, delete or get data.  
+* [Availability](/docs/AVAILABILITY) – update product or variant.  
+* [Orders](/docs/ORDERS) - get information about specific order, get all order IDs of open or unconfirmed orders, change order status.  
+* [Deliveries](/docs/DELIVERIES) - get, create or update delivery setup list.  
+* [Labels](/docs/LABELS) - get list of available labels.  
+* [Categories](/docs/CATEGORIES) - get all categories, search title with phrase or prefix, get available parameters for specific category.
     
