@@ -1,34 +1,33 @@
 {
-  "description": "Mall marketplace API client",
   "name" : "mallgroup/mpapi-client",
-  "type": "library",
+  "description" : "Mall marketplace API client",
+  "version" : "1.0.0",
   "require" : {
     "php" : "^5.5 || ^7.0",
     "monolog/monolog" : "~1.20.0",
     "guzzlehttp/guzzle" : "~6.2.0",
     "psr/log" : "~1.0.0"
-	},
-	"require-dev" : {
-		"codeception/codeception": "~2.1"
-	},
+  },
+  "require-dev" : {
+    "codeception/codeception" : "~2.1"
+  },
   "license" : "MIT",
   "autoload" : {
     "psr-4" : {
       "MPAPI\\" : "src/"
-	}
+    }
   },
+  "type" : "library",
   "support" : {
     "email" : "it.helpdesk@mall.cz"
   },
-  "authors" : [{
+  "authors" : [ {
     "name" : "Jan Blaha",
     "email" : "jan.blaha@mall.cz",
     "role" : "Developer"
-  },
-  {
+  }, {
     "name" : "Jonas Habr",
     "email" : "jonas.habr@mall.cz",
     "role" : "Developer"
-  }
-  ]
+  } ]
 }
