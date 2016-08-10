@@ -137,12 +137,14 @@ class Products extends AbstractService
 				$data = $data->getData();
 			}
 			$response = $this->productsEndpoints->postProduct($data);
+			if (json_decode($response->getBody(), true) == null) {
+				$errors[] = (string)$response->getBody();
+			}
 		}
 		
 		if (!empty($errors)) {
 			$this->client->getLogger()->error('Error during post products', $errors);
-			$exception = new ApplicationException();
-			$exception->setData($errors);
+			$exception = new ApplicationException('Error during post products: ' . implode(', ', $errors));
 			throw $exception;
 		}
 		
