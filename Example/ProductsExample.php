@@ -60,6 +60,7 @@ $variant->setRrpPrice(229);
 $variant->addParameter("MP_COLOR", "blue");
 $variant->addParameter("MP_TYPE", "wood");
 $variant->addParameter("MP_TYPE", "iron");
+$variant->addLabel('NEW', '2015-07-19 00:00:00', '2018-11-14 23:59:59');
 $variant->addMedia('http://i.cdn.nrholding.net/15880228', true);
 $variant->addPromotion(1700, '2015-07-19 00:00:00', '2016-11-16 23:59:59');
 $variant->setStatus(Product::STATUS_ACTIVE);
