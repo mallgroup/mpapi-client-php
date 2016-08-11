@@ -4,7 +4,7 @@ use MPAPI\Services\Labels;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
+$mpapiClient = new Client('your_client_id');
 $labels = new Labels($mpapiClient);
 $response = $labels->get();
 

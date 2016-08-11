@@ -7,7 +7,7 @@ use Monolog\Logger;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpApiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
+$mpApiClient = new Client('your_client_id');
 
 /**
  * Create instance of monolog logger

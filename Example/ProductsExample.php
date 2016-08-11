@@ -8,7 +8,7 @@ use Monolog\Handler\StreamHandler;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
+$mpapiClient = new Client('your_client_id');
 $logger = new Logger('loggerName');
 $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
 

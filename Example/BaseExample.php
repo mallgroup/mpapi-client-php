@@ -4,7 +4,7 @@ use MPAPI\Services\Client;
 require __DIR__ . '/../vendor/autoload.php';
 
 // initialize API client
-$mpApiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
+$mpApiClient = new Client('your_client_id');
 
 if ($mpApiClient->validatePartner() == true) {
 	print('Partner is valid' . PHP_EOL);

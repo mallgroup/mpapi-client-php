@@ -6,7 +6,7 @@ use Monolog\Handler\StreamHandler;
 require __DIR__ . '/../vendor/autoload.php';
 
 // initialize API client
-$mpApiClient = new Client('mp_vivantis_sk_dGVzc3R8MzAw');
+$mpApiClient = new Client('your_client_id');
 
 // Create instance of monolog logger
 $logger = new Logger('loggerName');

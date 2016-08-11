@@ -8,7 +8,7 @@ use MPAPI\Entity\DeliveryPricing;
 require __DIR__ . '/../vendor/autoload.php';
 
 // initialize API client
-$mpApiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
+$mpApiClient = new Client('your_client_id');
 
 // initialize delivery settings service
 $deliverySettings = new DeliveryMethods($mpApiClient);
