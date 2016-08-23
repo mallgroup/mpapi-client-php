@@ -153,6 +153,36 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	const KEY_LABEL = 'label';
 
 	/**
+	 *
+	 * @var string
+	 */
+	const KEY_DIMENSIONS = 'dimensions';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_WEIGHT = 'weight';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_WIDTH = 'width';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_LENGTH = 'length';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_HEIGHT = 'height';
+
+	/**
 	 * Get variant ID
 	 *
 	 * @return string
@@ -667,6 +697,51 @@ abstract class AbstractArticleEntity extends AbstractEntity
 			}
 		}
 		
+		return $this;
+	}
+
+	/**
+	 * Get variable parameters
+	 *
+	 * @return array
+	 */
+	public function getDimensions()
+	{
+		return $this->data[self::KEY_DIMENSIONS];
+	}
+
+	/**
+	 * Set variable parameters
+	 *
+	 * @param array $value
+	 * @return Product
+	 */
+	public function setDimensions($value)
+	{
+		if ($value !== $this->getDimensions()) {
+			$this->data[self::KEY_DIMENSIONS] = $value;
+		}
+		return $this;
+	}
+
+	/**
+	 * Add dimensions
+	 *
+	 * @param double $price
+	 * @param string $from
+	 * @param string $to
+	 * @return AbstractArticleEntity
+	 */
+	public function addDimensions($weight, $width, $height, $length)
+	{
+		$dimensions = [
+			self::KEY_WEIGHT => $weight,
+			self::KEY_WIDTH => $width,
+			self::KEY_HEIGHT => $height,
+			self::KEY_LENGTH => $length
+		];
+		$this->setDimensions($dimensions);
+
 		return $this;
 	}
 }
