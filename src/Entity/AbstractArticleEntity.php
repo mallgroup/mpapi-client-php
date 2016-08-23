@@ -714,7 +714,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set variable parameters
 	 *
 	 * @param array $value
-	 * @return Product
+	 * @return AbstractArticleEntity
 	 */
 	public function setDimensions($value)
 	{
@@ -726,10 +726,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 
 	/**
 	 * Add dimensions
-	 *
-	 * @param double $price
-	 * @param string $from
-	 * @param string $to
+	 * 
+	 * @param double $weight
+	 * @param double $width
+	 * @param double $height
+	 * @param double $length
 	 * @return AbstractArticleEntity
 	 */
 	public function addDimensions($weight, $width, $height, $length)
@@ -740,6 +741,66 @@ abstract class AbstractArticleEntity extends AbstractEntity
 			self::KEY_HEIGHT => $height,
 			self::KEY_LENGTH => $length
 		];
+		$this->setDimensions($dimensions);
+
+		return $this;
+	}
+
+	/**
+	 * set dimension weight
+	 *
+	 * @param double $weight
+	 * @return AbstractArticleEntity
+	 */
+	public function setWeight($weight)
+	{
+		$dimensions = $this->getDimensions()[0];
+		$dimensions[self::KEY_WEIGHT] = $weight;
+		$this->setDimensions($dimensions);
+
+		return $this;
+	}
+
+	/**
+	 * set dimension width
+	 *
+	 * @param double $width
+	 * @return AbstractArticleEntity
+	 */
+	public function setWidth($width)
+	{
+		$dimensions = $this->getDimensions()[0];
+		$dimensions[self::KEY_WIDTH] = $width;
+		$this->setDimensions($dimensions);
+
+		return $this;
+	}
+
+	/**
+	 * set dimension height
+	 *
+	 * @param double $height
+	 * @return AbstractArticleEntity
+	 */
+	public function setHeight($height)
+	{
+		$dimensions = $this->getDimensions()[0];
+		$dimensions[self::KEY_HEIGHT] = $height;
+		$this->setDimensions($dimensions);
+
+		return $this;
+	}
+
+	/**
+	 * set dimension length
+	 *
+	 * @param double $length
+	 * @return AbstractArticleEntity
+	 */
+	public function setLength($length)
+	{
+		$dimensions = $this->getDimensions()[0];
+		$dimensions[self::KEY_LENGTH] = $length;
 		$this->setDimensions($dimensions);
 
 		return $this;
