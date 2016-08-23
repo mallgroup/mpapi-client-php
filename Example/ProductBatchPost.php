@@ -46,8 +46,9 @@ $product1->setId('pTU00_test')
 	->setRrpPrice(95)
 	->setBrandId('SAMSUNG')
 	->addParameter('MP_COLOR', 'blue')
+	->addDimensions(30,90,50,35)
 	->setStatus(Product::STATUS_ACTIVE)
-	->setInstock(10);
+	->setInStock(10);
 
 // create entity for the second product
 $product2 = new Product();
@@ -74,8 +75,9 @@ $product2->setId('pTU00_test2')
 	->setRrpPrice(95)
 	->setBrandId('LG')
 	->addParameter('MP_COLOR', 'red')
+	->setWeight(30)
 	->setStatus(Product::STATUS_ACTIVE)
-	->setInstock(15);
+	->setInStock(15);
 
 /**
  * During synchronization (POST, PUT, DELETE)

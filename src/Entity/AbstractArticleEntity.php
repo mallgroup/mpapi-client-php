@@ -153,6 +153,36 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	const KEY_LABEL = 'label';
 
 	/**
+	 *
+	 * @var string
+	 */
+	const KEY_DIMENSIONS = 'dimensions';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_WEIGHT = 'weight';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_WIDTH = 'width';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_LENGTH = 'length';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_HEIGHT = 'height';
+
+	/**
 	 * Get variant ID
 	 *
 	 * @return string
@@ -667,6 +697,112 @@ abstract class AbstractArticleEntity extends AbstractEntity
 			}
 		}
 		
+		return $this;
+	}
+
+	/**
+	 * Get variable parameters
+	 *
+	 * @return array
+	 */
+	public function getDimensions()
+	{
+		return $this->data[self::KEY_DIMENSIONS];
+	}
+
+	/**
+	 * Set variable parameters
+	 *
+	 * @param array $value
+	 * @return AbstractArticleEntity
+	 */
+	public function setDimensions($value)
+	{
+		if ($value !== $this->getDimensions()) {
+			$this->data[self::KEY_DIMENSIONS] = $value;
+		}
+		return $this;
+	}
+
+	/**
+	 * Add dimensions
+	 * 
+	 * @param double $weight
+	 * @param double $width
+	 * @param double $height
+	 * @param double $length
+	 * @return AbstractArticleEntity
+	 */
+	public function addDimensions($weight, $width, $height, $length)
+	{
+		$dimensions = [
+			self::KEY_WEIGHT => $weight,
+			self::KEY_WIDTH => $width,
+			self::KEY_HEIGHT => $height,
+			self::KEY_LENGTH => $length
+		];
+		$this->setDimensions($dimensions);
+
+		return $this;
+	}
+
+	/**
+	 * set dimension weight
+	 *
+	 * @param double $weight
+	 * @return AbstractArticleEntity
+	 */
+	public function setWeight($weight)
+	{
+		$dimensions = $this->getDimensions()[0];
+		$dimensions[self::KEY_WEIGHT] = $weight;
+		$this->setDimensions($dimensions);
+
+		return $this;
+	}
+
+	/**
+	 * set dimension width
+	 *
+	 * @param double $width
+	 * @return AbstractArticleEntity
+	 */
+	public function setWidth($width)
+	{
+		$dimensions = $this->getDimensions()[0];
+		$dimensions[self::KEY_WIDTH] = $width;
+		$this->setDimensions($dimensions);
+
+		return $this;
+	}
+
+	/**
+	 * set dimension height
+	 *
+	 * @param double $height
+	 * @return AbstractArticleEntity
+	 */
+	public function setHeight($height)
+	{
+		$dimensions = $this->getDimensions()[0];
+		$dimensions[self::KEY_HEIGHT] = $height;
+		$this->setDimensions($dimensions);
+
+		return $this;
+	}
+
+	/**
+	 * set dimension length
+	 *
+	 * @param double $length
+	 * @return AbstractArticleEntity
+	 */
+	public function setLength($length)
+	{
+		$dimensions = $this->getDimensions()[0];
+		$dimensions[self::KEY_LENGTH] = $length;
+		$this->setDimensions($dimensions);
+
 		return $this;
 	}
 }
