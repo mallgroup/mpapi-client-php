@@ -28,7 +28,8 @@ $product = [
 			'to' => '2027-10-11 00:00:00'
 		]
 	],
-	'delivery_setup' => 'testDelivery1'
+	'delivery_setup' => 'testDelivery1',
+	'delivery_delay' => 2
 ];
 
 $media = [

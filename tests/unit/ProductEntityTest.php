@@ -44,6 +44,11 @@ class ProductTest extends \Codeception\Test\Unit
 		$this->assertNotEmpty($this->object->getCategoryId());
 	}
 
+	public function testGetDeliveryDelay()
+	{
+		$this->assertNotEmpty($this->object->getDeliveryDelay());
+	}
+
 	public function testGetShortdesc()
 	{
 		$this->assertNotEmpty($this->object->getShortdesc());
