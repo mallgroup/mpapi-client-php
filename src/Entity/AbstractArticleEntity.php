@@ -183,6 +183,12 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	const KEY_HEIGHT = 'height';
 
 	/**
+	 *
+	 * @var string
+	 */
+	const KEY_DELIVERY_DELAY = 'delivery_delay';
+
+	/**
 	 * Get variant ID
 	 *
 	 * @return string
@@ -464,7 +470,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 				$this->data[self::KEY_MEDIA][] = $mediaCurrent;
 			}
 		}
-		
+
 		return $this;
 	}
 
@@ -507,7 +513,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 			self::KEY_FROM => $from,
 			self::KEY_TO => $to
 		];
-		
+
 		if (!isset($this->data[self::KEY_PROMOTIONS])) {
 			$this->data[self::KEY_PROMOTIONS][] = $promotionCurrent;
 		} else {
@@ -522,7 +528,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 				$this->data[self::KEY_PROMOTIONS][] = $promotionCurrent;
 			}
 		}
-		
+
 		return $this;
 	}
 
@@ -681,7 +687,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 			self::KEY_FROM => $from,
 			self::KEY_TO => $to
 		];
-		
+
 		if (!isset($this->data[self::KEY_LABELS])) {
 			$this->data[self::KEY_LABELS][] = $labelCurrent;
 		} else {
@@ -696,7 +702,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 				$this->data[self::KEY_LABELS][] = $labelCurrent;
 			}
 		}
-		
+
 		return $this;
 	}
 
@@ -726,7 +732,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 
 	/**
 	 * Add dimensions
-	 * 
+	 *
 	 * @param double $weight
 	 * @param double $width
 	 * @param double $height
@@ -803,6 +809,30 @@ abstract class AbstractArticleEntity extends AbstractEntity
 		$dimensions[self::KEY_LENGTH] = $length;
 		$this->setDimensions($dimensions);
 
+		return $this;
+	}
+
+	/**
+	 * Get delivery delay
+	 *
+	 * @return integer
+	 */
+	public function getDeliveryDelay()
+	{
+		return (int) $this->data[self::KEY_DELIVERY_DELAY];
+	}
+
+	/**
+	 * Set delivery delay
+	 *
+	 * @param integer $value
+	 * @return AbstractArticleEntity
+	 */
+	public function setDeliveryDelay($value)
+	{
+		if ((int) $value !== $this->getDeliveryDelay()) {
+			$this->data[self::KEY_DELIVERY_DELAY] = $value;
+		}
 		return $this;
 	}
 }
