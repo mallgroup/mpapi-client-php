@@ -29,7 +29,7 @@ class Deliveries extends AbstractService
 	private $entities = [];
 
 	/**
-	 * Orders constructor.
+	 * Deliveries constructor.
 	 *
 	 * @param Client $client
 	 */
