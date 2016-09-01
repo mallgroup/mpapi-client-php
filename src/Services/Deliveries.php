@@ -4,7 +4,7 @@ namespace MPAPI\Services;
 use MPAPI\Entity\AbstractDeliveriesEntity;
 
 /**
- * Delivery settings
+ * Deliveries
  *
  * @author Jan Blaha <jan.blaha@mall.cz>
  */
@@ -24,7 +24,7 @@ class Deliveries extends AbstractService
 
 	/**
 	 *
-	 * @var Deliveries[]
+	 * @var AbstractDeliveriesEntity[]
 	 */
 	private $entities = [];
 
