@@ -77,7 +77,7 @@ class PartnerEndpoints extends AbstractEndpoints
 	 * Get all the endpoints that use POST
 	 *
 	 * @param AbstractDelivery $deliveryEntity
-	 * @return PartnerPostEndpoints
+	 * @return boolean
 	 */
 	public function post(AbstractDelivery $deliveryEntity = null)
 	{
@@ -100,7 +100,7 @@ class PartnerEndpoints extends AbstractEndpoints
 	 * Get all the endpoints that use PUT
 	 *
 	 * @param AbstractDelivery $deliveryEntity
-	 * @return PartnerPutEndpoints
+	 * @return boolean
 	 */
 	public function put(AbstractDelivery $deliveryEntity = null)
 	{
@@ -122,11 +122,29 @@ class PartnerEndpoints extends AbstractEndpoints
 	/**
 	 * Get all the endpoints that use DELETE
 	 *
-	 * @return PartnerDeleteEndpoints
+	 * @param AbstractDelivery $deliveryEntity
+	 * @return boolean
 	 */
-	public function delete()
+	public function delete(AbstractDelivery $deliveryEntity = null)
 	{
-		return new PartnerDeleteEndpoints($this->client, $this->service);
+		$entitiesQueue = $this->service->getEntities();
+
+		if (!empty($entitiesQueue)) {
+			// batch delete of delivery
+			foreach ($entitiesQueue as $entity) {
+				if ($entity instanceof AbstractDelivery) {
+					$this->deleteDelivery($entity);
+				}
+			}
+		} elseif ($deliveryEntity instanceof  AbstractDelivery) {
+			// delete one delivery
+			$this->deleteDelivery($deliveryEntity);
+		} else {
+			// delete all partner deliveries
+			$this->deleteDelivery();
+		}
+
+		return empty($this->getErrors());
 	}
 
 	/**
@@ -170,7 +188,6 @@ class PartnerEndpoints extends AbstractEndpoints
 		if ($response->getStatusCode() !== 201 || $response->getStatusCode() !== 200) {
 			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
 		}
-
 		return true;
 	}
 
@@ -186,7 +203,27 @@ class PartnerEndpoints extends AbstractEndpoints
 		if ($response->getStatusCode() !== 200) {
 			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
 		}
+		return true;
+	}
 
+	/**
+	 * Delete delivery by API
+	 *
+	 * @param AbstractDelivery $data
+	 * @return boolean
+	 */
+	private function deleteDelivery(AbstractDelivery $entity = null)
+	{
+		$code = null;
+		$delimiter = null;
+		if ($entity instanceof AbstractDelivery) {
+			$code = $entity->getCode();
+			$delimiter = self::PATH_DELIMITER;
+		}
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $delimiter, $code), Client::METHOD_DELETE);
+		if ($response->getStatusCode() !== 200) {
+			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
+		}
 		return true;
 	}
 }
