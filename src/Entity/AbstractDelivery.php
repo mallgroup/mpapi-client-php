@@ -291,6 +291,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	/**
 	 * Set delivery delay
 	 *
+	 * @param int $delay
 	 * @return Delivery
 	 */
 	public function setDeliveryDelay($delay)
