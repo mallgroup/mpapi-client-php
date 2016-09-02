@@ -8,20 +8,23 @@
 
 namespace MPAPI\Endpoints\Deliveries;
 
-use MPAPI\Endpoints\AbstractEndpoints;
-use MPAPI\Services\Client;
+use GuzzleHttp\Psr7\Response;
 
 /**
  *
  * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  */
-class PartnerPutEndpoints extends AbstractEndpoints
+class PartnerPutEndpoints extends AbstractDeliveriesEndpoints
 {
 	/**
+	 * Update partner delivery
 	 *
+	 * @param string $code
+	 * @param array $data
+	 * @return Response
 	 */
-	public function update()
+	public function update($code, array $data)
 	{
-
+		return $this->client->sendRequest(sprintf(self::ENDPOINT_PATH_WITH_CODE, $code), 'PUT', $data);
 	}
 }

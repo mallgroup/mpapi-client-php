@@ -25,7 +25,7 @@ class PartnerEndpoints extends AbstractEndpoints
 
 	/**
 	 * Get all the endpoints that use GET
-	 * 
+	 *
 	 * @return PartnerGetEndpoints
 	 */
 	public function get()
@@ -35,7 +35,7 @@ class PartnerEndpoints extends AbstractEndpoints
 
 	/**
 	 * Get all the endpoints that use POST
-	 * 
+	 *
 	 * @return PartnerPostEndpoints
 	 */
 	public function post()
@@ -45,7 +45,7 @@ class PartnerEndpoints extends AbstractEndpoints
 
 	/**
 	 * Get all the endpoints that use PUT
-	 * 
+	 *
 	 * @return PartnerPutEndpoints
 	 */
 	public function put()
@@ -55,7 +55,7 @@ class PartnerEndpoints extends AbstractEndpoints
 
 	/**
 	 * Get all the endpoints that use DELETE
-	 * 
+	 *
 	 * @return PartnerDeleteEndpoints
 	 */
 	public function delete()
