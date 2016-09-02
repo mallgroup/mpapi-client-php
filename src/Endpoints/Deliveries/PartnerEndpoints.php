@@ -7,7 +7,6 @@ use MPAPI\Services\AbstractService;
 use MPAPI\Lib\DataCollector;
 use MPAPI\Entity\PartnerDelivery;
 use MPAPI\Entity\AbstractDelivery;
-use GuzzleHttp\json_decode;
 
 /**
  *
@@ -39,6 +38,12 @@ class PartnerEndpoints extends AbstractEndpoints
 	 * @var AbstractService
 	 */
 	protected $service;
+
+	/**
+	 *
+	 * @var array
+	 */
+	protected $errors;
 
 	/**
 	 *
@@ -162,7 +167,9 @@ class PartnerEndpoints extends AbstractEndpoints
 	private function postDelivery(AbstractDelivery $entity)
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), Client::METHOD_POST, $entity->getData());
-		$this->addError($entity->getCode(), json_decode($response->getBody(), true));
+		if ($response->getStatusCode() !== 201 || $response->getStatusCode() !== 200) {
+			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
+		}
 
 		return true;
 	}
@@ -176,7 +183,9 @@ class PartnerEndpoints extends AbstractEndpoints
 	private function putDelivery(AbstractDelivery $entity)
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, $entity->getCode()), Client::METHOD_PUT, $entity->getData());
-		$this->addError($entity->getCode(), json_decode($response->getBody(), true));
+		if ($response->getStatusCode() !== 200) {
+			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
+		}
 
 		return true;
 	}
