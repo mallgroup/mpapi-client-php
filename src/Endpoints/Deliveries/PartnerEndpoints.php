@@ -159,9 +159,9 @@ class PartnerEndpoints extends AbstractEndpoints
 	 * @param AbstractDelivery $data
 	 * @return boolean
 	 */
-	private function postDelivery(AbstractDelivery $entity, $method = Client::METHOD_POST)
+	private function postDelivery(AbstractDelivery $entity)
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), $method, $entity->getData());
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), Client::METHOD_POST, $entity->getData());
 		$this->addError($entity->getCode(), json_decode($response->getBody(), true));
 
 		return true;
@@ -173,9 +173,9 @@ class PartnerEndpoints extends AbstractEndpoints
 	 * @param AbstractDelivery $data
 	 * @return boolean
 	 */
-	private function putDelivery(AbstractDelivery $entity, $method = Client::METHOD_POST)
+	private function putDelivery(AbstractDelivery $entity)
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, $entity->getCode()), $method, $entity->getData());
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, $entity->getCode()), Client::METHOD_PUT, $entity->getData());
 		$this->addError($entity->getCode(), json_decode($response->getBody(), true));
 
 		return true;
