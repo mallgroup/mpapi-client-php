@@ -153,7 +153,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	protected $changes = [];
 
-	public function __construct(array $data)
+	public function __construct(array $data = [])
 	{
 		// transform data dimensions
 		$this->transformDimensions($data, self::KEY_WEIGHT);
@@ -302,6 +302,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	/**
 	 * Set delivery delay
 	 *
+	 * @param int $delay
 	 * @return Delivery
 	 */
 	public function setDeliveryDelay($delay)
