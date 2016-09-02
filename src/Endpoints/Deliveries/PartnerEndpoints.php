@@ -24,6 +24,12 @@ class PartnerEndpoints extends AbstractEndpoints
 
 	/**
 	 *
+	 * @var string
+	 */
+	const PATH_DELIMITER = '/';
+
+	/**
+	 *
 	 * @var Client
 	 */
 	protected $client;
@@ -48,7 +54,7 @@ class PartnerEndpoints extends AbstractEndpoints
 	/**
 	 * Get all the endpoints that use GET
 	 *
-	 * @param $code null
+	 * @param string $code null
 	 * @return null|array|PartnerDelivery
 	 */
 	public function get($code = null)
@@ -88,11 +94,24 @@ class PartnerEndpoints extends AbstractEndpoints
 	/**
 	 * Get all the endpoints that use PUT
 	 *
+	 * @param AbstractDelivery $deliveryEntity
 	 * @return PartnerPutEndpoints
 	 */
-	public function put()
+	public function put(AbstractDelivery $deliveryEntity = null)
 	{
-		return new PartnerPutEndpoints($this->client, $this->service);
+		$entitiesQueue = $this->service->getEntities();
+
+		if (!empty($entitiesQueue)) {
+			foreach ($entitiesQueue as $entity) {
+				if ($entity instanceof AbstractDelivery) {
+					$this->putDelivery($entity);
+				}
+			}
+		} else {
+			$this->putDelivery($deliveryEntity);
+		}
+
+		return empty($this->getErrors());
 	}
 
 	/**
@@ -126,7 +145,7 @@ class PartnerEndpoints extends AbstractEndpoints
 	private function getDetail($code)
 	{
 		$retval = null;
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, '/', $code), Client::METHOD_GET);
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, $code), Client::METHOD_GET);
 		$responseData = json_decode($response->getBody(), true);
 		if (isset($responseData['data']) && !empty($responseData['data'])) {
 			$retval = new PartnerDelivery($responseData['data']);
@@ -140,9 +159,23 @@ class PartnerEndpoints extends AbstractEndpoints
 	 * @param AbstractDelivery $data
 	 * @return boolean
 	 */
-	private function postDelivery(AbstractDelivery $entity)
+	private function postDelivery(AbstractDelivery $entity, $method = Client::METHOD_POST)
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), Client::METHOD_POST, $entity->getData());
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), $method, $entity->getData());
+		$this->addError($entity->getCode(), json_decode($response->getBody(), true));
+
+		return true;
+	}
+
+	/**
+	 * Put delivery to API
+	 *
+	 * @param AbstractDelivery $data
+	 * @return boolean
+	 */
+	private function putDelivery(AbstractDelivery $entity, $method = Client::METHOD_POST)
+	{
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, $entity->getCode()), $method, $entity->getData());
 		$this->addError($entity->getCode(), json_decode($response->getBody(), true));
 
 		return true;
