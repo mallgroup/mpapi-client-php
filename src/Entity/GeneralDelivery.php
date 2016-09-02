@@ -2,11 +2,11 @@
 namespace MPAPI\Entity;
 
 /**
- * Global delivery entity
+ * General delivery entity
  *
  * @author Martin Drlik <martin.drlik@mall.cz>
  */
-class GlobalDelivery extends AbstractDelivery
+class GengeralDelivery extends AbstractDelivery
 {
 
 	/**
@@ -68,7 +68,7 @@ class GlobalDelivery extends AbstractDelivery
 	 * Set transport description
 	 *
 	 * @param string $description
-	 * @return GlobalDelivery
+	 * @return GeneralDelivery
 	 */
 	public function setDescription($description)
 	{
@@ -93,7 +93,7 @@ class GlobalDelivery extends AbstractDelivery
 	 * Set tracking url
 	 *
 	 * @param string $url
-	 * @return GlobalDelivery
+	 * @return GeneralDelivery
 	 */
 	public function setTrackingUrl($url)
 	{
@@ -118,7 +118,7 @@ class GlobalDelivery extends AbstractDelivery
 	 * Set transport active status
 	 *
 	 * @param boolean $active
-	 * @return GlobalDelivery
+	 * @return GeneralDelivery
 	 */
 	public function setActive($active)
 	{
@@ -143,7 +143,7 @@ class GlobalDelivery extends AbstractDelivery
 	 * Set transport service ID
 	 *
 	 * @param integer $transportId
-	 * @return GlobalDelivery
+	 * @return GeneralDelivery
 	 */
 	public function setTransportId($transportId)
 	{
