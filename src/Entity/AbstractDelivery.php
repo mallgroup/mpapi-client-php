@@ -153,17 +153,6 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	protected $changes = [];
 
-	public function __construct(array $data)
-	{
-		// transform data dimensions
-		$this->transformDimensions($data, self::KEY_WEIGHT);
-		$this->transformDimensions($data, self::KEY_HEIGHT);
-		$this->transformDimensions($data, self::KEY_LENGTH);
-		$this->transformDimensions($data, self::KEY_WIDTH);
-		// set to parent
-		parent::__construct($data);
-	}
-
 	/**
 	 * Get delivery title
 	 *
@@ -320,7 +309,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getHeightMin()
 	{
-		return (double) $this->data['height_min'];
+		$retval = 0;
+		if (isset($this->data[self::KEY_HEIGHT][self::KEY_MIN])) {
+			$retval = $this->data[self::KEY_HEIGHT][self::KEY_MIN];
+		}
+		return (double) $retval;
 	}
 
 	/**
@@ -333,7 +326,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	{
 		if ((double) $heightMin !== $this->getHeightMin()) {
 			$this->changes[] = self::KEY_MIN_HEIGHT;
-			$this->data[self::KEY_MIN_HEIGHT] = (double) $heightMin;
+			$this->data[self::KEY_HEIGHT][self::KEY_MIN] = (double) $heightMin;
 		}
 		return $this;
 	}
@@ -345,7 +338,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getHeightMax()
 	{
-		return (double) $this->data['height_max'];
+		$retval = 0;
+		if (isset($this->data[self::KEY_HEIGHT][self::KEY_MAX])) {
+			$retval = $this->data[self::KEY_HEIGHT][self::KEY_MAX];
+		}
+		return (double) $retval;
 	}
 
 	/**
@@ -358,7 +355,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	{
 		if ((double) $heightMax !== $this->getHeightMax()) {
 			$this->changes[] = self::KEY_MAX_HEIGHT;
-			$this->data[self::KEY_MAX_HEIGHT] = (double) $heightMax;
+			$this->data[self::KEY_HEIGHT][self::KEY_MAX] = (double) $heightMax;
 		}
 		return $this;
 	}
@@ -370,7 +367,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getLengthMin()
 	{
-		return (double) $this->data['length_min'];
+		$retval = 0;
+		if (isset($this->data[self::KEY_LENGTH][self::KEY_MIN])) {
+			$retval = $this->data[self::KEY_LENGTH][self::KEY_MIN];
+		}
+		return (double) $retval;
 	}
 
 	/**
@@ -383,7 +384,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	{
 		if ((double) $lengthMin !== $this->getLengthMin()) {
 			$this->changes[] = self::KEY_MIN_LENGTH;
-			$this->data[self::KEY_MIN_LENGTH] = (double) $lengthMin;
+			$this->data[self::KEY_LENGTH][self::KEY_MIN] = (double) $lengthMin;
 		}
 		return $this;
 	}
@@ -395,7 +396,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getLengthMax()
 	{
-		return (double) $this->data['length_max'];
+		$retval = 0;
+		if (isset($this->data[self::KEY_LENGTH][self::KEY_MAX])) {
+			$retval = $this->data[self::KEY_LENGTH][self::KEY_MAX];
+		}
+		return (double) $retval;
 	}
 
 	/**
@@ -408,7 +413,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	{
 		if ((double) $lengthMax !== $this->getLengthMax()) {
 			$this->changes[] = self::KEY_MAX_LENGTH;
-			$this->data[self::KEY_MAX_LENGTH] = (double) $lengthMax;
+			$this->data[self::KEY_LENGTH][self::KEY_MAX] = (double) $lengthMax;
 		}
 		return $this;
 	}
@@ -420,7 +425,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getWidthMin()
 	{
-		return (double) $this->data['width_min'];
+		$retval = 0;
+		if (isset($this->data[self::KEY_WIDTH][self::KEY_MIN])) {
+			$retval = $this->data[self::KEY_WIDTH][self::KEY_MIN];
+		}
+		return (double) $retval;
 	}
 
 	/**
@@ -433,7 +442,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	{
 		if ((double) $widthMin !== $this->getWidthMin()) {
 			$this->changes[] = self::KEY_MIN_WIDTH;
-			$this->data[self::KEY_MIN_WIDTH] = (double) $widthMin;
+			$this->data[self::KEY_WIDTH][self::KEY_MIN] = (double) $widthMin;
 		}
 		return $this;
 	}
@@ -445,7 +454,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getWidthMax()
 	{
-		return (double) $this->data['width_max'];
+		$retval = 0;
+		if (isset($this->data[self::KEY_WIDTH][self::KEY_MAX])) {
+			$retval = $this->data[self::KEY_WIDTH][self::KEY_MAX];
+		}
+		return (double) $retval;
 	}
 
 	/**
@@ -458,7 +471,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	{
 		if ((double) $widthMax !== $this->getWidthMax()) {
 			$this->changes[] = self::KEY_MAX_WIDTH;
-			$this->data[self::KEY_MAX_WIDTH] = (double) $widthMax;
+			$this->data[self::KEY_WIDTH][self::KEY_MAX] = (double) $widthMax;
 		}
 		return $this;
 	}
@@ -470,7 +483,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getWeightMin()
 	{
-		return (double) $this->data['weight_min'];
+		$retval = 0;
+		if (isset($this->data[self::KEY_WEIGHT][self::KEY_MIN])) {
+			$retval = $this->data[self::KEY_WEIGHT][self::KEY_MIN];
+		}
+		return (double) $retval;
 	}
 
 	/**
@@ -483,7 +500,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	{
 		if ((double) $weightMin !== $this->getWeightMin()) {
 			$this->changes[] = self::KEY_MIN_WEIGHT;
-			$this->data[self::KEY_MIN_WEIGHT] = (double) $weightMin;
+			$this->data[self::KEY_WEIGHT][self::KEY_MIN] = (double) $weightMin;
 		}
 		return $this;
 	}
@@ -495,7 +512,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getWeightMax()
 	{
-		return (double) $this->data['weight_max'];
+		$retval = 0;
+		if (isset($this->data[self::KEY_WEIGHT][self::KEY_MAX])) {
+			$retval = $this->data[self::KEY_WEIGHT][self::KEY_MAX];
+		}
+		return (double) $retval;
 	}
 
 	/**
@@ -508,7 +529,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	{
 		if ((double) $weightMax !== $this->getWeightMax()) {
 			$this->changes[] = self::KEY_MAX_WEIGHT;
-			$this->data[self::KEY_MAX_WEIGHT] = (double) $weightMax;
+			$this->data[self::KEY_WEIGHT][self::KEY_MAX] = (double) $weightMax;
 		}
 		return $this;
 	}
@@ -546,23 +567,5 @@ abstract class AbstractDelivery extends AbstractEntity
 	public function isChanged()
 	{
 		return !empty($this->changes);
-	}
-
-	/**
-	 * Transform dimension for entity
-	 *
-	 * @param array $data
-	 * @param string $dimension
-	 * @return array
-	 */
-	protected function transformDimensions(array &$data, $dimension)
-	{
-		if (isset($data[$dimension]) && is_array($data[$dimension])) {
-			foreach ($data[$dimension] as $dimensionKey => $dimensionValue) {
-				$data[sprintf(self::KEY_DIMENSION_PATTERN, $dimension, $dimensionKey)] = $dimensionValue;
-			}
-			unset($data[$dimension]);
-		}
-		return $data;
 	}
 }

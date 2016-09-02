@@ -6,6 +6,8 @@ use MPAPI\Services\Client;
 use MPAPI\Services\AbstractService;
 use MPAPI\Lib\DataCollector;
 use MPAPI\Entity\PartnerDelivery;
+use MPAPI\Entity\AbstractDelivery;
+use function GuzzleHttp\json_decode;
 
 /**
  *
@@ -63,11 +65,24 @@ class PartnerEndpoints extends AbstractEndpoints
 	/**
 	 * Get all the endpoints that use POST
 	 *
+	 * @param AbstractDelivery $deliveryEntity
 	 * @return PartnerPostEndpoints
 	 */
-	public function post()
+	public function post(AbstractDelivery $deliveryEntity = null)
 	{
-		return new PartnerPostEndpoints($this->client, $this->service);
+		$entitiesQueue = $this->service->getEntities();
+
+		if (!empty($entitiesQueue)) {
+			foreach ($entitiesQueue as $entity) {
+				if ($entity instanceof AbstractDelivery) {
+					$this->postDelivery($entity);
+				}
+			}
+		} else {
+			$this->postDelivery($deliveryEntity);
+		}
+
+		return empty($this->getErrors());
 	}
 
 	/**
@@ -117,5 +132,19 @@ class PartnerEndpoints extends AbstractEndpoints
 			$retval = new PartnerDelivery($responseData['data']);
 		}
 		return $retval;
+	}
+
+	/**
+	 * Post delivery to API
+	 *
+	 * @param AbstractDelivery $data
+	 * @return boolean
+	 */
+	private function postDelivery(AbstractDelivery $entity)
+	{
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), Client::METHOD_POST, $entity->getData());
+		$this->addError($entity->getCode(), json_decode($response->getBody(), true));
+
+		return true;
 	}
 }
