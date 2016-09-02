@@ -1,8 +1,8 @@
 <?php
 namespace MPAPI\Endpoints\Deliveries;
 
-use MPAPI\Endpoints\AbstractEndpoints;
 use MPAPI\Services\Client;
+use MPAPI\Lib\DataCollector;
 use MPAPI\Entity\PartnerDelivery;
 
 /**
@@ -10,7 +10,7 @@ use MPAPI\Entity\PartnerDelivery;
  * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  * @author Jan Blaha <jan.blaha@mall.cz>
  */
-class PartnerGetEndpoints extends AbstractEndpoints
+class PartnerGetEndpoints extends AbstractDeliveriesEndpoints
 {
 
 	/**
@@ -32,17 +32,13 @@ class PartnerGetEndpoints extends AbstractEndpoints
 	 */
 	public function deliveries()
 	{
-		$retval = [];
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), Client::METHOD_GET);
-		$responseData = json_decode($response->getBody(), true);
-		if (isset($responseData['data']['ids'])) {
-			$retval = $responseData['data']['ids'];
-		}
-		return $retval;
+		$dataCollector = new DataCollector($this->client, $response);
+		return $dataCollector->getData();
 	}
 
 	/**
-	 * Get detail for specific delivery code
+	 * Get partner delivery detail
 	 *
 	 * @param string $code
 	 * @return PartnerDelivery|null
@@ -52,8 +48,7 @@ class PartnerGetEndpoints extends AbstractEndpoints
 		$retval = null;
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, '/', $code), Client::METHOD_GET);
 		$responseData = json_decode($response->getBody(), true);
-
-		if (isset($responseData['data'])) {
+		if (isset($responseData['data']) && !empty($responseData['data'])) {
 			$retval = new PartnerDelivery($responseData['data']);
 		}
 		return $retval;

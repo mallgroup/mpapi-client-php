@@ -8,20 +8,22 @@
 
 namespace MPAPI\Endpoints\Deliveries;
 
-use MPAPI\Endpoints\AbstractEndpoints;
-use MPAPI\Services\Client;
+use GuzzleHttp\Psr7\Response;
 
 /**
  *
  * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  */
-class PartnerPostEndpoints extends AbstractEndpoints
+class PartnerPostEndpoints extends AbstractDeliveriesEndpoints
 {
 	/**
+	 * Create partner delivery
 	 *
+	 * @param array $data
+	 * @return Response
 	 */
-	public function create()
+	public function create(array $data)
 	{
-
+		return $this->client->sendRequest(self::ENDPOINT_PATH, 'POST', $data);
 	}
 }
