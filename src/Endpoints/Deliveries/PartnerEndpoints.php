@@ -7,7 +7,7 @@ use MPAPI\Services\AbstractService;
 use MPAPI\Lib\DataCollector;
 use MPAPI\Entity\PartnerDelivery;
 use MPAPI\Entity\AbstractDelivery;
-use function GuzzleHttp\json_decode;
+use GuzzleHttp\json_decode;
 
 /**
  *

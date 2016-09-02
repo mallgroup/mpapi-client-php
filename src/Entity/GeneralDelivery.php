@@ -6,7 +6,7 @@ namespace MPAPI\Entity;
  *
  * @author Martin Drlik <martin.drlik@mall.cz>
  */
-class GengeralDelivery extends AbstractDelivery
+class GeneralDelivery extends AbstractDelivery
 {
 
 	/**
