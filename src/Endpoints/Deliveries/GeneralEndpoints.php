@@ -5,22 +5,27 @@ use MPAPI\Endpoints\AbstractEndpoints;
 use MPAPI\Services\Client;
 use MPAPI\Services\AbstractService;
 use MPAPI\Lib\DataCollector;
-use MPAPI\Entity\PartnerDelivery;
+use MPAPI\Entity\GeneralDelivery;
 use MPAPI\Entity\AbstractDelivery;
 
 /**
  *
- * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  * @author Jan Blaha <jan.blaha@mall.cz>
  */
-class PartnerEndpoints extends AbstractEndpoints
+class GeneralEndpoints extends AbstractEndpoints
 {
 
 	/**
 	 *
 	 * @var string
 	 */
-	const ENDPOINT_PATH = 'deliveries/partner%s%s';
+	const ENDPOINT_PATH = 'deliveries/general%s%s';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const ENDPOINT_PATH_ACTIVE = 'active';
 
 	/**
 	 *
@@ -61,7 +66,7 @@ class PartnerEndpoints extends AbstractEndpoints
 	 * Get all the endpoints that use GET
 	 *
 	 * @param string $code null
-	 * @return null|array|PartnerDelivery
+	 * @return null|array|GeneralDelivery
 	 */
 	public function get($code = null)
 	{
@@ -72,29 +77,6 @@ class PartnerEndpoints extends AbstractEndpoints
 			$retval = $this->getDetail($code);
 		}
 		return $retval;
-	}
-
-	/**
-	 * Get all the endpoints that use POST
-	 *
-	 * @param AbstractDelivery $deliveryEntity
-	 * @return boolean
-	 */
-	public function post(AbstractDelivery $deliveryEntity = null)
-	{
-		$entitiesQueue = $this->service->getEntities();
-
-		if (!empty($entitiesQueue)) {
-			foreach ($entitiesQueue as $entity) {
-				if ($entity instanceof AbstractDelivery) {
-					$this->postDelivery($entity);
-				}
-			}
-		} else {
-			$this->postDelivery($deliveryEntity);
-		}
-
-		return empty($this->getErrors());
 	}
 
 	/**
@@ -116,7 +98,6 @@ class PartnerEndpoints extends AbstractEndpoints
 		} else {
 			$this->putDelivery($deliveryEntity);
 		}
-
 		return empty($this->getErrors());
 	}
 
@@ -144,7 +125,6 @@ class PartnerEndpoints extends AbstractEndpoints
 			// delete all partner deliveries
 			$this->deleteDelivery();
 		}
-
 		return empty($this->getErrors());
 	}
 
@@ -172,24 +152,9 @@ class PartnerEndpoints extends AbstractEndpoints
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, $code), Client::METHOD_GET);
 		$responseData = json_decode($response->getBody(), true);
 		if (isset($responseData['data']) && !empty($responseData['data'])) {
-			$retval = new PartnerDelivery($responseData['data']);
+			$retval = new GeneralDelivery($responseData['data']);
 		}
 		return $retval;
-	}
-
-	/**
-	 * Post delivery to API
-	 *
-	 * @param AbstractDelivery $data
-	 * @return boolean
-	 */
-	private function postDelivery(AbstractDelivery $entity)
-	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), Client::METHOD_POST, $entity->getData());
-		if ($response->getStatusCode() !== 201 || $response->getStatusCode() !== 200) {
-			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
-		}
-		return true;
 	}
 
 	/**
@@ -200,7 +165,12 @@ class PartnerEndpoints extends AbstractEndpoints
 	 */
 	private function putDelivery(AbstractDelivery $entity)
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, $entity->getCode()), Client::METHOD_PUT, $entity->getData());
+		$requestData = [
+			'ids' => [
+				$entity->getCode()
+			]
+		];
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, self::ENDPOINT_PATH_ACTIVE), Client::METHOD_PUT, $requestData);
 		if ($response->getStatusCode() !== 200) {
 			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
 		}
@@ -215,13 +185,13 @@ class PartnerEndpoints extends AbstractEndpoints
 	 */
 	private function deleteDelivery(AbstractDelivery $entity = null)
 	{
-		$code = null;
-		$delimiter = null;
+		$endpoint = self::ENDPOINT_PATH_ACTIVE;
+		$requestData = [];
 		if ($entity instanceof AbstractDelivery) {
-			$code = $entity->getCode();
-			$delimiter = self::PATH_DELIMITER;
+			$endpoint .= self::PATH_DELIMITER;
+			$endpoint .= $entity->getCode();
 		}
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $delimiter, $code), Client::METHOD_DELETE);
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, $endpoint), Client::METHOD_DELETE, $requestData);
 		if ($response->getStatusCode() !== 200) {
 			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
 		}
