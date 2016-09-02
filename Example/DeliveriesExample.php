@@ -49,7 +49,7 @@ $response = $deliveries->partner()->post($partnerDelivery);
 var_dump($response);
 
 // Update partner delivery
-$response = $deliveries->partner()->put('newDelivery2', $partnerDelivery);
+$response = $deliveries->partner()->put($partnerDelivery);
 var_dump($response);
 
 // Delete all partner deliveries
