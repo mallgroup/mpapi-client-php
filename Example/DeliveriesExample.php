@@ -57,5 +57,5 @@ $response = $deliveries->partner()->delete();
 var_dump($response);
 
 // Delete partner delivery
-$response = $deliveries->partner()->delete('newDelivery2');
+$response = $deliveries->partner()->delete($partnerDelivery);
 var_dump($response);
