@@ -62,6 +62,26 @@ class Client
 	const LOGGER_RESPONSE = 'Response for %s %s';
 
 	/**
+	 * @var string
+	 */
+	const METHOD_POST = 'POST';
+
+	/**
+	 * @var string
+	 */
+	const METHOD_PUT = 'PUT';
+
+	/**
+	 * @var string
+	 */
+	const METHOD_DELETE = 'DELETE';
+
+	/**
+	 * @var string
+	 */
+	const METHOD_GET = 'GET';
+
+	/**
 	 *
 	 * @var string
 	 */

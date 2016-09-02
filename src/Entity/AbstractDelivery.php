@@ -6,7 +6,7 @@ namespace MPAPI\Entity;
  *
  * @author Martin Drlik <martin.drlik@mall.cz>
  */
-abstract class AbstractDelivery
+abstract class AbstractDelivery extends AbstractEntity
 {
 
 	/**
@@ -137,6 +137,12 @@ abstract class AbstractDelivery
 
 	/**
 	 *
+	 * @var string
+	 */
+	const KEY_DIMENSION_PATTERN = '%s_%s';
+
+	/**
+	 *
 	 * @var array
 	 */
 	protected $data = [];
@@ -147,21 +153,16 @@ abstract class AbstractDelivery
 	 */
 	protected $changes = [];
 
-	/**
-	 *
-	 * @param array $data
-	 */
 	public function __construct(array $data)
 	{
-		$this->data = $data;
+		// transform data dimensions
+		$this->transformDimensions($data, self::KEY_WEIGHT);
+		$this->transformDimensions($data, self::KEY_HEIGHT);
+		$this->transformDimensions($data, self::KEY_LENGTH);
+		$this->transformDimensions($data, self::KEY_WIDTH);
+		// set to parent
+		parent::__construct($data);
 	}
-
-	/**
-	 * Get output data
-	 *
-	 * @return array
-	 */
-	abstract public function getData();
 
 	/**
 	 * Get delivery title
@@ -545,5 +546,23 @@ abstract class AbstractDelivery
 	public function isChanged()
 	{
 		return !empty($this->changes);
+	}
+
+	/**
+	 * Transform dimension for entity
+	 *
+	 * @param array $data
+	 * @param string $dimension
+	 * @return array
+	 */
+	protected function transformDimensions(array &$data, $dimension)
+	{
+		if (isset($data[$dimension]) && is_array($data[$dimension])) {
+			foreach ($data[$dimension] as $dimensionKey => $dimensionValue) {
+				$data[sprintf(self::KEY_DIMENSION_PATTERN, $dimension, $dimensionKey)] = $dimensionValue;
+			}
+			unset($data[$dimension]);
+		}
+		return $data;
 	}
 }

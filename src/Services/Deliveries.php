@@ -1,7 +1,8 @@
 <?php
 namespace MPAPI\Services;
 
-use MPAPI\Entity\AbstractDeliveriesEntity;
+use MPAPI\Endpoints\Deliveries\PartnerEndpoints;
+use MPAPI\Entity\AbstractEntity;
 
 /**
  * Deliveries
@@ -24,7 +25,7 @@ class Deliveries extends AbstractService
 
 	/**
 	 *
-	 * @var AbstractDeliveriesEntity[]
+	 * @var AbstractDelivery[]
 	 */
 	private $entities = [];
 
@@ -40,32 +41,41 @@ class Deliveries extends AbstractService
 
 	/**
 	 *
-	 * @return \MPAPI\Endpoints\Deliveries\PartnerEndpoints
+	 * @return MPAPI\Endpoints\Deliveries\PartnerEndpoints
 	 */
 	public function partner()
 	{
-		return new PartnerEndpoints($this->client);
+		return new PartnerEndpoints($this->client, $this);
 	}
 
 	/**
 	 *
-	 * @return \MPAPI\Endpoints\Deliveries\GeneralEndpoints
+	 * @return MPAPI\Endpoints\Deliveries\GeneralEndpoints
 	 */
 	public function general()
 	{
-		return new GeneralEndpoints($this->client);
+		return [];
 	}
 
 	/**
 	 * Add delivery method
 	 *
 	 * @see \MPAPI\Services\AbstractService::add()
-	 * @param AbstractDeliveriesEntity $entity
+	 * @param AbstractEntity $entity
 	 * @return Deliveries
 	 */
-	public function add(AbstractDeliveriesEntity $entity)
+	public function add(AbstractEntity $entity)
 	{
 		$this->entities[] = $entity;
 		return $this;
+	}
+
+	/**
+	 *
+	 * @return \MPAPI\Services\AbstractDelivery[]
+	 */
+	public function getEntities()
+	{
+		return $this->entities;
 	}
 }

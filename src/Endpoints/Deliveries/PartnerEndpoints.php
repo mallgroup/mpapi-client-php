@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mhrdlicka
- * Date: 1.9.2016
- * Time: 14:20
- */
-
 namespace MPAPI\Endpoints\Deliveries;
 
 use MPAPI\Endpoints\AbstractEndpoints;
 use MPAPI\Services\Client;
+use MPAPI\Services\AbstractService;
 
 /**
  *
@@ -24,8 +18,25 @@ class PartnerEndpoints extends AbstractEndpoints
 	protected $client;
 
 	/**
+	 *
+	 * @var AbstractService
+	 */
+	protected $service;
+
+	/**
+	 *
+	 * @param Client $client
+	 * @param AbstractService $service
+	 */
+	public function __construct(Client $client, AbstractService $service)
+	{
+		parent::__construct($client);
+		$this->service = $service;
+	}
+
+	/**
 	 * Get all the endpoints that use GET
-	 * 
+	 *
 	 * @return PartnerGetEndpoints
 	 */
 	public function get()
@@ -35,31 +46,31 @@ class PartnerEndpoints extends AbstractEndpoints
 
 	/**
 	 * Get all the endpoints that use POST
-	 * 
+	 *
 	 * @return PartnerPostEndpoints
 	 */
 	public function post()
 	{
-		return new PartnerPostEndpoints($this->client);
+		return new PartnerPostEndpoints($this->client, $this->service);
 	}
 
 	/**
 	 * Get all the endpoints that use PUT
-	 * 
+	 *
 	 * @return PartnerPutEndpoints
 	 */
 	public function put()
 	{
-		return new PartnerPutEndpoints($this->client);
+		return new PartnerPutEndpoints($this->client, $this->service);
 	}
 
 	/**
 	 * Get all the endpoints that use DELETE
-	 * 
+	 *
 	 * @return PartnerDeleteEndpoints
 	 */
 	public function delete()
 	{
-		return new PartnerDeleteEndpoints($this->client);
+		return new PartnerDeleteEndpoints($this->client, $this->service);
 	}
 }
