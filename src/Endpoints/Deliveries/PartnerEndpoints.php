@@ -4,6 +4,8 @@ namespace MPAPI\Endpoints\Deliveries;
 use MPAPI\Endpoints\AbstractEndpoints;
 use MPAPI\Services\Client;
 use MPAPI\Services\AbstractService;
+use MPAPI\Lib\DataCollector;
+use MPAPI\Entity\PartnerDelivery;
 
 /**
  *
@@ -11,6 +13,13 @@ use MPAPI\Services\AbstractService;
  */
 class PartnerEndpoints extends AbstractEndpoints
 {
+
+	/**
+	 *
+	 * @var string
+	 */
+	const ENDPOINT_PATH = 'deliveries/partner%s%s';
+
 	/**
 	 *
 	 * @var Client
@@ -37,11 +46,18 @@ class PartnerEndpoints extends AbstractEndpoints
 	/**
 	 * Get all the endpoints that use GET
 	 *
-	 * @return PartnerGetEndpoints
+	 * @param $code null
+	 * @return null|array|PartnerDelivery
 	 */
-	public function get()
+	public function get($code = null)
 	{
-		return new PartnerGetEndpoints($this->client);
+		$retval = null;
+		if (empty($code)) {
+			$retval = $this->getList();
+		} else {
+			$retval = $this->getDetail($code);
+		}
+		return $retval;
 	}
 
 	/**
@@ -72,5 +88,34 @@ class PartnerEndpoints extends AbstractEndpoints
 	public function delete()
 	{
 		return new PartnerDeleteEndpoints($this->client, $this->service);
+	}
+
+	/**
+	 * Get list of partner deliveries
+	 *
+	 * @return array
+	 */
+	private function getList()
+	{
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), Client::METHOD_GET);
+		$dataCollector = new DataCollector($this->client, $response);
+		return $dataCollector->getData();
+	}
+
+	/**
+	 * Get detail of partner delivery
+	 *
+	 * @param string $code
+	 * @return null|\MPAPI\Endpoints\Deliveries\PartnerDelivery
+	 */
+	private function getDetail($code)
+	{
+		$retval = null;
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, '/', $code), Client::METHOD_GET);
+		$responseData = json_decode($response->getBody(), true);
+		if (isset($responseData['data']) && !empty($responseData['data'])) {
+			$retval = new PartnerDelivery($responseData['data']);
+		}
+		return $retval;
 	}
 }

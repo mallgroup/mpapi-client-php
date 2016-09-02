@@ -17,9 +17,9 @@ $mpapiClient->setLogger($logger);
 $deliveries = new MPAPI\Services\Deliveries($mpapiClient);
 
 // get partner deliveries
-$deliveryList = $deliveries->partner()->get()->deliveries();
+$deliveryList = $deliveries->partner()->get();
 
 var_dump($deliveryList);
 
-$deliveryDetail = $deliveries->partner()->get()->detail('new_delivery1');
+$deliveryDetail = $deliveries->partner()->get('new_delivery1');
 var_dump($deliveryDetail);
