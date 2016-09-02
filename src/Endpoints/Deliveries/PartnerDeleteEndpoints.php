@@ -18,7 +18,7 @@ class PartnerDeleteEndpoints extends AbstractDeliveriesEndpoints
 {
 	/**
 	 * Delete partner deliveries
-	 * 
+	 *
 	 * @return Response
 	 */
 	public function deliveries()

@@ -10,7 +10,6 @@ namespace MPAPI\Endpoints\Deliveries;
 
 use MPAPI\Endpoints\AbstractEndpoints;
 
-
 /**
  *
  * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
