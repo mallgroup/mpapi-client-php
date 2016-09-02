@@ -52,4 +52,14 @@ abstract class AbstractEndpoints
 		$this->errors[$identifier] = $errorData;
 		return $this;
 	}
+
+	/**
+	 * Get last client response
+	 *
+	 * @return \GuzzleHttp\Psr7\Response
+	 */
+	public function getLastResponse()
+	{
+		return $this->client->getLastResponse();
+	}
 }

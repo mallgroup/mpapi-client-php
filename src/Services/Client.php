@@ -133,6 +133,12 @@ class Client
 
 	/**
 	 *
+	 * @var Response
+	 */
+	private $lastResponse;
+
+	/**
+	 *
 	 * @param string $clientId
 	 */
 	public function __construct($clientId)
@@ -205,7 +211,6 @@ class Client
 	 */
 	public function sendRequest($path, $method, array $body = [], array $args = [])
 	{
-		$response = null;
 		$query = [];
 		try {
 			// log request parameters
@@ -223,7 +228,7 @@ class Client
 			$query = array_merge($query, $args);
 
 			/* @var Response $response */
-			$response = $this->getHttpClient()->request($method, $path, [
+			$this->lastResponse = $this->getHttpClient()->request($method, $path, [
 				'headers' => [
 					'X-Application-Name' => self::APPLICATION_NAME
 				],
@@ -231,7 +236,8 @@ class Client
 				'query' => $query
 			]);
 
-			$responseData = json_decode((string)$response->getBody(), true);
+
+			$responseData = json_decode((string)$this->lastResponse->getBody(), true);
 			if (empty($responseData)) {
 				$responseData = [];
 			}
@@ -248,7 +254,7 @@ class Client
 			]);
 			throw $e;
 		}
-		return $response;
+		return $this->lastResponse;
 	}
 
 	/**
@@ -266,6 +272,16 @@ class Client
 			$this->lastRequest['body'],
 			$args
 		);
+	}
+
+	/**
+	 * Get last response
+	 *
+	 * @return \GuzzleHttp\Psr7\Response
+	 */
+	public function getLastResponse()
+	{
+		return $this->lastResponse;
 	}
 
 	/**

@@ -107,7 +107,7 @@ class PartnerDelivery extends AbstractDelivery
 	 */
 	public function setAsPickupPoint($status)
 	{
-		if ((boolean) $status !== $this->isPickupPoint()) {
+		if ((boolean) $status !== $this->isPickupPoint() || !isset($this->data[self::KEY_IS_PICKUP_POINT])) {
 			$this->changes[] = self::KEY_IS_PICKUP_POINT;
 			$this->data[self::KEY_IS_PICKUP_POINT] = (boolean) $status;
 		}

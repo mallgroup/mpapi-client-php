@@ -221,7 +221,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setPrice($price)
 	{
-		if ((double) $price !== $this->getPrice()) {
+		if ((double) $price !== $this->getPrice() || !isset($this->data[self::KEY_PRICE])) {
 			$this->changes[] = self::KEY_PRICE;
 			$this->data[self::KEY_PRICE] = (double) $price;
 		}
@@ -246,7 +246,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setCodPrice($price)
 	{
-		if ((double) $price !== $this->getCodPrice()) {
+		if ((double) $price !== $this->getCodPrice() || !isset($this->data[self::KEY_COD_PRICE])) {
 			$this->changes[] = self::KEY_COD_PRICE;
 			$this->data[self::KEY_COD_PRICE] = (double) $price;
 		}
@@ -271,7 +271,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setFreeLimit($limit)
 	{
-		if ((double) $limit !== $this->getFreeLimit()) {
+		if ((double) $limit !== $this->getFreeLimit() || !isset($this->data[self::KEY_FREE_LIMIT])) {
 			$this->changes[] = self::KEY_FREE_LIMIT;
 			$this->data[self::KEY_FREE_LIMIT] = (double) $limit;
 		}
@@ -296,7 +296,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setDeliveryDelay($delay)
 	{
-		if ((int) $delay !== $this->getDeliveryDelay()) {
+		if ((int) $delay !== $this->getDeliveryDelay() || !isset($this->data[self::KEY_DELIVERY_DELAY])) {
 			$this->changes[] = self::KEY_DELIVERY_DELAY;
 			$this->data[self::KEY_DELIVERY_DELAY] = (int) $delay;
 		}
@@ -354,7 +354,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setHeightMax($heightMax)
 	{
-		if ((double) $heightMax !== $this->getHeightMax()) {
+		if ((double) $heightMax !== $this->getHeightMax() || !isset($this->data[self::KEY_HEIGHT][self::KEY_MAX])) {
 			$this->changes[] = self::KEY_MAX_HEIGHT;
 			$this->data[self::KEY_HEIGHT][self::KEY_MAX] = (double) $heightMax;
 		}
@@ -383,7 +383,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setLengthMin($lengthMin)
 	{
-		if ((double) $lengthMin !== $this->getLengthMin()) {
+		if ((double) $lengthMin !== $this->getLengthMin() || !isset($this->data[self::KEY_HEIGHT][self::KEY_MIN])) {
 			$this->changes[] = self::KEY_MIN_LENGTH;
 			$this->data[self::KEY_LENGTH][self::KEY_MIN] = (double) $lengthMin;
 		}
@@ -412,7 +412,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setLengthMax($lengthMax)
 	{
-		if ((double) $lengthMax !== $this->getLengthMax()) {
+		if ((double) $lengthMax !== $this->getLengthMax() || !isset($this->data[self::KEY_LENGTH][self::KEY_MAX])) {
 			$this->changes[] = self::KEY_MAX_LENGTH;
 			$this->data[self::KEY_LENGTH][self::KEY_MAX] = (double) $lengthMax;
 		}
@@ -441,7 +441,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setWidthMin($widthMin)
 	{
-		if ((double) $widthMin !== $this->getWidthMin()) {
+		if ((double) $widthMin !== $this->getWidthMin() || !isset($this->data[self::KEY_WIDTH][self::KEY_MIN])) {
 			$this->changes[] = self::KEY_MIN_WIDTH;
 			$this->data[self::KEY_WIDTH][self::KEY_MIN] = (double) $widthMin;
 		}
@@ -470,7 +470,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setWidthMax($widthMax)
 	{
-		if ((double) $widthMax !== $this->getWidthMax()) {
+		if ((double) $widthMax !== $this->getWidthMax() || !isset($this->data[self::KEY_WIDTH][self::KEY_MAX])) {
 			$this->changes[] = self::KEY_MAX_WIDTH;
 			$this->data[self::KEY_WIDTH][self::KEY_MAX] = (double) $widthMax;
 		}
@@ -499,7 +499,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setWeightMin($weightMin)
 	{
-		if ((double) $weightMin !== $this->getWeightMin()) {
+		if ((double) $weightMin !== $this->getWeightMin() || !isset($this->data[self::KEY_WEIGHT][self::KEY_MIN])) {
 			$this->changes[] = self::KEY_MIN_WEIGHT;
 			$this->data[self::KEY_WEIGHT][self::KEY_MIN] = (double) $weightMin;
 		}
@@ -528,7 +528,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setWeightMax($weightMax)
 	{
-		if ((double) $weightMax !== $this->getWeightMax()) {
+		if ((double) $weightMax !== $this->getWeightMax() || !isset($this->data[self::KEY_WEIGHT][self::KEY_MAX])) {
 			$this->changes[] = self::KEY_MAX_WEIGHT;
 			$this->data[self::KEY_WEIGHT][self::KEY_MAX] = (double) $weightMax;
 		}
@@ -553,7 +553,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setPriority($priority)
 	{
-		if ((int) $priority !== $this->getPriority()) {
+		if ((int) $priority !== $this->getPriority() || !isset($this->data[self::KEY_PRIORITY])) {
 			$this->changes[] = self::KEY_PRIORITY;
 			$this->data[self::KEY_PRIORITY] = (int) $priority;
 		}

@@ -27,7 +27,7 @@ class Deliveries extends AbstractService
 	 *
 	 * @var AbstractDelivery[]
 	 */
-	private $entities = [];
+	protected $entities = [];
 
 	/**
 	 * Deliveries constructor.
