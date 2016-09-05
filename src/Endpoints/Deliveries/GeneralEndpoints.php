@@ -80,6 +80,16 @@ class GeneralEndpoints extends AbstractEndpoints
 	}
 
 	/**
+	 * Get active general deliveries.
+	 *
+	 * @return null|array|GeneralDelivery
+	 */
+	public function getActive()
+	{
+		return $this->getActiveList();
+	}
+
+	/**
 	 * Get all the endpoints that use PUT
 	 *
 	 * @param AbstractDelivery $deliveryEntity
@@ -136,6 +146,18 @@ class GeneralEndpoints extends AbstractEndpoints
 	private function getList()
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), Client::METHOD_GET);
+		$dataCollector = new DataCollector($this->client, $response);
+		return $dataCollector->getData();
+	}
+
+	/**
+	 * Get active list of partner deliveries
+	 *
+	 * @return array
+	 */
+	private function getActiveList()
+	{
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, self::ENDPOINT_PATH_ACTIVE), Client::METHOD_GET);
 		$dataCollector = new DataCollector($this->client, $response);
 		return $dataCollector->getData();
 	}

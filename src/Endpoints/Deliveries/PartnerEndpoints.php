@@ -186,7 +186,7 @@ class PartnerEndpoints extends AbstractEndpoints
 	private function postDelivery(AbstractDelivery $entity)
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), Client::METHOD_POST, $entity->getData());
-		if ($response->getStatusCode() !== 201 || $response->getStatusCode() !== 200) {
+		if ($response->getStatusCode() !== 201 && $response->getStatusCode() !== 200) {
 			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
 		}
 		return true;
