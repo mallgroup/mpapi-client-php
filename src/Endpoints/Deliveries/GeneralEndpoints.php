@@ -86,7 +86,9 @@ class GeneralEndpoints extends AbstractEndpoints
 	 */
 	public function getActive()
 	{
-		return $this->getActiveList();
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, self::ENDPOINT_PATH_ACTIVE), Client::METHOD_GET);
+		$dataCollector = new DataCollector($this->client, $response);
+		return $dataCollector->getData();
 	}
 
 	/**
@@ -146,18 +148,6 @@ class GeneralEndpoints extends AbstractEndpoints
 	private function getList()
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), Client::METHOD_GET);
-		$dataCollector = new DataCollector($this->client, $response);
-		return $dataCollector->getData();
-	}
-
-	/**
-	 * Get active list of partner deliveries
-	 *
-	 * @return array
-	 */
-	private function getActiveList()
-	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, self::ENDPOINT_PATH_ACTIVE), Client::METHOD_GET);
 		$dataCollector = new DataCollector($this->client, $response);
 		return $dataCollector->getData();
 	}
