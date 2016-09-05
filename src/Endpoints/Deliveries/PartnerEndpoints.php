@@ -180,7 +180,7 @@ class PartnerEndpoints extends AbstractEndpoints
 	/**
 	 * Post delivery to API
 	 *
-	 * @param AbstractDelivery $data
+	 * @param AbstractDelivery $entity
 	 * @return boolean
 	 */
 	private function postDelivery(AbstractDelivery $entity)
