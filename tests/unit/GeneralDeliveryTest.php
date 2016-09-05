@@ -52,9 +52,8 @@ class GeneralDeliveryTest extends \Codeception\Test\Unit
 
 	public function testSetTrackingUrl()
 	{
-		$newTrackingUrl = 'http://www.ppl.cz/main2.aspx?cls=Package&amp;idSearch=%TRACKING_NUMBER%';
-		$this->object->setTrackingUrl($newTrackingUrl);
-		$this->assertEquals($newTrackingUrl, $this->object->getTrackingUrl());
+		$this->object->setTrackingUrl(Fixtures::get('newTrackingUrl'));
+		$this->assertEquals(Fixtures::get('newTrackingUrl'), $this->object->getTrackingUrl());
 	}
 
 	public function testIsActive()

@@ -269,3 +269,4 @@ $generalDelivery = [
 	'active' => true
 ];
 Codeception\Util\Fixtures::add('generalDelivery', $generalDelivery);
+Codeception\Util\Fixtures::add('newTrackingUrl', $generalDelivery);
