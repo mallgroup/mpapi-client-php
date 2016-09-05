@@ -13,12 +13,6 @@ class GeneralDelivery extends AbstractDelivery
 	 *
 	 * @var string
 	 */
-	const KEY_TRANSPORT_ID = 'transport_id';
-
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_DESCRIPTION = 'description';
 
 	/**
@@ -125,31 +119,6 @@ class GeneralDelivery extends AbstractDelivery
 		if ((boolean) $active !== $this->isActive()) {
 			$this->changes[] = self::KEY_ACTIVE;
 			$this->data[self::KEY_ACTIVE] = (boolean) $active;
-		}
-		return $this;
-	}
-
-	/**
-	 * Get transport service ID
-	 *
-	 * @return integer
-	 */
-	public function getTransportId()
-	{
-		return $this->data[self::KEY_TRANSPORT_ID];
-	}
-
-	/**
-	 * Set transport service ID
-	 *
-	 * @param integer $transportId
-	 * @return GeneralDelivery
-	 */
-	public function setTransportId($transportId)
-	{
-		if ($transportId !== $this->getTransportId()) {
-			$this->changes[] = self::KEY_TRANSPORT_ID;
-			$this->data[self::KEY_TRANSPORT_ID] = $transportId;
 		}
 		return $this;
 	}
