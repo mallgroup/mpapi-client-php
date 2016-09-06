@@ -20,7 +20,7 @@ $deliveries = new MPAPI\Services\Deliveries($mpapiClient);
 
 // Get partner deliveries
 $response = $deliveries->partner()->get();
-//var_dump($response);
+var_dump($response);
 
 $partnerDelivery = new PartnerDelivery();
 $partnerDelivery->setCode('newDelivery1');
