@@ -1,7 +1,7 @@
 ## PARTNER DELIVERIES
 
 
-#### All predefined deliveries:
+#### All partner deliveries:
 **GET**  
 This method loads all partner deliveries.
 ```

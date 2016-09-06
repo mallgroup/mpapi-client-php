@@ -72,7 +72,7 @@ The response contains an array of delivery data:
 
 #### Get list of general deliveries selected by partner
 **GET**  
-This method shown list of selected general deliveries by partner.
+This method shows list of selected general deliveries by partner.
 ```
 <?php 
 ...
@@ -95,7 +95,7 @@ The response contains an array of delivery data:
 
 #### Activate general deliveries
 **PUT**  
-This method shown how to activate specific general deliveries
+This method shows how to activate specific general deliveries
 ```
 <?php 
 ...
@@ -127,7 +127,7 @@ Service returns only true or false depends on result of API request.
 
 #### Deactivate general delivery
 **DELETE**  
-This method shown how to deactivate specific general deliveries
+This method shows how to deactivate specific general deliveries
 ```
 <?php 
 ...
@@ -149,7 +149,7 @@ Service returns only true or false depends on result of API request.
 
 #### Deactivate all general deliveries
 **delete**  
-This method shown how to deactivate all general deliveries activated by partner
+This method shows how to deactivate all general deliveries activated by partner
 ```
 <?php 
 ...
