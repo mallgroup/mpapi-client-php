@@ -11,14 +11,14 @@ use MPAPI\Services\Deliveries;
 ... 
 
 $deliveries = new Deliveries($mpapiClient); 
-// Get all predefined deliveries
+// get all predefined deliveries
 $response = $deliveries->general()->get(); 
 ```
 
 The response contains an array of all predefined deliveries:
 ```
 [
-  "ids": [
+  "ids" => [
     "DHL",
     "CP",
     ...
@@ -36,37 +36,37 @@ use MPAPI\Services\Deliveries;
 ... 
 
 $deliveries = new Deliveries($mpapiClient); 
-// Get all predefined deliveries
+// get all predefined deliveries
 $response = $deliveries->general()->get('DHL'); 
 ```
 
 The response contains an array of delivery data:
 ```
 [
-  "code": "DHL",
-  "title": "DHL",
-  "description": "test přeprava",
-  "tracking_url": "https://www.dhl.cz",
-  "price": 99,
-  "cod_price": 50,
-  "free_limit": 0,
-  "delivery_delay": 2,
-  "height": {
-    "min": 0,
-    "max": 30
-  },
-  "length": {
-    "min": 0,
-    "max": 90
-  },
-  "width": {
-    "min": 0,
-    "max": 100
-  },
-  "weight": {
-    "min": 0,
-    "max": 30
-  }
+  "code" => "DHL",
+  "title" => "DHL",
+  "description" => "test přeprava",
+  "tracking_url" => "https://www.dhl.cz",
+  "price" => 99,
+  "cod_price" => 50,
+  "free_limit" => 0,
+  "delivery_delay" => 2,
+  "height" => [
+    "min" => 0,
+    "max" => 30
+  ],
+  "length" => [
+    "min" => 0,
+    "max" => 90
+  ],
+  "width" => [
+    "min" => 0,
+    "max" => 100
+  ],
+  "weight" => [
+    "min" => 0,
+    "max" => 30
+  ]
 ]
 ```
 
@@ -80,14 +80,14 @@ use MPAPI\Services\Deliveries;
 ... 
 
 $deliveries = new Deliveries($mpapiClient); 
-// Get list of all activated general deliveries by partner
+// get list of all activated general deliveries by partner
 $response = $deliveries->general()->getActive(); 
 ```
 
 The response contains an array of delivery data:
 ```
 [
-  "ids": [
+  "ids" => [
     "DHL"
   ]
 ]
