@@ -28,7 +28,7 @@ The response contains an array of all predefined deliveries:
 
 #### Detail of one predefined delivery:
 **GET**  
-This method shown detail data about selected predefined delivery method.
+This method shows detail data about selected predefined delivery method.
 ```
 <?php 
 ...
@@ -125,7 +125,7 @@ $deliveries->general()->put($generalDelivery2);
 Service returns only true or false depends on result of API request.
 
 
-#### Deactivate general deliveries
+#### Deactivate general delivery
 **DELETE**  
 This method shown how to deactivate specific general deliveries
 ```
