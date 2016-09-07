@@ -209,3 +209,64 @@ Codeception\Util\Fixtures::add('updatedDeliverySetupPrice', 200);
 Codeception\Util\Fixtures::add('updatedDeliverySetupCodPrice', 10);
 Codeception\Util\Fixtures::add('updatedDeliverySetupFreeLimit', 0);
 Codeception\Util\Fixtures::add('updatedDeliverySetupDeliveryDelay', 8);
+
+$partnerDelivery = [
+	'code' => 'new_delivery',
+	'title' => 'NEW delivery',
+	'price' => 100,
+	'cod_price' => 0,
+	'free_limit' => 1000,
+	'delivery_delay' => 3,
+	'is_pickup_point' => true,
+	'height' => [
+		'min' => 0,
+		'max' => 120
+	],
+	'length' => [
+		'min' => 0,
+		'max' => 100
+	],
+	'width' => [
+		'min' => 0,
+		'max' => 100
+	],
+	'weight' => [
+		'min' => 0,
+		'max' => 30
+	],
+	'priority' => 1,
+	'partner_id' => 3000,
+	'delivery_method_id' => 1
+
+];
+Codeception\Util\Fixtures::add('partnerDelivery', $partnerDelivery);
+
+$generalDelivery = [
+	'code' => 'CP',
+	'title' => 'Česká pošta',
+	'description' => 'Česká pošta',
+	'tracking_url' => 'http=>//www.ceskaposta.cz/cz/nastroje/sledovani-zasilky.php?barcode=%TRACKING_NUMBER%&amp;send=submit&amp;go=ok',
+	'price' => 99,
+	'cod_price' => 40,
+	'free_limit' => 1000,
+	'delivery_delay' => 2,
+	'height' => [
+		'min' => 10,
+		'max' => 15
+	],
+	'length' => [
+		'min' => 20,
+		'max' => 25
+	],
+	'width' => [
+		'min' => 30,
+		'max' => 35
+	],
+	'weight' => [
+		'min' => 0,
+		'max' => 1
+	],
+	'active' => true
+];
+Codeception\Util\Fixtures::add('generalDelivery', $generalDelivery);
+Codeception\Util\Fixtures::add('newTrackingUrl', $generalDelivery);

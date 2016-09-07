@@ -21,44 +21,44 @@ $response = $deliveryMethods->get();
 The response contains an array of available delivery methods:
 ```
 [
-    "delivery_methods": [
+    "delivery_methods" => [
       [
-        "id": "testDelivery1",
-        "title": "Test delivery - 1",
-        "price": 90,
-        "cod_price": 21,
-        "free_limit": 1000,
-        "delivery_delay": 3,
-        "is_pickup_point": false
+        "id" => "testDelivery1",
+        "title" => "Test delivery - 1",
+        "price" => 90,
+        "cod_price" => 21,
+        "free_limit" => 1000,
+        "delivery_delay" => 3,
+        "is_pickup_point" => false
       ],
       [
-        "id": "testDelivery2",
-        "title": "Test delivery - 2",
-        "price": 120,
-        "cod_price": 21,
-        "free_limit": 0,
-        "delivery_delay": 0,
-        "is_pickup_point": false
+        "id" => "testDelivery2",
+        "title" => "Test delivery - 2",
+        "price" => 120,
+        "cod_price" => 21,
+        "free_limit" => 0,
+        "delivery_delay" => 0,
+        "is_pickup_point" => false
       ]
       ...
     ],
-    "delivery_setups": [
+    "delivery_setups" => [
       [
-        "id": "testDelivery1",
-        "pricing": [
+        "id" => "testDelivery1",
+        "pricing" => [
          [
-            "id": "testDelivery1",
-            "price": 90,
-            "cod_price": 21,
-            "free_limit": 1000,
-            "delivery_delay": 3
+            "id" => "testDelivery1",
+            "price" => 90,
+            "cod_price" => 21,
+            "free_limit" => 1000,
+            "delivery_delay" => 3
          ],
          [
-            "id": "testDelivery2",
-            "price": 110,
-            "cod_price": 10,
-            "free_limit": 1200,
-            "delivery_delay": 4
+            "id" => "testDelivery2",
+            "price" => 110,
+            "cod_price" => 10,
+            "free_limit" => 1200,
+            "delivery_delay" => 4
          ]
          ...
         ]

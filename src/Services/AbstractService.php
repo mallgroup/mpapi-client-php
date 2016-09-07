@@ -12,6 +12,11 @@ use MPAPI\Entity\AbstractEntity;
  */
 abstract class AbstractService implements ServiceInterface
 {
+	/**
+	 *
+	 * @var AbstractEntity[]
+	 */
+	protected $entities;
 
 	/**
 	 *
@@ -81,5 +86,14 @@ abstract class AbstractService implements ServiceInterface
 	public function add(AbstractEntity $entity)
 	{
 		user_error(sprintf(self::MSG_NOT_IMPLEMENTED, __METHOD__), E_USER_WARNING);
+	}
+
+	/**
+	 *
+	 * @return \MPAPI\Services\AbstractEntity[]
+	 */
+	public function getEntities()
+	{
+		return $this->entities;
 	}
 }
