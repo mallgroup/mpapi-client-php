@@ -60,7 +60,7 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	 * Get all the endpoints that use GET
 	 *
 	 * @param string $code null
-	 * @return null|array|PartnerDelivery
+	 * @return null|array|PartnerPickupPoint
 	 */
 	public function get($code = null)
 	{
@@ -163,7 +163,7 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	 * Get detail of pickup point
 	 *
 	 * @param string $code
-	 * @return null|\MPAPI\Entity\PickupPoint
+	 * @return null|\MPAPI\Entity\PartnerPickupPoint
 	 */
 	private function getDetail($code)
 	{
