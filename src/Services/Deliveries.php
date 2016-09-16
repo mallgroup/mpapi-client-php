@@ -5,6 +5,7 @@ use MPAPI\Endpoints\Deliveries\PartnerEndpoints;
 use MPAPI\Entity\AbstractEntity;
 use MPAPI\Endpoints\Deliveries\GeneralEndpoints;
 use MPAPI\Endpoints\Deliveries\PickupPointsEndpoints;
+use MPAPI\Endpoints\Deliveries\PartnerPickupPointsEndpoints;
 
 /**
  * Deliveries
@@ -61,11 +62,11 @@ class Deliveries extends AbstractService
 
 	/**
 	 *
-	 * @return MPAPI\Endpoints\Deliveries\PickupPointsEndpoints
+	 * @return MPAPI\Endpoints\Deliveries\PartnerPickupPointsEndpoints
 	 */
-	public function pickupPoints()
+	public function partnerPickupPoints()
 	{
-		return new PickupPoints($this->client, $this);
+		return new PartnerPickupPointsEndpoints($this->client, $this);
 	}
 
 	/**
