@@ -4,8 +4,8 @@ namespace MPAPI\Services;
 use MPAPI\Endpoints\Deliveries\PartnerEndpoints;
 use MPAPI\Entity\AbstractEntity;
 use MPAPI\Endpoints\Deliveries\GeneralEndpoints;
-use MPAPI\Endpoints\Deliveries\PickupPointsEndpoints;
 use MPAPI\Endpoints\Deliveries\PartnerPickupPointsEndpoints;
+use MPAPI\Endpoints\Deliveries\DistrictsEndpoints;
 
 /**
  * Deliveries
@@ -67,6 +67,15 @@ class Deliveries extends AbstractService
 	public function partnerPickupPoints()
 	{
 		return new PartnerPickupPointsEndpoints($this->client, $this);
+	}
+
+	/**
+	 *
+	 * @return MPAPI\Endpoints\Deliveries\DistrictsEndpoints
+	 */
+	public function districts()
+	{
+		return new DistrictsEndopoints($this->client, $this);
 	}
 
 	/**
