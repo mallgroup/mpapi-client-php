@@ -149,6 +149,15 @@ class PartnerEndpoints extends AbstractEndpoints
 	}
 
 	/**
+	 *
+	 * @return MPAPI\Endpoints\Deliveries\PartnerPickupPointsEndpoints
+	 */
+	public function pickupPoints($deliveryCode)
+	{
+		return new PartnerPickupPointsEndpoints($this->client, $this, $deliveryCode);
+	}
+
+	/**
 	 * Get list of partner deliveries
 	 *
 	 * @return array

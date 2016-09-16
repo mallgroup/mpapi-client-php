@@ -62,15 +62,6 @@ class Deliveries extends AbstractService
 
 	/**
 	 *
-	 * @return MPAPI\Endpoints\Deliveries\PartnerPickupPointsEndpoints
-	 */
-	public function partnerPickupPoints()
-	{
-		return new PartnerPickupPointsEndpoints($this->client, $this);
-	}
-
-	/**
-	 *
 	 * @return MPAPI\Endpoints\Deliveries\DistrictsEndpoints
 	 */
 	public function districts()

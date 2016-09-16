@@ -1,26 +1,24 @@
 <?php
 namespace MPAPI\Entity;
 
-use MPAPI\Entity\AbstractDelivery;
-
 /**
  * Pickup point entity
  *
  * @author Jan Blaha <jan.blaha@mall.cz>
  */
-class PickupPoint extends AbstractDelivery
+class PickupPoint
 {
 	/**
 	 *
 	 * @var string
 	 */
-	const KEY_DELIVERY_METHOD_ID = 'delivery_method_id';
+	const KEY_DELIVERY_CODE = 'delivery_code';
 
 	/**
 	 *
 	 * @var string
 	 */
-	const KEY_PARTNER_ID = 'partner_id';
+	const KEY_CODE = 'code';
 
 	/**
 	 *
@@ -90,6 +88,18 @@ class PickupPoint extends AbstractDelivery
 
 	/**
 	 *
+	 * @var string
+	 */
+	const KEY_TITLE = 'title';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_PRIORITY = 'priority';
+
+	/**
+	 *
 	 * @var array
 	 */
 	protected $data;
@@ -103,7 +113,6 @@ class PickupPoint extends AbstractDelivery
 		$retval = [
 			self::KEY_CODE => $this->getCode(),
 			self::KEY_TITLE => $this->getTitle(),
-			self::KEY_DELIVERY_METHOD_ID => $this->getDeliveryMethodId(),
 			self::KEY_PARTNER_ID => $this->getPartnerId(),
 			self::KEY_STREET => $this->getStreet(),
 			self::KEY_CITY => $this->getCity(),
@@ -128,56 +137,24 @@ class PickupPoint extends AbstractDelivery
 	}
 
 	/**
-	 * Get pickup point id
+	 * Get delivery code
 	 *
 	 * @return integer
 	 */
-	public function getPickupPointId()
+	public function getDeliveryCode()
 	{
-		return (int) $this->data[self::KEY_PICKUP_POINT_ID];
+		return (int) $this->data[self::KEY_DELIVERY_CODE];
 	}
 
 	/**
-	 * Get delivery method id
-	 *
-	 * @return integer
-	 */
-	public function getDeliveryMethodId()
-	{
-		return (int) $this->data[self::KEY_DELIVERY_METHOD_ID];
-	}
-
-	/**
-	 * Set delivery method id
+	 * Set delivery code
 	 *
 	 * @param integer $deliveryMethodId
 	 * @return PickupPoint
 	 */
-	public function setDeliveryMethodId($deliveryMethodId)
+	public function setDeliveryCode($code)
 	{
-		$this->data[self::KEY_DELIVERY_METHOD_ID] = (int) $deliveryMethodId;
-		return $this;
-	}
-
-	/**
-	 * Get partner id
-	 *
-	 * @return integer
-	 */
-	public function getPartnerId()
-	{
-		return (int) $this->data[self::KEY_PARTNER_ID];
-	}
-
-	/**
-	 * Set partner id
-	 *
-	 * @param integer $partnerId
-	 * @return PickupPoint
-	 */
-	public function setPartnerId($partnerId)
-	{
-		$this->data[self::KEY_PARTNER_ID] = (int) $partnerId;
+		$this->data[self::KEY_DELIVERY_CODE] = $code;
 		return $this;
 	}
 
@@ -272,7 +249,7 @@ class PickupPoint extends AbstractDelivery
 	/**
 	 * Get longitude
 	 *
-	 * @return string
+	 * @return double
 	 */
 	public function getLongitude()
 	{
@@ -298,16 +275,16 @@ class PickupPoint extends AbstractDelivery
 	 */
 	public function getOpeningHours()
 	{
-		return json_decode($this->data[self::KEY_OPENING_HOURS], true);
+		return $this->data[self::KEY_OPENING_HOURS];
 	}
 
 	/**
 	 * Set opening hours
 	 *
-	 * @param string $openingHours
+	 * @param array $openingHours
 	 * @return PickupPoint
 	 */
-	public function setOpeningHours($openingHours)
+	public function setOpeningHours(array $openingHours)
 	{
 		$this->data[self::KEY_OPENING_HOURS] = $openingHours;
 		return $this;
@@ -316,20 +293,20 @@ class PickupPoint extends AbstractDelivery
 	/**
 	 * Get payment methods
 	 *
-	 * @return string
+	 * @return array
 	 */
 	public function getPaymentMethods()
 	{
-		return json_decode($this->data[self::KEY_PAYMENT_METHODS], true);
+		return $this->data[self::KEY_PAYMENT_METHODS];
 	}
 
 	/**
 	 * Set payment methods
 	 *
-	 * @param string $paymentMethods
+	 * @param array $paymentMethods
 	 * @return PickupPoint
 	 */
-	public function setPaymentMethods($paymentMethods)
+	public function setPaymentMethods(array $paymentMethods)
 	{
 		$this->data[self::KEY_PAYMENT_METHODS] = $paymentMethods;
 		return $this;
@@ -358,7 +335,7 @@ class PickupPoint extends AbstractDelivery
 	}
 
 	/**
-	 * Get longitude
+	 * Get email
 	 *
 	 * @return string
 	 */
@@ -424,66 +401,66 @@ class PickupPoint extends AbstractDelivery
 	}
 
 	/**
-	 * Get height
+	 * Get height (in cm)
 	 *
 	 * @return double
 	 */
-	public function getHeight()
+	public function getHeightLimit()
 	{
 		return (double) $this->data[self::KEY_HEIGHT];
 	}
 
 	/**
-	 * Set max height
+	 * Set max height (in cm)
 	 *
 	 * @param double $height
 	 * @return PickupPoint
 	 */
-	public function setHeight($height)
+	public function setHeightLimit($height)
 	{
 		$this->data[self::KEY_HEIGHT] = (double) $height;
 		return $this;
 	}
 
 	/**
-	 * Get length
+	 * Get length (in cm)
 	 *
 	 * @return double
 	 */
-	public function getLength()
+	public function getLengthLimit()
 	{
 		return (double) $this->data[self::KEY_LENGTH];
 	}
 
 	/**
-	 * Set max length
+	 * Set max length (in cm)
 	 *
 	 * @param double $length
 	 * @return PickupPoint
 	 */
-	public function setLength($length)
+	public function setLengthLimit($length)
 	{
 		$this->data[self::KEY_LENGTH] = (double) $length;
 		return $this;
 	}
 
 	/**
-	 * Get width
+	 * Get width (in cm)
 	 *
 	 * @return double
 	 */
-	public function getWidth()
+	public function getWidthLimit()
 	{
 		return (double) $this->data[self::KEY_WIDTH];
 	}
 
 	/**
-	 * Set max width
+	 * Set max width (in cm)
 	 *
 	 * @param double $width
 	 * @return PickupPoint
 	 */
-	public function setWidth($width)
+	public function setWidthLimit($width)
 	{
 		$this->data[self::KEY_WIDTH] = (double) $width;
 		return $this;
@@ -494,7 +471,7 @@ class PickupPoint extends AbstractDelivery
 	 *
 	 * @return double
 	 */
-	public function getWeight()
+	public function getWeightLimit()
 	{
 		return (double) $this->data[self::KEY_WEIGHT];
 	}
@@ -505,9 +482,75 @@ class PickupPoint extends AbstractDelivery
 	 * @param double $weight
 	 * @return PickupPoint
 	 */
-	public function setWeight($weight)
+	public function setWeightLimit($weight)
 	{
 		$this->data[self::KEY_WEIGHT] = (double) $weight;
+		return $this;
+	}
+
+	/**
+	 * Get pickup point priority
+	 *
+	 * @return integer
+	 */
+	public function getPriority()
+	{
+		return (int)$this->data[self::KEY_PRIORITY];
+	}
+
+	/**
+	 * Set pickup point priority
+	 *
+	 * @param integer $priority
+	 * @return PickupPoint
+	 */
+	public function setPriority($priority)
+	{
+		$this->data[self::KEY_PRIORITY] = $priority;
+		return $this;
+	}
+
+	/**
+	 * Get pickup point title
+	 *
+	 * @return string
+	 */
+	public function getTitle()
+	{
+		return (int)$this->data[self::KEY_TITLE];
+	}
+
+	/**
+	 * Set pickup point title
+	 *
+	 * @param string $title
+	 * @return PickupPoint
+	 */
+	public function setTitle($title)
+	{
+		$this->data[self::KEY_TITLE] = $title;
+		return $this;
+	}
+
+	/**
+	 * Get pickup point code
+	 *
+	 * @return string
+	 */
+	public function getCode()
+	{
+		return (int)$this->data[self::KEY_CODE];
+	}
+
+	/**
+	 * Set pickup point title
+	 *
+	 * @param string $code
+	 * @return PickupPoint
+	 */
+	public function setCode($code)
+	{
+		$this->data[self::KEY_CODE] = $code;
 		return $this;
 	}
 }

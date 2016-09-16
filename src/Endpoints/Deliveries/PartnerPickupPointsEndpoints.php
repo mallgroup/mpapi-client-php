@@ -7,6 +7,7 @@ use MPAPI\Services\AbstractService;
 use MPAPI\Lib\DataCollector;
 use MPAPI\Entity\AbstractDelivery;
 use MPAPI\Entity\PartnerPickupPoint;
+use MPAPI\Entity\PickupPoint;
 
 /**
  *
@@ -19,7 +20,7 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	 *
 	 * @var string
 	 */
-	const ENDPOINT_PATH = 'deliveries/partner/pickup-points%s%s';
+	const ENDPOINT_PATH = 'deliveries/partner/%s/pickup-points%s%s';
 
 	/**
 	 *
@@ -47,13 +48,20 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 
 	/**
 	 *
+	 * @var string
+	 */
+	private $deliveryCode;
+
+	/**
+	 *
 	 * @param Client $client
 	 * @param AbstractService $service
 	 */
-	public function __construct(Client $client, AbstractService $service)
+	public function __construct(Client $client, AbstractService $service, $deliveryCode)
 	{
 		parent::__construct($client);
 		$this->service = $service;
+		$this->deliveryCode = $deliveryCode;
 	}
 
 	/**
@@ -74,18 +82,18 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	}
 
 	/**
-	 * Get all the endpoints that use POST
+	 * Create pickup points
 	 *
 	 * @param AbstractDelivery $pickupPointEntity
 	 * @return boolean
 	 */
-	public function post(AbstractDelivery $pickupPointEntity = null)
+	public function create(PickupPoint $pickupPointEntity = null)
 	{
 		$entitiesQueue = $this->service->getEntities();
 
 		if (!empty($entitiesQueue)) {
 			foreach ($entitiesQueue as $entity) {
-				if ($entity instanceof AbstractDelivery) {
+				if ($entity instanceof PickupPoint) {
 					$this->postPickupPoint($entity);
 				}
 			}
@@ -97,18 +105,18 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	}
 
 	/**
-	 * Get all the endpoints that use PUT
+	 * Update pickup points
 	 *
 	 * @param AbstractDelivery $pickupPointEntity
 	 * @return boolean
 	 */
-	public function put(AbstractDelivery $pickupPointEntity = null)
+	public function update(PickupPoint $pickupPointEntity = null)
 	{
 		$entitiesQueue = $this->service->getEntities();
 
 		if (!empty($entitiesQueue)) {
 			foreach ($entitiesQueue as $entity) {
-				if ($entity instanceof AbstractDelivery) {
+				if ($entity instanceof PickupPoint) {
 					$this->putPickupPoint($entity);
 				}
 			}
@@ -125,18 +133,18 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	 * @param AbstractDelivery $pickupPointEntity
 	 * @return boolean
 	 */
-	public function delete(AbstractDelivery $pickupPointEntity = null)
+	public function delete(PickupPoint $pickupPointEntity = null)
 	{
 		$entitiesQueue = $this->service->getEntities();
 
 		if (!empty($entitiesQueue)) {
 			// batch delete of pickup points
 			foreach ($entitiesQueue as $entity) {
-				if ($entity instanceof AbstractDelivery) {
+				if ($entity instanceof PickupPoint) {
 					$this->deletePickupPoint($entity);
 				}
 			}
-		} elseif ($pickupPointEntity instanceof AbstractDelivery) {
+		} elseif ($pickupPointEntity instanceof PickupPoint) {
 			// delete one pickup point
 			$this->deletePickupPoint($pickupPointEntity);
 		} else {
@@ -154,7 +162,7 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	 */
 	private function getList()
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), Client::METHOD_GET);
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $this->deliveryCode, null, null), Client::METHOD_GET);
 		$dataCollector = new DataCollector($this->client, $response);
 		return $dataCollector->getData();
 	}
@@ -168,7 +176,7 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	private function getDetail($code)
 	{
 		$retval = null;
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, $code), Client::METHOD_GET);
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $this->deliveryCode, self::PATH_DELIMITER, $code), Client::METHOD_GET);
 		$responseData = json_decode($response->getBody(), true);
 		if (isset($responseData['data']) && !empty($responseData['data'])) {
 			$retval = new PickupPoint($responseData['data']);
@@ -182,9 +190,9 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	 * @param AbstractDelivery $entity
 	 * @return boolean
 	 */
-	private function postPickupPoint(AbstractDelivery $entity)
+	private function postPickupPoint(PickupPoint $entity)
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), Client::METHOD_POST, $entity->getData());
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $this->deliveryCode, null, null), Client::METHOD_POST, $entity->getData());
 		if ($response->getStatusCode() !== 201 && $response->getStatusCode() !== 200) {
 			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
 		}
@@ -197,9 +205,9 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	 * @param AbstractDelivery $data
 	 * @return boolean
 	 */
-	private function putPickupPoint(AbstractDelivery $entity)
+	private function putPickupPoint(PickupPoint $entity)
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, $entity->getCode()), Client::METHOD_PUT, $entity->getData());
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $this->deliveryCode, self::PATH_DELIMITER, $entity->getCode()), Client::METHOD_PUT, $entity->getData());
 		if ($response->getStatusCode() !== 200) {
 			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
 		}
@@ -212,15 +220,15 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	 * @param AbstractDelivery $data
 	 * @return boolean
 	 */
-	private function deletePickupPoint(AbstractDelivery $entity = null)
+	private function deletePickupPoint(PickupPoint $entity = null)
 	{
 		$code = null;
 		$delimiter = null;
-		if ($entity instanceof AbstractDelivery) {
+		if ($entity instanceof PickupPoint) {
 			$code = $entity->getCode();
 			$delimiter = self::PATH_DELIMITER;
 		}
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $delimiter, $code), Client::METHOD_DELETE);
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $this->deliveryCode, $delimiter, $code), Client::METHOD_DELETE);
 		if ($response->getStatusCode() !== 200) {
 			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
 		}
