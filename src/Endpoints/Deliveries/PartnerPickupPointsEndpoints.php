@@ -5,22 +5,21 @@ use MPAPI\Endpoints\AbstractEndpoints;
 use MPAPI\Services\Client;
 use MPAPI\Services\AbstractService;
 use MPAPI\Lib\DataCollector;
-use MPAPI\Entity\PartnerDelivery;
 use MPAPI\Entity\AbstractDelivery;
+use MPAPI\Entity\PartnerPickupPoint;
 
 /**
  *
- * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
- * @author Jan Blaha <jan.blaha@mall.cz>
+ * @author Martin Drlik <martin.drlik@mall.cz>
  */
-class PartnerEndpoints extends AbstractEndpoints
+class PartnerPickupPointsEndpoints extends AbstractEndpoints
 {
 
 	/**
 	 *
 	 * @var string
 	 */
-	const ENDPOINT_PATH = 'deliveries/partner%s%s';
+	const ENDPOINT_PATH = 'deliveries/partner/pickup-points%s%s';
 
 	/**
 	 *
@@ -77,21 +76,21 @@ class PartnerEndpoints extends AbstractEndpoints
 	/**
 	 * Get all the endpoints that use POST
 	 *
-	 * @param AbstractDelivery $deliveryEntity
+	 * @param AbstractDelivery $pickupPointEntity
 	 * @return boolean
 	 */
-	public function post(AbstractDelivery $deliveryEntity = null)
+	public function post(AbstractDelivery $pickupPointEntity = null)
 	{
 		$entitiesQueue = $this->service->getEntities();
 
 		if (!empty($entitiesQueue)) {
 			foreach ($entitiesQueue as $entity) {
 				if ($entity instanceof AbstractDelivery) {
-					$this->postDelivery($entity);
+					$this->postPickupPoint($entity);
 				}
 			}
 		} else {
-			$this->postDelivery($deliveryEntity);
+			$this->postPickupPoint($pickupPointEntity);
 		}
 
 		return empty($this->getErrors());
@@ -100,21 +99,21 @@ class PartnerEndpoints extends AbstractEndpoints
 	/**
 	 * Get all the endpoints that use PUT
 	 *
-	 * @param AbstractDelivery $deliveryEntity
+	 * @param AbstractDelivery $pickupPointEntity
 	 * @return boolean
 	 */
-	public function put(AbstractDelivery $deliveryEntity = null)
+	public function put(AbstractDelivery $pickupPointEntity = null)
 	{
 		$entitiesQueue = $this->service->getEntities();
 
 		if (!empty($entitiesQueue)) {
 			foreach ($entitiesQueue as $entity) {
 				if ($entity instanceof AbstractDelivery) {
-					$this->putDelivery($entity);
+					$this->putPickupPoint($entity);
 				}
 			}
 		} else {
-			$this->putDelivery($deliveryEntity);
+			$this->putPickupPoint($pickupPointEntity);
 		}
 
 		return empty($this->getErrors());
@@ -123,33 +122,33 @@ class PartnerEndpoints extends AbstractEndpoints
 	/**
 	 * Get all the endpoints that use DELETE
 	 *
-	 * @param AbstractDelivery $deliveryEntity
+	 * @param AbstractDelivery $pickupPointEntity
 	 * @return boolean
 	 */
-	public function delete(AbstractDelivery $deliveryEntity = null)
+	public function delete(AbstractDelivery $pickupPointEntity = null)
 	{
 		$entitiesQueue = $this->service->getEntities();
 
 		if (!empty($entitiesQueue)) {
-			// batch delete of delivery
+			// batch delete of pickup points
 			foreach ($entitiesQueue as $entity) {
 				if ($entity instanceof AbstractDelivery) {
-					$this->deleteDelivery($entity);
+					$this->deletePickupPoint($entity);
 				}
 			}
-		} elseif ($deliveryEntity instanceof  AbstractDelivery) {
-			// delete one delivery
-			$this->deleteDelivery($deliveryEntity);
+		} elseif ($pickupPointEntity instanceof AbstractDelivery) {
+			// delete one pickup point
+			$this->deletePickupPoint($pickupPointEntity);
 		} else {
-			// delete all partner deliveries
-			$this->deleteDelivery();
+			// delete all pickup points
+			$this->deletePickupPoint();
 		}
 
 		return empty($this->getErrors());
 	}
 
 	/**
-	 * Get list of partner deliveries
+	 * Get list of pickup points
 	 *
 	 * @return array
 	 */
@@ -161,10 +160,10 @@ class PartnerEndpoints extends AbstractEndpoints
 	}
 
 	/**
-	 * Get detail of partner delivery
+	 * Get detail of pickup point
 	 *
 	 * @param string $code
-	 * @return null|\MPAPI\Entity\PartnerDelivery
+	 * @return null|\MPAPI\Entity\PickupPoint
 	 */
 	private function getDetail($code)
 	{
@@ -172,18 +171,18 @@ class PartnerEndpoints extends AbstractEndpoints
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, $code), Client::METHOD_GET);
 		$responseData = json_decode($response->getBody(), true);
 		if (isset($responseData['data']) && !empty($responseData['data'])) {
-			$retval = new PartnerDelivery($responseData['data']);
+			$retval = new PickupPoint($responseData['data']);
 		}
 		return $retval;
 	}
 
 	/**
-	 * Post delivery to API
+	 * Post pickup point to API
 	 *
 	 * @param AbstractDelivery $entity
 	 * @return boolean
 	 */
-	private function postDelivery(AbstractDelivery $entity)
+	private function postPickupPoint(AbstractDelivery $entity)
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, null, null), Client::METHOD_POST, $entity->getData());
 		if ($response->getStatusCode() !== 201 && $response->getStatusCode() !== 200) {
@@ -193,12 +192,12 @@ class PartnerEndpoints extends AbstractEndpoints
 	}
 
 	/**
-	 * Put delivery to API
+	 * Put pickup point to API
 	 *
 	 * @param AbstractDelivery $data
 	 * @return boolean
 	 */
-	private function putDelivery(AbstractDelivery $entity)
+	private function putPickupPoint(AbstractDelivery $entity)
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, $entity->getCode()), Client::METHOD_PUT, $entity->getData());
 		if ($response->getStatusCode() !== 200) {
@@ -208,12 +207,12 @@ class PartnerEndpoints extends AbstractEndpoints
 	}
 
 	/**
-	 * Delete delivery by API
+	 * Delete pickup point by API
 	 *
 	 * @param AbstractDelivery $data
 	 * @return boolean
 	 */
-	private function deleteDelivery(AbstractDelivery $entity = null)
+	private function deletePickupPoint(AbstractDelivery $entity = null)
 	{
 		$code = null;
 		$delimiter = null;
