@@ -11,7 +11,7 @@ use MPAPI\Entity\District;
  *
  * @author Martin Drlik <martin.drlik@mall.cz>
  */
-class PartnerPickupPointsEndpoints extends AbstractEndpoints
+class DistrictsEndpoints extends AbstractEndpoints
 {
 
 	/**
