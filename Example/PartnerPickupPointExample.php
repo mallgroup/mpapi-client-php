@@ -9,7 +9,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
 $deliveries = new Deliveries($mpapiClient);
 // delivery code of already defined delivery method
-$deliveryCode = 'dpd';
+$deliveryCode = 'new_delivery2';
 
 /**
  * ##################################
@@ -29,6 +29,7 @@ $pickupPointEntity->setTitle('First pickup point')
 	->setHeightLimit(200)
 	->setWidthLimit(150)
 	->setLengthLimit(300)
+	->setWeightLimit(100)
 	->setLatitude(32.2154)
 	->setLongitude(12.1154)
 	->setNote('Pickup point is ready for handicapped')
@@ -55,10 +56,9 @@ var_dump($createdPickupPoint);
  * Get list of partner's pickup points
  * ###################################
  */
-$pickupPoints = $deliveries->partnerPickupPoints()->get();
+$pickupPoints = $deliveries->partner()->pickupPoints($deliveryCode)->get();
 // print all pickup point ids
-var_dump($pickupPoints);exit;
-
+var_dump($pickupPoints);
 
 /**
  * ###################################
@@ -69,7 +69,6 @@ var_dump($pickupPoints);exit;
 $pickupPoint = $deliveries->partner()->pickupPoints($deliveryCode)->get(current($pickupPoints));
 // print pickup point title
 var_dump($pickupPoint->getTitle());
-
 
 /**
  * ##################################

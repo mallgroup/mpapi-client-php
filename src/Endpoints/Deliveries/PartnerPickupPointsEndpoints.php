@@ -5,8 +5,6 @@ use MPAPI\Endpoints\AbstractEndpoints;
 use MPAPI\Services\Client;
 use MPAPI\Services\AbstractService;
 use MPAPI\Lib\DataCollector;
-use MPAPI\Entity\AbstractDelivery;
-use MPAPI\Entity\PartnerPickupPoint;
 use MPAPI\Entity\PickupPoint;
 
 /**
@@ -84,7 +82,7 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	/**
 	 * Create pickup points
 	 *
-	 * @param AbstractDelivery $pickupPointEntity
+	 * @param PickupPoint $pickupPointEntity
 	 * @return boolean
 	 */
 	public function create(PickupPoint $pickupPointEntity = null)
@@ -107,7 +105,7 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	/**
 	 * Update pickup points
 	 *
-	 * @param AbstractDelivery $pickupPointEntity
+	 * @param PickupPoint $pickupPointEntity
 	 * @return boolean
 	 */
 	public function update(PickupPoint $pickupPointEntity = null)
@@ -130,7 +128,7 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	/**
 	 * Get all the endpoints that use DELETE
 	 *
-	 * @param AbstractDelivery $pickupPointEntity
+	 * @param PickupPoint $pickupPointEntity
 	 * @return boolean
 	 */
 	public function delete(PickupPoint $pickupPointEntity = null)
@@ -164,7 +162,8 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $this->deliveryCode, null, null), Client::METHOD_GET);
 		$dataCollector = new DataCollector($this->client, $response);
-		return $dataCollector->getData();
+		$data = $dataCollector->getData();
+		return $data['ids'];
 	}
 
 	/**
@@ -187,7 +186,7 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	/**
 	 * Post pickup point to API
 	 *
-	 * @param AbstractDelivery $entity
+	 * @param PickupPoint $entity
 	 * @return boolean
 	 */
 	private function postPickupPoint(PickupPoint $entity)
@@ -202,7 +201,7 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	/**
 	 * Put pickup point to API
 	 *
-	 * @param AbstractDelivery $data
+	 * @param PickupPoint $data
 	 * @return boolean
 	 */
 	private function putPickupPoint(PickupPoint $entity)
@@ -217,7 +216,7 @@ class PartnerPickupPointsEndpoints extends AbstractEndpoints
 	/**
 	 * Delete pickup point by API
 	 *
-	 * @param AbstractDelivery $data
+	 * @param PickupPoint $data
 	 * @return boolean
 	 */
 	private function deletePickupPoint(PickupPoint $entity = null)

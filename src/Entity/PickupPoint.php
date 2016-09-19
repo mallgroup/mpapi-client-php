@@ -12,6 +12,12 @@ class PickupPoint
 	 *
 	 * @var string
 	 */
+	const KEY_PARTNER_ID = 'partner_id';
+
+	/**
+	 *
+	 * @var string
+	 */
 	const KEY_DELIVERY_CODE = 'delivery_code';
 
 	/**
@@ -100,9 +106,48 @@ class PickupPoint
 
 	/**
 	 *
+	 * @var string
+	 */
+	const KEY_DIMENSIONS = 'dimensions';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_HEIGHT = 'height';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_LENGTH = 'length';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_WIDTH = 'width';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_WEIGHT = 'weight';
+
+	/**
+	 *
 	 * @var array
 	 */
-	protected $data;
+	private $data;
+
+	/**
+	 *
+	 * @param array $data
+	 */
+	public function __construct(array $data = [])
+	{
+		$this->data = $data;
+	}
 
 	/**
 	 *
@@ -113,7 +158,6 @@ class PickupPoint
 		$retval = [
 			self::KEY_CODE => $this->getCode(),
 			self::KEY_TITLE => $this->getTitle(),
-			self::KEY_PARTNER_ID => $this->getPartnerId(),
 			self::KEY_STREET => $this->getStreet(),
 			self::KEY_CITY => $this->getCity(),
 			self::KEY_ZIP => $this->getZip(),
@@ -126,10 +170,10 @@ class PickupPoint
 			self::KEY_DISTRICT_CODE => $this->getDistrictCode(),
 			self::KEY_NOTE => $this->getNote(),
 			self::KEY_DIMENSIONS => [
-				self::KEY_HEIGHT => $this->getHeight(),
-				self::KEY_LENGTH => $this->getLength(),
-				self::KEY_WIDTH => $this->getWidth(),
-				self::KEY_WEIGHT => $this->getWeight()
+				self::KEY_HEIGHT => $this->getHeightLimit(),
+				self::KEY_LENGTH => $this->getLengthLimit(),
+				self::KEY_WIDTH => $this->getWidthLimit(),
+				self::KEY_WEIGHT => $this->getWeightLimit()
 			],
 			self::KEY_PRIORITY => $this->getPriority()
 		];
@@ -517,7 +561,7 @@ class PickupPoint
 	 */
 	public function getTitle()
 	{
-		return (int)$this->data[self::KEY_TITLE];
+		return $this->data[self::KEY_TITLE];
 	}
 
 	/**
@@ -539,7 +583,7 @@ class PickupPoint
 	 */
 	public function getCode()
 	{
-		return (int)$this->data[self::KEY_CODE];
+		return $this->data[self::KEY_CODE];
 	}
 
 	/**

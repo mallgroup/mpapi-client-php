@@ -154,7 +154,7 @@ class PartnerEndpoints extends AbstractEndpoints
 	 */
 	public function pickupPoints($deliveryCode)
 	{
-		return new PartnerPickupPointsEndpoints($this->client, $this, $deliveryCode);
+		return new PartnerPickupPointsEndpoints($this->client, $this->service, $deliveryCode);
 	}
 
 	/**
