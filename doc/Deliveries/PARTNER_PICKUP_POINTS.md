@@ -1,4 +1,4 @@
-## Partner pickup point
+## PARTNER PICKUP POINTS
 
 
 #### Available methods:
@@ -8,6 +8,9 @@
 use MPAPI\Services\Deliveries;
 ... 
 
+// create an instance of deliveries service  
+$deliveries = new Deliveries($mpapiClient);  
+
 // delivery code of already defined delivery method
 $deliveryCode = 'new_delivery2';
 
@@ -16,14 +19,14 @@ $pickupPointEntity = new PickupPoint();
 ```
 
 **POST**  
-This method create partner's pickup point.
+This method creates partner's pickup point.
 
 ```
 $pickupPointEntity->setTitle('First pickup point')
 	              ->setCode('fpp')
 	              ->setDistrictCode('PR')
 	              ...
-	
+
 // create pickup point  
 $createdPickupPoint = $deliveries->partner()->pickupPoints($deliveryCode)->create($pickupPointEntity);
 ```
@@ -58,20 +61,20 @@ __code*__ (string, max. 50 chars) - code of pickup point,
 __district_code*__ (string , max. 4 chars) - district code,  
 __title*__ (string, max. 200 chars) - title of pickup point,  
 __city*__ (string, max. 100 chars) - city,  
-__street*__ (string, max. 100 chars) - street name,  
+__street*__ (string, max. 100 chars) - street and number,  
 __zip*__ (string, max. 10 chars) - ZIP code,  
 __email*__ (string, max. 200 chars) - email,  
-__phone*__ (string, max. 15 chars) - phone,  
-__height*__ (number, max. 8 lenght, max. 3 decimals) - height of acceptable package,  
-__width*__ (number, max. 8 lenght, max. 3 decimals) - width of acceptable package, 
-__length*__ (number, max. 8 lenght, max. 3 decimals) - length of acceptable package,  
-__weight*__ (number, max. 8 lenght, max. 3 decimals) - weight of acceptable package,  
+__phone*__ (string, max. 15 chars) - phone number,  
+__height*__ (number, max. 8 lenght, max. 3 decimals) - maximal height package,  
+__width*__ (number, max. 8 lenght, max. 3 decimals) - maximal width package,  
+__length*__ (number, max. 8 lenght, max. 3 decimals) - maximal length package,  
+__weight*__ (number, max. 8 lenght, max. 3 decimals) - maximal weight package,  
 __lalitude*__ (number) - lalitude,  
 __longitude*__ (number) - longitude,  
-__note*__ (string, max. 500 chars) - pickup point note,   
-__priority*__ (number, max. 3 lenght) - priority of pickup point,  
+__note__ (string, max. 500 chars) - additional information,  
+__priority__ (number, max. 3 lenght) - priority of pickup point,  
 __opening_hours*__ (array) - opening hours,  
-__payment_methods*__ (array) - Available payment methods,  
+__payment_methods*__ (array) - available payment methods  
 
 *Those attributes marked with * are required.* 
 

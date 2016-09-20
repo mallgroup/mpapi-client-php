@@ -13,6 +13,14 @@ $deliveryCode = 'new_delivery2';
 
 /**
  * ##################################
+ * Get list of district codes
+ * ##################################
+ */
+$districtCodes = $deliveries->districts()->get();
+var_dump($districtCodes);
+
+/**
+ * ##################################
  * Create pickup point
  * ##################################
  */
