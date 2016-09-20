@@ -1,7 +1,7 @@
 ## DISTRICTS
 
 
-#### Available method:
+#### Get list of districts
 ```
 <?php 
 ...
@@ -10,10 +10,7 @@ use MPAPI\Services\Deliveries;
 
 // create an instance of deliveries service  
 $deliveries = new Deliveries($mpapiClient);  
-```
 
-**GET**  
-```
 // get list of districts
 $districtCodes = $deliveries->districts()->get();
 ```
