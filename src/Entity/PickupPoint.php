@@ -183,17 +183,17 @@ class PickupPoint
 	/**
 	 * Get delivery code
 	 *
-	 * @return integer
+	 * @return string
 	 */
 	public function getDeliveryCode()
 	{
-		return (int) $this->data[self::KEY_DELIVERY_CODE];
+		return $this->data[self::KEY_DELIVERY_CODE];
 	}
 
 	/**
 	 * Set delivery code
 	 *
-	 * @param integer $deliveryMethodId
+	 * @param string $code
 	 * @return PickupPoint
 	 */
 	public function setDeliveryCode($code)
@@ -521,7 +521,7 @@ class PickupPoint
 	}
 
 	/**
-	 * Set max weight
+	 * Set max weight (in kg)
 	 *
 	 * @param double $weight
 	 * @return PickupPoint
