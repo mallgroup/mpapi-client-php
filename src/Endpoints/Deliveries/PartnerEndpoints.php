@@ -231,7 +231,7 @@ class PartnerEndpoints extends AbstractEndpoints
 			$delimiter = self::PATH_DELIMITER;
 		}
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $delimiter, $code), Client::METHOD_DELETE);
-		if ($response->getStatusCode() !== 200) {
+		if ($response->getStatusCode() !== 204) {
 			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
 		}
 		return true;

@@ -39,7 +39,7 @@ class Products extends AbstractService
 	 *
 	 * @var Product[]
 	 */
-	private $entities = [];
+    protected $entities = [];
 
 	/**
 	 * Products constructor.
@@ -85,7 +85,7 @@ class Products extends AbstractService
 			foreach ($this->entities as $index => $productEntity) {
 				$response = $this->productsEndpoints->deleteProduct($productEntity->getId());
 				unset($this->entities[$index]);
-				if ($response->getStatusCode() !== 200) {
+				if ($response->getStatusCode() !== 204) {
 					$errors[$index] = [
 						'entity' => $productEntity->getData(),
 						'response' => json_decode($response->getBody(), true)
@@ -94,9 +94,8 @@ class Products extends AbstractService
 			}
 		} else {
 			$response = $this->productsEndpoints->deleteProduct($productId);
-			if ($response->getStatusCode() !== 200) {
+			if ($response->getStatusCode() !== 204) {
 				$errors[] = [
-					'entity' => $productEntity->getData(),
 					'response' => json_decode($response->getBody(), true)
 				];
 			}

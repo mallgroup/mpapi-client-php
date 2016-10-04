@@ -204,7 +204,7 @@ class GeneralEndpoints extends AbstractEndpoints
 			$endpoint .= $entity->getCode();
 		}
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, self::PATH_DELIMITER, $endpoint), Client::METHOD_DELETE, $requestData);
-		if ($response->getStatusCode() !== 200) {
+		if ($response->getStatusCode() !== 204) {
 			$this->addError($entity->getCode(), json_decode($response->getBody(), true));
 		}
 		return true;
