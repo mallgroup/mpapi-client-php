@@ -259,7 +259,7 @@ class Product extends AbstractArticleEntity
 			$updated = false;
 			foreach ($this->data[self::KEY_VARIANTS] as $key => $variant)
 			{
-				if ($variantCurrent[self::KEY_ID] === $variant[self::KEY_ID]) {
+				if ($variantCurrent->getId() === $variant[self::KEY_ID]) {
 					$this->data[self::KEY_VARIANTS][$key] = $variantCurrent->getData();
 					$updated = true;
 				}
