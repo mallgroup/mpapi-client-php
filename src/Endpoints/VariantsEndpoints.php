@@ -31,7 +31,7 @@ class VariantsEndpoints
 	}
 
 	/**
-	 * Get list of all products.
+	 * Get list of all variants.
 	 *
 	 * @return Response
 	 */
@@ -41,7 +41,7 @@ class VariantsEndpoints
 	}
 
 	/**
-	 * Get product detail
+	 * Get variant detail
 	 *
 	 * @param string $productId
 	 * @param string $variantId
@@ -53,7 +53,7 @@ class VariantsEndpoints
 	}
 
 	/**
-	 * Delete product
+	 * Delete variant
 	 *
 	 * @param string $productId
 	 * @param string $variantId
@@ -65,8 +65,9 @@ class VariantsEndpoints
 	}
 
 	/**
-	 * POST product
+	 * POST variant
 	 *
+	 * @param array $data
 	 * @return Response
 	 */
 	public function postVariant(array $data)
@@ -75,7 +76,7 @@ class VariantsEndpoints
 	}
 
 	/**
-	 * Put product
+	 * Put variant
 	 *
 	 * @param string $productId
 	 * @param array $data
