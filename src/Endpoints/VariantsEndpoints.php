@@ -5,7 +5,7 @@ use GuzzleHttp\Psr7\Response;
 use MPAPI\Services\Client;
 
 /**
- * Products endpoints
+ * Variants000 endpoints
  *
  * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  */
@@ -35,9 +35,9 @@ class VariantsEndpoints
 	 *
 	 * @return Response
 	 */
-	public function getVariants()
+	public function getVariants($productId)
 	{
-		return $this->client->sendRequest(self::ENDPOINT_VARIANTS, 'GET');
+		return $this->client->sendRequest(sprintf(self::ENDPOINT_VARIANTS, $productId), 'GET');
 	}
 
 	/**
