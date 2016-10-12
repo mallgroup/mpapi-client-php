@@ -3,6 +3,7 @@ namespace MPAPI\Services;
 
 use GuzzleHttp\Psr7\Response;
 use MPAPI\Endpoints\ProductsEndpoints;
+use MPAPI\Endpoints\VariantsEndpoints;
 use MPAPI\Entity\Product;
 use MPAPI\Entity\AbstractEntity;
 use MPAPI\Exceptions\ApplicationException;
@@ -201,6 +202,16 @@ class Products extends AbstractService
         $this->entities[] = $entity;
         return $this;
     }
+
+	/**
+	 * Get variants endpoints
+	 *
+	 * @return VariantsEndpoints
+	 */
+	public function variants()
+	{
+		return new VariantsEndpoints($this->client, $this);
+	}
 
     /**
      * Get base class name
