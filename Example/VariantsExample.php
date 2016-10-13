@@ -1,7 +1,6 @@
-
 <?php
 use MPAPI\Services\Client;
-use MPAPI\Services\Products;
+use MPAPI\Services\Variants;
 use MPAPI\Entity\Product;
 use MPAPI\Entity\Variant;
 use Monolog\Logger;
@@ -9,25 +8,45 @@ use Monolog\Handler\StreamHandler;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('your_client_id');
+$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
 $logger = new Logger('loggerName');
 $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
 
 // set logger into MP API client
 $mpapiClient->setLogger($logger);
 
-$products = new Products($mpapiClient);
+// your product ID
+$productId = 'pTU00_te12';
+$variantId = 'p50_white_ZY';
 
-// Get products
-$response = $products->get()->variants()->get();
+// initialize variants service
+$variants = new Variants($mpapiClient);
+
+/**
+ * ############################
+ * Get list of product variants
+ * ############################
+ */
+$response = $variants->get()->variantsList($productId);
 var_dump($response);
-// Get detail products
-$response = $products->get(32059);
+
+/**
+ * ############################
+ * Get variant detail
+ * ############################
+ */
+$response = $variants->get()->detail($productId, $variantId);
 var_dump($response->getData());
 
-// add Variants
+
+/**
+ * ############################
+ * Initialize entity for create,
+ * update or delete variant
+ * ############################
+ */
 $variant = new Variant();
-$variant->setId('p50_white_XL');
+$variant->setId('p50_white_GK');
 $variant->setTitle('Title of Book - black cover XL');
 $variant->setShortdesc('Short decription of this book.');
 $variant->setLongdesc('This black book is about long description. It can also contains simple formatting like');
@@ -47,16 +66,30 @@ $variant->setStatus(Product::STATUS_ACTIVE);
 $variant->setInStock(10);
 $variant->setRecommended([]);
 
-$product->addVariant($variant);
 
-// Create new product
-$response = $products->post($product);
+/**
+ * ##########################
+ * Create new variant
+ * ##########################
+ */
+$response = $variants->post($productId, $variant);
 var_dump($response);
 
-// Update product
-$response = $products->put('pTU00_test', $product);
+
+/**
+ * ##########################
+ * Update variant
+ * ##########################
+ */
+$variant->setTitle($variant->getTitle() . ' - updated');
+$response = $variants->put()->update($productId, $variant);
 var_dump($response);
 
-// Delete product
-$response = $products->delete('pTU00_test');
+
+/**
+ * #########################
+ * Delete variant
+ * ##########################
+ */
+$response = $variants->delete()->variant($productId, $variant->getId());
 var_dump($response);
