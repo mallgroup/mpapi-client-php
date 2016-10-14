@@ -52,6 +52,7 @@ $exampleService = new NameOfService($mpapiClient);
 ```
 For more examples how to use specific services see following links:  
 * [Products](https://gitlab.com/mallgroup/mpapi-client/blob/master/doc/PRODUCTS.md) – create, update, delete or get data.  
+* [Variants](https://gitlab.com/mallgroup/mpapi-client/blob/master/doc/VARIANTS.md) – create, update, delete or get data.  
 * [Availability](https://gitlab.com/mallgroup/mpapi-client/blob/master/doc/AVAILABILITY.md) – update product or variant.  
 * [Orders](https://gitlab.com/mallgroup/mpapi-client/blob/master/doc/ORDERS.md) - get information about specific order, get all order IDs of open or unconfirmed orders, change order status.  
 * [Deliveries](https://gitlab.com/mallgroup/mpapi-client/blob/master/doc/DELIVERIES.md) - get, create or update delivery setup list.  
