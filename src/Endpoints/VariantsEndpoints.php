@@ -123,7 +123,7 @@ class VariantsEndpoints
 			'DELETE'
 		);
 
-		if ($response->getStatusCode() !== 200) {
+		if ($response->getStatusCode() !== 204) {
 			$error = [
 				'productId' => $productId,
 				'variantId' => $variantId,
