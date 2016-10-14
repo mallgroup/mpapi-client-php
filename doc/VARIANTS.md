@@ -14,47 +14,46 @@ use Monolog\Handler\StreamHandler;
 
 ```
 // Initialize entity
-$variant = new Variant();
-$variant->setId('p50_white_GK');
-$variant->setTitle('Title of Book - black cover XL');
+$variant = new Variant($mpapiClient);
+$variant->setId('newVariantId');
+$variant->setTitle('Title of your variant');
 ...
 
-// product and variant ID
+// your product and variant IDs
 $productId = 'your_product_id';
 $variantId = 'your_variant_id';
 ``` 
  
 #### Available methods: 
 **GET**  
-You can send request either with product ID and variant ID as a parameters and get variant detail or with only product ID parameter and receive all your variant list for this product: 
+You can either get list of all variants for relevant product ID or send request with both product ID and variant ID to receive the variant detail: 
 ```
 ...
-$variants = new Variants($mpapiClient);
 // Get variant detail
-$response = $variants->get()->detail($productId, $variantId);
+$variantEntity = $variants->get($productId, $variantId);
 
 // Get list of product variants
-$response = $variants->get()->variantsList($productId); 
+$response = $variants->get($productId);
 ```
  
 **POST**  
 Use post method to create new variant.
 ```
-$response = $variants->post($productId, $variant);
+$createStatus = $variants->post($productId, $variant);
 ```
  
 **PUT**  
 Use put method to update variant.
 ```
-$variant->setTitle($variant->getTitle() . ' - updated');
+$variant->setTitle('Variant title new');
 ...
-$response = $variants->put()->update($productId, $variant);
+$updateStatus = $variants->put($productId, $variant);
 ```
 
 **DELETE**  
-You can delete variant:
+Use delete method to delete variant:
 ```
-$response = $variants->delete()->variant($productId, $variant->getId());
+$deleteStatus = $variants->delete($productId, $variantId);
 ```
 
 List of attributes:
