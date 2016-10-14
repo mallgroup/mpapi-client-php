@@ -8,16 +8,16 @@ use Monolog\Handler\StreamHandler;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
+$mpapiClient = new Client('your_client_id');
 $logger = new Logger('loggerName');
 $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
 
 // set logger into MP API client
 $mpapiClient->setLogger($logger);
 
-// your product ID
-$productId = 'pTU00_te12';
-$variantId = 'p50_white_ZY';
+// your product and variant IDs
+$productId = 'your_product_id';
+$variantId = 'your_variant_id';
 
 // initialize variants service
 $variants = new Variants($mpapiClient);
@@ -27,7 +27,7 @@ $variants = new Variants($mpapiClient);
  * Get list of product variants
  * ############################
  */
-$response = $variants->get()->variantsList($productId);
+$response = $variants->get($productId);
 var_dump($response);
 
 /**
@@ -35,8 +35,8 @@ var_dump($response);
  * Get variant detail
  * ############################
  */
-$response = $variants->get()->detail($productId, $variantId);
-var_dump($response->getData());
+$variantEntity = $variants->get($productId, $variantId);
+var_dump($variantEntity->getData());
 
 
 /**
@@ -46,9 +46,9 @@ var_dump($response->getData());
  * ############################
  */
 $variant = new Variant();
-$variant->setId('p50_white_GK');
-$variant->setTitle('Title of Book - black cover XL');
-$variant->setShortdesc('Short decription of this book.');
+$variant->setId('newVariantId');
+$variant->setTitle('Title of your variant - black cover XL');
+$variant->setShortdesc('Short decription of this article.');
 $variant->setLongdesc('This black book is about long description. It can also contains simple formatting like');
 $variant->setPriority(1);
 $variant->setBarcode('0000619262110');
@@ -72,18 +72,21 @@ $variant->setRecommended([]);
  * Create new variant
  * ##########################
  */
-$response = $variants->post($productId, $variant);
-var_dump($response);
-
+$createStatus = $variants->post($productId, $variant);
+print('Create variant: ');
+var_export($createStatus);
+print(PHP_EOL);
 
 /**
  * ##########################
  * Update variant
  * ##########################
  */
-$variant->setTitle($variant->getTitle() . ' - updated');
-$response = $variants->put()->update($productId, $variant);
-var_dump($response);
+$variant->setTitle('Changed variant title');
+$updateStatus = $variants->put($productId, $variant);
+print('Update variant: ');
+var_export($updateStatus);
+print(PHP_EOL);
 
 
 /**
@@ -91,5 +94,7 @@ var_dump($response);
  * Delete variant
  * ##########################
  */
-$response = $variants->delete()->variant($productId, $variant->getId());
-var_dump($response);
+$deleteStatus = $variants->delete($productId, $variant->getId());
+print('Delete variant: ');
+var_export($deleteStatus);
+print(PHP_EOL);
