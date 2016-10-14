@@ -119,6 +119,52 @@ $variants = [
 Codeception\Util\Fixtures::add('product', $product);
 Codeception\Util\Fixtures::add('variantData', $variants[0]);
 
+$variant = [
+		'id' => 'cdcept-v0123',
+		'title' => 'Title of Product - codeception variant',
+		'shortdesc' => 'Short decription of codeception variant of product.',
+		'longdesc' => 'This codeception variant has long description. It can also contains simple formatting like <strong>bold text</strong>.',
+		'priority' => 1,
+		'barcode' => '22677170992',
+		'price' => 185,
+		'rrp' => 229,
+		'parameters' => [
+			'MP_ATR_TEST1_CHAR' => 'test char value',
+			'MP_ATR_TEST2_NUM' => 'test num value'
+		],
+		'labels' => [],
+		'media' => [
+			[
+				'url' => 'https://i.cdn.nrholding.net/15880228',
+				'main' => true
+			]
+		],
+		'promotions' => [],
+		'dimensions' => [],
+		'availability' => [
+			'status' => 'A',
+			'in_stock' => 10
+		],
+		'recommended' => [],
+		'delivery_delay' => 2
+];
+Codeception\Util\Fixtures::add('variant', $variant);
+Codeception\Util\Fixtures::add('variantInStock', $variant['availability']['in_stock']);
+Codeception\Util\Fixtures::add('variantStatus', $variant['availability']['status']);
+
+$promotions = [
+	'price' => 135,
+	'from' => '2027-10-11 00:00:00',
+	'to' => '2027-10-11 23:59:59'
+];
+Codeception\Util\Fixtures::add('promotions', $promotions);
+$labels = [
+			'label' => 'NEW',
+			'from' => '2018-01-01 00:00:00',
+			'to' => '2020-03-01 00:00:00'
+		];
+Codeception\Util\Fixtures::add('labels', $labels);
+
 $orderData = [
 	'id' => 8888888801,
 	'purchase_id' => 88888888,
