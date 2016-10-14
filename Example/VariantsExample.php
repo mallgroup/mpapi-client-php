@@ -73,7 +73,7 @@ $variant->setRecommended([]);
  * ##########################
  */
 $createStatus = $variants->post($productId, $variant);
-print('Create variant: ');
+print('Variant created: ');
 var_export($createStatus);
 print(PHP_EOL);
 
@@ -84,7 +84,7 @@ print(PHP_EOL);
  */
 $variant->setTitle('Changed variant title');
 $updateStatus = $variants->put($productId, $variant);
-print('Update variant: ');
+print('Variant updated: ');
 var_export($updateStatus);
 print(PHP_EOL);
 
@@ -95,6 +95,6 @@ print(PHP_EOL);
  * ##########################
  */
 $deleteStatus = $variants->delete($productId, $variant->getId());
-print('Delete variant: ');
+print('Variant deleted: ');
 var_export($deleteStatus);
 print(PHP_EOL);

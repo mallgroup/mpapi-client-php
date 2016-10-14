@@ -4,6 +4,7 @@ namespace MPAPI\Endpoints;
 use GuzzleHttp\Psr7\Response;
 use MPAPI\Services\Client;
 use MPAPI\Entity\Variant;
+use MPAPI\Exceptions\ApplicationException;
 
 /**
  * Variants GET endpoints
@@ -39,7 +40,7 @@ class VariantsEndpoints
 	/**
 	 * Get list of all variants.
 	 *
-	 * @return Response
+	 * @return array
 	 */
 	public function variantsList($productId)
 	{
@@ -52,7 +53,7 @@ class VariantsEndpoints
 	 *
 	 * @param string $productId
 	 * @param string $variantId
-	 * @return Response
+	 * @return Variant
 	 */
 	public function detail($productId, $variantId)
 	{
@@ -65,7 +66,7 @@ class VariantsEndpoints
 	 *
 	 * @param string $productId
 	 * @param Variant $variant
-	 * @return Response
+	 * @return boolean
 	 */
 	public function update($productId, Variant $variant)
 	{
@@ -111,7 +112,7 @@ class VariantsEndpoints
 	 *
 	 * @param string $productId
 	 * @param string $variantId
-	 * @return Response
+	 * @return boolean
 	 */
 	public function delete($productId, $variantId)
 	{
