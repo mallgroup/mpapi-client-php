@@ -29,7 +29,6 @@ $variantId = 'your_variant_id';
 You can either get list of all variants for relevant product ID or send request with both product ID and variant ID to receive the variant detail: 
 ```
 ...
-$variants = new Variants($mpapiClient);
 // Get variant detail
 $variantEntity = $variants->get($productId, $variantId);
 
