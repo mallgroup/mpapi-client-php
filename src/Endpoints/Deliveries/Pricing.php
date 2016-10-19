@@ -66,11 +66,29 @@ class PricingEndpoints extends AbstractEndpoints
 	 *
 	 * @param string $deliveryCode
 	 * @param \MPAPI\Endpoints\Deliveries\PricingsEntity $entity
-	 * @return array
+	 * @return boolean
 	 */
 	public function put($deliveryCode, PricingsEntity $entity)
 	{
+		/* @var GuzzleHttp\Psr7\Response $response*/
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $deliveryCode), Client::METHOD_PUT, $entity->getData());
-		return $response->getData();
+		if ($response->getStatusCode() !== 200 || $response->getStatusCode() !== 201) {
+			$this->addError($deliveryCode, json_decode($response->getBody(), true));
+		}
+		return true;
+	}
+
+	/**
+	 *
+	 * @param type $deliveryCode
+	 * @return boolean
+	 */
+	public function delete($deliveryCode)
+	{
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $deliveryCode), Client::METHOD_DELETE);
+		if ($response->getStatusCode() !== 204) {
+			$this->addError($deliveryCode, json_decode($response->getBody(), true));
+		}
+		return true;
 	}
 }
