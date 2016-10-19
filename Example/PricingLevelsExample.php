@@ -7,7 +7,7 @@ use MPAPI\Services\Deliveries;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
+$mpapiClient = new Client('your_client_id');
 $logger = new Logger('loggerName');
 $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
 
@@ -19,7 +19,6 @@ $deliveries = new Deliveries($mpapiClient);
 
 // delivery code of already defined delivery method
 $deliveryCode = 'new_delivery2';
-
 
 /**
  * ##################################
@@ -40,7 +39,6 @@ print(PHP_EOL);
  */
 $response = $deliveries->pricing()->get($deliveryCode);
 var_dump($response);
-print(PHP_EOL);
 
 /**
  * ##################################

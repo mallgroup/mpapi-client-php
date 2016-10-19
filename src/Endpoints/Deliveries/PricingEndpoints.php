@@ -2,6 +2,7 @@
 namespace MPAPI\Endpoints\Deliveries;
 
 use MPAPI\Endpoints\AbstractEndpoints;
+use MPAPI\Entity\Deliveries\PricingLevels;
 use MPAPI\Services\AbstractService;
 use MPAPI\Services\Client;
 
@@ -69,13 +70,13 @@ class PricingEndpoints extends AbstractEndpoints
 	 * Create or update pricings
 	 *
 	 * @param string $deliveryCode
-	 * @param MPAPI\Endpoints\Deliveries\PricingsEntity $entity
+	 * @param PricingLevels $entity
 	 * @return boolean
 	 */
-	public function post($deliveryCode, PricingsEntity $entity)
+	public function post($deliveryCode, PricingLevels $entity)
 	{
 		/* @var GuzzleHttp\Psr7\Response $response*/
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $deliveryCode), Client::METHOD_PUT, $entity->getData());
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $deliveryCode), Client::METHOD_POST, $entity->getData());
 		if ($response->getStatusCode() !== 200) {
 			$this->addError($deliveryCode, json_decode($response->getBody(), true));
 		}
