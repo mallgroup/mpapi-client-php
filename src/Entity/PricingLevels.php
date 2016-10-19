@@ -2,13 +2,14 @@
 namespace MPAPI\Entity\Delivery;
 
 use MPAPI\Entity\AbstractEntity;
+use MPAPI\Exceptions\PricingLevelBadTypeException;
 
 /**
- * Delivery pricings levels entity
+ * Delivery pricing levels entity
  *
  * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  */
-class PricingsLevels extends AbstractEntity
+class PricingLevels extends AbstractEntity
 {
 
 	/**
@@ -54,6 +55,15 @@ class PricingsLevels extends AbstractEntity
 	protected $data = [];
 
 	/**
+	 *
+	 * @var array
+	 */
+	protected $allowType = [
+		self::TYPE_PRICE,
+		self::TYPE_WEIGHT
+	];
+
+	/**
 	 * @see \MPAPI\Entity\AbstractEntity::getData()
 	 */
 	public function getData()
@@ -67,10 +77,14 @@ class PricingsLevels extends AbstractEntity
 	 * @param integer $price
 	 * @param integer $codPrice
 	 * @param integer $limit
-	 * @return PricingsLevels
+	 * @return PricingLevels
 	 */
-	public function addData($type, $price, $codPrice, $limit)
+	public function addLevel($type, $price, $codPrice, $limit)
 	{
+		if (!in_array($type, $this->allowType)) {
+			throw new PricingLevelBadTypeException($type, $this->allowType);
+		}
+
 		$pricingLevelCurrent = [
 			self::KEY_TYPE => $type,
 			self::KEY_PRICE => $price,
