@@ -79,8 +79,9 @@ class PricingEndpoints extends AbstractEndpoints
 	}
 
 	/**
-	 *
-	 * @param type $deliveryCode
+	 * Delete delivery pricings
+	 * 
+	 * @param string $deliveryCode
 	 * @return boolean
 	 */
 	public function delete($deliveryCode)
