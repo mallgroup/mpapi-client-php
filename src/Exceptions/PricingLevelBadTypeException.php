@@ -3,7 +3,7 @@ namespace MPAPI\Exceptions;
 
 /**
  *
- * @author Martin Hrdlicka <jan.blaha@mall.cz>
+ * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  */
 class PricingLevelBadTypeException extends \Exception
 {
@@ -11,7 +11,7 @@ class PricingLevelBadTypeException extends \Exception
 	 *
 	 * @var string
 	 */
-	protected $message = 'Bad pricing level type "%s" allowed are %s.';
+	protected $message = 'Bad pricing level type: "%s". Accepted values are "%s".';
 
 	/**
 	 *
@@ -20,7 +20,7 @@ class PricingLevelBadTypeException extends \Exception
 	 */
 	public function __construct($currentStatus, array $allowed)
 	{
-		$this->message = sprintf($this->message, $currentStatus, implode(', ', $allowed));
+		$this->message = sprintf($this->message, $currentStatus, implode('" and "', $allowed));
 		parent::__construct($this->message);
 	}
 }

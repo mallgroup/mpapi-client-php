@@ -316,3 +316,14 @@ $generalDelivery = [
 ];
 Codeception\Util\Fixtures::add('generalDelivery', $generalDelivery);
 Codeception\Util\Fixtures::add('newTrackingUrl', $generalDelivery);
+
+$pricingLevelsData = [
+	[
+		'type' => 'p',
+		'price' => 120,
+		'cod_price' => 40,
+		'limit' => 1000
+	]
+];
+
+Codeception\Util\Fixtures::add('pricingLevelsData', $pricingLevelsData);
