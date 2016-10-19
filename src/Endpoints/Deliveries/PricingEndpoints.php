@@ -2,10 +2,9 @@
 namespace MPAPI\Endpoints\Deliveries;
 
 use MPAPI\Endpoints\AbstractEndpoints;
-use MPAPI\Services\Client;
 use MPAPI\Services\AbstractService;
-use MPAPI\Lib\DataCollector;
-use MPAPI\Entity\District;
+use MPAPI\Services\Client;
+
 
 /**
  *
@@ -58,21 +57,21 @@ class PricingEndpoints extends AbstractEndpoints
 	public function get($deliveryCode)
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $deliveryCode), Client::METHOD_GET);
-		return $response->getData();
+		return json_decode($response->getBody(), true)['data'];
 	}
 
 	/**
 	 * Create or update pricings
 	 *
 	 * @param string $deliveryCode
-	 * @param \MPAPI\Endpoints\Deliveries\PricingsEntity $entity
+	 * @param MPAPI\Endpoints\Deliveries\PricingsEntity $entity
 	 * @return boolean
 	 */
-	public function put($deliveryCode, PricingsEntity $entity)
+	public function post($deliveryCode, PricingsEntity $entity)
 	{
 		/* @var GuzzleHttp\Psr7\Response $response*/
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $deliveryCode), Client::METHOD_PUT, $entity->getData());
-		if ($response->getStatusCode() !== 200 || $response->getStatusCode() !== 201) {
+		if ($response->getStatusCode() !== 200) {
 			$this->addError($deliveryCode, json_decode($response->getBody(), true));
 		}
 		return true;
@@ -80,7 +79,7 @@ class PricingEndpoints extends AbstractEndpoints
 
 	/**
 	 * Delete delivery pricings
-	 * 
+	 *
 	 * @param string $deliveryCode
 	 * @return boolean
 	 */
