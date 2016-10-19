@@ -1,5 +1,5 @@
 <?php
-namespace MPAPI\Entity\Delivery;
+namespace MPAPI\Entity\Deliveries;
 
 use MPAPI\Entity\AbstractEntity;
 use MPAPI\Exceptions\PricingLevelBadTypeException;
