@@ -52,12 +52,17 @@ class PricingEndpoints extends AbstractEndpoints
 	 * Get all pricing levels
 	 *
 	 * @param string $deliveryCode
-	 * @return null|array
+	 * @return array
 	 */
 	public function get($deliveryCode)
 	{
+		$retval = [];
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $deliveryCode), Client::METHOD_GET);
-		return json_decode($response->getBody(), true)['data'];
+		$responseData = json_decode($response->getBody(), true);
+		if (!empty($responseData) && isset($responseData['data'])) {
+			$retval = $responseData['data'];
+		}
+		return $retval;
 	}
 
 	/**
