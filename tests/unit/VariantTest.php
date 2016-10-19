@@ -244,7 +244,7 @@ class VariantTest extends \Codeception\Test\Unit
 	{
 		$this->assertArrayNotHasKey('width', $this->object->getDimensions());
 		$this->object->addDimensions(100, 200, 300, 400);
-		$this->assertArrayNotHasKey('price', $this->object->getDimensions());
+		$this->assertArrayHasKey('width', $this->object->getDimensions());
 	}
 
 	public function testGetAvailability()
