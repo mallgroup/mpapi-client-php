@@ -15,8 +15,8 @@ $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
 // set logger into MP API client
 $mpapiClient->setLogger($logger);
 
-/* @var $deliveries Deliveries */
-$deliveries = new MPAPI\Services\Deliveries($mpapiClient);
+/* @var Deliveries $deliveries */
+$deliveries = new Deliveries($mpapiClient);
 
 // Get partner deliveries
 $response = $deliveries->partner()->get();
