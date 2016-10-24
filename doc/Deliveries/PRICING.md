@@ -12,26 +12,22 @@ $deliveries = new Deliveries($mpapiClient);
 
 #### Available methods:
 **GET**  
-You can get information about pricing levels on the delivery:
+You can get information about pricing levels for the delivery:
 ```
 ...
 // get delivery pricings
 $pricings = $deliveries->pricing()->get('yourDeliveryCode');
 ```
 
-The response contains pricing levels on the delivery:  
+The response contains pricing levels for the delivery:  
 ```
 [
 	[
-	    "delivery_code" => 'yourDeliveryCode',
-	    "partner_id" => 3000,
 	    "type" => 'p',
 	    "price" => 120,
 	    "cod_price" => 40,
 	    "limit" => 1000
     ], [
-    	"delivery_code" => 'yourDeliveryCode',
-	    "partner_id" => 3000,
 	    "type" => 'p',
 	    "price" => 99,
 	    "cod_price" => 29,
@@ -43,12 +39,12 @@ The response contains pricing levels on the delivery:
 
 #### Create or update delivery pricings
 **POST**
-To update delivery pricing levels, send post request: 
+To create or update delivery pricing levels, send post request. To set type of pricing use constants: TYPE_PRICE for price or TYPE_WEIGHT for weight. 
 ```
 ...
 $pricingLevels = new PricingLevels();
 $pricingLevels->addLevel(PricingLevels::TYPE_PRICE, 100, 49, 1000);
-$createStatus = $deliveries->pricing()->post('yourDeliveryCode', $pricingLevels);
+$status = $deliveries->pricing()->post('yourDeliveryCode', $pricingLevels);
 ```
 
 #### Delete delivery pricings
