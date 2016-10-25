@@ -56,9 +56,11 @@ The response contains order details:
     "items" => [
         [
             "id" => "F192621",
+            "article_id" => 100000249018,
             "quantity" => 1,
             "price" => 350,
-            "vat" => 21
+            "vat" => 21,
+            "commission" => 16
         ]
     ]
 ]
