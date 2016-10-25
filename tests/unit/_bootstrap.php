@@ -192,6 +192,7 @@ $orderData = [
 	'items' => [
 		[
 			'id' => 'productId1',
+			'article_id' => 100000294681,
 			'quantity' => 1,
 			'price' => 35.07,
 			'vat' => 21,
@@ -199,6 +200,7 @@ $orderData = [
 		],
 		[
 			'id' => 'productID2',
+			'article_id' => 100000249018,
 			'quantity' => 1,
 			'price' => 36.91,
 			'vat' => 21,
