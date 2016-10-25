@@ -195,12 +195,14 @@ $orderData = [
 			'quantity' => 1,
 			'price' => 35.07,
 			'vat' => 21,
+			'commission' => 16
 		],
 		[
 			'id' => 'productID2',
 			'quantity' => 1,
 			'price' => 36.91,
 			'vat' => 21,
+			'commission' => 11.5
 		]
 	]
 ];

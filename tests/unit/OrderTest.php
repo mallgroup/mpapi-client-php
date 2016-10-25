@@ -37,6 +37,7 @@ class OrderTest extends \Codeception\Test\Unit
 	{
 		$this->assertTrue(is_array($this->object->getItems()));
 		$this->assertTrue(!empty($this->object->getItems()));
+		$this->assertEquals(Fixtures::get('orderData')['items'], $this->object->getItems());
 	}
 
 	public function testGetEmptyPartnerId()
