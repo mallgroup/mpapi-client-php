@@ -63,7 +63,7 @@ class Product extends AbstractArticleEntity
 	 */
 	public function getCategoryId()
 	{
-		$retval = null;
+		$retval = 0;
 		if (isset($this->data[self::KEY_CATEGORY_ID])) {
 			$retval = (int) $this->data[self::KEY_CATEGORY_ID];
 		}
@@ -115,7 +115,7 @@ class Product extends AbstractArticleEntity
 	 */
 	public function getBrandId()
 	{
-		$retval = null;
+		$retval = '';
 		if (isset($this->data[self::KEY_BRAND_ID])) {
 			$retval = $this->data[self::KEY_BRAND_ID];
 		}
@@ -143,7 +143,7 @@ class Product extends AbstractArticleEntity
 	 */
 	public function getVat()
 	{
-		$retval = null;
+		$retval = 0;
 		if (isset($this->data[self::KEY_VAT])) {
 			$retval = (float) $this->data[self::KEY_VAT];
 		}
@@ -171,7 +171,7 @@ class Product extends AbstractArticleEntity
 	 */
 	public function getDeliverySetup()
 	{
-		$retval = null;
+		$retval = '';
 		if (isset($this->data[self::KEY_DELIVERY_SETUP])) {
 			$retval = $this->data[self::KEY_DELIVERY_SETUP];
 		}
@@ -199,7 +199,7 @@ class Product extends AbstractArticleEntity
 	 */
 	public function getVariableParameters()
 	{
-		$retval = null;
+		$retval = [];
 		if (isset($this->data[self::KEY_VARIABLE_PARAMETERS])) {
 			$retval = $this->data[self::KEY_VARIABLE_PARAMETERS];
 		}
@@ -243,7 +243,7 @@ class Product extends AbstractArticleEntity
 	 */
 	public function getVariants()
 	{
-		$retval = null;
+		$retval = [];
 		if (isset($this->data[self::KEY_VARIANTS])) {
 			$retval = $this->data[self::KEY_VARIANTS];
 		}

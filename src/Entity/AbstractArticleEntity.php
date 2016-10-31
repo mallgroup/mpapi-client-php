@@ -195,7 +195,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getId()
 	{
-		$retval = null;
+		$retval = '';
 		if (isset($this->data[self::KEY_ID])) {
 			$retval = $this->data[self::KEY_ID];
 		}
@@ -223,7 +223,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getTitle()
 	{
-		$retval = null;
+		$retval = '';
 		if (isset($this->data[self::KEY_TITLE])) {
 			$retval = $this->data[self::KEY_TITLE];
 		}
@@ -251,7 +251,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getShortdesc()
 	{
-		$retval = null;
+		$retval = '';
 		if (isset($this->data[self::KEY_SHORTDESC])) {
 			$retval = $this->data[self::KEY_SHORTDESC];
 		}
@@ -279,7 +279,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getLongdesc()
 	{
-		$retval = null;
+		$retval = '';
 		if (isset($this->data[self::KEY_LONGDESC])) {
 			$retval = $this->data[self::KEY_LONGDESC];
 		}
@@ -307,7 +307,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getPriority()
 	{
-		$retval = null;
+		$retval = 0;
 		if (isset($this->data[self::KEY_PRIORITY])) {
 			$retval = (int) $this->data[self::KEY_PRIORITY];
 		}
@@ -349,7 +349,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getBarcode()
 	{
-		$retval = null;
+		$retval = '';
 		if (isset($this->data[self::KEY_BARCODE])) {
 			$retval = $this->data[self::KEY_BARCODE];
 		}
@@ -363,7 +363,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getPrice()
 	{
-		$retval = null;
+		$retval = 0;
 		if (isset($this->data[self::KEY_PRICE])) {
 			$retval = (float) $this->data[self::KEY_PRICE];
 		}
@@ -391,7 +391,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getRrpPrice()
 	{
-		$retval = null;
+		$retval = 0;
 		if (isset($this->data[self::KEY_RRP_PRICE])) {
 			$retval = (float) $this->data[self::KEY_RRP_PRICE];
 		}
@@ -419,7 +419,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getInStock()
 	{
-		$retval = null;
+		$retval = 0;
 		if (isset($this->data[self::KEY_AVAILABILITY][self::KEY_IN_STOCK])) {
 			$retval = (int) $this->data[self::KEY_AVAILABILITY][self::KEY_IN_STOCK];
 		}
@@ -447,7 +447,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getMedia()
 	{
-		$retval = null;
+		$retval = [];
 		if (isset($this->data[self::KEY_MEDIA])) {
 			$retval = $this->data[self::KEY_MEDIA];
 		}
@@ -505,7 +505,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getPromotions()
 	{
-		$retval = null;
+		$retval = [];
 		if (isset($this->data[self::KEY_PROMOTIONS])) {
 			$retval = $this->data[self::KEY_PROMOTIONS];
 		}
@@ -567,7 +567,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getParameters()
 	{
-		$retval = null;
+		$retval = [];
 		if (isset($this->data[self::KEY_PARAMETERS])) {
 			$retval = $this->data[self::KEY_PARAMETERS];
 		}
@@ -623,7 +623,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getStatus()
 	{
-		$retval = null;
+		$retval = '';
 		if (isset($this->data[self::KEY_AVAILABILITY][self::KEY_STATUS])) {
 			$retval = $this->data[self::KEY_AVAILABILITY][self::KEY_STATUS];
 		}
@@ -637,7 +637,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getAvailability()
 	{
-		$retval = null;
+		$retval = [];
 		if (isset($this->data[self::KEY_AVAILABILITY])) {
 			$retval = $this->data[self::KEY_AVAILABILITY];
 		}
@@ -651,7 +651,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getRecommended()
 	{
-		$retval = null;
+		$retval = [];
 		if (isset($this->data[self::KEY_RECOMMENDED])) {
 			$retval = $this->data[self::KEY_RECOMMENDED];
 		}
@@ -695,7 +695,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getLabels()
 	{
-		$retval = null;
+		$retval = [];
 		if (isset($this->data[self::KEY_LABELS])) {
 			$retval = $this->data[self::KEY_LABELS];
 		}
@@ -757,7 +757,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getDimensions()
 	{
-		$retval = null;
+		$retval = [];
 		if (isset($this->data[self::KEY_DIMENSIONS])) {
 			$retval = $this->data[self::KEY_DIMENSIONS];
 		}
@@ -867,7 +867,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getDeliveryDelay()
 	{
-		$retval = null;
+		$retval = 0;
 		if (isset($this->data[self::KEY_DELIVERY_DELAY])) {
 			$retval = (int) $this->data[self::KEY_DELIVERY_DELAY];
 		}
