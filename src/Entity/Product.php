@@ -63,7 +63,11 @@ class Product extends AbstractArticleEntity
 	 */
 	public function getCategoryId()
 	{
-		return $this->data[self::KEY_CATEGORY_ID];
+		$retval = null;
+		if (isset($this->data[self::KEY_CATEGORY_ID])) {
+			$retval = (int) $this->data[self::KEY_CATEGORY_ID];
+		}
+		return $retval;
 	}
 
 	/**
@@ -111,7 +115,11 @@ class Product extends AbstractArticleEntity
 	 */
 	public function getBrandId()
 	{
-		return $this->data[self::KEY_BRAND_ID];
+		$retval = null;
+		if (isset($this->data[self::KEY_BRAND_ID])) {
+			$retval = $this->data[self::KEY_BRAND_ID];
+		}
+		return $retval;
 	}
 
 	/**
@@ -135,7 +143,11 @@ class Product extends AbstractArticleEntity
 	 */
 	public function getVat()
 	{
-		return (float)$this->data[self::KEY_VAT];
+		$retval = null;
+		if (isset($this->data[self::KEY_VAT])) {
+			$retval = (float) $this->data[self::KEY_VAT];
+		}
+		return $retval;
 	}
 
 	/**
@@ -159,7 +171,11 @@ class Product extends AbstractArticleEntity
 	 */
 	public function getDeliverySetup()
 	{
-		return $this->data[self::KEY_DELIVERY_SETUP];
+		$retval = null;
+		if (isset($this->data[self::KEY_DELIVERY_SETUP])) {
+			$retval = $this->data[self::KEY_DELIVERY_SETUP];
+		}
+		return $retval;
 	}
 
 	/**
@@ -183,7 +199,11 @@ class Product extends AbstractArticleEntity
 	 */
 	public function getVariableParameters()
 	{
-		return $this->data[self::KEY_VARIABLE_PARAMETERS];
+		$retval = null;
+		if (isset($this->data[self::KEY_VARIABLE_PARAMETERS])) {
+			$retval = $this->data[self::KEY_VARIABLE_PARAMETERS];
+		}
+		return $retval;
 	}
 
 	/**
@@ -252,13 +272,11 @@ class Product extends AbstractArticleEntity
 	 */
 	public function addVariant(Variant $variantCurrent)
 	{
-
 		if (!isset($this->data[self::KEY_VARIANTS])) {
 			$this->data[self::KEY_VARIANTS][] = $variantCurrent->getData();
 		} else {
 			$updated = false;
-			foreach ($this->data[self::KEY_VARIANTS] as $key => $variant)
-			{
+			foreach ($this->data[self::KEY_VARIANTS] as $key => $variant) {
 				if ($variantCurrent->getId() === $variant[self::KEY_ID]) {
 					$this->data[self::KEY_VARIANTS][$key] = $variantCurrent->getData();
 					$updated = true;

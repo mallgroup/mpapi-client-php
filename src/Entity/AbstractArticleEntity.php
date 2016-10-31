@@ -195,7 +195,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getId()
 	{
-		return $this->data[self::KEY_ID];
+		$retval = null;
+		if (isset($this->data[self::KEY_ID])) {
+			$retval = $this->data[self::KEY_ID];
+		}
+		return $retval;
 	}
 
 	/**
@@ -219,7 +223,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getTitle()
 	{
-		return $this->data[self::KEY_TITLE];
+		$retval = null;
+		if (isset($this->data[self::KEY_TITLE])) {
+			$retval = $this->data[self::KEY_TITLE];
+		}
+		return $retval;
 	}
 
 	/**
@@ -243,7 +251,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getShortdesc()
 	{
-		return $this->data[self::KEY_SHORTDESC];
+		$retval = null;
+		if (isset($this->data[self::KEY_SHORTDESC])) {
+			$retval = $this->data[self::KEY_SHORTDESC];
+		}
+		return $retval;
 	}
 
 	/**
@@ -267,7 +279,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getLongdesc()
 	{
-		return $this->data[self::KEY_LONGDESC];
+		$retval = null;
+		if (isset($this->data[self::KEY_LONGDESC])) {
+			$retval = $this->data[self::KEY_LONGDESC];
+		}
+		return $retval;
 	}
 
 	/**
@@ -291,7 +307,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getPriority()
 	{
-		return (int) $this->data[self::KEY_PRIORITY];
+		$retval = null;
+		if (isset($this->data[self::KEY_PRIORITY])) {
+			$retval = (int) $this->data[self::KEY_PRIORITY];
+		}
+		return $retval;
 	}
 
 	/**
@@ -399,7 +419,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getInStock()
 	{
-		return (int) $this->data[self::KEY_AVAILABILITY][self::KEY_IN_STOCK];
+		$retval = null;
+		if (isset($this->data[self::KEY_AVAILABILITY][self::KEY_IN_STOCK])) {
+			$retval = (int) $this->data[self::KEY_AVAILABILITY][self::KEY_IN_STOCK];
+		}
+		return $retval;
 	}
 
 	/**
@@ -481,7 +505,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getPromotions()
 	{
-		return $this->data[self::KEY_PROMOTIONS];
+		$retval = null;
+		if (isset($this->data[self::KEY_PROMOTIONS])) {
+			$retval = $this->data[self::KEY_PROMOTIONS];
+		}
+		return $retval;
 	}
 
 	/**
@@ -539,7 +567,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getParameters()
 	{
-		return $this->data[self::KEY_PARAMETERS];
+		$retval = null;
+		if (isset($this->data[self::KEY_PARAMETERS])) {
+			$retval = $this->data[self::KEY_PARAMETERS];
+		}
+		return $retval;
 	}
 
 	/**
@@ -591,7 +623,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getStatus()
 	{
-		return $this->data[self::KEY_AVAILABILITY][self::KEY_STATUS];
+		$retval = null;
+		if (isset($this->data[self::KEY_AVAILABILITY][self::KEY_STATUS])) {
+			$retval = $this->data[self::KEY_AVAILABILITY][self::KEY_STATUS];
+		}
+		return $retval;
 	}
 
 	/**
@@ -601,7 +637,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getAvailability()
 	{
-		return $this->data[self::KEY_AVAILABILITY];
+		$retval = null;
+		if (isset($this->data[self::KEY_AVAILABILITY])) {
+			$retval = $this->data[self::KEY_AVAILABILITY];
+		}
+		return $retval;
 	}
 
 	/**
@@ -655,7 +695,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getLabels()
 	{
-		return $this->data[self::KEY_LABELS];
+		$retval = null;
+		if (isset($this->data[self::KEY_LABELS])) {
+			$retval = $this->data[self::KEY_LABELS];
+		}
+		return $retval;
 	}
 
 	/**
@@ -707,17 +751,21 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	}
 
 	/**
-	 * Get variable parameters
+	 * Get dimensions
 	 *
 	 * @return array
 	 */
 	public function getDimensions()
 	{
-		return $this->data[self::KEY_DIMENSIONS];
+		$retval = null;
+		if (isset($this->data[self::KEY_DIMENSIONS])) {
+			$retval = $this->data[self::KEY_DIMENSIONS];
+		}
+		return $retval;
 	}
 
 	/**
-	 * Set variable parameters
+	 * Set dimensions
 	 *
 	 * @param array $value
 	 * @return AbstractArticleEntity
@@ -819,7 +867,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function getDeliveryDelay()
 	{
-		return (int) $this->data[self::KEY_DELIVERY_DELAY];
+		$retval = null;
+		if (isset($this->data[self::KEY_DELIVERY_DELAY])) {
+			$retval = (int) $this->data[self::KEY_DELIVERY_DELAY];
+		}
+		return $retval;
 	}
 
 	/**
