@@ -8,7 +8,7 @@ use MPAPI\Entity\DeliverySetup;
 use MPAPI\Exceptions\ApplicationException;
 
 /**
- * Delivery settings
+ * Delivery methods
  *
  * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  */
@@ -30,10 +30,10 @@ class DeliveryMethods extends AbstractService
 	 *
 	 * @var DeliveryMethod[]
 	 */
-	private $entities = [];
+	protected $entities = [];
 
 	/**
-	 * Orders constructor.
+	 * Delivery methods constructor.
 	 *
 	 * @param Client $client
 	 */
