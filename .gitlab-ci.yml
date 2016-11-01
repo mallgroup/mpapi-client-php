@@ -1,5 +1,6 @@
 stages:
   - master
+  - github
 
 test:
   stage: master
@@ -13,3 +14,17 @@ test:
     - ./vendor/bin/codecept run unit
   tags:
     - php
+
+github_deploy:
+    stage: github
+    before_script:
+        - echo "$DEPLOY_KEY_GITHUB" > ./deploy_key
+        - chmod 0600 ./deploy_key
+    script:
+        - git remote add github git@github.com:mallgroup/mpapi-client-php.git -i ./deploy_key
+        - git fetch github
+        - git push github
+    after_script:
+        - rm -f ./deploy_key
+    only:
+        - master
