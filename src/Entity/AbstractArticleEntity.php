@@ -378,7 +378,9 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function setPrice($value)
 	{
-		if (bccomp($value, $this->getPrice(), self::PRICE_PRECISION) !== 0) {
+		if (function_exists('bccomp') && bccomp($value, $this->getPrice(), self::PRICE_PRECISION) !== 0) {
+			$this->data[self::KEY_PRICE] = $value;
+		} elseif ((int)$value != (int) $this->getPrice()) {
 			$this->data[self::KEY_PRICE] = $value;
 		}
 		return $this;
