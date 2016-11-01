@@ -408,7 +408,9 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function setRrpPrice($value)
 	{
-		if (bccomp($value, $this->getRrpPrice(), self::PRICE_PRECISION) !== 0) {
+		if (function_exists('bccomp') && bccomp($value, $this->getRrpPrice(), self::PRICE_PRECISION) !== 0) {
+			$this->data[self::KEY_RRP_PRICE] = $value;
+		} elseif ((int)$value != (int) $this->getRrpPrice()) {
 			$this->data[self::KEY_RRP_PRICE] = $value;
 		}
 		return $this;
