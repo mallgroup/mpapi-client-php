@@ -59,13 +59,13 @@ class Product extends AbstractArticleEntity
 	/**
 	 * Get category ID
 	 *
-	 * @return integer
+	 * @return string
 	 */
 	public function getCategoryId()
 	{
 		$retval = 0;
 		if (isset($this->data[self::KEY_CATEGORY_ID])) {
-			$retval = (int) $this->data[self::KEY_CATEGORY_ID];
+			$retval = $this->data[self::KEY_CATEGORY_ID];
 		}
 		return $retval;
 	}
