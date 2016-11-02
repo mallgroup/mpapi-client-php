@@ -1,6 +1,7 @@
 stages:
   - master
   - github
+  - packagist
 
 test:
   stage: master
@@ -20,9 +21,9 @@ github_deploy:
     before_script:
         - echo "$DEPLOY_KEY_GITHUB" > ./deploy_key
         - chmod 0600 ./deploy_key
-        - git remote add github git@github.com:mallgroup/mpapi-client-php.git
-        - git config core.sshCommand 'ssh -o StrictHostKeyChecking=no'
     script:
+        - git remote add github git@github.com:mallgroup/mpapi-client-php.git
+        - git config core.sshCommand 'ssh -T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
         - ssh-agent bash -c 'ssh-add ./deploy_key; git push -v github master'
     after_script:
         - git remote remove github
