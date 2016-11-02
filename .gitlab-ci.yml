@@ -12,6 +12,8 @@ test:
     - composer install
   script:
     - ./vendor/bin/codecept run unit
+  after_script:
+    - rm -rf ./vendor
   tags:
     - php
 
