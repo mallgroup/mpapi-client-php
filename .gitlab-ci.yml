@@ -23,7 +23,7 @@ github_deploy:
         - git remote add github git@github.com:mallgroup/mpapi-client-php.git
         - git config core.sshCommand 'ssh -o StrictHostKeyChecking=no'
     script:
-        - ssh-agent bash -c 'ssh-add ./deploy_key; git pull -ff github +refs/heads/master:refs/remotes/origin/master; git push github refs/heads/master:refs/heads/master -v'
+        - ssh-agent bash -c 'ssh-add ./deploy_key; git push github HEAD:refs/heads/master'
     after_script:
         - git remote remove github
         - rm -f ./deploy_key
