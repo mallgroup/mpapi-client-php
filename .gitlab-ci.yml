@@ -21,7 +21,8 @@ github_deploy:
         - echo "$DEPLOY_KEY_GITHUB" > ./deploy_key
         - chmod 0600 ./deploy_key
     script:
-        - git -i ./deploy_key remote add github git@github.com:mallgroup/mpapi-client-php.git
+        - ssh -i ./deploy_key "$DEPLOY_REMOTE_REP"
+        - git remote add github git@github.com:mallgroup/mpapi-client-php.git
         - git fetch github
         - git push github
     after_script:
