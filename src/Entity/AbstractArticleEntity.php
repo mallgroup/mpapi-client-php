@@ -322,7 +322,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function setPriority($value)
 	{
-		if ((int) $value !== $this->getPriority()) {
+		if ((int) $value !== $this->getPriority() || !isset($this->data[self::KEY_PRIORITY])) {
 			$this->data[self::KEY_PRIORITY] = $value;
 		}
 		return $this;
@@ -438,7 +438,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function setInStock($value)
 	{
-		if ((int) $value !== $this->getInStock()) {
+		if ((int) $value !== $this->getInStock() || !isset($this->data[self::KEY_AVAILABILITY][self::KEY_IN_STOCK])) {
 			$this->data[self::KEY_AVAILABILITY][self::KEY_IN_STOCK] = $value;
 		}
 		return $this;
@@ -725,7 +725,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 *
 	 * @param string $labelName
 	 * @param string $from
-	 * @param string $from
+	 * @param string $to
 	 * @return AbstractArticleEntity
 	 */
 	public function addLabel($labelName, $from, $to)
@@ -776,7 +776,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function setDimensions($value)
 	{
-		if ($value !== $this->getDimensions()) {
+		if ($value !== $this->getDimensions() || !isset($this->data[self::KEY_DIMENSIONS])) {
 			$this->data[self::KEY_DIMENSIONS] = $value;
 		}
 		return $this;
@@ -886,7 +886,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function setDeliveryDelay($value)
 	{
-		if ((int) $value !== $this->getDeliveryDelay()) {
+		if ((int) $value !== $this->getDeliveryDelay() || !isset($this->data[self::KEY_DELIVERY_DELAY])) {
 			$this->data[self::KEY_DELIVERY_DELAY] = $value;
 		}
 		return $this;

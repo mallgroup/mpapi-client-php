@@ -325,7 +325,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setHeightMin($heightMin)
 	{
-		if ((double) $heightMin !== $this->getHeightMin()) {
+		if ((double) $heightMin !== $this->getHeightMin() || !isset($this->data[self::KEY_HEIGHT][self::KEY_MIN])) {
 			$this->changes[] = self::KEY_MIN_HEIGHT;
 			$this->data[self::KEY_HEIGHT][self::KEY_MIN] = (double) $heightMin;
 		}
@@ -383,7 +383,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function setLengthMin($lengthMin)
 	{
-		if ((double) $lengthMin !== $this->getLengthMin() || !isset($this->data[self::KEY_HEIGHT][self::KEY_MIN])) {
+		if ((double) $lengthMin !== $this->getLengthMin() || !isset($this->data[self::KEY_LENGTH][self::KEY_MIN])) {
 			$this->changes[] = self::KEY_MIN_LENGTH;
 			$this->data[self::KEY_LENGTH][self::KEY_MIN] = (double) $lengthMin;
 		}
