@@ -29,4 +29,4 @@ github_deploy:
         - git remote remove github
         - rm -f ./deploy_key
     only:
-        - master
+        - tags
