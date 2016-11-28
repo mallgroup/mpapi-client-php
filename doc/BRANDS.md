@@ -2,7 +2,7 @@
 
 ### Available methods:
 **GET**  
-This service have only one method, this method provides list of brands.
+This service has only one method, this method provides list of brands.
 ```
 <?php 
 ...
@@ -10,7 +10,7 @@ use MPAPI\Services\Brands;
 
 ...
 
-$categories = new Categories($mpapiClient);
+$brands = new Brands($mpapiClient);
 ...
 ``` 
 
@@ -42,7 +42,7 @@ The response contains array of brands:
 Search brands by phrase in title:
 ```
 ...
-$response = $categories->get()->searchBrands('BRAND'); 
+$response = $brands->get()->searchBrands('BRAND'); 
 ... 
 ```
 
@@ -51,11 +51,11 @@ The response contains an array of found brands:
  [
    [
     "title" => "Brand 1 - title",
-    "category_id" => "BRAND 1"
+    "brand_id" => "BRAND 1"
   ],
   [
     "title" => "Brand 2 - title",
-    "category_id" => "BRAND 2"
+    "brand_id" => "BRAND 2"
   ],
   ...
 ]
