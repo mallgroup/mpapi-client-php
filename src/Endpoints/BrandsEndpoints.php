@@ -33,7 +33,7 @@ class BrandsEndpoints extends AbstractEndpoints
 	 *
 	 * @return array|null
 	 */
-	public function categories()
+	public function brands()
 	{
 		$response = $this->client->sendRequest(self::ENDPOINT_PATH, 'GET');
 		$dataCollector = new DataCollector($this->client, $response);
