@@ -15,7 +15,7 @@ $mpapiClient->setLogger($logger);
 $brands = new Brands($mpapiClient);
 
 // // get all brands
-$response = $brands->get()->categories();
+$response = $brands->get()->brands();
 var_dump($response);
 
 // get brands by phrase
