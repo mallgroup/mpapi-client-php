@@ -46,7 +46,7 @@ class BrandsEndpoints extends AbstractEndpoints
 	 * @param string $phrase
 	 * @return array|null
 	 */
-	public function searchCategories($phrase)
+	public function searchBrands($phrase)
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_SEARCH, self::ENDPOINT_PATH, $phrase), 'GET');
 		$dataCollector = new DataCollector($this->client, $response);
