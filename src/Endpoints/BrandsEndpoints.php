@@ -31,7 +31,7 @@ class BrandsEndpoints extends AbstractEndpoints
 	/**
 	 * Get list of brands
 	 *
-	 * @return array|null
+	 * @return array
 	 */
 	public function brands()
 	{
@@ -43,12 +43,12 @@ class BrandsEndpoints extends AbstractEndpoints
 	/**
 	 * Search brands
 	 *
-	 * @param string $phrase
-	 * @return array|null
+	 * @param string $term
+	 * @return array
 	 */
-	public function searchBrands($phrase)
+	public function searchBrands($term)
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_SEARCH, self::ENDPOINT_PATH, $phrase), 'GET');
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_SEARCH, self::ENDPOINT_PATH, $term), 'GET');
 		$dataCollector = new DataCollector($this->client, $response);
 		return $dataCollector->getData();
 	}
