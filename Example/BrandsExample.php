@@ -14,7 +14,7 @@ $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
 $mpapiClient->setLogger($logger);
 $brands = new Brands($mpapiClient);
 
-// // get all brands
+// get all brands
 $response = $brands->get()->brands();
 var_dump($response);
 
