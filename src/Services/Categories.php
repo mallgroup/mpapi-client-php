@@ -18,19 +18,7 @@ class Categories extends AbstractService
 	private $client;
 
 	/**
-	 *
-	 * @var CategoriesEndpoints
-	 */
-	private $categoriesEndpoints;
-
-	/**
-	 *
-	 * @var string
-	 */
-	const PATH = 'category';
-
-	/**
-	 * Category constructor.
+	 * Category constructor
 	 *
 	 * @param Client $client
 	 */
@@ -40,9 +28,9 @@ class Categories extends AbstractService
 	}
 
 	/**
-	 * Get Data
+	 * Get list of categories endpoints
 	 *
-	 * @return array
+	 * @return CategoriesEndpoints
 	 */
 	public function get()
 	{

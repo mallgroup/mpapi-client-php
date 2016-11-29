@@ -22,7 +22,7 @@ var_dump($response);
 $response = $categories->get()->categoriesByPrefix('Lam');
 var_dump($response);
 
-// get categories by phrase
+// get categories by term
 $response = $categories->get()->searchCategories('desky');
 var_dump($response);
 

@@ -18,6 +18,6 @@ $brands = new Brands($mpapiClient);
 $response = $brands->get()->brands();
 var_dump($response);
 
-// get brands by phrase
+// get brands by term
 $response = $brands->get()->searchBrands('cal');
 var_dump($response);
