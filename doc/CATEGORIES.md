@@ -2,7 +2,7 @@
 
 ### Available methods:
 **GET**  
-This service have only one method, this method provides list of available categories.
+This service has only one method, this method provides list of available categories.
 ```
 <?php 
 ...
@@ -26,12 +26,12 @@ The response contains array of available categories:
 ```
  [
    [
-    "title" => "Category 1 - title",
-    "category_id" => "MPCAT01"
+    "category_id" => "MPCAT01",
+    "title" => "Category 1 - title"
   ],
   [
-    "title" => "MP Category 2 - title",
-    "category_id" => "MPCAT01"
+    "category_id" => "MPCAT01",
+    "title" => "MP Category 2 - title"
   ],
   ...
 ]
@@ -50,8 +50,8 @@ The response contains an array of found categories:
 ```
  [
    [
-    "title" => "Category 1 - title",
-    "category_id" => "MPCAT01"
+    "category_id" => "MPCAT01",
+    "title" => "Category 1 - title"
   ],
   ...
 ]
@@ -59,7 +59,7 @@ The response contains an array of found categories:
 ```
 
 #### Search in categories
-Search categories by phrase in title:
+Search categories by term in title:
 ```
 ...
 $response = $categories->get()->searchCategories('gory'); 
@@ -70,12 +70,12 @@ The response contains an array of found categories:
 ```
  [
    [
-    "title" => "Category 1 - title",
-    "category_id" => "MPCAT01"
+    "category_id" => "MPCAT01",
+    "title" => "Category 1 - title"
   ],
   [
-    "title" => "MP Category 2 - title",
-    "category_id" => "MPCAT01"
+    "category_id" => "MPCAT01",
+    "title" => "MP Category 2 - title"
   ],
   ...
 ]
@@ -94,16 +94,16 @@ The response contains an array of found parameters:
 ```
  [
   [
-    "title" => "Barva",
-    "param_id" => "MP_COLOR"
+    "param_id" => "MP_COLOR",
+    "title" => "Barva"
   ],
   [
-    "title" => "Velikost",
-    "param_id" => "MP_SIZE"
+    "param_id" => "MP_SIZE",
+    "title" => "Velikost"
   ],
   [
-    "title" => "Určení produktu",
-    "param_id" => "MP_DETERMINATION_PRODUCT"
+    "param_id" => "MP_DETERMINATION_PRODUCT",
+    "title" => "Určení produktu"
   ]
   ...
 ]

@@ -26,12 +26,12 @@ The response contains array of brands:
 ```
  [
    [
-    "title" => "Brand 1 - title",
-    "brand_id" => "BRAND 1"
+    "brand_id" => "BRAND 1",
+    "title" => "Brand 1 - title"
   ],
   [
-    "title" => "Brand 2 - title",
-    "brand_id" => "BRAND 2"
+    "brand_id" => "BRAND 2",
+    "title" => "Brand 2 - title"
   ],
   ...
 ]
@@ -39,7 +39,7 @@ The response contains array of brands:
 ```
 
 #### Search in brands
-Search brands by phrase in title:
+Search brands by term in title:
 ```
 ...
 $response = $brands->get()->searchBrands('BRAND'); 
@@ -50,12 +50,12 @@ The response contains an array of found brands:
 ```
  [
    [
-    "title" => "Brand 1 - title",
-    "brand_id" => "BRAND 1"
+    "brand_id" => "BRAND 1",
+    "title" => "Brand 1 - title"
   ],
   [
-    "title" => "Brand 2 - title",
-    "brand_id" => "BRAND 2"
+    "brand_id" => "BRAND 2",
+    "title" => "Brand 2 - title"
   ],
   ...
 ]
