@@ -7,7 +7,7 @@ use MPAPI\Entity\Order;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
+$mpapiClient = new Client('your_client_id');
 
 $logger = new Logger('loggerName');
 $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
@@ -31,9 +31,9 @@ foreach ($unconfirmedOrders as $orderId) {
 	print('Unconfirmed order: ' . $orderId . PHP_EOL);
 }
 
-// get all orders with statuses
-$ordersList = $orders->get()->allOrders();
-// print list of all orders
+// get all orders data
+$ordersList = $orders->get()->all();
+// print list of all orders data
 var_dump($ordersList);
 
 if (!empty($openOrders)) {
