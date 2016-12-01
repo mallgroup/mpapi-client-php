@@ -12,8 +12,36 @@ $orders = new Orders($mpapiClient);
 
 #### Available methods:
 **GET**  
-You can get either information about specific order or information about all open/unconfirmed orders:
+You can get either information about specific order or information about all orders or open/unconfirmed orders:
 ```
+...
+// get all orders
+$allOrders = $orders->get()->all();
+```
+The response contains basic data of all orders:  
+```
+[
+    [
+        "id": 8977390306,
+        "purchase_id": 89773903,
+        "name": "John Doe",
+        "cod_price": 229,
+        "ship_date": "2016-12-01",
+        "status": "delivered",
+        "confirmed": false
+    ],
+    [
+        "id": 8978607802,
+        "purchase_id": 89786078,
+        "name": "John Doe",
+        "cod_price": 0,
+        "ship_date": "2016-12-01",
+        "status": "cancelled",
+        "confirmed": false
+    ],
+    ...
+]
+
 ...
 // get all open orders
 $openOrders = $orders->get()->open();
