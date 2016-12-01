@@ -66,7 +66,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	}
 
 	/**
-	 * Get list of all orders with statuses
+	 * Get list of all orders
 	 *
 	 * @return array
 	 */
