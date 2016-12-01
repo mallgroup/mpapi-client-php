@@ -22,7 +22,7 @@ The response contains basic data of all orders:
 ```
 [
     [
-        "id": 12345675,
+		"id": 12345675,
 		"purchase_id": 98653274,
 		"customer": "John Doe",
 		"cod": 25,
