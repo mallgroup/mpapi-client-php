@@ -22,22 +22,22 @@ The response contains basic data of all orders:
 ```
 [
     [
-        "id": 8977390306,
-        "purchase_id": 89773903,
-        "customer": "John Doe",
-        "cod": 229,
-        "ship_date": "2016-12-01",
-        "status": "delivered",
-        "confirmed": false
+        "id": 12345675,
+		"purchase_id": 98653274,
+		"customer": "John Doe",
+		"cod": 25,
+		"ship_date": "2016-12-10",
+		"status": "shipping",
+		"confirmed": true
     ],
     [
-        "id": 8978607802,
-        "purchase_id": 89786078,
-        "customer": "John Doe",
-        "cod": 0,
-        "ship_date": "2016-12-01",
-        "status": "cancelled",
-        "confirmed": false
+		"id": 9876543,
+		"purchase_id": 12457896,
+		"customer": "Jane Doe",
+		"cod": 0,
+		"ship_date": "2016-10-21",
+		"status": "cancelled",
+		"confirmed": false
     ],
     ...
 ]
