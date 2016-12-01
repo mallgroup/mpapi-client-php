@@ -70,7 +70,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	 *
 	 * @return array
 	 */
-	public function allOrders()
+	public function all()
 	{
 		$response = $this->client->sendRequest(self::ENDPOINT_PATH, 'GET');
 		$dataCollector = new DataCollector($this->client, $response, false);
