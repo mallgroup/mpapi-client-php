@@ -24,8 +24,8 @@ The response contains basic data of all orders:
     [
         "id": 8977390306,
         "purchase_id": 89773903,
-        "name": "John Doe",
-        "cod_price": 229,
+        "customer": "John Doe",
+        "cod": 229,
         "ship_date": "2016-12-01",
         "status": "delivered",
         "confirmed": false
@@ -33,8 +33,8 @@ The response contains basic data of all orders:
     [
         "id": 8978607802,
         "purchase_id": 89786078,
-        "name": "John Doe",
-        "cod_price": 0,
+        "customer": "John Doe",
+        "cod": 0,
         "ship_date": "2016-12-01",
         "status": "cancelled",
         "confirmed": false
