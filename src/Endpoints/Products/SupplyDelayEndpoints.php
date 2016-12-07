@@ -14,12 +14,12 @@ class SupplyDelayEndpoints extends AbstractEndpoints
 	 *
 	 * @var string
 	 */
-	const ENDPOINT_PATH = 'products/%s/supply-delay%s';
+	const ENDPOINT_PATH_PRODUCT = 'products/%s/supply-delay';
 
 	/**
 	 * @var string
 	 */
-	const ENDPOINT_PATH_VARIANT = '/%s';
+	const ENDPOINT_PATH_VARIANT = 'products/%s/variants/%s/supply-delay';
 
 	/**
 	 *
@@ -60,8 +60,8 @@ class SupplyDelayEndpoints extends AbstractEndpoints
 	/**
 	 *
 	 * @param \MPAPI\Services\Client $client
-	 * @param type $productId
-	 * @param type $variantId
+	 * @param string $productId
+	 * @param string $variantId
 	 */
 	public function __construct(\MPAPI\Services\Client $client, $productId, $variantId = null)
 	{
@@ -71,7 +71,7 @@ class SupplyDelayEndpoints extends AbstractEndpoints
 	}
 
 	/**
-	 * Get list of brands
+	 * Get supply delay
 	 *
 	 * @return array
 	 */
@@ -109,7 +109,7 @@ class SupplyDelayEndpoints extends AbstractEndpoints
 	 * @param \DateTime $validFrom = null
 	 * @return array
 	 */
-	public function update(\DateTime $validTo, \DateTime $validFrom = null)
+	public function put(\DateTime $validTo, \DateTime $validFrom = null)
 	{
 		$requestData = [
 			self::KEY_VALID_FROM => $validFrom->format(self::DEFAULT_DATE_FORMAT)
@@ -141,10 +141,11 @@ class SupplyDelayEndpoints extends AbstractEndpoints
 	 */
 	private function buildRequestUrl()
 	{
-		$variantPath = null;
 		if (!empty($this->variantId)) {
-			$variantPath = sprintf(self::ENDPOINT_PATH_VARIANT, $this->variantId);
+			$requestPath = sprintf(self::ENDPOINT_PATH_VARIANT, $this->productId, $this->variantId);
+		} else {
+			$requestPath = sprintf(self::ENDPOINT_PATH_PRODUCT, $this->productId);
 		}
-		return sprintf(self::ENDPOINT_PATH, $this->productId, $variantPath);
+		return $requestPath;
 	}
 }
