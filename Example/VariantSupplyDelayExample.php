@@ -29,7 +29,7 @@ $products = new Products($mpapiClient);
 // create object with actual date/time
 $validFrom = new DateTime();
 $validTo = new DateTime();
-// modify date - add 10 days
+// modify date - add 12 days
 $validTo->modify('+12 day');
 
 /**
