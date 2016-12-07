@@ -29,6 +29,5 @@ github_deploy:
     after_script:
         - git remote remove github
         - rm -f ./deploy_key
-        - rm -rf ./builds
     only:
         - tags
