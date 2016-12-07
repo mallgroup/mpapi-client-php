@@ -25,42 +25,54 @@ $products = new Products($mpapiClient);
  * #################################
  */
 // create object with actual date/time
-$currentDate = new DateTime();
+$validFrom = new DateTime();
+$validTo = new DateTime();
 // modify date - add 10 days
-$futureDate = $currentDate->modify('+ 10 days');
+$validTo->modify('+10 day');
 
 /**
- * It can be sent just end of validity
+ * You can also send only end of validity
  */
-$response = $products->supplyDelay($productId)->post($futureDate);
-var_dump($response->getData());
+$delayCreated = $products->supplyDelay($productId)->post($validTo);
+print('Setup supply delay: ');
+var_dump($delayCreated);
+print(PHP_EOL);
 
 /**
- * or it can be sent both dates (valid from and valid to)
+ * or you can send both valid from and valid to date
  */
-$response = $products->supplyDelay($productId)->post($futureDate, $currentDate);
+$delayCreatedBothDate = $products->supplyDelay($productId)->post($validTo, $validFrom);
+print('Setup supply delay with both dates: ');
+var_dump($delayCreatedBothDate);
+print(PHP_EOL);
 
 /**
  * #######################################
  *  UPDATE EXISTING PRODUCT SUPPLY DELAY
  * #######################################
  */
-$updatedValidTo = $futureDate->modify('+5 days');
-$response = $products->supplyDelay($productId)->put($updatedValidTo);
-var_dump($response);
+$updatedValidTo = $validTo->modify('+5 day');
+$delayUpdated = $products->supplyDelay($productId)->put($updatedValidTo);
+print('Update supply delay: ');
+var_dump($delayUpdated);
+print(PHP_EOL);
 
 /**
  * #############################
  *   GET PRODUCT SUPPLY DELAY
  * #############################
  */
-$response = $products->supplyDelay($productId)->get();
-var_dump($response);
+$delayDetail = $products->supplyDelay($productId)->get();
+print('Get supply delay: ');
+var_dump($delayDetail);
+print(PHP_EOL);
 
 /**
  * ###############################
  *   DELETE PRODUCT SUPPLY DELAY
  * ###############################
  */
-$response = $products->supplyDelay($productId)->delete();
-var_dump($response);
+$deleteDelay = $products->supplyDelay($productId)->delete();
+print('Delete supply delay: ');
+var_dump($deleteDelay);
+print(PHP_EOL);

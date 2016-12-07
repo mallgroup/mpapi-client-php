@@ -86,20 +86,20 @@ class SupplyDelayEndpoints extends AbstractEndpoints
 	 *
 	 * @param \DateTime $validTo
 	 * @param \DateTime $validFrom = null
-	 * @return array
+	 * @return boolean
 	 */
 	public function post(\DateTime $validTo, \DateTime $validFrom = null)
 	{
 		$requestData = [
-			self::KEY_VALID_FROM => $validFrom->format(self::DEFAULT_DATE_FORMAT)
+			self::KEY_VALID_TO => $validTo->format(self::DEFAULT_DATE_FORMAT)
 		];
 
 		if ($validFrom !== null) {
-			$requestData[self::KEY_VALID_TO] = $validTo->format(self::DEFAULT_DATE_FORMAT);
+			$requestData[self::KEY_VALID_FROM] = $validFrom->format(self::DEFAULT_DATE_FORMAT);
 		}
 
 		$response = $this->client->sendRequest($this->buildRequestUrl(), 'POST', $requestData);
-		return json_decode($response->getBody(), true)['data'];
+		return $response->getStatusCode() == 200 || $response->getStatusCode() == 201;
 	}
 
 	/**
@@ -112,15 +112,15 @@ class SupplyDelayEndpoints extends AbstractEndpoints
 	public function put(\DateTime $validTo, \DateTime $validFrom = null)
 	{
 		$requestData = [
-			self::KEY_VALID_FROM => $validFrom->format(self::DEFAULT_DATE_FORMAT)
+			self::KEY_VALID_TO => $validTo->format(self::DEFAULT_DATE_FORMAT)
 		];
 
 		if ($validFrom !== null) {
-			$requestData[self::KEY_VALID_TO] = $validTo->format(self::DEFAULT_DATE_FORMAT);
+			$requestData[self::KEY_VALID_FROM] = $validFrom->format(self::DEFAULT_DATE_FORMAT);
 		}
 
 		$response = $this->client->sendRequest($this->buildRequestUrl(), 'PUT', $requestData);
-		return json_decode($response->getBody(), true)['data'];
+		return $response->getStatusCode() == 200;
 	}
 
 	/**
@@ -131,7 +131,7 @@ class SupplyDelayEndpoints extends AbstractEndpoints
 	public function delete()
 	{
 		$response = $this->client->sendRequest($this->buildRequestUrl(), 'DELETE');
-		return json_decode($response->getBody(), true)['data'];
+		return $response->getStatusCode() == 200 || $response->getStatusCode() == 204;
 	}
 
 	/**

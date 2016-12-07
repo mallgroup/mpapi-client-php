@@ -14,9 +14,9 @@ $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
 $mpapiClient->setLogger($logger);
 
 // your product id
-$productId = 'pTU00_test';
+$productId = 'pTU00_test1';
 // your variant id
-$variantId = 'vt0001';
+$variantId = 'p50_white_XL1';
 
 // Initialize products service
 $products = new Products($mpapiClient);
@@ -27,42 +27,55 @@ $products = new Products($mpapiClient);
  * #################################
  */
 // create object with actual date/time
-$currentDate = new DateTime();
+$validFrom = new DateTime();
+$validTo = new DateTime();
 // modify date - add 10 days
-$futureDate = $currentDate->modify('+ 12 days');
+$validTo->modify('+12 day');
 
 /**
- * It can be sent just end of validity
+ * You can also send only end of validity
  */
-$response = $products->variants()->supplyDelay($productId, $variantId)->post($futureDate);
-var_dump($response->getData());
+$delayCreated = $products->variants()->supplyDelay($productId, $variantId)->post($validTo);
+print('Setup supply delay: ');
+var_dump($delayCreated);
+print(PHP_EOL);
 
 /**
- * or it can be sent both dates (valid from and valid to)
+ * or you can send both valid from and valid to date
  */
-$response = $products->variants()->supplyDelay($productId, $variantId)->post($futureDate, $currentDate);
+$delayCreatedBothDate = $products->variants()->supplyDelay($productId, $variantId)->post($validTo, $validFrom);
+print('Setup supply delay with both dates: ');
+var_dump($delayCreatedBothDate);
+print(PHP_EOL);
 
 /**
  * #######################################
  *  UPDATE EXISTING VARIANT SUPPLY DELAY
  * #######################################
  */
-$updatedValidTo = $futureDate->modify('+5 days');
-$response = $products->variants()->supplyDelay($productId, $variantId)->put($updatedValidTo);
-var_dump($response);
+$updatedValidTo = $validTo->modify('+5 day');
+$delayUpdated = $products->variants()->supplyDelay($productId, $variantId)->put($updatedValidTo);
+print('Update supply delay: ');
+var_dump($delayUpdated);
+print(PHP_EOL);
+
 
 /**
  * #############################
  *   GET PRODUCT SUPPLY DELAY
  * #############################
  */
-$response = $products->variants()->supplyDelay($productId, $variantId)->get();
-var_dump($response);
+$delayDetail = $products->variants()->supplyDelay($productId, $variantId)->get();
+print('Get supply delay: ');
+var_dump($delayDetail);
+print(PHP_EOL);
 
 /**
  * ###############################
  *   DELETE VARIANT SUPPLY DELAY
  * ###############################
  */
-$response = $products->variants()->supplyDelay($productId, $variantId)->delete();
-var_dump($response);
+$deleteDelay = $products->variants()->supplyDelay($productId, $variantId)->delete();
+print('Delete supply delay: ');
+var_dump($deleteDelay);
+print(PHP_EOL);
