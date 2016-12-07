@@ -54,6 +54,8 @@ For more examples how to use specific services see following links:
 * [Products](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/PRODUCTS.md) – create, update, delete or get data.  
 * [Variants](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/VARIANTS.md) – create, update, delete or get data.  
 * [Availability](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/AVAILABILITY.md) – update product or variant.  
+* [Product supply delay](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/PRODUCT_SUPPLY_DELAY.md) – create, update, delete or get product supply delay.  
+* [Variant supply delay](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/VARIANT_SUPPLY_DELAY.md) – create, update, delete or get variant supply delay.  
 * [Orders](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/ORDERS.md) - get information about specific order, get all order IDs of open or unconfirmed orders, change order status.  
 * [Deliveries](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/DELIVERIES.md) - get, create or update delivery setup list.  
 * [Labels](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/LABELS.md) - get list of available labels.  
