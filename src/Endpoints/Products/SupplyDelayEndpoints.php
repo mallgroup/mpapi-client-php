@@ -1,0 +1,150 @@
+<?php
+namespace MPAPI\Endpoints\Products;
+
+use MPAPI\Endpoints\AbstractEndpoints;
+
+/**
+ * Supply delay endpoints
+ *
+ * @author Jan Blaha <jan.blaha@mall.cz>
+ */
+class SupplyDelayEndpoints extends AbstractEndpoints
+{
+	/**
+	 *
+	 * @var string
+	 */
+	const ENDPOINT_PATH = 'products/%s/supply-delay%s';
+
+	/**
+	 * @var string
+	 */
+	const ENDPOINT_PATH_VARIANT = '/%s';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_VALID_FROM = 'valid_from';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_VALID_TO = 'valid_to';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const DEFAULT_DATE_FORMAT = 'Y-m-d H:i:s';
+
+	/**
+	 *
+	 * @var Client
+	 */
+	protected $client;
+
+	/**
+	 *
+	 * @var string $productId
+	 */
+	private $productId;
+
+	/**
+	 *
+	 * @var string $variantId
+	 */
+	private $variantId;
+
+	/**
+	 *
+	 * @param \MPAPI\Services\Client $client
+	 * @param type $productId
+	 * @param type $variantId
+	 */
+	public function __construct(\MPAPI\Services\Client $client, $productId, $variantId = null)
+	{
+		parent::__construct($client);
+		$this->productId = $productId;
+		$this->variantId = $variantId;
+	}
+
+	/**
+	 * Get list of brands
+	 *
+	 * @return array
+	 */
+	public function get()
+	{
+		$response = $this->client->sendRequest($this->buildRequestUrl(), 'GET');
+		return json_decode($response->getBody(), true)['data'];
+	}
+
+	/**
+	 * Create new supply delay
+	 *
+	 * @param \DateTime $validTo
+	 * @param \DateTime $validFrom = null
+	 * @return array
+	 */
+	public function post(\DateTime $validTo, \DateTime $validFrom = null)
+	{
+		$requestData = [
+			self::KEY_VALID_FROM => $validFrom->format(self::DEFAULT_DATE_FORMAT)
+		];
+
+		if ($validFrom !== null) {
+			$requestData[self::KEY_VALID_TO] = $validTo->format(self::DEFAULT_DATE_FORMAT);
+		}
+
+		$response = $this->client->sendRequest($this->buildRequestUrl(), 'POST', $requestData);
+		return json_decode($response->getBody(), true)['data'];
+	}
+
+	/**
+	 * Update supply delay
+	 *
+	 * @param \DateTime $validTo
+	 * @param \DateTime $validFrom = null
+	 * @return array
+	 */
+	public function update(\DateTime $validTo, \DateTime $validFrom = null)
+	{
+		$requestData = [
+			self::KEY_VALID_FROM => $validFrom->format(self::DEFAULT_DATE_FORMAT)
+		];
+
+		if ($validFrom !== null) {
+			$requestData[self::KEY_VALID_TO] = $validTo->format(self::DEFAULT_DATE_FORMAT);
+		}
+
+		$response = $this->client->sendRequest($this->buildRequestUrl(), 'PUT', $requestData);
+		return json_decode($response->getBody(), true)['data'];
+	}
+
+	/**
+	 * Delete supply delay
+	 *
+	 * @return array
+	 */
+	public function delete()
+	{
+		$response = $this->client->sendRequest($this->buildRequestUrl(), 'DELETE');
+		return json_decode($response->getBody(), true)['data'];
+	}
+
+	/**
+	 * Build request URL
+	 *
+	 * @return string
+	 */
+	private function buildRequestUrl()
+	{
+		$variantPath = null;
+		if (!empty($this->variantId)) {
+			$variantPath = sprintf(self::ENDPOINT_PATH_VARIANT, $this->variantId);
+		}
+		return sprintf(self::ENDPOINT_PATH, $this->productId, $variantPath);
+	}
+}
