@@ -73,7 +73,7 @@ __labels__ (array) - labels data of the variant; labels are used for sorting pro
 __dimensions__ (array) - dimensions of the variant; structure: weight (number, 3 decimal points float format) - weight in kg, width (number, 1 decimal point float format) - width in cm, height (number, 1 decimal point float format) - width in cm, Length (number, 1 decimal point float format) - width in cm,  
 __availability*__ (array) - availability of variant. Structure: id* (string) - id of the variant, status* (string) - status of variant availability, in_stock* (number) - amount of items available in stock (max. 9999),  
 __recommended__ (array) - ids of recommended products; max. limit of recommended products / variants is 30,  
-__delivery_delay__ (number) - number of days the delivery will be delayed for the variant; delivery delay can be extend with [supply delay](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/VARIANT_SUPPLY_DELAY.md); value 0 means the item can be delivered the same day; if the value is the same for all variants, it is enough to use the attribute only in the product data structure.  
+__delivery_delay__ (number) - number of days the delivery will be delayed for the variant; value 0 means the item can be delivered the same day; if the value is the same for all variants, it is sufficient to use the attribute only in the product data structure.  
 
 *Those attributes marked with * are required.* 
 

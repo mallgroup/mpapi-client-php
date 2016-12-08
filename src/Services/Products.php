@@ -104,7 +104,7 @@ class Products extends AbstractService
         }
 
         if (!empty($errors)) {
-            $this->client->getLogger()->error('Error during post products', $errors);
+            $this->client->getLogger()->error('Failed to delete products', $errors);
             $exception = new ApplicationException();
             $exception->setData($errors);
             throw $exception;
@@ -144,8 +144,8 @@ class Products extends AbstractService
         }
 
         if (!empty($errors)) {
-            $this->client->getLogger()->error('Error during post products', $errors);
-            $exception = new ApplicationException('Error during post products: ' . implode(', ', $errors));
+            $this->client->getLogger()->error('Failed to post products', $errors);
+            $exception = new ApplicationException('Failed to post products: ' . implode(', ', $errors));
             throw $exception;
         }
 
@@ -184,7 +184,7 @@ class Products extends AbstractService
         }
 
         if (!empty($errors)) {
-            $this->client->getLogger()->error('Error during post products', $errors);
+            $this->client->getLogger()->error('Failed to update products', $errors);
             $exception = new ApplicationException();
             $exception->setData($errors);
             throw $exception;
