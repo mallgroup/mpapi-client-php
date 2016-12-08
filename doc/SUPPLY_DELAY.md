@@ -20,7 +20,7 @@ $validTo->modify('+10 day');
 
 ### Available methods:
 **GET**  
-The method returns supply delay data
+The method returns supply delay data.
 ```
 ...
 // get supply delay for product
