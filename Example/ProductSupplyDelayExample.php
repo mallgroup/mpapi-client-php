@@ -31,7 +31,7 @@ $validTo = new DateTime();
 $validTo->modify('+10 day');
 
 /**
- * You can also send only end of validity
+ * You can send only end of validity
  */
 $delayCreated = $products->supplyDelay($productId)->post($validTo);
 print('Setup supply delay: ');
@@ -41,9 +41,9 @@ print(PHP_EOL);
 /**
  * or you can send both valid from and valid to date
  */
-$delayCreatedBothDate = $products->supplyDelay($productId)->post($validTo, $validFrom);
+$delayCreated2 = $products->supplyDelay($productId)->post($validTo, $validFrom);
 print('Setup supply delay with both dates: ');
-var_dump($delayCreatedBothDate);
+var_dump($delayCreated2);
 print(PHP_EOL);
 
 /**

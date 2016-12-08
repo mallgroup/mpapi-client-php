@@ -33,7 +33,7 @@ $validTo = new DateTime();
 $validTo->modify('+12 day');
 
 /**
- * You can also send only end of validity
+ * You can send only end of validity
  */
 $delayCreated = $products->variants()->supplyDelay($productId, $variantId)->post($validTo);
 print('Setup supply delay: ');
@@ -43,9 +43,9 @@ print(PHP_EOL);
 /**
  * or you can send both valid from and valid to date
  */
-$delayCreatedBothDate = $products->variants()->supplyDelay($productId, $variantId)->post($validTo, $validFrom);
+$delayCreated2 = $products->variants()->supplyDelay($productId, $variantId)->post($validTo, $validFrom);
 print('Setup supply delay with both dates: ');
-var_dump($delayCreatedBothDate);
+var_dump($delayCreated2);
 print(PHP_EOL);
 
 /**
