@@ -66,7 +66,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	}
 
 	/**
-	 * Get list of orders data
+	 * Get list of orders with basic detail
 	 *
 	 * @return array
 	 */
