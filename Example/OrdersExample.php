@@ -31,9 +31,14 @@ foreach ($unconfirmedOrders as $orderId) {
 	print('Unconfirmed order: ' . $orderId . PHP_EOL);
 }
 
+// get all orders data
+$ordersList = $orders->get()->all();
+// print list of all orders data
+var_dump($ordersList);
+
 if (!empty($openOrders)) {
 	// get order detail
-	/* @var $order MPAPI\Entity\Order */
+	/* @var MPAPI\Entity\Order $order */
 	$order = $orders->get()->detail($openOrders[0]);
 	// print order detail
 	var_dump($order->getData());

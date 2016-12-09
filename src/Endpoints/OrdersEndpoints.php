@@ -65,6 +65,18 @@ class OrdersEndpoints extends AbstractEndpoints
 		return $dataCollector->setDataSection('ids')->getData();
 	}
 
+	/**
+	 * Get list of orders data
+	 *
+	 * @return array
+	 */
+	public function all()
+	{
+		$response = $this->client->sendRequest(self::ENDPOINT_PATH, 'GET');
+		$dataCollector = new DataCollector($this->client, $response, false);
+		return $dataCollector->getData();
+	}
+
 
 	/**
 	 * Get order detail
