@@ -153,12 +153,6 @@ class Order extends AbstractEntity
 	 *
 	 * @var string
 	 */
-	const KEY_EXTERNAL_DELIVERY_METHOD_ID = 'external_delivery_method_id';
-
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_TRANSPORT_ID = 'transport_id';
 
 	/**
@@ -314,7 +308,7 @@ class Order extends AbstractEntity
 			'delivery_price' => (float)$this->getDeliveryPrice(),
 			'cod_price' => (float)$this->getDeliveryCodPrice(),
 			'discount' => (float)$this->getDiscount(),
-			'delivery_method' => $this->getExternalDeliveryMethodId(),
+			'delivery_method' => $this->getDeliveryMethod(),
 			'delivery_method_id' => (int)$this->getDeliveryMethodId(),
 			'ship_date' => $this->getDeliveryDate(),
 			'delivery_date' => $this->getDeliveryDate(),
@@ -543,18 +537,6 @@ class Order extends AbstractEntity
 		$retval = 0;
 		if (!empty($this->data[self::KEY_DELIVERY_COD_PRICE])) {
 			$retval = $this->data[self::KEY_DELIVERY_COD_PRICE];
-		}
-		return $retval;
-	}
-
-	/**
-	 * return string
-	 */
-	public function getExternalDeliveryMethodId()
-	{
-		$retval = '';
-		if (!empty($this->data[self::KEY_EXTERNAL_DELIVERY_METHOD_ID])) {
-			$retval = $this->data[self::KEY_EXTERNAL_DELIVERY_METHOD_ID];
 		}
 		return $retval;
 	}
