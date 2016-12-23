@@ -23,9 +23,9 @@ github_deploy:
         - echo "$DEPLOY_KEY_GITHUB" > ./deploy_key
         - chmod 0600 ./deploy_key
     script:
-        - git config core.sshCommand "ssh -v -T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+        - git config core.sshCommand "ssh -i ./deploy_key -v -T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
         - git remote add github git@github.com:mallgroup/mpapi-client-php.git
-        - ssh-agent bash -c "ssh-add ./deploy_key; git push github HEAD:master"
+        - git push github HEAD:master
     after_script:
         - git remote remove github
         - rm -f ./deploy_key
