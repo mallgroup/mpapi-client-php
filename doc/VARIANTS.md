@@ -60,8 +60,8 @@ List of attributes:
 
 __id*__ (string, max. 50 chars) - id of variant,  
 __title*__ (string, max. 200 chars) - title of variant,  
-__shortdesc*__ (string, max. 2000 chars) - short description of the variant,  
-__longdesc*__ (string, max. 5000 chars) - long description of the variant; it can contain simple formatting like \<strong\>bold text\</strong\>),  
+__shortdesc*__ (string, max. 300 chars) - short description of the variant,  
+__longdesc*__ (string, max. 4000 chars) - long description of the variant; it can contain simple formatting like \<strong\>bold text\</strong\>),  
 __priority*__ (number, max. 10 chars) - priority to sort products' variants on the list - the higher number the higher priority,  
 __barcode__ (string, 13 chars) - EAN code of variant,  
 __price*__ (number, max. 11 chars) - promotion price,   
@@ -71,7 +71,7 @@ __media*__ (array) - product media; supported types are: JPEG, GIF, PNG, the for
 __promotions__ (array) - promotions data of variant. Promotion is highlighted on the product list/detail of product. price* (number) - promotion price, from* (string, Y-m-d H:i:s) - date and time of promotion start, to* (string, Y-m-d H:i:s) - date and time of promotion end,  
 __labels__ (array) - labels data of the variant; labels are used for sorting products, each product can have assigned any number of valid labels; there are some standard labels - if you want to use special labels, they have to be created in cooperation with MALL: label* (string, max. 32 chars) - code of the label, from* (string, Y-m-d H:i:s) - date and time to start label's validity, to* (string, Y-m-d H:i:s) - date and time to finish label's validity (Y-m-d H:i:s),      
 __dimensions__ (array) - dimensions of the variant; structure: weight (number, 3 decimal points float format) - weight in kg, width (number, 1 decimal point float format) - width in cm, height (number, 1 decimal point float format) - width in cm, Length (number, 1 decimal point float format) - width in cm,  
-__availability*__ (array) - availability of variant. Structure: id* (string) - id of the variant, status* (string) - status of variant availability, in_stock* (number) - amount of items available in stock (max. 9999),  
+__availability*__ (array) - availability of variant. Structure: status* (string) - status of variant availability, in_stock* (number) - amount of items available in stock (max. 9999),  
 __recommended__ (array) - ids of recommended products; max. limit of recommended products / variants is 30,  
 __delivery_delay__ (number) - number of days the delivery will be delayed for the variant; value 0 means the item can be delivered the same day; if the value is the same for all variants, it is enough to use the attribute only in the product data structure.  
 

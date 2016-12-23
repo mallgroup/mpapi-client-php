@@ -112,12 +112,12 @@ List of attributes:
 
 __id*__ (string, max. 50 chars) - id of product,  
 __category_id*__ (string , max. 10 chars) - category id,  
-__brand_id__ (string , max. 20 chars) - brand id, strongly recommended to use; iIf you use brand id, the final title is composed of brand id + title,  
-__title*__ (string, max. 200 chars) - title of product,  
-__shortdesc*__ (string, max. 2000 chars) - short description of the product,  
-__longdesc*__ (string, max. 5000 chars) - long description of the product; it can contain simple formatting like \<strong\>bold text\</strong\>),  
+__brand_id__ (string , max. 20 chars) - brand id, strongly recommended to use; if you use brand id, the final title is composed of brand id + title,  
+__title*__ (string, max. 200 chars) - title of the product,  
+__shortdesc*__ (string, max. 300 chars) - short description of the product,  
+__longdesc*__ (string, max. 4000 chars included HTML tags) - long description of the product; it can contain simple formatting like \<strong\>bold text\</strong\>),  
 __priority*__ (number, max. 10 chars) - priority to sort products (or products' variants) on the list - the higher number the higher priority,  
-__barcode*__ (string, 13 chars) - EAN code of product/variant; if the product has variants, use this attribute only in the variant data structure,  
+__barcode*__ (string, 13 chars) - EAN code of the product/variant; if the product has variants, use this attribute only in the variant data structure,  
 __price*__ (number, max. 11 chars) - promotion price,  
 __vat*__ (number, max. 13 chars) - VAT rate in percentage,  
 __rrp__ (number, max. 11 chars) - recommended retail price; if the product has variants, use this attribute only in the variant data structure,  
@@ -128,8 +128,7 @@ __labels__ (array) - labels data of product/variant; labels are used for sorting
 __variants__ (array) - if the product has variants, array of variants is used with the same structure as product,  
 __variable_parameters__ (array) - variable parameters of variants (e.g. ['MP_COLOR', 'MP_SIZE']), required only if the product has variants,  
 __dimensions__ (array) - dimensions of the product or variant; if the product has variants, use this attribute only in the variant data structure: weight (number, 3 decimal points float format) - weight in kg, width (number, 1 decimal point float format) - width in cm, height (number, 1 decimal point float format) - width in cm, Length (number, 1 decimal point float format) - width in cm,  
-__availability*__ (array) - availability of product/variant (if the product has variants, use this attribute only in the variant data structure): id* (string) - id of the product, status* (string) - status of product availability, in_stock* (number) - amount of items available in stock (max. 9999),  
-__delivery_setup__ (string, max. 50 chars) - id of delivery setup,  
+__availability*__ (array) - availability of product/variant (if the product has variants, use this attribute only in the variant data structure): status* (string) - status of product availability, in_stock* (number) - amount of items available in stock (max. 9999),  
 __recommended__ (array) - ids of recommended products; if the product has variants, use this attribute only in the variant data structure); max. limit of recommended products / variants is 30,  
 __delivery_delay__ (number) - number of days the delivery will be delayed for the product or variant; value 0 means the item can be delivered the same day; if the product has variants and they have different value, use this attribute in the variant data structure; if the value is the same for all variants, it is enough to use the attribute only in the product data structure.  
 

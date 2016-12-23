@@ -133,9 +133,9 @@ class OrderTest extends \Codeception\Test\Unit
 		$this->assertEmpty($this->object->getDeliveryCodPrice());
 	}
 
-	public function testGetExternalDeliveryMethodId()
+	public function getDeliveryMethod()
 	{
-		$this->assertEmpty($this->object->getExternalDeliveryMethodId());
+		$this->assertEmpty($this->object->getDeliveryMethod());
 	}
 
 	public function testGetTransportId()
