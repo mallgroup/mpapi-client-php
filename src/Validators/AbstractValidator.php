@@ -93,6 +93,12 @@ abstract class AbstractValidator
 
 	/**
 	 *
+	 * @var integer
+	 */
+	const MAX_LONGDESC_LENGTH = 13000;
+
+	/**
+	 *
 	 * @var bool
 	 */
 	protected $forceTokenUsed = false;

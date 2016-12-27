@@ -185,8 +185,8 @@ class ProductValidator extends AbstractValidator
 		}
 
 		// product longdesc
-		if ($this->validateLength($validationData[Product::KEY_LONGDESC], 13000) === false) {
-			throw $this->generateThrow(sprintf(ValidatorException::MSG_INVALID_VALUE_MAX_LENGTH, Product::KEY_LONGDESC, $validationData[Product::KEY_LONGDESC], 13000), [
+		if ($this->validateLength($validationData[Product::KEY_LONGDESC], self::MAX_LONGDESC_LENGTH) === false) {
+			throw $this->generateThrow(sprintf(ValidatorException::MSG_INVALID_VALUE_MAX_LENGTH, Product::KEY_LONGDESC, $validationData[Product::KEY_LONGDESC], self::MAX_LONGDESC_LENGTH), [
 				self::ITEM_KEY => implode('.', [self::OBJECT_TYPE_PRODUCT, Product::KEY_LONGDESC])
 			]);
 		}
