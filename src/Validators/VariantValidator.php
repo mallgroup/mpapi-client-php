@@ -157,8 +157,8 @@ class VariantValidator extends AbstractValidator
 						throw $this->generateThrow(sprintf(ValidatorException::MSG_INVALID_VALUE_EAN, Variant::KEY_SHORTDESC, $variantData[Variant::KEY_SHORTDESC], 2000));
 					}
 					// variant longdesc
-					if ($this->validateLength($variantData[Variant::KEY_LONGDESC], 4000) === false) {
-						throw $this->generateThrow(sprintf(ValidatorException::MSG_INVALID_VALUE_MAX_LENGTH, Variant::KEY_LONGDESC, $variantData[Variant::KEY_LONGDESC], 4000));
+					if ($this->validateLength($variantData[Variant::KEY_LONGDESC], 13000) === false) {
+						throw $this->generateThrow(sprintf(ValidatorException::MSG_INVALID_VALUE_MAX_LENGTH, Variant::KEY_LONGDESC, $variantData[Variant::KEY_LONGDESC], 13000));
 					}
 					// variant priority
 					if ($this->validateBiggerThen($variantData[Variant::KEY_PRIORITY], 0) === false) {

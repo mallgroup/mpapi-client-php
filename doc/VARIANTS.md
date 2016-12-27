@@ -61,7 +61,7 @@ List of attributes:
 __id*__ (string, max. 50 chars) - id of variant,  
 __title*__ (string, max. 200 chars) - title of variant,  
 __shortdesc*__ (string, max. 2000 chars) - short description of the variant,  
-__longdesc*__ (string, max. 5000 chars) - long description of the variant; it can contain simple formatting like \<strong\>bold text\</strong\>),  
+__longdesc*__ (string, max. 13000 chars) - long description of the variant; it can contain simple formatting like \<strong\>bold text\</strong\>),  
 __priority*__ (number, max. 10 chars) - priority to sort products' variants on the list - the higher number the higher priority,  
 __barcode__ (string, 13 chars) - EAN code of variant,  
 __price*__ (number, max. 11 chars) - promotion price,   
