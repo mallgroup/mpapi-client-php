@@ -4,6 +4,7 @@ namespace MPAPI\Services;
 use GuzzleHttp\Psr7\Response;
 use MPAPI\Endpoints\ProductsEndpoints;
 use MPAPI\Endpoints\VariantsEndpoints;
+use MPAPI\Endpoints\Products\SupplyDelayEndpoints;
 use MPAPI\Entity\Product;
 use MPAPI\Entity\AbstractEntity;
 use MPAPI\Exceptions\ApplicationException;
@@ -103,7 +104,7 @@ class Products extends AbstractService
         }
 
         if (!empty($errors)) {
-            $this->client->getLogger()->error('Error during post products', $errors);
+            $this->client->getLogger()->error('Failed to delete products', $errors);
             $exception = new ApplicationException();
             $exception->setData($errors);
             throw $exception;
@@ -143,8 +144,8 @@ class Products extends AbstractService
         }
 
         if (!empty($errors)) {
-            $this->client->getLogger()->error('Error during post products', $errors);
-            $exception = new ApplicationException('Error during post products: ' . implode(', ', $errors));
+            $this->client->getLogger()->error('Failed to post products', $errors);
+            $exception = new ApplicationException('Failed to post products: ' . implode(', ', $errors));
             throw $exception;
         }
 
@@ -183,7 +184,7 @@ class Products extends AbstractService
         }
 
         if (!empty($errors)) {
-            $this->client->getLogger()->error('Error during post products', $errors);
+            $this->client->getLogger()->error('Failed to update products', $errors);
             $exception = new ApplicationException();
             $exception->setData($errors);
             throw $exception;
@@ -211,6 +212,17 @@ class Products extends AbstractService
 	public function variants()
 	{
 		return new VariantsEndpoints($this->client, $this);
+	}
+
+	/**
+	 * Get endpoint for supply delay
+	 *
+	 * @param string $productId
+	 * @return MPAPI\Endpoints\Products\SupplayDelayEndpoints
+	 */
+	public function supplyDelay($productId)
+	{
+		return new SupplyDelayEndpoints($this->client, $productId);
 	}
 
     /**

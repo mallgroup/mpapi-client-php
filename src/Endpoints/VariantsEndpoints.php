@@ -2,9 +2,10 @@
 namespace MPAPI\Endpoints;
 
 use GuzzleHttp\Psr7\Response;
+use MPAPI\Endpoints\Products\SupplyDelayEndpoints;
+use MPAPI\Entity\Variant;
 use MPAPI\Exceptions\ApplicationException;
 use MPAPI\Services\Client;
-use MPAPI\Entity\Variant;
 
 /**
  * Variants GET endpoints
@@ -139,5 +140,17 @@ class VariantsEndpoints
 		}
 
 		return true;
+	}
+
+	/**
+	 * Get endpoint for supply delay
+	 *
+	 * @param string $productId
+	 * @param string $variantId
+	 * @return MPAPI\Endpoints\Products\SupplayDelayEndpoints
+	 */
+	public function supplyDelay($productId, $variantId)
+	{
+		return new SupplyDelayEndpoints($this->client, $productId, $variantId);
 	}
 }
