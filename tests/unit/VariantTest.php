@@ -49,6 +49,11 @@ class VariantTest extends \Codeception\Test\Unit
 		$this->assertEquals($newValue, $this->object->getId());
 	}
 
+	public function testGetArticleId()
+	{
+		$this->assertNotEmpty($this->object->getArticleId());
+	}
+
 	public function testGetTitle()
 	{
 		$this->assertNotEmpty($this->object->getTitle());

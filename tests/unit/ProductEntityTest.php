@@ -34,6 +34,11 @@ class ProductTest extends \Codeception\Test\Unit
 		$this->assertNotEmpty($this->object->getId());
 	}
 
+	public function testGetArticleId()
+	{
+		$this->assertNotEmpty($this->object->getArticleId());
+	}
+
 	public function testGetTitle()
 	{
 		$this->assertNotEmpty($this->object->getTitle());

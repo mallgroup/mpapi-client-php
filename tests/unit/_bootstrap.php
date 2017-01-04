@@ -2,6 +2,7 @@
 // Here you can initialize variables that will be available to your tests
 $product = [
 	'id' => 'cdcept0123456',
+	'article_id' => 100000342333,
 	'title' => 'Testing Product',
 	'shortdesc' => 'Short decription of this product.',
 	'category_id' => 'MP001',
@@ -50,6 +51,7 @@ Codeception\Util\Fixtures::add('media', $media);
 $variants = [
 	[
 		'id' => 'cdcept-v0123',
+		'article_id' => 100000342798,
 		'title' => 'Title of Product - codeception variant',
 		'shortdesc' => 'Short decription of codeception variant of product.',
 		'longdesc' => 'This codeception variant has long description. It can also contains simple formatting like <strong>bold text</strong>.',
@@ -81,6 +83,7 @@ $variants = [
 	],
 	[
 		'id' => 'cdcept-v01234',
+		'article_id' => 100000342799,
 		'title' => 'Title of Book - codeception variant',
 		'shortdesc' => 'Short decription of codeception variant of product.',
 		'longdesc' => 'This codeception variant has long description. It can also contains simple formatting like <strong>bold text</strong>.',
@@ -121,6 +124,7 @@ Codeception\Util\Fixtures::add('variantData', $variants[0]);
 
 $variant = [
 		'id' => 'cdcept-v0123',
+		'article_id' => 100000342798,
 		'title' => 'Title of Product - codeception variant',
 		'shortdesc' => 'Short decription of codeception variant of product.',
 		'longdesc' => 'This codeception variant has long description. It can also contains simple formatting like <strong>bold text</strong>.',
