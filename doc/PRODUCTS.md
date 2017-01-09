@@ -111,6 +111,7 @@ $productSynchronizer->add($product1)
 List of attributes:
 
 __id*__ (string, max. 50 chars) - id of product,  
+__article_id__ (number) - MALL id of product/variant,  
 __category_id*__ (string , max. 10 chars) - category id,  
 __brand_id__ (string , max. 20 chars) - brand id, strongly recommended to use; iIf you use brand id, the final title is composed of brand id + title,  
 __title*__ (string, max. 200 chars) - title of product,  
@@ -129,7 +130,7 @@ __variants__ (array) - if the product has variants, array of variants is used wi
 __variable_parameters__ (array) - variable parameters of variants (e.g. ['MP_COLOR', 'MP_SIZE']), required only if the product has variants,  
 __dimensions__ (array) - dimensions of the product or variant; if the product has variants, use this attribute only in the variant data structure: weight (number, 3 decimal points float format) - weight in kg, width (number, 1 decimal point float format) - width in cm, height (number, 1 decimal point float format) - width in cm, Length (number, 1 decimal point float format) - width in cm,  
 __availability*__ (array) - availability of the product/variant (if the product has variants, use this attribute only in the variant data structure): status* (string) - status of product availability, in_stock* (number) - amount of items available in stock (max. 9999),  
-__recommended__ (array) - ids of recommended products; if the product has variants, use this attribute only in the variant data structure); max. limit of recommended products / variants is 30,  
+__recommended__ (array) - ids of recommended products; if the product has variants, use this attribute only in the variant data structure); max. limit of recommended products/variants is 30,  
 __delivery_delay__ (number) - number of days the delivery will be delayed for the product or its variants; value 0 means the item can be delivered the same day; if the product has variants and they have different value, use this attribute in the variant data structure; if the value is the same for all variants, it is enough to use the attribute only in the product data structure. To add an extra delay because of stock-taking or vacation, you can use [supply delay](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/SUPPLY_DELAY.md);
 
 *Those attributes marked with * are required.* 

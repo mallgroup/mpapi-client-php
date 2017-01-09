@@ -18,6 +18,12 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 *
 	 * @var string
 	 */
+	const KEY_ARTICLE_ID = 'article_id';
+
+	/**
+	 *
+	 * @var string
+	 */
 	const KEY_TITLE = 'title';
 
 	/**
@@ -198,6 +204,20 @@ abstract class AbstractArticleEntity extends AbstractEntity
 		$retval = '';
 		if (isset($this->data[self::KEY_ID])) {
 			$retval = $this->data[self::KEY_ID];
+		}
+		return $retval;
+	}
+
+	/**
+	 * Get MALL article ID
+	 *
+	 * @return integer
+	 */
+	public function getArticleId()
+	{
+		$retval = 0;
+		if (isset($this->data[self::KEY_ARTICLE_ID])) {
+			$retval = $this->data[self::KEY_ARTICLE_ID];
 		}
 		return $retval;
 	}

@@ -65,6 +65,7 @@ class ProductsEndpoints
 	/**
 	 * POST product
 	 *
+	 * @param array $data
 	 * @return Response
 	 */
 	public function postProduct(array $data)
