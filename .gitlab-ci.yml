@@ -18,18 +18,18 @@ test:
     - php
 
 github_deploy:
-    stage: github
-    before_script:
-        - echo "$DEPLOY_KEY_GITHUB" > ./deploy_key
-        - chmod 0600 ./deploy_key
-    script:
-        - git config core.sshCommand "ssh -i ./deploy_key -v -T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-        - git remote add github git@github.com:mallgroup/mpapi-client-php.git
-        - git push github HEAD:master
-    after_script:
-        - git remote remove github
-        - rm -f ./deploy_key
-    only:
-        - tags
+  stage: github
+  before_script:
+    - echo "$DEPLOY_KEY_GITHUB" > ./deploy_key
+    - chmod 0600 ./deploy_key
+  script:
+    - git config core.sshCommand "ssh -i ./deploy_key -v -T -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+    - git remote add github git@github.com:mallgroup/mpapi-client-php.git
+    - git push github HEAD:master
+  after_script:
+    - git remote remove github
+    - rm -f ./deploy_key
+  only:
+    - tags
   tags:
     - shell
