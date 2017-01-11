@@ -31,3 +31,5 @@ github_deploy:
         - rm -f ./deploy_key
     only:
         - tags
+  tags:
+    - shell
