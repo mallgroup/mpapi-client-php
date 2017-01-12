@@ -13,6 +13,24 @@ class Partner extends AbstractService
 
 	/**
 	 *
+	 * @var string
+	 */
+	const KEY_VALID_FROM = 'valid_from';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_VALID_TO = 'valid_to';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const DEFAULT_DATE_FORMAT = 'Y-m-d H:i:s';
+
+	/**
+	 *
 	 * @var Client
 	 */
 	private $client;
@@ -47,23 +65,41 @@ class Partner extends AbstractService
 	/**
 	 * Create partner supply delay
 	 *
-	 * @param array $data
+	 * @param \DateTime $validTo
+	 * @param \DateTime $validFrom = null
 	 * @return \GuzzleHttp\Psr7\Response
 	 */
-	public function postSupplyDelay(array $data)
+	public function postSupplyDelay(\DateTime $validTo, \DateTime $validFrom = null)
 	{
-		return $this->endpoints->postSupplyDelay($data);
+		$requestData = [
+			self::KEY_VALID_TO => $validTo->format(self::DEFAULT_DATE_FORMAT)
+		];
+
+		if ($validFrom !== null) {
+			$requestData[self::KEY_VALID_FROM] = $validFrom->format(self::DEFAULT_DATE_FORMAT);
+		}
+
+		return $this->endpoints->postSupplyDelay($requestData);
 	}
 
 	/**
 	 * Update partner supply delay
 	 *
-	 * @param array $data
+	 * @param \DateTime $validTo
+	 * @param \DateTime $validFrom = null
 	 * @return \GuzzleHttp\Psr7\Response
 	 */
-	public function putSupplyDelay(array $data)
+	public function putSupplyDelay(\DateTime $validTo, \DateTime $validFrom = null)
 	{
-		return $this->endpoints->putSupplyDelay($data);
+		$requestData = [
+			self::KEY_VALID_TO => $validTo->format(self::DEFAULT_DATE_FORMAT)
+		];
+
+		if ($validFrom !== null) {
+			$requestData[self::KEY_VALID_FROM] = $validFrom->format(self::DEFAULT_DATE_FORMAT);
+		}
+
+		return $this->endpoints->putSupplyDelay($requestData);
 	}
 
 	/**
