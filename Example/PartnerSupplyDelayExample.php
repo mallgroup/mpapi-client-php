@@ -6,7 +6,7 @@ use Monolog\Handler\StreamHandler;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('api_marketplace_test_client_id');
+$mpapiClient = new Client('your_client_id');
 $logger = new Logger('loggerName');
 $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
 
