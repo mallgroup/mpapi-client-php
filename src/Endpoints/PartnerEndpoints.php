@@ -19,7 +19,7 @@ class PartnerEndpoints
 	/**
 	 * @var string
 	 */
-	const ENDPOINT_SUPPLY_DELAY = '%s/supply-delay';
+	const ENDPOINT_SUPPLY_DELAY = 'supply-delay';
 
 	/**
 	 * @var Client
@@ -42,7 +42,7 @@ class PartnerEndpoints
 	 */
 	public function getSupplyDelay()
 	{
-		return $this->client->sendRequest(sprintf(self::ENDPOINT_SUPPLY_DELAY, self::ENDPOINT_PARTNERS), 'GET');
+		return $this->client->sendRequest($this->buildRequestUrl(), 'GET');
 	}
 
 	/**
@@ -53,7 +53,7 @@ class PartnerEndpoints
 	 */
 	public function postSupplyDelay(array $data)
 	{
-		return $this->client->sendRequest(sprintf(self::ENDPOINT_SUPPLY_DELAY, self::ENDPOINT_PARTNERS), 'POST', $data);
+		return $this->client->sendRequest($this->buildRequestUrl(), 'POST', $data);
 	}
 
 	/**
@@ -64,7 +64,7 @@ class PartnerEndpoints
 	 */
 	public function putSupplyDelay(array $data)
 	{
-		return $this->client->sendRequest(sprintf(self::ENDPOINT_SUPPLY_DELAY, self::ENDPOINT_PARTNERS), 'PUT', $data);
+		return $this->client->sendRequest($this->buildRequestUrl(), 'PUT', $data);
 	}
 
 	/**
@@ -74,6 +74,16 @@ class PartnerEndpoints
 	 */
 	public function deleteSupplyDelay()
 	{
-		return $this->client->sendRequest(sprintf(self::ENDPOINT_SUPPLY_DELAY, self::ENDPOINT_PARTNERS), 'DELETE');
+		return $this->client->sendRequest($this->buildRequestUrl(), 'DELETE');
+	}
+
+	/**
+	 * Build request URL
+	 *
+	 * @return string
+	 */
+	private function buildRequestUrl()
+	{
+		return  self::ENDPOINT_PARTNERS . DIRECTORY_SEPARATOR . self::ENDPOINT_SUPPLY_DELAY;
 	}
 }

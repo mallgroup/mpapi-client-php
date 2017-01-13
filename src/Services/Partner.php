@@ -111,6 +111,4 @@ class Partner extends AbstractService
 	{
 		return $this->endpoints->deleteSupplyDelay();
 	}
-
-
 }
