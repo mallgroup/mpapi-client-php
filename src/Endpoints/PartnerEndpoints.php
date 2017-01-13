@@ -42,7 +42,9 @@ class PartnerEndpoints
 	 */
 	public function getSupplyDelay()
 	{
-		return $this->client->sendRequest($this->buildRequestUrl(), 'GET');
+		$response = $this->client->sendRequest($this->buildRequestUrl(), 'GET');
+		$responseBody = json_decode($response->getBody(), true);
+		return $responseBody['data'];
 	}
 
 	/**
@@ -53,7 +55,9 @@ class PartnerEndpoints
 	 */
 	public function postSupplyDelay(array $data)
 	{
-		return $this->client->sendRequest($this->buildRequestUrl(), 'POST', $data);
+		/* @var GuzzleHttp\Psr7\Response $response*/
+		$response = $this->client->sendRequest($this->buildRequestUrl(), 'POST', $data);
+		return ($response->getStatusCode() === 201 || $response->getStatusCode() === 200);
 	}
 
 	/**
@@ -64,7 +68,9 @@ class PartnerEndpoints
 	 */
 	public function putSupplyDelay(array $data)
 	{
-		return $this->client->sendRequest($this->buildRequestUrl(), 'PUT', $data);
+		/* @var GuzzleHttp\Psr7\Response $response*/
+		$response = $this->client->sendRequest($this->buildRequestUrl(), 'PUT', $data);
+		return ($response->getStatusCode() === 200);
 	}
 
 	/**
@@ -74,7 +80,8 @@ class PartnerEndpoints
 	 */
 	public function deleteSupplyDelay()
 	{
-		return $this->client->sendRequest($this->buildRequestUrl(), 'DELETE');
+		$response = $this->client->sendRequest($this->buildRequestUrl(), 'DELETE');
+		return ($response->getStatusCode() === 404 || $response->getStatusCode() === 204);
 	}
 
 	/**
