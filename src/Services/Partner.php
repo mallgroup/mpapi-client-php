@@ -2,6 +2,7 @@
 namespace MPAPI\Services;
 
 use MPAPI\Endpoints\PartnerEndpoints;
+use MPAPI\Exceptions\ApplicationException;
 
 /**
  * Partner service
@@ -67,19 +68,33 @@ class Partner extends AbstractService
 	 *
 	 * @param \DateTime $validTo
 	 * @param \DateTime $validFrom = null
-	 * @return \GuzzleHttp\Psr7\Response
+	 * @throws ApplicationException
+	 * @return boolean
 	 */
 	public function postSupplyDelay(\DateTime $validTo, \DateTime $validFrom = null)
 	{
 		$requestData = [
 			self::KEY_VALID_TO => $validTo->format(self::DEFAULT_DATE_FORMAT)
 		];
-
 		if ($validFrom !== null) {
 			$requestData[self::KEY_VALID_FROM] = $validFrom->format(self::DEFAULT_DATE_FORMAT);
 		}
 
-		return $this->endpoints->postSupplyDelay($requestData);
+		$response = $this->endpoints->postSupplyDelay($requestData);
+		if ($response->getStatusCode() !== 201) {
+			$error = [
+				'response' => json_decode($response->getBody(), true)
+			];
+		}
+
+		if (!empty($error)) {
+			$this->client->getLogger()->error('Failed to set supply delay', $error);
+			$exception = new ApplicationException();
+			$exception->setData($error);
+			throw $exception;
+		}
+
+		return true;
 	}
 
 	/**
@@ -87,7 +102,8 @@ class Partner extends AbstractService
 	 *
 	 * @param \DateTime $validTo
 	 * @param \DateTime $validFrom = null
-	 * @return \GuzzleHttp\Psr7\Response
+	 * @throws ApplicationException
+	 * @return boolean
 	 */
 	public function putSupplyDelay(\DateTime $validTo, \DateTime $validFrom = null)
 	{
@@ -99,16 +115,45 @@ class Partner extends AbstractService
 			$requestData[self::KEY_VALID_FROM] = $validFrom->format(self::DEFAULT_DATE_FORMAT);
 		}
 
-		return $this->endpoints->putSupplyDelay($requestData);
+		$response = $this->endpoints->putSupplyDelay($requestData);
+		if ($response->getStatusCode() !== 200) {
+			$error = [
+				'response' => json_decode($response->getBody(), true)
+			];
+		}
+
+		if (!empty($error)) {
+			$this->client->getLogger()->error('Failed to set supply delay', $error);
+			$exception = new ApplicationException();
+			$exception->setData($error);
+			throw $exception;
+		}
+
+		return true;
 	}
 
 	/**
 	 * Delete partner supply delay
 	 *
-	 * @return \GuzzleHttp\Psr7\Response
+	 * @throws ApplicationException
+	 * @return boolean
 	 */
 	public function deleteSupplyDelay()
 	{
-		return $this->endpoints->deleteSupplyDelay();
+		$response = $this->endpoints->deleteSupplyDelay();
+		if ($response->getStatusCode() !== 204) {
+			$error = [
+				'response' => json_decode($response->getBody(), true)
+			];
+		}
+
+		if (!empty($error)) {
+			$this->client->getLogger()->error('Failed to delete supply delay', $error);
+			$exception = new ApplicationException();
+			$exception->setData($error);
+			throw $exception;
+		}
+
+		return true;
 	}
 }

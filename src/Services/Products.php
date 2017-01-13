@@ -78,7 +78,8 @@ class Products extends AbstractService
      * Delete data
      *
      * @param string $productId
-     * @return Response
+     * @throws ApplicationException
+     * @return boolean
      */
     public function delete($productId = null)
     {
@@ -117,6 +118,7 @@ class Products extends AbstractService
      * Post data
      *
      * @param array|Product $data
+     * @throws ApplicationException
      * @return Response
      */
     public function post($data = null)
@@ -156,8 +158,9 @@ class Products extends AbstractService
      * Put data
      *
      * @param string $productId
-     * @param array $data
+     * @param AbstractEntity $entity
      * @param string $variantId
+     * @throws ApplicationException
      * @return Response
      */
     public function put($productId = null, AbstractEntity $entity = null, $variantId = null)
