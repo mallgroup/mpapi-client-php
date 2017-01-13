@@ -87,7 +87,7 @@ class VariantsEndpoints
 		}
 
 		if (!empty($error)) {
-			$this->client->getLogger()->error('Error during updating variants', $error);
+			$this->client->getLogger()->error('Failed to update variants', $error);
 			$exception = new ApplicationException();
 			$exception->setData($error);
 			throw $exception;

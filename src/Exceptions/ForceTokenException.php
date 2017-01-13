@@ -1,5 +1,6 @@
 <?php
 namespace MPAPI\Exceptions;
+
 use GuzzleHttp\Exception\ClientException;
 
 /**
@@ -9,6 +10,12 @@ use GuzzleHttp\Exception\ClientException;
  */
 class ForceTokenException extends \Exception
 {
+
+	/**
+	 *
+	 * @var string
+	 */
+	const KEY_DATA = 'data';
 
 	/**
 	 *
@@ -61,7 +68,7 @@ class ForceTokenException extends \Exception
 	 */
 	public function getForceToken()
 	{
-		return $this->data[self::KEY_FORCE_TOKEN];
+		return $this->data[self::KEY_DATA][self::KEY_FORCE_TOKEN];
 	}
 
 	/**
@@ -72,7 +79,7 @@ class ForceTokenException extends \Exception
 	 */
 	public function setForceToken($forceToken)
 	{
-		$this->data[self::KEY_FORCE_TOKEN] = $forceToken;
+		$this->data[self::KEY_DATA][self::KEY_FORCE_TOKEN] = $forceToken;
 		return $this;
 	}
 }

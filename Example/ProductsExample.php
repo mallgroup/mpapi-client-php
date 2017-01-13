@@ -37,7 +37,7 @@ $product->setVat(10);
 $product->setRrpPrice(0);
 $product->setDeliveryDelay(3);
 $product->addMedia('http://i.cdn.nrholding.net/15880228', true);
-$product->addPromotion(1700, '2015-07-19 00:00:00', '2016-11-15 23:59:59');
+$product->addPromotion(1700, '2015-07-19 00:00:00', '2018-11-15 23:59:59');
 $product->addParameter("MP_COLOR", "blue");
 $product->addVariableParameters([
 	"MP_COLOR"
@@ -87,9 +87,9 @@ try {
 	$product->setVariableParameters([]);
 	$product->setVariants([]);
 	$product->setPrice(800);
-	$response = $products->put('pTU00_test_xx', $product);
+	$response = $products->put('pTU00_test', $product);
 } catch (ForceTokenException $ex) {
-	print('Product updated failed. Use force token: ');
+	print('Product update failed. To confirm price difference use force token: ');
 	var_export($ex->getForceToken());
 	print(PHP_EOL);
 }

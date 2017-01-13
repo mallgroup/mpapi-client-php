@@ -94,7 +94,7 @@ try {
 	$variant->setPrice(2000);
 	$variants->put($productId, $variant);
 } catch (ForceTokenException $ex) {
-	print('Variant updated failed. Use force token: ');
+	print('Variant update failed. To confirm price difference use force token: ');
 	var_export($ex->getForceToken());
 	print(PHP_EOL);
 }

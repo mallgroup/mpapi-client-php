@@ -254,11 +254,9 @@ class Client
 				'client_id' => $this->clientId
 			]);
 			$responseData = json_decode($e->getResponse()->getBody()->getContents(), true)['data'];
-			if (isset($responseData['forceToken']) || isset($responseData['data']['forceToken'])) {
-				$forceToken = isset($responseData['forceToken']) ? $responseData['forceToken'] : $responseData['data']['forceToken'];
+			if (isset($responseData['data']['forceToken'])) {
 				$exception = new ForceTokenException($e);
 				$exception->setData($responseData);
-				$exception->setForceToken($forceToken);
 				throw $exception;
 			}
 			throw $e;
