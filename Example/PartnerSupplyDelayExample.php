@@ -23,9 +23,7 @@ $partner = new Partner($mpapiClient);
  */
 // create object with actual date/time
 $validFrom = new DateTime();
-$validTo = new DateTime();
-// modify date - add 10 days
-$validTo->modify('+10 day');
+$validTo = new DateTime('+10 days');
 
 /**
  * You can send only end of validity
