@@ -31,7 +31,7 @@ $validTo->modify('+10 day');
  * You can send only end of validity
  */
 $delayCreated = $partner->postSupplyDelay($validTo);
-print('Setup supply delay: ');
+print('Setup partner supply delay: ');
 var_dump($delayCreated);
 print(PHP_EOL);
 
@@ -39,7 +39,7 @@ print(PHP_EOL);
  * or you can send both valid from and valid to date
  */
 $delayCreated2 = $partner->postSupplyDelay($validTo, $validFrom);
-print('Setup supply delay with both dates: ');
+print('Setup partner supply delay with both dates: ');
 var_dump($delayCreated2);
 print(PHP_EOL);
 
@@ -50,7 +50,7 @@ print(PHP_EOL);
  */
 $updatedValidTo = $validTo->modify('+5 day');
 $delayUpdated = $partner->putSupplyDelay($updatedValidTo);
-print('Update supply delay: ');
+print('Update partner supply delay: ');
 var_dump($delayUpdated);
 print(PHP_EOL);
 
@@ -60,7 +60,7 @@ print(PHP_EOL);
  * #############################
  */
 $delayDetail = $partner->getSupplyDelay();
-print('Get supply delay: ');
+print('Get partner supply delay: ');
 var_dump($delayDetail);
 print(PHP_EOL);
 
@@ -70,6 +70,6 @@ print(PHP_EOL);
  * ###############################
  */
 $deleteDelay = $partner->deleteSupplyDelay();
-print('Delete supply delay: ');
+print('Delete partner supply delay: ');
 var_dump($deleteDelay);
 print(PHP_EOL);
