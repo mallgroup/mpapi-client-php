@@ -86,10 +86,10 @@ class VariantsEndpoints
 			];
 		}
 
-		if (!empty($errors)) {
-			$this->client->getLogger()->error('Error during updating variants', $errors);
+		if (!empty($error)) {
+			$this->client->getLogger()->error('Error during updating variants', $error);
 			$exception = new ApplicationException();
-			$exception->setData($errors);
+			$exception->setData($error);
 			throw $exception;
 		}
 

@@ -3,6 +3,7 @@ use MPAPI\Services\Client;
 use MPAPI\Services\Products;
 use MPAPI\Entity\Product;
 use MPAPI\Entity\Variant;
+use MPAPI\Exceptions\ForceTokenException;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
@@ -66,7 +67,7 @@ $variant->addParameter("MP_TYPE", "iron");
 $variant->addLabel('NEW', '2015-07-19 00:00:00', '2018-11-14 23:59:59');
 $variant->addDimensions(25,95,45,30);
 $variant->addMedia('http://i.cdn.nrholding.net/15880228', true);
-$variant->addPromotion(1700, '2015-07-19 00:00:00', '2016-11-16 23:59:59');
+$variant->addPromotion(1700, '2015-07-19 00:00:00', '2018-11-16 23:59:59');
 $variant->setStatus(Product::STATUS_ACTIVE);
 $variant->setInStock(10);
 $variant->setRecommended([]);
@@ -80,6 +81,18 @@ var_dump($response);
 // Update product
 $response = $products->put('pTU00_test', $product);
 var_dump($response);
+
+// Product with big different price
+try {
+	$product->setVariableParameters([]);
+	$product->setVariants([]);
+	$product->setPrice(800);
+	$response = $products->put('pTU00_test_xx', $product);
+} catch (ForceTokenException $ex) {
+	print('Product updated failed. Use force token: ');
+	var_export($ex->getForceToken());
+	print(PHP_EOL);
+}
 
 // Delete product
 $response = $products->delete('pTU00_test');
