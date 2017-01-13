@@ -88,7 +88,7 @@ class Partner extends AbstractService
 		}
 
 		if (!empty($error)) {
-			$this->client->getLogger()->error('Failed to set supply delay', $error);
+			$this->client->getLogger()->error('Failed to set partner supply delay', $error);
 			$exception = new ApplicationException();
 			$exception->setData($error);
 			throw $exception;
@@ -123,7 +123,7 @@ class Partner extends AbstractService
 		}
 
 		if (!empty($error)) {
-			$this->client->getLogger()->error('Failed to set supply delay', $error);
+			$this->client->getLogger()->error('Failed to update partner supply delay', $error);
 			$exception = new ApplicationException();
 			$exception->setData($error);
 			throw $exception;
@@ -148,7 +148,7 @@ class Partner extends AbstractService
 		}
 
 		if (!empty($error)) {
-			$this->client->getLogger()->error('Failed to delete supply delay', $error);
+			$this->client->getLogger()->error('Failed to delete partner supply delay', $error);
 			$exception = new ApplicationException();
 			$exception->setData($error);
 			throw $exception;
