@@ -58,6 +58,6 @@ For more examples how to use specific services see following links:
 * [Orders](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/ORDERS.md) - get information about specific order, get all order IDs of open or unconfirmed orders, change order status.  
 * [Deliveries](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/DELIVERIES.md) - get, create or update delivery setup list.  
 * [Labels](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/LABELS.md) - get list of available labels.  
-* [Categories](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/CATEGORIES.md) - get all categories, search title with phrase or prefix, get available parameters for specific category.
+* [Categories](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/CATEGORIES.md) - get all categories, search title with phrase or prefix, get available parameters for specific category.  
 * [Brands](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/BRANDS.md) - get all brands, search title with phrase.
     
