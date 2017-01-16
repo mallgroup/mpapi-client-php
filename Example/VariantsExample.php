@@ -3,6 +3,7 @@ use MPAPI\Services\Client;
 use MPAPI\Services\Variants;
 use MPAPI\Entity\Product;
 use MPAPI\Entity\Variant;
+use MPAPI\Exceptions\ForceTokenException;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
@@ -61,7 +62,7 @@ $variant->addParameter("MP_TYPE", "iron");
 $variant->addLabel('NEW', '2015-07-19 00:00:00', '2018-11-14 23:59:59');
 $variant->addDimensions(25,95,45,30);
 $variant->addMedia('http://i.cdn.nrholding.net/15880228', true);
-$variant->addPromotion(1700, '2015-07-19 00:00:00', '2016-11-16 23:59:59');
+$variant->addPromotion(1700, '2015-07-19 00:00:00', '2018-11-16 23:59:59');
 $variant->setStatus(Product::STATUS_ACTIVE);
 $variant->setInStock(10);
 $variant->setRecommended([]);
@@ -88,6 +89,15 @@ print('Variant updated: ');
 var_export($updateStatus);
 print(PHP_EOL);
 
+// Variant with big different price.
+try {
+	$variant->setPrice(2000);
+	$variants->put($productId, $variant);
+} catch (ForceTokenException $ex) {
+	print('Variant update failed. To confirm price difference use force token: ');
+	var_export($ex->getForceToken());
+	print(PHP_EOL);
+}
 
 /**
  * #########################

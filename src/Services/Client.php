@@ -4,6 +4,7 @@ namespace MPAPI\Services;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Exception\ClientException;
+use MPAPI\Exceptions\ForceTokenException;
 use Psr\Log\LoggerInterface;
 use MPAPI\Lib\Logger;
 use MPAPI\Lib\ClientIdParser;
@@ -252,6 +253,14 @@ class Client
 				'body' => $body,
 				'client_id' => $this->clientId
 			]);
+			$responseData = json_decode($e->getResponse()->getBody()->getContents(), true)['data'];
+			if (isset($responseData['forceToken']) || isset($responseData['data']['forceToken'])) {
+				$forceToken = isset($responseData['forceToken']) ? $responseData['forceToken'] : $responseData['data']['forceToken'];
+				$exception = new ForceTokenException($e);
+				$exception->setData($responseData);
+				$exception->setForceToken($forceToken);
+				throw $exception;
+			}
 			throw $e;
 		}
 		return $this->lastResponse;
