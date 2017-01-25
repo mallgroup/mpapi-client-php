@@ -58,7 +58,7 @@ $deleteStatus = $variants->delete($productId, $variantId);
 
 List of attributes:
 
-__id*__ (string, max. 50 chars) - id of variant,  
+__id*__ (string, max. 20 chars) - id of variant,  
 __article_id__ (number) - MALL id of variant,  
 __title*__ (string, max. 200 chars) - title of variant,  
 __shortdesc*__ (string, max. 2000 chars) - short description of the variant,  
