@@ -68,7 +68,7 @@ class OrderTest extends \Codeception\Test\Unit
 
 	public function testGetCod()
 	{
-		$this->assertEmpty($this->object->getCod());
+		$this->assertNotEmpty($this->object->getCod());
 	}
 
 	public function testGetName()
