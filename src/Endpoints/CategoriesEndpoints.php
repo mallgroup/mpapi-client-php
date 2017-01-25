@@ -60,7 +60,7 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 */
 	public function searchCategories($phrase)
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_SEARCH, self::ENDPOINT_PATH, $phrase), 'GET');
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_SEARCH, self::ENDPOINT_PATH, urlencode($phrase)), 'GET');
 		$dataCollector = new DataCollector($this->client, $response);
 		return $dataCollector->getData();
 	}
