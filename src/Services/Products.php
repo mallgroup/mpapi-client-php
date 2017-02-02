@@ -119,7 +119,7 @@ class Products extends AbstractService
 	 *
 	 * @param array|Product $data
 	 * @throws ApplicationException
-	 * @return Response
+	 * @return boolean
 	 */
 	public function post($data = null)
 	{
@@ -164,7 +164,7 @@ class Products extends AbstractService
 	 * @param AbstractEntity $entity
 	 * @param string $variantId
 	 * @throws ApplicationException
-	 * @return Response
+	 * @return boolean
 	 */
 	public function put($productId = null, AbstractEntity $entity = null, $variantId = null)
 	{
