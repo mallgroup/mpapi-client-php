@@ -119,7 +119,7 @@ class Products extends AbstractService
 	 *
 	 * @param array|Product $data
 	 * @throws ApplicationException
-	 * @return Response
+	 * @return boolean
 	 */
 	public function post($data = null)
 	{
@@ -140,8 +140,11 @@ class Products extends AbstractService
 				$data = $data->getData();
 			}
 			$response = $this->productsEndpoints->postProduct($data);
-			if (json_decode($response->getBody(), true) == null) {
-				$errors[] = (string) $response->getBody();
+			if (json_decode($response->getBody(), true) == null || $response->getStatusCode() !== 201) {
+				$errors[] = [
+					'entity' => $data,
+					'response' => (string) $response->getBody()
+				];
 			}
 		}
 
@@ -161,7 +164,7 @@ class Products extends AbstractService
 	 * @param AbstractEntity $entity
 	 * @param string $variantId
 	 * @throws ApplicationException
-	 * @return Response
+	 * @return boolean
 	 */
 	public function put($productId = null, AbstractEntity $entity = null, $variantId = null)
 	{
@@ -184,6 +187,12 @@ class Products extends AbstractService
 			}
 		} else {
 			$response = $endpoint->$method($productId, $entity->getData(), $variantId);
+			if ($response->getStatusCode() !== 200) {
+				$errors[$index] = [
+					'entity' => $entity->getData(),
+					'response' => json_decode($response->getBody(), true)
+				];
+			}
 		}
 
 		if (!empty($errors)) {

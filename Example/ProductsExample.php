@@ -21,7 +21,7 @@ $products = new Products($mpapiClient);
 $response = $products->get();
 var_dump($response);
 // Get detail products
-$response = $products->get(32059);
+$response = $products->get($response['ids'][0]);
 var_dump($response->getData());
 
 $product = new Product();
