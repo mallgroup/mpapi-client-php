@@ -185,7 +185,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getCode()
 	{
-		return $this->data[self::KEY_CODE];
+		$retval = '';
+		if (isset($this->data[self::KEY_CODE])) {
+			$retval = $this->data[self::KEY_CODE];
+		}
+		return $retval;
 	}
 
 	/**
