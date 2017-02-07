@@ -110,10 +110,10 @@ $productSynchronizer->add($product1)
 
 List of attributes:
 
-__id*__ (string, max. 50 chars) - id of product,  
+__id*__ (string, max. 20 chars) - id of product,  
 __article_id__ (number) - MALL id of product/variant,  
 __category_id*__ (string , max. 10 chars) - category id,  
-__brand_id__ (string , max. 20 chars) - brand id, strongly recommended to use; iIf you use brand id, the final title is composed of brand id + title,  
+__brand_id__ (string , max. 20 chars) - brand id, strongly recommended to use; if you use brand id, the final title is composed of brand id + title,  
 __title*__ (string, max. 200 chars) - title of product,  
 __shortdesc*__ (string, max. 2000 chars) - short description of the product,  
 __longdesc*__ (string, max. 13000 chars) - long description of the product; it can contain simple formatting like \<strong\>bold text\</strong\>),  

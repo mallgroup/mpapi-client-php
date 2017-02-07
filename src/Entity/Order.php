@@ -147,7 +147,7 @@ class Order extends AbstractEntity
 	 *
 	 * @var string
 	 */
-	const KEY_DELIVERY_COD_PRICE = 'delivery_cod_price';
+	const KEY_COD = 'cod';
 
 	/**
 	 *
@@ -306,13 +306,13 @@ class Order extends AbstractEntity
 			'external_order_id' => (int)$this->getExternalOrderId(),
 			'currency' => $this->getCurrencyId(),
 			'delivery_price' => (float)$this->getDeliveryPrice(),
-			'cod_price' => (float)$this->getDeliveryCodPrice(),
+			'cod_price' => (float)$this->getCodPrice(),
 			'discount' => (float)$this->getDiscount(),
 			'delivery_method' => $this->getDeliveryMethod(),
 			'delivery_method_id' => (int)$this->getDeliveryMethodId(),
 			'ship_date' => $this->getDeliveryDate(),
 			'delivery_date' => $this->getDeliveryDate(),
-			'cod' => (float)$this->getCodPrice(),
+			'cod' => (float)$this->getCod(),
 			'address' => [
 				'name' => $this->getName(),
 				'company' => $this->getCompany(),
@@ -438,11 +438,11 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return integer
+	 * return double
 	 */
-	public function getCodPrice()
+	public function getCod()
 	{
-		return $this->data[self::KEY_COD_PRICE];
+		return $this->data[self::KEY_COD];
 	}
 
 	/**
@@ -530,13 +530,13 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return integer
+	 * return double
 	 */
-	public function getDeliveryCodPrice()
+	public function getCodPrice()
 	{
 		$retval = 0;
-		if (!empty($this->data[self::KEY_DELIVERY_COD_PRICE])) {
-			$retval = $this->data[self::KEY_DELIVERY_COD_PRICE];
+		if (!empty($this->data[self::KEY_COD_PRICE])) {
+			$retval = $this->data[self::KEY_COD_PRICE];
 		}
 		return $retval;
 	}

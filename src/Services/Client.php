@@ -137,12 +137,13 @@ class Client
 	 * @var Response
 	 */
 	private $lastResponse;
-
+	
 	/**
 	 *
 	 * @param string $clientId
+	 * @param boolean $useErrorHandler
 	 */
-	public function __construct($clientId)
+	public function __construct($clientId, $useErrorHandler = true)
 	{
 		if (empty($clientId)) {
 			throw new ClientIdException(ClientIdException::MSG_MISSING_CLIENT_ID);
@@ -151,7 +152,9 @@ class Client
 		$this->environment = self::ENVIRONMENT_TEST;
 
 		// set default exception handler
-		$this->setExceptionHandler(new ExceptionHandler($this->getLogger()));
+		if ($useErrorHandler === true) {
+			$this->setExceptionHandler(new ExceptionHandler($this->getLogger()));
+		}
 	}
 
 	/**

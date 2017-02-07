@@ -66,9 +66,9 @@ class OrderTest extends \Codeception\Test\Unit
 		$this->assertEmpty($this->object->getDeliveryPrice());
 	}
 
-	public function testGetCodPrice()
+	public function testGetCod()
 	{
-		$this->assertEmpty($this->object->getCodPrice());
+		$this->assertNotEmpty($this->object->getCod());
 	}
 
 	public function testGetName()
@@ -128,9 +128,9 @@ class OrderTest extends \Codeception\Test\Unit
 		$this->assertEquals(Order::STATUS_SHIPPED, $this->object->getStatus());
 	}
 
-	public function testGetDeliveryCodPrice()
+	public function testGetCodPrice()
 	{
-		$this->assertEmpty($this->object->getDeliveryCodPrice());
+		$this->assertEmpty($this->object->getCodPrice());
 	}
 
 	public function getDeliveryMethod()
