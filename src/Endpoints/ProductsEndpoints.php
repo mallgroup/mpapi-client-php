@@ -17,9 +17,43 @@ class ProductsEndpoints
 	const ENDPOINT_PRODUCTS = 'products';
 
 	/**
+	 *
+	 * @var string
+	 */
+	const PARAMETER_FILTER = 'filter';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const FILTER_TYPE_IDS = 'ids';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const FILTER_TYPE_BASIC = 'basic';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const FILTER_TYPE_FULL = 'full';
+
+	/**
 	 * @var Client
 	 */
 	private $client;
+
+	/**
+	 *
+	 * @var array
+	 */
+	private $filterType = [
+		self::FILTER_TYPE_IDS,
+		self::FILTER_TYPE_BASIC,
+		self::FILTER_TYPE_FULL
+	];
 
 	/**
 	 *
@@ -33,11 +67,17 @@ class ProductsEndpoints
 	/**
 	 * Get list of all products.
 	 *
+	 * @param string $filterType
 	 * @return Response
 	 */
-	public function getProducts()
+	public function getProducts($filterType = '')
 	{
-		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS, 'GET');
+		$args = [];
+		if (in_array($filterType, $this->filterType)) {
+			$args[self::PARAMETER_FILTER] = $filterType;
+		}
+
+		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS, 'GET', $args);
 	}
 
 	/**
