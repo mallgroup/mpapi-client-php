@@ -135,4 +135,18 @@ class ProductsEndpoints
 		}
 		return $this;
 	}
+
+	/**
+	 * Get filter
+	 *
+	 * @return string
+	 */
+	public function getFilter()
+	{
+		$retval = self::FILTER_TYPE_IDS;
+		if (!empty($this->filter)) {
+			$retval = $this->filter;
+		}
+		return $retval;
+	}
 }
