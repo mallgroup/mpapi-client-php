@@ -238,6 +238,18 @@ class Products extends AbstractService
 	}
 
 	/**
+	 * Set filter to obtain data structures
+	 *
+	 * @param string $filterType
+	 * @return Products
+	 */
+	public function setFilter($filterType)
+	{
+		$this->productsEndpoints->setFilter($filterType);
+		return $this;
+	}
+
+	/**
 	 * Get base class name
 	 *
 	 * @param object $object

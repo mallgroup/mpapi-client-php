@@ -35,12 +35,6 @@ class ProductsEndpoints
 	const FILTER_TYPE_BASIC = 'basic';
 
 	/**
-	 *
-	 * @var string
-	 */
-	const FILTER_TYPE_FULL = 'full';
-
-	/**
 	 * @var Client
 	 */
 	private $client;
@@ -51,9 +45,14 @@ class ProductsEndpoints
 	 */
 	private $filterType = [
 		self::FILTER_TYPE_IDS,
-		self::FILTER_TYPE_BASIC,
-		self::FILTER_TYPE_FULL
+		self::FILTER_TYPE_BASIC
 	];
+
+	/**
+	 *
+	 * @var string
+	 */
+	private $filter;
 
 	/**
 	 *
@@ -67,16 +66,14 @@ class ProductsEndpoints
 	/**
 	 * Get list of all products.
 	 *
-	 * @param string $filterType
 	 * @return Response
 	 */
-	public function getProducts($filterType = '')
+	public function getProducts()
 	{
 		$args = [];
-		if (in_array($filterType, $this->filterType)) {
-			$args[self::PARAMETER_FILTER] = $filterType;
+		if (!empty($this->filter)) {
+			$args[self::PARAMETER_FILTER] = $this->filter;
 		}
-
 		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS, 'GET', $args);
 	}
 
@@ -123,5 +120,19 @@ class ProductsEndpoints
 	public function putProduct($productId, array $data)
 	{
 		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId, 'PUT', $data);
+	}
+
+	/**
+	 * Set filter
+	 *
+	 * @param string $filterType
+	 * @return ProductsEndpoints
+	 */
+	public function setFilter($filterType)
+	{
+		if (in_array($filterType, $this->filterType) && $filterType !== $this->filter) {
+			$this->filter = $filterType;
+		}
+		return $this;
 	}
 }
