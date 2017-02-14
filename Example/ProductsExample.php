@@ -1,11 +1,12 @@
 <?php
-use MPAPI\Services\Client;
-use MPAPI\Services\Products;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+use MPAPI\Endpoints\ProductsEndpoints;
 use MPAPI\Entity\Product;
 use MPAPI\Entity\Variant;
 use MPAPI\Exceptions\ForceTokenException;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+use MPAPI\Services\Client;
+use MPAPI\Services\Products;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -23,6 +24,10 @@ var_dump($response);
 // Get detail products
 $response = $products->get($response['ids'][0]);
 var_dump($response->getData());
+
+// Set filter to modify response data structure
+$products->setFilter(ProductsEndpoints::FILTER_TYPE_BASIC);
+$response = $products->get();
 
 $product = new Product();
 $product->setId('pTU00_test');
