@@ -5,6 +5,7 @@ use GuzzleHttp\Psr7\Response;
 use MPAPI\Endpoints\ProductsEndpoints;
 use MPAPI\Endpoints\VariantsEndpoints;
 use MPAPI\Endpoints\Products\SupplyDelayEndpoints;
+use MPAPI\Entity\BasicProductIterator;
 use MPAPI\Entity\Product;
 use MPAPI\Entity\AbstractEntity;
 use MPAPI\Exceptions\ApplicationException;
@@ -65,7 +66,13 @@ class Products extends AbstractService
 		$retval = null;
 		if (is_null($productId)) {
 			$response = $this->productsEndpoints->getProducts();
-			$retval = json_decode($response->getBody(), true)['data'];
+			switch ($this->productsEndpoints->getFilter()) {
+				case ProductsEndpoints::FILTER_TYPE_BASIC:
+					$retval = new BasicProductIterator(json_decode($response->getBody(), true)['data']);
+					break;
+				default:
+					$retval = json_decode($response->getBody(), true)['data'];
+			}
 		} else {
 			$response = $this->productsEndpoints->getDetail($productId);
 			$retval = new Product(json_decode($response->getBody(), true)['data']);
@@ -238,7 +245,7 @@ class Products extends AbstractService
 	}
 
 	/**
-	 * Set filter to obtain data structures
+	 * Set filter to modify response data structure
 	 *
 	 * @param string $filterType
 	 * @return Products
