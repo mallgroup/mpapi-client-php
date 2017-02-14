@@ -137,7 +137,7 @@ class Client
 	 * @var Response
 	 */
 	private $lastResponse;
-	
+
 	/**
 	 *
 	 * @param string $clientId
@@ -257,12 +257,15 @@ class Client
 				'client_id' => $this->clientId
 			]);
 			$responseData = json_decode($e->getResponse()->getBody()->getContents(), true)['data'];
-			if (isset($responseData['forceToken']) || isset($responseData['data']['forceToken'])) {
-				$forceToken = isset($responseData['forceToken']) ? $responseData['forceToken'] : $responseData['data']['forceToken'];
-				$exception = new ForceTokenException($e);
-				$exception->setData($responseData);
-				$exception->setForceToken($forceToken);
-				throw $exception;
+			if (isset($responseData['data'])) {
+				$data = $responseData['data'];
+				if (isset($data['forceToken']) || isset($data['data']['forceToken'])) {
+					$forceToken = isset($data['forceToken']) ? $data['forceToken'] : $data['data']['forceToken'];
+					$exception = new ForceTokenException($e);
+					$exception->setData($data);
+					$exception->setForceToken($forceToken);
+					throw $exception;
+				}
 			}
 			throw $e;
 		}

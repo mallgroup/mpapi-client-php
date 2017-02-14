@@ -61,7 +61,11 @@ class PartnerDelivery extends AbstractDelivery
 	 */
 	public function getDeliveryMethodId()
 	{
-		return $this->data[self::KEY_DELIVERY_METHOD_ID];
+		$retval = '';
+		if (isset($this->data[self::KEY_DELIVERY_METHOD_ID])) {
+			$retval = $this->data[self::KEY_DELIVERY_METHOD_ID];
+		}
+		return $retval;
 	}
 
 	/**
@@ -71,7 +75,11 @@ class PartnerDelivery extends AbstractDelivery
 	 */
 	public function getPartnerId()
 	{
-		return $this->data[self::KEY_PARTNER_ID];
+		$retval = 0;
+		if (isset($this->data[self::KEY_PARTNER_ID])) {
+			$retval = $this->data[self::KEY_PARTNER_ID];
+		}
+		return (int)$retval;
 	}
 
 	/**
@@ -96,7 +104,11 @@ class PartnerDelivery extends AbstractDelivery
 	 */
 	public function isPickupPoint()
 	{
-		return (boolean) $this->data[self::KEY_IS_PICKUP_POINT];
+		$retval = false;
+		if (isset($this->data[self::KEY_IS_PICKUP_POINT])) {
+			$retval = $this->data[self::KEY_IS_PICKUP_POINT];
+		}
+		return (boolean) $retval;
 	}
 
 	/**
