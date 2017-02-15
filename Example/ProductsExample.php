@@ -32,7 +32,7 @@ $products->setFilter(Products::FILTER_TYPE_BASIC);
 var_dump($products->get());
 
 // ###################
-// Get detail products
+// Get detail product
 // ###################
 $response = $products->get($productIds['ids'][0]);
 var_dump($response->getData());
