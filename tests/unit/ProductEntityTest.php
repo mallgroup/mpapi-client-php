@@ -54,6 +54,11 @@ class ProductTest extends \Codeception\Test\Unit
 		$this->assertNotEmpty($this->object->getDeliveryDelay());
 	}
 
+	public function testGetUrl()
+	{
+		$this->assertNotEmpty($this->object->getUrl());
+	}
+
 	public function testGetShortdesc()
 	{
 		$this->assertNotEmpty($this->object->getShortdesc());

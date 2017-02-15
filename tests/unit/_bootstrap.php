@@ -4,6 +4,7 @@ $product = [
 	'id' => 'cdcept0123456',
 	'article_id' => 100000342333,
 	'title' => 'Testing Product',
+	'url' => '"https://www.mall.cz/id/100000342333',
 	'shortdesc' => 'Short decription of this product.',
 	'category_id' => 'MP001',
 	'longdesc' => 'This product has long description. It can also contains simple formatting like <strong>bold text</strong>.',
@@ -344,5 +345,6 @@ $basicProduct = [
 	'category_id' => 'MP001',
 	'variants_count' => 1,
 	'has_variant' => true,
+	'status' => 'A'
 ];
 Codeception\Util\Fixtures::add('productBasicData', $basicProduct);

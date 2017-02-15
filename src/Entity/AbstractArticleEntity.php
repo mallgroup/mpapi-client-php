@@ -265,6 +265,20 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	}
 
 	/**
+	 * Get product url
+	 *
+	 * @return string
+	 */
+	public function getUrl()
+	{
+		$retval = '';
+		if (isset($this->data[self::KEY_URL])) {
+			$retval = $this->data[self::KEY_URL];
+		}
+		return $retval;
+	}
+
+	/**
 	 * Get short description of product
 	 *
 	 * @return string
