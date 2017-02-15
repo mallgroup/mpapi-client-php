@@ -67,7 +67,7 @@ class Client
 	 *
 	 * @var string
 	 */
-	const MSG_BAD_ARGUMENTS_DATA = 'In argument is missing name or value';
+	const MSG_BAD_ARGUMENTS_DATA = 'Name or value is missing in argument.';
 
 	/**
 	 * @var string

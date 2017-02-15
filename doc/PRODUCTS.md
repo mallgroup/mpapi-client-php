@@ -19,10 +19,10 @@ $products = new Products($mpapiClient);
 $response = $products->get(); 
 
 /**
- * If you want to recieve more products data in one request, you can use filter
- * in this time are available two types of filter, IDS and BASIC
- * IDS - returns only list of product IDs
- * BASIC - returns list of basic product data (id, product_id, title, status, category_id, variants_count, has_variant)
+ * If you want to receive more products data in one request, you can use a filter.
+ * By now two types of filters are available: 'ids' and 'basic'.
+ * ids - returns only list of product IDs
+ * basic - returns list of basic product data (id, product_id, title, status, category_id, variants_count, has_variant)
  */
 $products->setFilter(ProductsEndpoints::FILTER_TYPE_BASIC); 
 $response = $products->get(); 
