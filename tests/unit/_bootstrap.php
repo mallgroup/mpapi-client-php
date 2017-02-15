@@ -335,3 +335,14 @@ $pricingLevelsData = [
 ];
 
 Codeception\Util\Fixtures::add('pricingLevelsData', $pricingLevelsData);
+
+// Product basic data
+$basicProduct = [
+	'id' => 'TP',
+	'product_id' => 100000305492,
+	'title' => 'Testing product',
+	'category_id' => 'MP001',
+	'variants_count' => 1,
+	'has_variant' => true,
+];
+Codeception\Util\Fixtures::add('productBasicData', $basicProduct);
