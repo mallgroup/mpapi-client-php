@@ -4,7 +4,7 @@ namespace MPAPI\Entity;
 /**
  * Basic product iterator
  *
- * @author martin.hrdlicka@mall.cz
+ * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  */
 class BasicProductIterator implements \Iterator
 {
