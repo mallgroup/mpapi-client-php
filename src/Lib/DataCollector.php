@@ -128,16 +128,17 @@ class DataCollector
 	/**
 	 * Load next page
 	 *
-	 * @return Response|null
+	 * @return boolean
 	 */
 	private function nextPage()
 	{
 		$this->currentPage++;
 		if ($this->currentPage > $this->pages) {
 			$this->isSeekable = false;
+		} else {
+			$this->processResponse($this->client->repeatLastRequest(['page' => $this->currentPage]));
 		}
-
-		return $this->processResponse($this->client->repeatLastRequest(['page' => $this->currentPage]));
+		return true;
 	}
 
 	/**

@@ -11,6 +11,7 @@ use MPAPI\Entity\AbstractEntity;
 use MPAPI\Exceptions\ApplicationException;
 use MPAPI\Exceptions\EndpointNotfoundException;
 use MPAPI\Exceptions\EndpointNotContainMethod;
+use MPAPI\Lib\DataCollector;
 
 /**
  * Products service
@@ -101,7 +102,8 @@ class Products extends AbstractService
 						$retval = new BasicProductIterator($responseData['data']);
 					break;
 					default:
-						$retval = $responseData['data'];
+						$dataCollector = new DataCollector($this->client, $response, false);
+						$retval = $dataCollector->setDataSection('ids')->getData();
 				}
 			}
 		} else {

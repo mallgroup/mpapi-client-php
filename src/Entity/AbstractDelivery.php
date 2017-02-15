@@ -160,7 +160,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getTitle()
 	{
-		return $this->data[self::KEY_TITLE];
+		$retval = '';
+		if (isset($this->data[self::KEY_TITLE])) {
+			$retval = $this->data[self::KEY_TITLE];
+		}
+		return $retval;
 	}
 
 	/**
@@ -214,7 +218,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getPrice()
 	{
-		return (double) $this->data[self::KEY_PRICE];
+		$retval = 0;
+		if (isset($this->data[self::KEY_PRICE])) {
+			$retval = $this->data[self::KEY_PRICE];
+		}
+		return (double) $retval;
 	}
 
 	/**
@@ -239,7 +247,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getCodPrice()
 	{
-		return (double) $this->data[self::KEY_COD_PRICE];
+		$retval = 0;
+		if (isset($this->data[self::KEY_COD_PRICE])) {
+			$retval = $this->data[self::KEY_COD_PRICE];
+		}
+		return (double) $retval;
 	}
 
 	/**
@@ -264,7 +276,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getFreeLimit()
 	{
-		return (double) $this->data[self::KEY_FREE_LIMIT];
+		$retval = 0;
+		if (isset($this->data[self::KEY_FREE_LIMIT])) {
+			$retval = $this->data[self::KEY_FREE_LIMIT];
+		}
+		return (double) $retval;
 	}
 
 	/**
@@ -289,7 +305,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getDeliveryDelay()
 	{
-		return (int) $this->data[self::KEY_DELIVERY_DELAY];
+		$retval = 0;
+		if (isset($this->data[self::KEY_DELIVERY_DELAY])) {
+			$retval = $this->data[self::KEY_DELIVERY_DELAY];
+		}
+		return (int) $retval;
 	}
 
 	/**
@@ -546,7 +566,11 @@ abstract class AbstractDelivery extends AbstractEntity
 	 */
 	public function getPriority()
 	{
-		return (int) $this->data[self::KEY_PRIORITY];
+		$retval = 0;
+		if (isset($this->data[self::KEY_PRIORITY])) {
+			$retval = $this->data[self::KEY_PRIORITY];
+		}
+		return (int) $retval;
 	}
 
 	/**
