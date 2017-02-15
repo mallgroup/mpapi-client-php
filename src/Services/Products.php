@@ -28,6 +28,33 @@ class Products extends AbstractService
 
 	/**
 	 *
+	 * @var string
+	 */
+	const ARGUMENT_FILTER = 'filter';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const FILTER_TYPE_IDS = 'ids';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const FILTER_TYPE_BASIC = 'basic';
+
+	/**
+	 *
+	 * @var array
+	 */
+	private $filterType = [
+		self::FILTER_TYPE_IDS,
+		self::FILTER_TYPE_BASIC
+	];
+
+	/**
+	 *
 	 * @var Client
 	 */
 	private $client;
@@ -66,16 +93,23 @@ class Products extends AbstractService
 		$retval = null;
 		if (is_null($productId)) {
 			$response = $this->productsEndpoints->getProducts();
-			switch ($this->productsEndpoints->getFilter()) {
-				case ProductsEndpoints::FILTER_TYPE_BASIC:
-					$retval = new BasicProductIterator(json_decode($response->getBody(), true)['data']);
+			// parse JSON response to array
+			$responseData = json_decode($response->getBody(), true);
+			if (isset($responseData['data'])) {
+				switch ($this->getFilter()) {
+					case self::FILTER_TYPE_BASIC:
+						$retval = new BasicProductIterator($responseData['data']);
 					break;
-				default:
-					$retval = json_decode($response->getBody(), true)['data'];
+					default:
+						$retval = $responseData['data'];
+				}
 			}
 		} else {
 			$response = $this->productsEndpoints->getDetail($productId);
-			$retval = new Product(json_decode($response->getBody(), true)['data']);
+			$responseData = json_decode($response->getBody(), true);
+			if (isset($responseData['data'])) {
+				$retval = new Product($responseData['data']);
+			}
 		}
 
 		return $retval;
@@ -252,8 +286,24 @@ class Products extends AbstractService
 	 */
 	public function setFilter($filterType)
 	{
-		$this->productsEndpoints->setFilter($filterType);
+		if (in_array($filterType, $this->filterType)) {
+			$this->client->setArguments(self::ARGUMENT_FILTER, $filterType);
+		}
 		return $this;
+	}
+
+	/**
+	 * Get filter
+	 *
+	 * @return string
+	 */
+	public function getFilter()
+	{
+		$retval = $this->client->getArguments(self::ARGUMENT_FILTER);
+		if (empty($retval)) {
+			$retval = self::FILTER_TYPE_IDS;
+		}
+		return $retval;
 	}
 
 	/**

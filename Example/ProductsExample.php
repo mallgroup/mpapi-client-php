@@ -1,7 +1,6 @@
 <?php
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use MPAPI\Endpoints\ProductsEndpoints;
 use MPAPI\Entity\Product;
 use MPAPI\Entity\Variant;
 use MPAPI\Exceptions\ForceTokenException;
@@ -18,16 +17,25 @@ $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
 $mpapiClient->setLogger($logger);
 
 $products = new Products($mpapiClient);
-// Get products
-$response = $products->get();
-var_dump($response);
-// Get detail products
-$response = $products->get($response['ids'][0]);
-var_dump($response->getData());
 
-// Set filter to modify response data structure
-$products->setFilter(ProductsEndpoints::FILTER_TYPE_BASIC);
-$response = $products->get();
+// #######################
+// Get list of product IDs
+// #######################
+$productIds = $products->get();
+var_dump($productIds);
+
+// ####################################
+// Get list of products with basic data
+// Use filter to modify response
+// ####################################
+$products->setFilter(Products::FILTER_TYPE_BASIC);
+var_dump($products->get());
+
+// ###################
+// Get detail products
+// ###################
+$response = $products->get($productIds['ids'][0]);
+var_dump($response->getData());
 
 $product = new Product();
 $product->setId('pTU00_test');
