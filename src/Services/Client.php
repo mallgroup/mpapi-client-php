@@ -67,7 +67,7 @@ class Client
 	 *
 	 * @var string
 	 */
-	const MSG_BAD_ARGUMENTS_DATA = 'In argument is missing name or value';
+	const MSG_BAD_ARGUMENTS_DATA = 'Name or value is missing in argument.';
 
 	/**
 	 * @var string
@@ -269,7 +269,8 @@ class Client
 				'body' => $body,
 				'client_id' => $this->clientId
 			]);
-			$responseData = json_decode($e->getResponse()->getBody()->getContents(), true)['data'];
+			$responseData = json_decode($e->getResponse()->getBody()->getContents(), true);
+			$responseData = isset($responseData['data']) ? $responseData['data'] : $responseData;
 			if (isset($responseData['forceToken']) || isset($responseData['data']['forceToken'])) {
 				$forceToken = isset($responseData['forceToken']) ? $responseData['forceToken'] : $responseData['data']['forceToken'];
 				$exception = new ForceTokenException($e);
