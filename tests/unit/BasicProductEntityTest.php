@@ -67,5 +67,6 @@ class BasicProductTest extends \Codeception\Test\Unit
 		$this->assertArrayHasKey('category_id', $dataOutput);
 		$this->assertArrayHasKey('variants_count', $dataOutput);
 		$this->assertArrayHasKey('has_variant', $dataOutput);
+		$this->assertArrayHasKey('status', $dataOutput);
 	}
 }

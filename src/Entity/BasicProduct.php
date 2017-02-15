@@ -100,7 +100,8 @@ class BasicProduct extends AbstractArticleEntity
 			self::KEY_TITLE => $this->getTitle(),
 			self::KEY_CATEGORY_ID => $this->getCategoryId(),
 			self::KEY_HAS_VARIANT => $this->hasVariant(),
-			self::KEY_VARIANTS_COUNT => $this->getVariantsCount()
+			self::KEY_VARIANTS_COUNT => $this->getVariantsCount(),
+			self::KEY_STATUS => $this->getStatus()
 		];
 	}
 
