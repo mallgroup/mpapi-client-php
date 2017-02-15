@@ -17,36 +17,9 @@ class ProductsEndpoints
 	const ENDPOINT_PRODUCTS = 'products';
 
 	/**
-	 *
-	 * @var string
-	 */
-	const PARAMETER_FILTER = 'filter';
-
-	/**
-	 *
-	 * @var string
-	 */
-	const FILTER_TYPE_IDS = 'ids';
-
-	/**
-	 *
-	 * @var string
-	 */
-	const FILTER_TYPE_BASIC = 'basic';
-
-	/**
 	 * @var Client
 	 */
 	private $client;
-
-	/**
-	 *
-	 * @var array
-	 */
-	private $filterType = [
-		self::FILTER_TYPE_IDS,
-		self::FILTER_TYPE_BASIC
-	];
 
 	/**
 	 *
@@ -120,33 +93,5 @@ class ProductsEndpoints
 	public function putProduct($productId, array $data)
 	{
 		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId, 'PUT', $data);
-	}
-
-	/**
-	 * Set filter
-	 *
-	 * @param string $filterType
-	 * @return ProductsEndpoints
-	 */
-	public function setFilter($filterType)
-	{
-		if (in_array($filterType, $this->filterType) && $filterType !== $this->filter) {
-			$this->filter = $filterType;
-		}
-		return $this;
-	}
-
-	/**
-	 * Get filter
-	 *
-	 * @return string
-	 */
-	public function getFilter()
-	{
-		$retval = self::FILTER_TYPE_IDS;
-		if (!empty($this->filter)) {
-			$retval = $this->filter;
-		}
-		return $retval;
 	}
 }

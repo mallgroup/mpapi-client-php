@@ -2,15 +2,16 @@
 namespace MPAPI\Services;
 
 use GuzzleHttp\Client as HttpClient;
-use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Exception\ClientException;
-use MPAPI\Exceptions\ForceTokenException;
-use Psr\Log\LoggerInterface;
-use MPAPI\Lib\Logger;
-use MPAPI\Lib\ClientIdParser;
-use MPAPI\Exceptions\ClientIdException;
-use MPAPI\Lib\Handlers\ExceptionHandler;
+use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
+use MPAPI\Exceptions\ApplicationException;
+use MPAPI\Exceptions\ClientIdException;
+use MPAPI\Exceptions\ForceTokenException;
+use MPAPI\Lib\ClientIdParser;
+use MPAPI\Lib\Handlers\ExceptionHandler;
+use MPAPI\Lib\Logger;
+use Psr\Log\LoggerInterface;
 
 /**
  * Marketplace API client
@@ -61,6 +62,12 @@ class Client
 	 * @var string
 	 */
 	const LOGGER_RESPONSE = 'Response for %s %s';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const MSG_BAD_ARGUMENTS_DATA = 'In argument is missing name or value';
 
 	/**
 	 * @var string
@@ -137,7 +144,13 @@ class Client
 	 * @var Response
 	 */
 	private $lastResponse;
-	
+
+	/**
+	 *
+	 * @var array
+	 */
+	private $arguments = [];
+
 	/**
 	 *
 	 * @param string $clientId
@@ -219,6 +232,8 @@ class Client
 		try {
 			// log request parameters
 			$this->getLogger()->info(sprintf(self::LOGGER_REQUEST, $method, $path), $body);
+			// merge global arguments with arguments for current request
+			$args = array_merge($this->arguments, $args);
 			// save request params into history
 			$this->lastRequest = [
 				'path' => $path,
@@ -230,7 +245,6 @@ class Client
 			// set query params
 			$query['client_id'] = $this->clientId;
 			$query = array_merge($query, $args);
-
 			/* @var Response $response */
 			$this->lastResponse = $this->getHttpClient()->request($method, $path, [
 				'headers' => [
@@ -239,7 +253,6 @@ class Client
 				'json' => $body,
 				'query' => $query
 			]);
-
 
 			$responseData = json_decode((string)$this->lastResponse->getBody(), true);
 			if (empty($responseData)) {
@@ -307,6 +320,37 @@ class Client
 		$response = $this->sendRequest('partners/validate', 'GET');
 		if ($response->getStatusCode() == 200) {
 			$retval = true;
+		}
+		return $retval;
+	}
+
+	/**
+	 * Set specific arguments for requests
+	 *
+	 * @param string $name
+	 * @param string $value
+	 * @return Client
+	 */
+	public function setArguments($name, $value)
+	{
+		if (empty($name) || empty($value)) {
+			throw new ApplicationException(self::MSG_BAD_ARGUMENTS_DATA);
+		}
+		$this->arguments[$name] = $value;
+		return $this;
+	}
+
+	/**
+	 * Get argument value
+	 *
+	 * @param string $name
+	 * @return string
+	 */
+	public function getArguments($name)
+	{
+		$retval = '';
+		if (isset($this->arguments[$name])) {
+			$retval = $this->arguments[$name];
 		}
 		return $retval;
 	}

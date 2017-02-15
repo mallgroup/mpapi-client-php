@@ -15,9 +15,18 @@ You can send request either with product ID as a parameter and get product detai
 ```
 ...
 $products = new Products($mpapiClient); 
-// Get all products 
+// Get all product ids
 $response = $products->get(); 
- 
+
+/**
+ * If you want to recieve more products data in one request, you can use filter
+ * in this time are available two types of filter, IDS and BASIC
+ * IDS - returns only list of product IDs
+ * BASIC - returns list of basic product data (id, product_id, title, status, category_id, variants_count, has_variant)
+ */
+$products->setFilter(ProductsEndpoints::FILTER_TYPE_BASIC); 
+$response = $products->get(); 
+
 // Get product detail 
 $response = $products->get('123abc'); 
 ```
