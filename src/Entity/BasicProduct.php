@@ -36,7 +36,7 @@ class BasicProduct extends AbstractArticleEntity
 	/**
 	 * Get product ID
 	 *
-	 * @return string
+	 * @return integer
 	 */
 	public function getProductId()
 	{
@@ -45,20 +45,6 @@ class BasicProduct extends AbstractArticleEntity
 			$retval = $this->data[self::KEY_PRODUCT_ID];
 		}
 		return $retval;
-	}
-
-	/**
-	 * Set product ID
-	 *
-	 * @param string $value
-	 * @return BasicProduct
-	 */
-	public function setProductId($value)
-	{
-		if ($value !== $this->getProductId()) {
-			$this->data[self::KEY_PRODUCT_ID] = $value;
-		}
-		return $this;
 	}
 
 	/**
@@ -76,23 +62,9 @@ class BasicProduct extends AbstractArticleEntity
 	}
 
 	/**
-	 * Set category ID
-	 *
-	 * @param string $value
-	 * @return BasicProduct
-	 */
-	public function setCategoryId($value)
-	{
-		if ($value !== $this->getCategoryId()) {
-			$this->data[self::KEY_CATEGORY_ID] = $value;
-		}
-		return $this;
-	}
-
-	/**
 	 * Product has variant
 	 *
-	 * @return string
+	 * @return boolean
 	 */
 	public function hasVariant()
 	{
@@ -115,20 +87,6 @@ class BasicProduct extends AbstractArticleEntity
 			$retval = $this->data[self::KEY_VARIANTS_COUNT];
 		}
 		return $retval;
-	}
-
-	/**
-	 * Set variant count
-	 *
-	 * @param integer $value
-	 * @return BasicProduct
-	 */
-	public function setVariantsCount($value)
-	{
-		if ($value !== $this->getVariantsCount()) {
-			$this->data[self::KEY_VARIANTS_COUNT] = (int) $value;
-		}
-		return $this;
 	}
 
 	/**
