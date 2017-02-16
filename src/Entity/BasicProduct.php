@@ -44,7 +44,7 @@ class BasicProduct extends AbstractArticleEntity
 		if (isset($this->data[self::KEY_PRODUCT_ID])) {
 			$retval = $this->data[self::KEY_PRODUCT_ID];
 		}
-		return $retval;
+		return (int) $retval;
 	}
 
 	/**
@@ -72,7 +72,7 @@ class BasicProduct extends AbstractArticleEntity
 		if (isset($this->data[self::KEY_HAS_VARIANT])) {
 			$retval = (boolean) $this->data[self::KEY_HAS_VARIANT];
 		}
-		return $retval;
+		return (bool) $retval;
 	}
 
 	/**
@@ -85,6 +85,20 @@ class BasicProduct extends AbstractArticleEntity
 		$retval = 0;
 		if (isset($this->data[self::KEY_VARIANTS_COUNT])) {
 			$retval = $this->data[self::KEY_VARIANTS_COUNT];
+		}
+		return (int) $retval;
+	}
+
+	/**
+	 * Get status
+	 *
+	 * @return string
+	 */
+	public function getStatus()
+	{
+		$retval = '';
+		if (isset($this->data[self::KEY_STATUS])) {
+			$retval = $this->data[self::KEY_STATUS];
 		}
 		return $retval;
 	}
