@@ -34,7 +34,7 @@ var_dump($products->get());
 // ###################
 // Get detail product
 // ###################
-$response = $products->get($productIds['ids'][0]);
+$response = $products->get($productIds[0]);
 var_dump($response->getData());
 
 $product = new Product();
