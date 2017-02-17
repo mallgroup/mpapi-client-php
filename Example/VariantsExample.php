@@ -1,8 +1,8 @@
 <?php
 use MPAPI\Services\Client;
 use MPAPI\Services\Variants;
-use MPAPI\Entity\Product;
-use MPAPI\Entity\Variant;
+use MPAPI\Entity\Products\Product;
+use MPAPI\Entity\Products\Variant;
 use MPAPI\Exceptions\ForceTokenException;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
@@ -30,6 +30,18 @@ $variants = new Variants($mpapiClient);
  */
 $response = $variants->get($productId);
 var_dump($response);
+
+/**
+ * ############################################
+ * Get list of product variants with basic data
+ * ############################################
+ */
+$variants->setFilter(Variants::FILTER_TYPE_BASIC);
+$response = $variants->get($productId);
+var_dump($response);
+
+// Remove used filter
+$variants->removeFilter();
 
 /**
  * ############################

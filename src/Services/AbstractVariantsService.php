@@ -1,7 +1,7 @@
 <?php
 namespace MPAPI\Services;
 
-use MPAPI\Entity\Variant;
+use MPAPI\Entity\Products\Variant;
 use MPAPI\Interfaces\VariantsServiceInterface;
 
 /**
@@ -9,7 +9,7 @@ use MPAPI\Interfaces\VariantsServiceInterface;
  *
  * @author Jan Blaha <jan.blaha@mall.cz>
  */
-abstract class AbstractVariantsService implements VariantsServiceInterface
+abstract class AbstractVariantsService extends AbstractServiceFilter implements VariantsServiceInterface
 {
 	/**
 	 *

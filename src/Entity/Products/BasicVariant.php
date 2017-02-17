@@ -1,12 +1,12 @@
 <?php
-namespace MPAPI\Entity;
+namespace MPAPI\Entity\Products;
 
 /**
  * Basic product entity
  *
  * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  */
-class BasicProduct extends AbstractArticleEntity
+class BasicVariant extends AbstractArticleEntity
 {
 
 	/**

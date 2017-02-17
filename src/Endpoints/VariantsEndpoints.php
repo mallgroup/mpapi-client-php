@@ -3,7 +3,7 @@ namespace MPAPI\Endpoints;
 
 use GuzzleHttp\Psr7\Response;
 use MPAPI\Endpoints\Products\SupplyDelayEndpoints;
-use MPAPI\Entity\Variant;
+use MPAPI\Entity\Products\Variant;
 use MPAPI\Exceptions\ApplicationException;
 use MPAPI\Services\Client;
 
@@ -45,8 +45,7 @@ class VariantsEndpoints
 	 */
 	public function variantsList($productId)
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_VARIANTS, $productId, null, null), 'GET');
-		return json_decode($response->getBody(), true)['data'];
+		return $this->client->sendRequest(sprintf(self::ENDPOINT_VARIANTS, $productId, null, null), 'GET');
 	}
 
 	/**

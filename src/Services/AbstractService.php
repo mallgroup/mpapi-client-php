@@ -4,14 +4,21 @@ namespace MPAPI\Services;
 use MPAPI\Entity\Product;
 use MPAPI\Interfaces\ServiceInterface;
 use MPAPI\Entity\AbstractEntity;
+use MPAPI\Services\AbstractServiceFilter;
 
 /**
  * Abstract service
  *
  * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
  */
-abstract class AbstractService implements ServiceInterface
+abstract class AbstractService extends AbstractServiceFilter implements ServiceInterface
 {
+	/**
+	 *
+	 * @var string
+	 */
+	const MSG_NOT_IMPLEMENTED = 'Method %s not implemented!';
+
 	/**
 	 *
 	 * @var AbstractEntity[]
@@ -20,9 +27,9 @@ abstract class AbstractService implements ServiceInterface
 
 	/**
 	 *
-	 * @var string
+	 * @var Client
 	 */
-	const MSG_NOT_IMPLEMENTED = 'Method %s not implemented!';
+	protected $client;
 
 	/**
 	 * Get data

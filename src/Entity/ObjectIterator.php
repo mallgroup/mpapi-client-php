@@ -4,27 +4,16 @@ namespace MPAPI\Entity;
 /**
  * Basic product iterator
  *
- * @author Martin Hrdlicka <martin.hrdlicka@mall.cz>
+ * @author Jan Blaha <jan.blaha@mall.cz>
  */
-class BasicProductIterator implements \Iterator
+abstract class ObjectIterator implements \Iterator
 {
 
 	/**
 	 *
 	 * @var array
 	 */
-	private $data;
-
-	/**
-	 *
-	 * @param array $basicData
-	 */
-	public function __construct(array $basicData)
-	{
-		foreach ($basicData as $basicItem) {
-			$this->data[] = new BasicProduct($basicItem);
-		}
-	}
+	protected $data;
 
 	/**
 	 *
@@ -78,14 +67,5 @@ class BasicProductIterator implements \Iterator
 	 *
 	 * @return array
 	 */
-	public function getOutputData()
-	{
-		$retval = [];
-		/* @var BasicProduct $basicItem */
-		foreach ($this->data as $basicItem) {
-			$retval[] = $basicItem->getData();
-		}
-		
-		return $retval;
-	}
+	abstract public function getOutputData();
 }

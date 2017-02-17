@@ -3,8 +3,10 @@ namespace MPAPI\Services;
 
 use GuzzleHttp\Psr7\Response;
 use MPAPI\Endpoints\VariantsEndpoints;
-use MPAPI\Entity\Variant;
+use MPAPI\Entity\Products\BasicVariantIterator;
+use MPAPI\Entity\Products\Variant;
 use MPAPI\Exceptions\ApplicationException;
+use MPAPI\Lib\DataCollector;
 
 /**
  * Variants service
@@ -23,7 +25,7 @@ class Variants extends AbstractVariantsService
 	 *
 	 * @var Client
 	 */
-	private $client;
+	protected $client;
 
 	/**
 	 *
@@ -47,13 +49,23 @@ class Variants extends AbstractVariantsService
 	 *
 	 * @param string $productId
 	 * @param string $variantId
-	 * @return array|Variant
+	 * @return array|Variant|BasicVariantIterator
 	 */
 	public function get($productId, $variantId = '')
 	{
 		$retval = [];
 		if (empty($variantId)) {
-			$retval = $this->endpoints->variantsList($productId);
+			/** @var Response $response */
+			$response = $this->endpoints->variantsList($productId);
+			// collect data from response
+			$dataCollector = new DataCollector($this->client, $response, false);
+			switch ($this->getFilter()) {
+				case self::FILTER_TYPE_BASIC:
+					$retval = new BasicVariantIterator($dataCollector->getData());
+				break;
+				default:
+					$retval = $dataCollector->setDataSection('ids')->getData();
+			}
 		} else {
 			$retval = $this->endpoints->detail($productId, $variantId);
 		}

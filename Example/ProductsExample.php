@@ -1,8 +1,8 @@
 <?php
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use MPAPI\Entity\Product;
-use MPAPI\Entity\Variant;
+use MPAPI\Entity\Products\Product;
+use MPAPI\Entity\Products\Variant;
 use MPAPI\Exceptions\ForceTokenException;
 use MPAPI\Services\Client;
 use MPAPI\Services\Products;

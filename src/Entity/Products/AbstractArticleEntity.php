@@ -1,5 +1,7 @@
 <?php
-namespace MPAPI\Entity;
+namespace MPAPI\Entity\Products;
+
+use MPAPI\Entity\AbstractEntity;
 
 /**
  *

@@ -357,6 +357,20 @@ class Client
 	}
 
 	/**
+	 * Remove arguments
+	 *
+	 * @param string $name
+	 * @return client
+	 */
+	public function removeArgument($name)
+	{
+		if (isset($this->arguments[$name])) {
+			unset($this->arguments[$name]);
+		}
+		return $this;
+	}
+
+	/**
 	 * Get configuration
 	 *
 	 * @param string $environment

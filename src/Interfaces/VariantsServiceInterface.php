@@ -1,7 +1,7 @@
 <?php
 namespace MPAPI\Interfaces;
 
-use MPAPI\Entity\Variant;
+use MPAPI\Entity\Products\Variant;
 
 /**
  * Variants service interface
