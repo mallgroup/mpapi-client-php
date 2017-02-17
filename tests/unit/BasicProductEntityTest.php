@@ -47,9 +47,9 @@ class BasicProductTest extends \Codeception\Test\Unit
 		$this->assertEquals($this->data['category_id'], $this->object->getCategoryId());
 	}
 
-	public function testHasVariant()
+	public function testHasVariants()
 	{
-		$this->assertEquals($this->data['has_variants'], $this->object->hasVariant());
+		$this->assertEquals($this->data['has_variants'], $this->object->hasVariants());
 	}
 
 	public function testGetVariantsCount()
