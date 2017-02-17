@@ -87,24 +87,21 @@ class Products extends AbstractService
 	 * Get data
 	 *
 	 * @param string $productId
-	 * @return Product|array|null
+	 * @return Product|BasicProductIterator|array|null
 	 */
 	public function get($productId = null)
 	{
 		$retval = null;
 		if (is_null($productId)) {
 			$response = $this->productsEndpoints->getProducts();
-			// parse JSON response to array
-			$responseData = json_decode($response->getBody(), true);
-			if (isset($responseData['data'])) {
-				switch ($this->getFilter()) {
-					case self::FILTER_TYPE_BASIC:
-						$retval = new BasicProductIterator($responseData['data']);
-					break;
-					default:
-						$dataCollector = new DataCollector($this->client, $response, false);
-						$retval = $dataCollector->setDataSection('ids')->getData();
-				}
+			// collect data from response
+			$dataCollector = new DataCollector($this->client, $response, false);
+			switch ($this->getFilter()) {
+				case self::FILTER_TYPE_BASIC:
+					$retval = new BasicProductIterator($dataCollector->getData());
+				break;
+				default:
+					$retval = $dataCollector->setDataSection('ids')->getData();
 			}
 		} else {
 			$response = $this->productsEndpoints->getDetail($productId);
