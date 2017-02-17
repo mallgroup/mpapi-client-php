@@ -68,7 +68,7 @@ class BasicProduct extends AbstractArticleEntity
 	 *
 	 * @return boolean
 	 */
-	public function hasVariant()
+	public function hasVariants()
 	{
 		$retval = false;
 		if (isset($this->data[self::KEY_HAS_VARIANTS])) {
@@ -106,6 +106,20 @@ class BasicProduct extends AbstractArticleEntity
 	}
 
 	/**
+	 * Get in stock
+	 *
+	 * @return integer
+	 */
+	public function getInStock()
+	{
+		$retval = '';
+		if (isset($this->data[self::KEY_IN_STOCK])) {
+			$retval = $this->data[self::KEY_IN_STOCK];
+		}
+		return (int) $retval;
+	}
+
+	/**
 	 * @see \MPAPI\Entity\AbstractEntity::getData()
 	 */
 	public function getData()
@@ -115,9 +129,10 @@ class BasicProduct extends AbstractArticleEntity
 			self::KEY_PRODUCT_ID => $this->getProductId(),
 			self::KEY_TITLE => $this->getTitle(),
 			self::KEY_CATEGORY_ID => $this->getCategoryId(),
-			self::KEY_HAS_VARIANTS => $this->hasVariant(),
+			self::KEY_HAS_VARIANTS => $this->hasVariants(),
 			self::KEY_VARIANTS_COUNT => $this->getVariantsCount(),
-			self::KEY_STATUS => $this->getStatus()
+			self::KEY_STATUS => $this->getStatus(),
+			self::KEY_IN_STOCK => $this->getInStock()
 		];
 	}
 

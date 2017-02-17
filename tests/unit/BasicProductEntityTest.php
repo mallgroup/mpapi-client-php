@@ -2,7 +2,7 @@
 namespace MPAPI\Tests\Unit;
 
 use Codeception\Util\Fixtures;
-use MPAPI\Entity\BasicProduct;
+use MPAPI\Entity\Products\BasicProduct;
 
 /**
  * Test basic product entity
@@ -47,9 +47,9 @@ class BasicProductTest extends \Codeception\Test\Unit
 		$this->assertEquals($this->data['category_id'], $this->object->getCategoryId());
 	}
 
-	public function testHasVariant()
+	public function testHasVariants()
 	{
-		$this->assertEquals($this->data['has_variants'], $this->object->hasVariant());
+		$this->assertEquals($this->data['has_variants'], $this->object->hasVariants());
 	}
 
 	public function testGetVariantsCount()
@@ -68,5 +68,6 @@ class BasicProductTest extends \Codeception\Test\Unit
 		$this->assertArrayHasKey('variants_count', $dataOutput);
 		$this->assertArrayHasKey('has_variants', $dataOutput);
 		$this->assertArrayHasKey('status', $dataOutput);
+		$this->assertArrayHasKey('in_stock', $dataOutput);
 	}
 }

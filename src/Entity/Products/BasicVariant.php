@@ -19,19 +19,7 @@ class BasicVariant extends AbstractArticleEntity
 	 *
 	 * @var string
 	 */
-	const KEY_CATEGORY_ID = 'category_id';
-
-	/**
-	 *
-	 * @var string
-	 */
-	const KEY_HAS_VARIANTS = 'has_variants';
-
-	/**
-	 *
-	 * @var string
-	 */
-	const KEY_VARIANTS_COUNT = 'variants_count';
+	const KEY_VARIANT_ID = 'variant_id';
 
 	/**
 	 * Get product ID
@@ -48,45 +36,17 @@ class BasicVariant extends AbstractArticleEntity
 	}
 
 	/**
-	 * Get category ID
+	 * Get variant ID
 	 *
 	 * @return string
 	 */
-	public function getCategoryId()
+	public function getVariantId()
 	{
 		$retval = '';
-		if (isset($this->data[self::KEY_CATEGORY_ID])) {
-			$retval = $this->data[self::KEY_CATEGORY_ID];
+		if (isset($this->data[self::KEY_VARIANT_ID])) {
+			$retval = $this->data[self::KEY_VARIANT_ID];
 		}
 		return $retval;
-	}
-
-	/**
-	 * Product has variant
-	 *
-	 * @return boolean
-	 */
-	public function hasVariant()
-	{
-		$retval = false;
-		if (isset($this->data[self::KEY_HAS_VARIANTS])) {
-			$retval = (boolean) $this->data[self::KEY_HAS_VARIANTS];
-		}
-		return (bool) $retval;
-	}
-
-	/**
-	 * Get variants count
-	 *
-	 * @return integer
-	 */
-	public function getVariantsCount()
-	{
-		$retval = 0;
-		if (isset($this->data[self::KEY_VARIANTS_COUNT])) {
-			$retval = $this->data[self::KEY_VARIANTS_COUNT];
-		}
-		return (int) $retval;
 	}
 
 	/**
@@ -104,6 +64,20 @@ class BasicVariant extends AbstractArticleEntity
 	}
 
 	/**
+	 * Get in stock
+	 *
+	 * @return integer
+	 */
+	public function getInStock()
+	{
+		$retval = '';
+		if (isset($this->data[self::KEY_IN_STOCK])) {
+			$retval = $this->data[self::KEY_IN_STOCK];
+		}
+		return (int) $retval;
+	}
+
+	/**
 	 * @see \MPAPI\Entity\AbstractEntity::getData()
 	 */
 	public function getData()
@@ -111,11 +85,10 @@ class BasicVariant extends AbstractArticleEntity
 		return [
 			self::KEY_ID => $this->getId(),
 			self::KEY_PRODUCT_ID => $this->getProductId(),
+			self::KEY_VARIANT_ID => $this->getVariantId(),
 			self::KEY_TITLE => $this->getTitle(),
-			self::KEY_CATEGORY_ID => $this->getCategoryId(),
-			self::KEY_HAS_VARIANTS => $this->hasVariant(),
-			self::KEY_VARIANTS_COUNT => $this->getVariantsCount(),
-			self::KEY_STATUS => $this->getStatus()
+			self::KEY_STATUS => $this->getStatus(),
+			self::KEY_IN_STOCK => $this->getInStock()
 		];
 	}
 
