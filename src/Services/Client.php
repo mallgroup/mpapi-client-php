@@ -360,7 +360,7 @@ class Client
 	 * Remove arguments
 	 *
 	 * @param string $name
-	 * @return client
+	 * @return Client
 	 */
 	public function removeArgument($name)
 	{

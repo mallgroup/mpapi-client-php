@@ -1,9 +1,10 @@
 # Marketplace API client - change log
+
 ## 2.3.0
-- Move products entities into Products namespace.
-- Add method for remove used filter.
-- Added two types of variants list (ids and basic). If you want get list with basic data you can use filter 'basic'. Filter 'ids' is default.
-- Variants service GET now returns three types of object 'array', 'Variant', 'BasicVariantIterator'.
+- move products entities into Products namespace
+- added method for remove used filter
+- added two types of variants list (ids and basic). If you want get list with basic data you can use filter 'basic'. Filter 'ids' is default
+- variants service GET now returns three types of object 'array', 'Variant', 'BasicVariantIterator'
 
 ## 2.2.1
 - fix basic product data get status
