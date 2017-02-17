@@ -25,7 +25,7 @@ class BasicProduct extends AbstractArticleEntity
 	 *
 	 * @var string
 	 */
-	const KEY_HAS_VARIANT = 'has_variant';
+	const KEY_HAS_VARIANTS = 'has_variants';
 
 	/**
 	 *
@@ -69,8 +69,8 @@ class BasicProduct extends AbstractArticleEntity
 	public function hasVariant()
 	{
 		$retval = false;
-		if (isset($this->data[self::KEY_HAS_VARIANT])) {
-			$retval = (boolean) $this->data[self::KEY_HAS_VARIANT];
+		if (isset($this->data[self::KEY_HAS_VARIANTS])) {
+			$retval = (boolean) $this->data[self::KEY_HAS_VARIANTS];
 		}
 		return (bool) $retval;
 	}
@@ -113,7 +113,7 @@ class BasicProduct extends AbstractArticleEntity
 			self::KEY_PRODUCT_ID => $this->getProductId(),
 			self::KEY_TITLE => $this->getTitle(),
 			self::KEY_CATEGORY_ID => $this->getCategoryId(),
-			self::KEY_HAS_VARIANT => $this->hasVariant(),
+			self::KEY_HAS_VARIANTS => $this->hasVariant(),
 			self::KEY_VARIANTS_COUNT => $this->getVariantsCount(),
 			self::KEY_STATUS => $this->getStatus()
 		];

@@ -344,7 +344,7 @@ $basicProduct = [
 	'title' => 'Testing product',
 	'category_id' => 'MP001',
 	'variants_count' => 1,
-	'has_variant' => true,
+	'has_variants' => true,
 	'status' => 'A'
 ];
 Codeception\Util\Fixtures::add('productBasicData', $basicProduct);

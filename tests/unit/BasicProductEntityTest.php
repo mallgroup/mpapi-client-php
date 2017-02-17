@@ -49,7 +49,7 @@ class BasicProductTest extends \Codeception\Test\Unit
 
 	public function testHasVariant()
 	{
-		$this->assertEquals($this->data['has_variant'], $this->object->hasVariant());
+		$this->assertEquals($this->data['has_variants'], $this->object->hasVariant());
 	}
 
 	public function testGetVariantsCount()
@@ -66,7 +66,7 @@ class BasicProductTest extends \Codeception\Test\Unit
 		$this->assertArrayHasKey('title', $dataOutput);
 		$this->assertArrayHasKey('category_id', $dataOutput);
 		$this->assertArrayHasKey('variants_count', $dataOutput);
-		$this->assertArrayHasKey('has_variant', $dataOutput);
+		$this->assertArrayHasKey('has_variants', $dataOutput);
 		$this->assertArrayHasKey('status', $dataOutput);
 	}
 }

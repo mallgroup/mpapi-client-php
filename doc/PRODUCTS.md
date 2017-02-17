@@ -22,7 +22,7 @@ $response = $products->get();
  * If you want to receive more products data in one request, you can use a filter.
  * By now two types of filters are available: 'ids' and 'basic'.
  * ids - returns only list of product IDs
- * basic - returns list of basic product data (id, product_id, title, status, category_id, variants_count, has_variant)
+ * basic - returns list of basic product data (id, product_id, title, status, category_id, variants_count, has_variants)
  */
 $products->setFilter(ProductsEndpoints::FILTER_TYPE_BASIC); 
 $response = $products->get(); 
