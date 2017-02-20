@@ -1,9 +1,9 @@
 <?php
 namespace MPAPI\Tests\Unit;
 
-use MPAPI\Entity\Product;
 use Codeception\Util\Fixtures;
-use MPAPI\Entity\Variant;
+use MPAPI\Entity\Products\Product;
+use MPAPI\Entity\Products\Variant;
 
 /**
  * Test product entity

@@ -1,8 +1,8 @@
 <?php
 namespace MPAPI\Tests\Unit;
 
-use MPAPI\Entity\Order;
 use Codeception\Util\Fixtures;
+use MPAPI\Entity\Order;
 
 class OrderTest extends \Codeception\Test\Unit
 {

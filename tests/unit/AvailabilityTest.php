@@ -1,8 +1,8 @@
 <?php
 namespace MPAPI\Tests\Unit;
 
-use MPAPI\Entity\Availability;
 use Codeception\Util\Fixtures;
+use MPAPI\Entity\Availability;
 
 class AvailabilityTest extends \Codeception\Test\Unit
 {
