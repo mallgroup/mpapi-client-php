@@ -13,7 +13,7 @@ class Labels extends AbstractService
 	 *
 	 * @var Client
 	 */
-	private $client;
+	protected $client;
 
 	/**
 	 *
@@ -23,7 +23,7 @@ class Labels extends AbstractService
 
 	/**
 	 * Labels constructor.
-	 * 
+	 *
 	 * @param Client $client
 	 */
 	public function __construct(Client $client)

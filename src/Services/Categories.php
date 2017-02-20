@@ -15,7 +15,7 @@ class Categories extends AbstractService
 	 *
 	 * @var Client
 	 */
-	private $client;
+	protected $client;
 
 	/**
 	 * Category constructor

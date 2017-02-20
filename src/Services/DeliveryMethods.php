@@ -18,7 +18,7 @@ class DeliveryMethods extends AbstractService
 	 *
 	 * @var Client
 	 */
-	private $client;
+	protected $client;
 
 	/**
 	 *

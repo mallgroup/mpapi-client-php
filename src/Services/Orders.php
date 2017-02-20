@@ -16,7 +16,7 @@ class Orders extends AbstractService
 	 *
 	 * @var Client
 	 */
-	private $client;
+	protected $client;
 
 	/**
 	 * Orders constructor.

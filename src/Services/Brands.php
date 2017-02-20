@@ -15,7 +15,7 @@ class Brands extends AbstractService
 	 *
 	 * @var Client
 	 */
-	private $client;
+	protected $client;
 
 	/**
 	 * Brands constructor

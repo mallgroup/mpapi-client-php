@@ -19,7 +19,7 @@ class Deliveries extends AbstractService
 	 *
 	 * @var Client
 	 */
-	private $client;
+	protected $client;
 
 	/**
 	 *
