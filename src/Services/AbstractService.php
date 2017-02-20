@@ -1,10 +1,9 @@
 <?php
 namespace MPAPI\Services;
 
-use MPAPI\Entity\Product;
+use MPAPI\Entity\Products\Product;
 use MPAPI\Interfaces\ServiceInterface;
 use MPAPI\Entity\AbstractEntity;
-use MPAPI\Services\AbstractServiceFilter;
 
 /**
  * Abstract service

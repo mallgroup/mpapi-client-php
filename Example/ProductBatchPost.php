@@ -1,7 +1,7 @@
 <?php
 use MPAPI\Services\Client;
 use MPAPI\Services\Products;
-use MPAPI\Entity\Product;
+use MPAPI\Entity\Products\Product;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 

@@ -4,8 +4,8 @@
 <?php 
 ...
 use MPAPI\Services\Products;
-use MPAPI\Entity\Product; 
-use MPAPI\Entity\Variant; 
+use MPAPI\Entity\Products\Product; 
+use MPAPI\Entity\Products\Variant; 
 ...
 ``` 
  

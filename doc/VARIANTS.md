@@ -5,8 +5,8 @@
 ...
 use MPAPI\Services\Client;
 use MPAPI\Services\Variants;
-use MPAPI\Entity\Product;
-use MPAPI\Entity\Variant;
+use MPAPI\Entity\Products\Product;
+use MPAPI\Entity\Products\Variant;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 ...

@@ -2,7 +2,7 @@
 namespace MPAPI\Tests\Unit;
 
 use Codeception\Util\Fixtures;
-use MPAPI\Entity\Variant;
+use MPAPI\Entity\Products\Variant;
 
 /**
  * Test variant entity
