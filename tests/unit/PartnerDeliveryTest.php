@@ -1,8 +1,8 @@
 <?php
 namespace MPAPI\Tests\Unit;
 
-use MPAPI\Entity\PartnerDelivery;
 use Codeception\Util\Fixtures;
+use MPAPI\Entity\PartnerDelivery;
 
 /**
  * Test partner delivery entity

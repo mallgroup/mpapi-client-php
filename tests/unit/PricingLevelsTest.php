@@ -1,8 +1,8 @@
 <?php
 namespace MPAPI\Tests\Unit;
 
-use MPAPI\Entity\Deliveries\PricingLevels;
 use Codeception\Util\Fixtures;
+use MPAPI\Entity\Deliveries\PricingLevels;
 
 class PricingLevelsTest extends \Codeception\Test\Unit
 {

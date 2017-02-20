@@ -1,9 +1,9 @@
 <?php
 namespace MPAPI\Tests\Unit;
 
-use MPAPI\Entity\DeliverySetup;
 use Codeception\Util\Fixtures;
 use MPAPI\Entity\DeliveryPricing;
+use MPAPI\Entity\DeliverySetup;
 
 class DeliverySetupTest extends \Codeception\Test\Unit
 {

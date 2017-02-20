@@ -1,8 +1,8 @@
 <?php
 namespace MPAPI\Tests\Unit;
 
-use MPAPI\Entity\Products\Product;
 use Codeception\Util\Fixtures;
+use MPAPI\Entity\Products\Product;
 use MPAPI\Entity\Products\Variant;
 
 /**

@@ -1,8 +1,8 @@
 <?php
 namespace MPAPI\Tests\Unit;
 
-use MPAPI\Entity\DeliveryMethod;
 use Codeception\Util\Fixtures;
+use MPAPI\Entity\DeliveryMethod;
 use MPAPI\Entity\DeliverySetup;
 
 class DeliveryMethodTest extends \Codeception\Test\Unit
