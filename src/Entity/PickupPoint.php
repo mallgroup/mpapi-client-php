@@ -451,7 +451,7 @@ class PickupPoint
 	 */
 	public function getHeightLimit()
 	{
-		return (double) $this->data[self::KEY_HEIGHT];
+		return (double) $this->data[self::KEY_DIMENSIONS][self::KEY_HEIGHT];
 	}
 
 	/**
@@ -462,7 +462,7 @@ class PickupPoint
 	 */
 	public function setHeightLimit($height)
 	{
-		$this->data[self::KEY_HEIGHT] = (double) $height;
+		$this->data[self::KEY_DIMENSIONS][self::KEY_HEIGHT] = (double) $height;
 		return $this;
 	}
 
@@ -473,7 +473,7 @@ class PickupPoint
 	 */
 	public function getLengthLimit()
 	{
-		return (double) $this->data[self::KEY_LENGTH];
+		return (double) $this->data[self::KEY_DIMENSIONS][self::KEY_LENGTH];
 	}
 
 	/**
@@ -484,7 +484,7 @@ class PickupPoint
 	 */
 	public function setLengthLimit($length)
 	{
-		$this->data[self::KEY_LENGTH] = (double) $length;
+		$this->data[self::KEY_DIMENSIONS][self::KEY_LENGTH] = (double) $length;
 		return $this;
 	}
 
@@ -495,7 +495,7 @@ class PickupPoint
 	 */
 	public function getWidthLimit()
 	{
-		return (double) $this->data[self::KEY_WIDTH];
+		return (double) $this->data[self::KEY_DIMENSIONS][self::KEY_WIDTH];
 	}
 
 	/**
@@ -506,7 +506,7 @@ class PickupPoint
 	 */
 	public function setWidthLimit($width)
 	{
-		$this->data[self::KEY_WIDTH] = (double) $width;
+		$this->data[self::KEY_DIMENSIONS][self::KEY_WIDTH] = (double) $width;
 		return $this;
 	}
 
@@ -517,7 +517,7 @@ class PickupPoint
 	 */
 	public function getWeightLimit()
 	{
-		return (double) $this->data[self::KEY_WEIGHT];
+		return (double) $this->data[self::KEY_DIMENSIONS][self::KEY_WEIGHT];
 	}
 
 	/**
@@ -528,7 +528,7 @@ class PickupPoint
 	 */
 	public function setWeightLimit($weight)
 	{
-		$this->data[self::KEY_WEIGHT] = (double) $weight;
+		$this->data[self::KEY_DIMENSIONS][self::KEY_WEIGHT] = (double) $weight;
 		return $this;
 	}
 

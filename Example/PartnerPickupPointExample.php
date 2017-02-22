@@ -3,10 +3,9 @@ use MPAPI\Services\Client;
 use MPAPI\Services\Deliveries;
 use MPAPI\Entity\PickupPoint;
 
-
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
+$mpapiClient = new Client('your_client_id');
 $deliveries = new Deliveries($mpapiClient);
 // delivery code of already defined delivery method
 $deliveryCode = 'new_delivery2';
