@@ -1,10 +1,22 @@
 # Marketplace API client - change log
 
+## 2.3.4
+- Bug fix: access to pickup point dimensions
+
+## 2.3.3
+- implemented data collector for product list; key 'ids' has been removed from response structure and the list of product ids is returned directly to the output
+
+## 2.3.2
+-  removed developer's URL from config
+
+## 2.3.1
+- in services the access type of client object has been changed to protected
+
 ## 2.3.0
-- move products entities into Products namespace
-- added method for remove used filter
-- added two types of variants list (ids and basic). If you want get list with basic data you can use filter 'basic'. Filter 'ids' is default
-- variants service GET now returns three types of object 'array', 'Variant', 'BasicVariantIterator'
+- moved products entities into Products namespace
+- added method to remove used filter
+- added two types of variant lists ('ids' and 'basic'). To get list with basic data you can use filter 'basic'. Filter 'ids' is set as default.
+- variants service GET returns three types of return type: 'array', 'Variant', 'BasicVariantIterator'
 
 ## 2.2.1
 - fix basic product data get status
