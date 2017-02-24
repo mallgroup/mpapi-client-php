@@ -11,6 +11,12 @@ abstract class ObjectIterator implements \Iterator
 
 	/**
 	 *
+	 * @var int
+	 */
+	protected $index = 0;
+
+	/**
+	 *
 	 * @var array
 	 */
 	protected $data;
@@ -21,7 +27,7 @@ abstract class ObjectIterator implements \Iterator
 	 */
 	public function current()
 	{
-		return current($this->data);
+		return $this->data[$this->index];
 	}
 
 	/**
@@ -30,7 +36,7 @@ abstract class ObjectIterator implements \Iterator
 	 */
 	public function next()
 	{
-		next($this->data);
+		$this->index++;
 		return $this;
 	}
 
@@ -40,7 +46,7 @@ abstract class ObjectIterator implements \Iterator
 	 */
 	public function key()
 	{
-		return key($this->data);
+		return $this->index;
 	}
 
 	/**
@@ -58,7 +64,7 @@ abstract class ObjectIterator implements \Iterator
 	 */
 	public function rewind()
 	{
-		reset($this->data);
+		$this->index = 0;
 		return $this;
 	}
 
