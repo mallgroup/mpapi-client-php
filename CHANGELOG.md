@@ -1,6 +1,6 @@
 # Marketplace API client - change log
 
-## 2.3.4
+## 2.3.5
 - Bug fix: warnings in object iterator
 
 ## 2.3.4
