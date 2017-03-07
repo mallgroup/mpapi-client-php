@@ -24,14 +24,18 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 	/**
 	 * Update order status
 	 *
+	 * @param integer $orderId
 	 * @param string $status
+	 * @param boolean $confirmed
+	 * @param string $trackingNumber
 	 * @return boolean
 	 */
-	public function status($orderId, $status, $confirmed = true)
+	public function status($orderId, $status, $confirmed = true, $trackingNumber = '')
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $orderId), 'PUT', [
 			'status' => $status,
-			'confirmed' => $confirmed
+			'confirmed' => $confirmed,
+			'tracking_number' => $trackingNumber
 		]);
 		return $response->getStatusCode() == 200;
 	}
