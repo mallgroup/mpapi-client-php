@@ -180,6 +180,7 @@ $orderData = [
 	'discount' => 0,
 	'delivery_method' => 'partner_delivery_id',
 	'delivery_method_id' => 1111,
+	'tracking_number' => 'T9999999999',
 	'ship_date' => '2016-03-16',
 	'delivery_date' => '2016-03-16',
 	'cod' => 71.98,

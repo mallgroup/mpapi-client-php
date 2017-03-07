@@ -145,7 +145,7 @@ class OrderTest extends \Codeception\Test\Unit
 
 	public function testGetTrackingNumber()
 	{
-		$this->assertEmpty($this->object->getTrackingNumber());
+		$this->assertNotEmpty($this->object->getTrackingNumber());
 	}
 
 	public function testGetDiscount()
