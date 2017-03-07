@@ -67,6 +67,7 @@ The response contains order details:
     "discount" => 185,
     "delivery_method" => "pplCz",
     "delivery_method_id" => "21",
+    "tracking_number": "T9999999999",
     "ship_date" => "2015-10-05",
     "cod" => 409,
     "address" => [
@@ -108,6 +109,13 @@ You will change the status of the order with its order ID as the first and statu
 ```
 ...
 $responseStatus = $orders->put()->status('yourOrderId', Order::STATUS_SHIPPING);
+...
+```
+
+You will set the tracking number of the order with its order ID as the first and tracking number as the second parameter:
+```
+...
+$responseStatus = $orders->put()->setTrackingNumber($order->getOrderId(), 'tracking-number');
 ...
 ```
 
