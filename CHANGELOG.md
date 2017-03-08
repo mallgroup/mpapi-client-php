@@ -1,7 +1,7 @@
 # Marketplace API client - change log
 
 ## 2.3.6
-- added tracking number to order
+- added tracking number to order detail
 
 ## 2.3.5
 - Bug fix: warnings in object iterator

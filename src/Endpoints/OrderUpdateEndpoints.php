@@ -25,7 +25,7 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 	 *
 	 * @var string
 	 */
-	const ENDPOINT_TRACKING_NUMBER = '%s/%s/tracking-number';
+	const ENDPOINT_TRACKING_NUMBER = '%s/%s/tracking-number/%s';
 
 	/**
 	 *
@@ -44,11 +44,15 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 	 */
 	public function status($orderId, $status, $confirmed = true, $trackingNumber = '')
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_DETAIL, self::ENDPOINT_PATH, $orderId), 'PUT', [
+		$requestData = [
 			'status' => $status,
-			'confirmed' => $confirmed,
-			'tracking_number' => $trackingNumber
-		]);
+			'confirmed' => $confirmed
+		];
+		if (!empty($trackingNumber)) {
+			$requestData['tracking_number'] = $trackingNumber;
+		}
+
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_DETAIL, self::ENDPOINT_PATH, $orderId), 'PUT', $requestData);
 		return $response->getStatusCode() == 200;
 	}
 
@@ -59,11 +63,9 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 	 * @param string $trackingNumber
 	 * @return boolean
 	 */
-	public function setTrackingNumber($orderId, $trackingNumber)
+	public function trackingNumber($orderId, $trackingNumber)
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_TRACKING_NUMBER, self::ENDPOINT_PATH, $orderId), 'PUT', [
-			'number' => $trackingNumber
-		]);
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_TRACKING_NUMBER, self::ENDPOINT_PATH, $orderId, $trackingNumber), 'PUT');
 		return $response->getStatusCode() == 200;
 	}
 }

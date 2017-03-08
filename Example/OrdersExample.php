@@ -7,7 +7,7 @@ use MPAPI\Entity\Order;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
+$mpapiClient = new Client('your_client_id');
 
 $logger = new Logger('loggerName');
 $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
@@ -49,7 +49,7 @@ if (!empty($openOrders)) {
 	 * ##################################
 	 */
 	$responseStatus = $orders->put()->status($order->getOrderId(), Order::STATUS_SHIPPING);
-	print('Setup order status: ');
+	print('New order status: ');
 	var_dump($responseStatus);
 	print(PHP_EOL);
 
@@ -58,8 +58,8 @@ if (!empty($openOrders)) {
 	 * Set tracking number
 	 * ##################################
 	 */
-	$responseStatus = $orders->put()->setTrackingNumber($order->getOrderId(), 'tracking-number');
-	print('Setup tracking number: ');
+	$responseStatus = $orders->put()->trackingNumber($order->getOrderId(), 'T9999999999');
+	print('Order tracking number: ');
 	var_dump($responseStatus);
 	print(PHP_EOL);
 }

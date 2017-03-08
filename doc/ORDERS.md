@@ -115,7 +115,7 @@ $responseStatus = $orders->put()->status('yourOrderId', Order::STATUS_SHIPPING);
 You will set the tracking number of the order with its order ID as the first and tracking number as the second parameter:
 ```
 ...
-$responseStatus = $orders->put()->setTrackingNumber($order->getOrderId(), 'tracking-number');
+$responseStatus = $orders->put()->trackingNumber($order->getOrderId(), 'T9999999999');
 ...
 ```
 
