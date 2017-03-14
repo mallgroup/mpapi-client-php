@@ -43,8 +43,12 @@ The response contains basic data of all orders:
 ]
 
 ...
+// get all orders except statuses: returned, delivered, cancelled
+$unfinishedOrders = $orders->get()->open();
+
+...
 // get all open orders
-$openOrders = $orders->get()->open();
+$openOrders = $orders->get()->open(Order::STATUS_OPEN);
 
 ...
 // get all shipping orders
