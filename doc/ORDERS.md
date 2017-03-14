@@ -12,7 +12,7 @@ $orders = new Orders($mpapiClient);
 
 #### Available methods:
 **GET**  
-You can get either information about specific order or information about all orders or open/unconfirmed orders:
+You can get either information about specific order or information about all orders or statuses orders:
 ```
 ...
 // get all orders
@@ -45,6 +45,26 @@ The response contains basic data of all orders:
 ...
 // get all open orders
 $openOrders = $orders->get()->open();
+
+...
+// get all shipping orders
+$shippingOrders = $orders->get()->shipping();
+
+...
+// get all shipped orders
+$shippedOrders = $orders->get()->shipped();
+
+...
+// get all delivered orders
+$deliveredOrders = $orders->get()->delivered();
+
+...
+// get all returned orders
+$returnedOrders = $orders->get()->returned();
+
+...
+// get all cancelled orders
+$cancelledOrders = $orders->get()->cancelled();
 
 ...
 // get all unconfirmed orders
