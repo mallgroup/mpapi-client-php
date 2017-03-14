@@ -75,11 +75,16 @@ class OrdersEndpoints extends AbstractEndpoints
 	/**
 	 * Get list of open orders
 	 *
+	 * @param string $status
 	 * @return array|null
 	 */
-	public function open()
+	public function open($status = '')
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS , self::ENDPOINT_PATH, self::ENDPOINT_OPEN), 'GET');
+		$args = [];
+		if ($status === Order::STATUS_OPEN) {
+			$args['status'] = $status;
+		}
+		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS , self::ENDPOINT_PATH, self::ENDPOINT_OPEN), 'GET', [], $args);
 		return $this->dataCollector($response);
 	}
 
