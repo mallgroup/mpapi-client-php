@@ -22,6 +22,12 @@ class OrdersEndpoints extends AbstractEndpoints
 	 *
 	 * @var string
 	 */
+	const ENDPOINT_BLOCKED = 'blocked';
+
+	/**
+	 *
+	 * @var string
+	 */
 	const ENDPOINT_OPEN = 'open';
 
 	/**
@@ -85,6 +91,17 @@ class OrdersEndpoints extends AbstractEndpoints
 			$args['status'] = $status;
 		}
 		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS , self::ENDPOINT_PATH, self::ENDPOINT_OPEN), 'GET', [], $args);
+		return $this->dataCollector($response);
+	}
+
+	/**
+	 * Get list of blocked orders
+	 *
+	 * @return array|null
+	 */
+	public function blocked()
+	{
+		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS , self::ENDPOINT_PATH, self::ENDPOINT_BLOCKED), 'GET');
 		return $this->dataCollector($response);
 	}
 

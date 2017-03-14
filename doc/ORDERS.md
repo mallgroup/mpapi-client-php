@@ -50,6 +50,9 @@ $unfinishedOrders = $orders->get()->open();
 // get all open orders
 $openOrders = $orders->get()->open(Order::STATUS_OPEN);
 
+// get all blocked orders
+$blockedOrders = $orders->get()->blocked();
+
 ...
 // get all shipping orders
 $shippingOrders = $orders->get()->shipping();

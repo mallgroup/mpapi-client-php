@@ -7,7 +7,7 @@ use MPAPI\Entity\Order;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('your_client_id');
+$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
 
 $logger = new Logger('loggerName');
 $logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
@@ -29,6 +29,13 @@ $openOrders = $orders->get()->open(Order::STATUS_OPEN);
 // print of open orders
 foreach ($openOrders as $orderId) {
 	print('Open order: ' . $orderId . PHP_EOL);
+}
+
+// get all blocked orders
+$blockedOrders = $orders->get()->blocked();
+// print of blocked orders
+foreach ($blockedOrders as $orderId) {
+	print('Blocked order: ' . $orderId . PHP_EOL);
 }
 
 // get all shipping orders
