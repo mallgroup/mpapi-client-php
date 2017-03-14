@@ -18,14 +18,7 @@ $mpapiClient->setLogger($logger);
 $orders = new Orders($mpapiClient);
 
 // get all orders except statuses: returned, delivered, cancelled
-$unfinishedOrders = $orders->get()->open();
-// print of unfinished orders
-foreach ($unfinishedOrders as $orderId) {
-	print('Unfinished order: ' . $orderId . PHP_EOL);
-}
-
-// get all open orders
-$openOrders = $orders->get()->open(Order::STATUS_OPEN);
+$openOrders = $orders->get()->open();
 // print of open orders
 foreach ($openOrders as $orderId) {
 	print('Open order: ' . $orderId . PHP_EOL);

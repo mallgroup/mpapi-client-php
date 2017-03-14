@@ -28,6 +28,12 @@ abstract class AbstractServiceFilter
 
 	/**
 	 *
+	 * @var string
+	 */
+	const FILTER_TYPE_STRICT = 'strict';
+
+	/**
+	 *
 	 * @var Client
 	 */
 	protected $client;
@@ -36,7 +42,7 @@ abstract class AbstractServiceFilter
 	 *
 	 * @var array
 	 */
-	private $filterType = [
+	protected $filterType = [
 		self::FILTER_TYPE_IDS,
 		self::FILTER_TYPE_BASIC
 	];

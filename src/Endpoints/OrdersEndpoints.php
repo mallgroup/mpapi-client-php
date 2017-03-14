@@ -81,93 +81,88 @@ class OrdersEndpoints extends AbstractEndpoints
 	/**
 	 * Get list of open orders
 	 *
-	 * @param string $status
-	 * @return array|null
+	 * @return array
 	 */
-	public function open($status = '')
+	public function open()
 	{
-		$args = [];
-		if ($status === Order::STATUS_OPEN) {
-			$args['status'] = $status;
-		}
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS , self::ENDPOINT_PATH, self::ENDPOINT_OPEN), 'GET', [], $args);
+		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_OPEN), 'GET');
 		return $this->dataCollector($response);
 	}
 
 	/**
 	 * Get list of blocked orders
 	 *
-	 * @return array|null
+	 * @return array
 	 */
 	public function blocked()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS , self::ENDPOINT_PATH, self::ENDPOINT_BLOCKED), 'GET');
+		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_BLOCKED), 'GET');
 		return $this->dataCollector($response);
 	}
 
 	/**
 	 * Get list of shipping orders
 	 *
-	 * @return array|null
+	 * @return array
 	 */
 	public function shipping()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS , self::ENDPOINT_PATH, self::ENDPOINT_SHIPPING), 'GET');
+		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_SHIPPING), 'GET');
 		return $this->dataCollector($response);
 	}
 
 	/**
 	 * Get list of shipped orders
 	 *
-	 * @return array|null
+	 * @return array
 	 */
 	public function shipped()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS , self::ENDPOINT_PATH, self::ENDPOINT_SHIPPED), 'GET');
+		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_SHIPPED), 'GET');
 		return $this->dataCollector($response);
 	}
 
 	/**
 	 * Get list of delivered orders
 	 *
-	 * @return array|null
+	 * @return array
 	 */
 	public function delivered()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS , self::ENDPOINT_PATH, self::ENDPOINT_DELIVERED), 'GET');
+		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_DELIVERED), 'GET');
 		return $this->dataCollector($response);
 	}
 
 	/**
 	 * Get list of returned orders
 	 *
-	 * @return array|null
+	 * @return array
 	 */
 	public function returned()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS , self::ENDPOINT_PATH, self::ENDPOINT_RETURNED), 'GET');
+		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_RETURNED), 'GET');
 		return $this->dataCollector($response);
 	}
 
 	/**
 	 * Get list of cancelled orders
 	 *
-	 * @return array|null
+	 * @return array
 	 */
 	public function cancelled()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS , self::ENDPOINT_PATH, self::ENDPOINT_CANCELLED), 'GET');
+		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_CANCELLED), 'GET');
 		return $this->dataCollector($response);
 	}
 
 	/**
 	 * Get list of unconfirmed orders
 	 *
-	 * @return array|null
+	 * @return array
 	 */
 	public function unconfirmed()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS , self::ENDPOINT_PATH, self::ENDPOINT_UNCONFIRMED), 'GET');
+		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_UNCONFIRMED), 'GET');
 		return $this->dataCollector($response);
 	}
 
@@ -187,8 +182,8 @@ class OrdersEndpoints extends AbstractEndpoints
 	/**
 	 * Get order detail
 	 *
-	 * @param integer $orderId
-	 * @return Order|null
+	 * @param int $orderId
+	 * @return Order|array
 	 */
 	public function detail($orderId)
 	{
@@ -205,7 +200,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	 * Collect all orders from response
 	 *
 	 * @param Response $response
-	 * @return array|null
+	 * @return array
 	 */
 	private function dataCollector(Response $response)
 	{

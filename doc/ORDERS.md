@@ -12,7 +12,7 @@ $orders = new Orders($mpapiClient);
 
 #### Available methods:
 **GET**  
-You can get either information about specific order or information about all orders or statuses orders:
+You can get either information about specific order or about all orders or you can get list of orders by status:
 ```
 ...
 // get all orders
@@ -44,11 +44,7 @@ The response contains basic data of all orders:
 
 ...
 // get all orders except statuses: returned, delivered, cancelled
-$unfinishedOrders = $orders->get()->open();
-
-...
-// get all open orders
-$openOrders = $orders->get()->open(Order::STATUS_OPEN);
+$openOrders = $orders->get()->open();
 
 // get all blocked orders
 $blockedOrders = $orders->get()->blocked();
