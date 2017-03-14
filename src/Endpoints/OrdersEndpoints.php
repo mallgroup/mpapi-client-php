@@ -1,6 +1,7 @@
 <?php
 namespace MPAPI\Endpoints;
 
+use GuzzleHttp\Psr7\Response;
 use MPAPI\Services\Client;
 use MPAPI\Lib\DataCollector;
 use MPAPI\Entity\Order;
@@ -21,7 +22,37 @@ class OrdersEndpoints extends AbstractEndpoints
 	 *
 	 * @var string
 	 */
-	const ENDPOINT_OPEN = '%s/open';
+	const ENDPOINT_OPEN = 'open';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const ENDPOINT_SHIPPING = 'shipping';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const ENDPOINT_SHIPPED = 'shipped';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const ENDPOINT_DELIVERED = 'delivered';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const ENDPOINT_RETURNED = 'returned';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const ENDPOINT_CANCELLED = 'cancelled';
 
 	/**
 	 *
@@ -48,9 +79,63 @@ class OrdersEndpoints extends AbstractEndpoints
 	 */
 	public function open()
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_OPEN, self::ENDPOINT_PATH), 'GET');
-		$dataCollector = new DataCollector($this->client, $response, false);
-		return $dataCollector->setDataSection('ids')->getData();
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_DETAIL , self::ENDPOINT_PATH, self::ENDPOINT_OPEN), 'GET');
+		return $this->dataCollector($response);
+	}
+
+	/**
+	 * Get list of shipping orders
+	 *
+	 * @return array|null
+	 */
+	public function shipping()
+	{
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_DETAIL , self::ENDPOINT_PATH, self::ENDPOINT_SHIPPING), 'GET');
+		return $this->dataCollector($response);
+	}
+
+	/**
+	 * Get list of shipped orders
+	 *
+	 * @return array|null
+	 */
+	public function shipped()
+	{
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_DETAIL , self::ENDPOINT_PATH, self::ENDPOINT_SHIPPED), 'GET');
+		return $this->dataCollector($response);
+	}
+
+	/**
+	 * Get list of delivered orders
+	 *
+	 * @return array|null
+	 */
+	public function delivered()
+	{
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_DETAIL , self::ENDPOINT_PATH, self::ENDPOINT_DELIVERED), 'GET');
+		return $this->dataCollector($response);
+	}
+
+	/**
+	 * Get list of returned orders
+	 *
+	 * @return array|null
+	 */
+	public function returned()
+	{
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_DETAIL , self::ENDPOINT_PATH, self::ENDPOINT_RETURNED), 'GET');
+		return $this->dataCollector($response);
+	}
+
+	/**
+	 * Get list of cancelled orders
+	 *
+	 * @return array|null
+	 */
+	public function cancelled()
+	{
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_DETAIL , self::ENDPOINT_PATH, self::ENDPOINT_CANCELLED), 'GET');
+		return $this->dataCollector($response);
 	}
 
 	/**
@@ -60,9 +145,8 @@ class OrdersEndpoints extends AbstractEndpoints
 	 */
 	public function unconfirmed()
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_UNCONFIRMED, self::ENDPOINT_PATH), 'GET');
-		$dataCollector = new DataCollector($this->client, $response, false);
-		return $dataCollector->setDataSection('ids')->getData();
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_DETAIL , self::ENDPOINT_PATH, self::ENDPOINT_UNCONFIRMED), 'GET');
+		return $this->dataCollector($response);
 	}
 
 	/**
@@ -81,6 +165,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	/**
 	 * Get order detail
 	 *
+	 * @param integer $orderId
 	 * @return Order|null
 	 */
 	public function detail($orderId)
@@ -92,5 +177,17 @@ class OrdersEndpoints extends AbstractEndpoints
 			$retval = new Order($responseData['data']);
 		}
 		return $retval;
+	}
+
+	/**
+	 * Collect all orders from response
+	 *
+	 * @param Response $response
+	 * @return array|null
+	 */
+	private function dataCollector(Response $response)
+	{
+		$dataCollector = new DataCollector($this->client, $response, false);
+		return $dataCollector->setDataSection('ids')->getData();
 	}
 }
