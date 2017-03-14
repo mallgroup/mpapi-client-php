@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 2.3.7
+- added endpoints for the get list of orders by status
+
 ## 2.3.6
 - added tracking number to order detail
 

@@ -21,7 +21,7 @@ $orders = new Orders($mpapiClient);
 $unfinishedOrders = $orders->get()->open();
 // print of unfinished orders
 foreach ($unfinishedOrders as $orderId) {
-	print('Order: ' . $orderId . PHP_EOL);
+	print('Unfinished order: ' . $orderId . PHP_EOL);
 }
 
 // get all open orders
