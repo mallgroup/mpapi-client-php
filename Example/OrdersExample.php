@@ -17,51 +17,51 @@ $mpapiClient->setLogger($logger);
 // initialize orders synchronizer
 $orders = new Orders($mpapiClient);
 
-// get all orders except statuses: returned, delivered, cancelled
+// get all open orders, it means all that are not close (that is delivered, returned, cancelled) and so they can have status from blocked to shipped
 $openOrders = $orders->get()->open();
-// print of open orders
+// print open orders
 foreach ($openOrders as $orderId) {
 	print('Open order: ' . $orderId . PHP_EOL);
 }
 
 // get all blocked orders
 $blockedOrders = $orders->get()->blocked();
-// print of blocked orders
+// print blocked orders
 foreach ($blockedOrders as $orderId) {
 	print('Blocked order: ' . $orderId . PHP_EOL);
 }
 
 // get all shipping orders
 $shippingOrders = $orders->get()->shipping();
-// print of shipping orders
+// print shipping orders
 foreach ($shippingOrders as $orderId) {
 	print('Shipping order: ' . $orderId . PHP_EOL);
 }
 
 // get all shipped orders
 $shippedOrders = $orders->get()->shipped();
-// print of shipped orders
+// print shipped orders
 foreach ($shippedOrders as $orderId) {
 	print('Shipped order: ' . $orderId . PHP_EOL);
 }
 
 // get all delivered orders
 $deliveredOrders = $orders->get()->delivered();
-// print of delivered orders
+// print delivered orders
 foreach ($deliveredOrders as $orderId) {
 	print('Delivered order: ' . $orderId . PHP_EOL);
 }
 
 // get all returned orders
 $returnedOrders = $orders->get()->returned();
-// print of returned orders
+// print returned orders
 foreach ($returnedOrders as $orderId) {
 	print('Returned order: ' . $orderId . PHP_EOL);
 }
 
 // get all cancelled orders
 $cancelledOrders = $orders->get()->cancelled();
-// print of cancelled orders
+// print cancelled orders
 foreach ($cancelledOrders as $orderId) {
 	print('Cancelled order: ' . $orderId . PHP_EOL);
 }

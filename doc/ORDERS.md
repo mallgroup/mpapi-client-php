@@ -43,7 +43,7 @@ The response contains basic data of all orders:
 ]
 
 ...
-// get all orders except statuses: returned, delivered, cancelled
+// get all open orders, it means all that are not close (that is delivered, returned, cancelled) and so they can have status from blocked to shipped
 $openOrders = $orders->get()->open();
 
 // get all blocked orders
