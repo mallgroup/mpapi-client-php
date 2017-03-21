@@ -1,5 +1,9 @@
 # Marketplace API client - change log
 
+## 2.5.0
+- extended variant media with 'switch', that marks media as variant switch (method addMedia has been extended with optional parameter 'switch')
+- changed Product/Variant entity method addMedia; second parameter 'main' is now optional and default value is false
+
 ## 2.4.0
 - added endpoints to get list of orders by all kinds of order statuses
 
