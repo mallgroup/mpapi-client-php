@@ -522,7 +522,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * @param boolean $switch
 	 * @return AbstractArticleEntity
 	 */
-	public function addMedia($url, $main, $switch = false)
+	public function addMedia($url, $main = false, $switch = false)
 	{
 		$mediaCurrent = [
 			self::KEY_URL => $url,
