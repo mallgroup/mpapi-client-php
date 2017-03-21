@@ -92,6 +92,12 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 *
 	 * @var string
 	 */
+	const KEY_SWITCH = 'switch';
+
+	/**
+	 *
+	 * @var string
+	 */
 	const KEY_PROMOTIONS = 'promotions';
 
 	/**
@@ -513,12 +519,15 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 *
 	 * @param string $url
 	 * @param boolean $main
+	 * @param boolean $switch
+	 * @return AbstractArticleEntity
 	 */
-	public function addMedia($url, $main)
+	public function addMedia($url, $main, $switch = false)
 	{
 		$mediaCurrent = [
 			self::KEY_URL => $url,
-			self::KEY_MAIN => $main
+			self::KEY_MAIN => (bool)$main,
+			self::KEY_SWITCH => (bool)$switch
 		];
 		if (!isset($this->data[self::KEY_MEDIA])) {
 			$this->data[self::KEY_MEDIA][] = $mediaCurrent;
