@@ -199,6 +199,7 @@ class VariantTest extends \Codeception\Test\Unit
 		$media = $this->object->getMedia();
 		$this->assertNotEmpty($media);
 		$this->assertEquals(true, $media[0]['main']);
+		$this->assertEquals(true, $media[0]['switch']);
 	}
 
 	public function testSetMedia()
@@ -209,13 +210,14 @@ class VariantTest extends \Codeception\Test\Unit
 		$this->object->setMedia($media);
 		$this->assertNotEmpty($this->object->getMedia());
 		$this->assertArrayHasKey('url', $this->object->getMedia()[0]);
-		$this->assertEquals(false, $this->object->getMedia()[1]['main']);
+		$this->assertFalse($this->object->getMedia()[1]['main']);
+		$this->assertTrue($this->object->getMedia()[1]['switch']);
 	}
 
 	public function testAddMedia()
 	{
 		$media = Fixtures::get('media');
-		$this->object->addMedia($media[1]['url'], $media[1]['main']);
+		$this->object->addMedia($media[1]['url'], $media[1]['main'], $media[1]['switch']);
 		$this->assertNotEmpty($this->object->getMedia());
 	}
 
