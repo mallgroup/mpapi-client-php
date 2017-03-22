@@ -1,7 +1,7 @@
 # Marketplace API client - change log
 
 ## 2.5.0
-- extended variant media with 'switch', that marks media as variant switch (method addMedia has been extended with optional parameter 'switch')
+- extended variant media with 'switch', that marks media as variant color switch (method addMedia has been extended with optional parameter 'switch')
 - changed Product/Variant entity method addMedia; second parameter 'main' is now optional and default value is false
 
 ## 2.4.0
