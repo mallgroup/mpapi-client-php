@@ -218,39 +218,42 @@ class VariantTest extends \Codeception\Test\Unit
 	{
 		$media = Fixtures::get('media');
 		$this->object->setMedia([]);
+		$this->assertEmpty($this->object->getMedia());
 		$this->object->addMedia($media[0]['url'], $media[0]['main'], $media[0]['switch']);
 		$this->assertEquals($media[0], current($this->object->getMedia()));
 
 		$this->object->setMedia([]);
+		$this->assertEmpty($this->object->getMedia());
 		$this->object->addMedia($media[1]['url'], $media[1]['main'], $media[1]['switch']);
 		$this->assertEquals($media[1], current($this->object->getMedia()));
+	}
 
+	public function testAddMediaUrlParameter()
+	{
+		$media = Fixtures::get('media');
 		$this->object->setMedia([]);
+		$this->assertEmpty($this->object->getMedia());
 		$this->object->addMedia($media[2]['url']);
-		$exceptedData = [
+		$expectedData = [
 			'url' => $media[2]['url'],
 			'main' => false,
 			'switch' => false
 		];
-		$this->assertEquals($exceptedData, current($this->object->getMedia()));
+		$this->assertEquals($expectedData, current($this->object->getMedia()));
+	}
 
+	public function testAddMediaSwitchParameter()
+	{
+		$media = Fixtures::get('media');
 		$this->object->setMedia([]);
-		$this->object->addMedia($media[3]['url'], $media[3]['main']);
-		$exceptedData = [
+		$this->assertEmpty($this->object->getMedia());
+		$this->object->addMedia($media[3]['url'], false, $media[3]['switch']);
+		$expectedData = [
 			'url' => $media[3]['url'],
-			'main' => $media[3]['main'],
-			'switch' => false
-		];
-		$this->assertEquals($exceptedData, current($this->object->getMedia()));
-
-		$this->object->setMedia([]);
-		$this->object->addMedia($media[4]['url'], false, $media[4]['switch']);
-		$exceptedData = [
-			'url' => $media[4]['url'],
 			'main' => false,
-			'switch' => $media[4]['switch']
+			'switch' => $media[3]['switch']
 		];
-		$this->assertEquals($exceptedData, current($this->object->getMedia()));
+		$this->assertEquals($expectedData, current($this->object->getMedia()));
 	}
 
 	public function testGetPromotions()

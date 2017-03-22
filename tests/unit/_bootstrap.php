@@ -38,7 +38,7 @@ $media = [
 	[
 		'url' => 'https://i.cdn.nrholding.net/15880228',
 		'main' => true,
-		'switch' => true
+		'switch' => false
 	],
 	[
 		'url' => 'https://i.cdn.nrholding.net/15880666',
@@ -47,10 +47,6 @@ $media = [
 	],
 	[
 		'url' => 'https://i.cdn.nrholding.net/15880666',
-	],
-	[
-		'url' => 'https://i.cdn.nrholding.net/15880666',
-		'main' => false
 	],
 	[
 		'url' => 'https://i.cdn.nrholding.net/15880666',
