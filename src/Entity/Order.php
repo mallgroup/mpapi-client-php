@@ -275,7 +275,6 @@ class Order extends AbstractEntity
 	 */
 	const STATUS_RETURNED = 'returned';
 
-
 	/**
 	 *
 	 * @var string

@@ -198,7 +198,8 @@ class VariantTest extends \Codeception\Test\Unit
 	{
 		$media = $this->object->getMedia();
 		$this->assertNotEmpty($media);
-		$this->assertEquals(true, $media[0]['main']);
+		$this->assertTrue($media[0]['main']);
+		$this->assertTrue($media[0]['switch']);
 	}
 
 	public function testSetMedia()
@@ -209,14 +210,47 @@ class VariantTest extends \Codeception\Test\Unit
 		$this->object->setMedia($media);
 		$this->assertNotEmpty($this->object->getMedia());
 		$this->assertArrayHasKey('url', $this->object->getMedia()[0]);
-		$this->assertEquals(false, $this->object->getMedia()[1]['main']);
+		$this->assertFalse($this->object->getMedia()[1]['main']);
+		$this->assertTrue($this->object->getMedia()[1]['switch']);
 	}
 
 	public function testAddMedia()
 	{
 		$media = Fixtures::get('media');
-		$this->object->addMedia($media[1]['url'], $media[1]['main']);
-		$this->assertNotEmpty($this->object->getMedia());
+		$this->object->setMedia([]);
+		$this->object->addMedia($media[0]['url'], $media[0]['main'], $media[0]['switch']);
+		$this->assertEquals($media[0], current($this->object->getMedia()));
+
+		$this->object->setMedia([]);
+		$this->object->addMedia($media[1]['url'], $media[1]['main'], $media[1]['switch']);
+		$this->assertEquals($media[1], current($this->object->getMedia()));
+
+		$this->object->setMedia([]);
+		$this->object->addMedia($media[2]['url']);
+		$exceptedData = [
+			'url' => $media[2]['url'],
+			'main' => false,
+			'switch' => false
+		];
+		$this->assertEquals($exceptedData, current($this->object->getMedia()));
+
+		$this->object->setMedia([]);
+		$this->object->addMedia($media[3]['url'], $media[3]['main']);
+		$exceptedData = [
+			'url' => $media[3]['url'],
+			'main' => $media[3]['main'],
+			'switch' => false
+		];
+		$this->assertEquals($exceptedData, current($this->object->getMedia()));
+
+		$this->object->setMedia([]);
+		$this->object->addMedia($media[4]['url'], false, $media[4]['switch']);
+		$exceptedData = [
+			'url' => $media[4]['url'],
+			'main' => false,
+			'switch' => $media[4]['switch']
+		];
+		$this->assertEquals($exceptedData, current($this->object->getMedia()));
 	}
 
 	public function testGetPromotions()

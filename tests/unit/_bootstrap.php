@@ -37,11 +37,24 @@ $product = [
 $media = [
 	[
 		'url' => 'https://i.cdn.nrholding.net/15880228',
-		'main' => true
+		'main' => true,
+		'switch' => true
+	],
+	[
+		'url' => 'https://i.cdn.nrholding.net/15880666',
+		'main' => false,
+		'switch' => true
+	],
+	[
+		'url' => 'https://i.cdn.nrholding.net/15880666',
 	],
 	[
 		'url' => 'https://i.cdn.nrholding.net/15880666',
 		'main' => false
+	],
+	[
+		'url' => 'https://i.cdn.nrholding.net/15880666',
+		'switch' => true
 	]
 ];
 
@@ -67,7 +80,8 @@ $variants = [
 		'media' => [
 			[
 				'url' => 'https://i.cdn.nrholding.net/15880228',
-				'main' => true
+				'main' => true,
+				'switch' => true
 			]
 		],
 		'promotions' => [
@@ -141,7 +155,8 @@ $variant = [
 		'media' => [
 			[
 				'url' => 'https://i.cdn.nrholding.net/15880228',
-				'main' => true
+				'main' => true,
+				'switch' => true
 			]
 		],
 		'promotions' => [],
