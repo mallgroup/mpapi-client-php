@@ -37,26 +37,35 @@ $product = [
 $media = [
 	[
 		'url' => 'https://i.cdn.nrholding.net/15880228',
-		'main' => true,
-		'switch' => false
+		'main' => true
+	],
+	[
+		'url' => 'https://i.cdn.nrholding.net/15880666',
 	],
 	[
 		'url' => 'https://i.cdn.nrholding.net/15880666',
 		'main' => false,
 		'switch' => true
-	],
-	[
-		'url' => 'https://i.cdn.nrholding.net/15880666',
-	],
-	[
-		'url' => 'https://i.cdn.nrholding.net/15880666',
-		'switch' => true
 	]
+];
+
+$ordinaryMedia = [
+	'url' => 'https://i.cdn.nrholding.net/15880666',
+	'main' => false,
+	'switch' => false
+];
+
+$mainMedia = [
+	'url' => 'https://i.cdn.nrholding.net/15880228',
+	'main' => true,
+	'switch' => false
 ];
 
 Codeception\Util\Fixtures::add('inStock', $product['availability']['in_stock']);
 Codeception\Util\Fixtures::add('status', $product['availability']['status']);
 Codeception\Util\Fixtures::add('media', $media);
+Codeception\Util\Fixtures::add('ordinaryMedia', $ordinaryMedia);
+Codeception\Util\Fixtures::add('mainMedia', $mainMedia);
 
 $variants = [
 	[

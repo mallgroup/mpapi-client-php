@@ -209,51 +209,38 @@ class VariantTest extends \Codeception\Test\Unit
 		$media = Fixtures::get('media');
 		$this->object->setMedia($media);
 		$this->assertNotEmpty($this->object->getMedia());
-		$this->assertArrayHasKey('url', $this->object->getMedia()[0]);
-		$this->assertFalse($this->object->getMedia()[1]['main']);
-		$this->assertTrue($this->object->getMedia()[1]['switch']);
+		$this->assertArrayHasKey('url', $this->object->getMedia()[2]);
+		$this->assertFalse($this->object->getMedia()[2]['main']);
+		$this->assertTrue($this->object->getMedia()[2]['switch']);
 	}
 
-	public function testAddMedia()
+	public function testMainMedia()
+	{
+		$media = Fixtures::get('media');
+		$expectedMedia = Fixtures::get('mainMedia');
+		$this->object->setMedia([]);
+		$this->assertEmpty($this->object->getMedia());
+		$this->object->addMedia($media[0]['url'], $media[0]['main']);
+		$this->assertEquals($expectedMedia, current($this->object->getMedia()));
+	}
+
+	public function testOrdinaryMedia()
+	{
+		$media = Fixtures::get('media');
+		$expectedMedia = Fixtures::get('ordinaryMedia');
+		$this->object->setMedia([]);
+		$this->assertEmpty($this->object->getMedia());
+		$this->object->addMedia($media[1]['url']);
+		$this->assertEquals($expectedMedia, current($this->object->getMedia()));
+	}
+
+	public function testColorSwitchMedia()
 	{
 		$media = Fixtures::get('media');
 		$this->object->setMedia([]);
 		$this->assertEmpty($this->object->getMedia());
-		$this->object->addMedia($media[0]['url'], $media[0]['main'], $media[0]['switch']);
-		$this->assertEquals($media[0], current($this->object->getMedia()));
-
-		$this->object->setMedia([]);
-		$this->assertEmpty($this->object->getMedia());
-		$this->object->addMedia($media[1]['url'], $media[1]['main'], $media[1]['switch']);
-		$this->assertEquals($media[1], current($this->object->getMedia()));
-	}
-
-	public function testAddMediaUrlParameter()
-	{
-		$media = Fixtures::get('media');
-		$this->object->setMedia([]);
-		$this->assertEmpty($this->object->getMedia());
-		$this->object->addMedia($media[2]['url']);
-		$expectedData = [
-			'url' => $media[2]['url'],
-			'main' => false,
-			'switch' => false
-		];
-		$this->assertEquals($expectedData, current($this->object->getMedia()));
-	}
-
-	public function testAddMediaSwitchParameter()
-	{
-		$media = Fixtures::get('media');
-		$this->object->setMedia([]);
-		$this->assertEmpty($this->object->getMedia());
-		$this->object->addMedia($media[3]['url'], false, $media[3]['switch']);
-		$expectedData = [
-			'url' => $media[3]['url'],
-			'main' => false,
-			'switch' => $media[3]['switch']
-		];
-		$this->assertEquals($expectedData, current($this->object->getMedia()));
+		$this->object->addMedia($media[2]['url'], $media[2]['main'], $media[2]['switch']);
+		$this->assertEquals($media[2], current($this->object->getMedia()));
 	}
 
 	public function testGetPromotions()

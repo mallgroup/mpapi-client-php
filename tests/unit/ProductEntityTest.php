@@ -120,11 +120,24 @@ class ProductTest extends \Codeception\Test\Unit
 		$this->assertEmpty($this->object->getMedia());
 	}
 
-	public function testAddMedia()
+	public function testMainMedia()
 	{
 		$media = Fixtures::get('media');
+		$expectedMedia = Fixtures::get('mainMedia');
+		$this->object->setMedia([]);
+		$this->assertEmpty($this->object->getMedia());
 		$this->object->addMedia($media[0]['url'], $media[0]['main']);
-		$this->assertNotEmpty($this->object->getMedia());
+		$this->assertEquals($expectedMedia, current($this->object->getMedia()));
+	}
+
+	public function testOrdinaryMedia()
+	{
+		$media = Fixtures::get('media');
+		$expectedMedia = Fixtures::get('ordinaryMedia');
+		$this->object->setMedia([]);
+		$this->assertEmpty($this->object->getMedia());
+		$this->object->addMedia($media[1]['url']);
+		$this->assertEquals($expectedMedia, current($this->object->getMedia()));
 	}
 
 	public function testAddParameter()
