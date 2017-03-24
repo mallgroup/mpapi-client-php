@@ -7,22 +7,39 @@ use MPAPI\Entity\Order;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('your_client_id');
+$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
 
-$logger = new Logger('loggerName');
-$logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
-// set logger into MP API client
-$mpapiClient->setLogger($logger);
+if (class_exists('Logger')) {
+	$logger = new Logger('loggerName');
+	$logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
+	// set logger into MP API client
+	$mpapiClient->setLogger($logger);
+}
 
 // initialize orders synchronizer
 $orders = new Orders($mpapiClient);
 
-// get all open orders, it means all that are not close (that is delivered, returned, cancelled) and so they can have status from blocked to shipped
+// #######################
+// Get list of order IDs
+//
+// get all open orders, it means all that are not close
+// (that is delivered, returned, cancelled)
+// and so they can have status from blocked to shipped
+// #######################
 $openOrders = $orders->get()->open();
 // print open orders
 foreach ($openOrders as $orderId) {
 	print('Open order: ' . $orderId . PHP_EOL);
 }
+
+// ####################################
+// Get list of orders with basic data
+// Use filter to modify response
+// ####################################
+$orders->setFilter(Orders::FILTER_TYPE_BASIC);
+$openOrdersBasicData = $orders->get()->open();
+var_dump($openOrdersBasicData);
+
 
 // get all blocked orders
 $blockedOrders = $orders->get()->blocked();

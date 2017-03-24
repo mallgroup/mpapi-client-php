@@ -28,6 +28,7 @@ The response contains basic data of all orders:
 		"cod": 25,
 		"ship_date": "2016-12-10",
 		"status": "shipping",
+		"payment_type: "A",
 		"confirmed": true
     ],
     [
@@ -37,6 +38,7 @@ The response contains basic data of all orders:
 		"cod": 0,
 		"ship_date": "2016-10-21",
 		"status": "cancelled",
+		"payment_type": "B"
 		"confirmed": false
     ],
     ...
@@ -88,6 +90,7 @@ The response contains order details:
     "delivery_price" => 29,
     "cod_price" => 30,
     "discount" => 185,
+    "payment_type" => "B"
     "delivery_method" => "pplCz",
     "delivery_method_id" => "21",
     "tracking_number": "T9999999999",
