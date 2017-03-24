@@ -205,6 +205,12 @@ class OrdersEndpoints extends AbstractEndpoints
 	private function dataCollector(Response $response)
 	{
 		$dataCollector = new DataCollector($this->client, $response, false);
-		return $dataCollector->setDataSection('ids')->getData();
+		$filter = $this->client->getArgument('filter');
+		if ($filter === \MPAPI\Services\Orders::FILTER_TYPE_BASIC) {
+			$dataSection = null;
+		} else {
+			$dataSection = 'ids';
+		}
+		return $dataCollector->setDataSection($dataSection)->getData();
 	}
 }

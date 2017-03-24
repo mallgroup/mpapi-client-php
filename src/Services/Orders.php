@@ -11,15 +11,6 @@ use MPAPI\Endpoints\OrderUpdateEndpoints;
  */
 class Orders extends AbstractService
 {
-
-	/**
-	 *
-	 * @var array
-	 */
-	protected $filterType = [
-		self::FILTER_TYPE_STRICT
-	];
-
 	/**
 	 *
 	 * @var Client

@@ -56,7 +56,7 @@ abstract class AbstractServiceFilter
 	public function setFilter($filterType)
 	{
 		if (in_array($filterType, $this->filterType)) {
-			$this->client->setArguments(self::ARGUMENT_FILTER, $filterType);
+			$this->client->setArgument(self::ARGUMENT_FILTER, $filterType);
 		}
 		return $this;
 	}
@@ -68,7 +68,7 @@ abstract class AbstractServiceFilter
 	 */
 	public function getFilter()
 	{
-		$retval = $this->client->getArguments(self::ARGUMENT_FILTER);
+		$retval = $this->client->getArgument(self::ARGUMENT_FILTER);
 		if (empty($retval)) {
 			$retval = self::FILTER_TYPE_IDS;
 		}
@@ -77,7 +77,7 @@ abstract class AbstractServiceFilter
 
 	/**
 	 * Remove filter
-	 * 
+	 *
 	 * @return AbstractServiceFilter
 	 */
 	public function removeFilter()

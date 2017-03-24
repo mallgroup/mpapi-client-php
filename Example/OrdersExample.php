@@ -7,7 +7,7 @@ use MPAPI\Entity\Order;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
+$mpapiClient = new Client('your_client_id');
 
 if (class_exists('Logger')) {
 	$logger = new Logger('loggerName');
@@ -36,9 +36,8 @@ foreach ($openOrders as $orderId) {
 // Get list of orders with basic data
 // Use filter to modify response
 // ####################################
-$orders->setFilter(Orders::FILTER_TYPE_BASIC);
-$openOrdersBasicData = $orders->get()->open();
-var_dump($openOrdersBasicData);
+$openOrdersBasicData = $orders->setFilter(Orders::FILTER_TYPE_BASIC)->get()->open();
+var_dump($openOrdersBasicData);exit;
 
 
 // get all blocked orders
