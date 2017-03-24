@@ -37,7 +37,7 @@ foreach ($openOrders as $orderId) {
 // Use filter to modify response
 // ####################################
 $openOrdersBasicData = $orders->setFilter(Orders::FILTER_TYPE_BASIC)->get()->open();
-var_dump($openOrdersBasicData);exit;
+var_dump($openOrdersBasicData);
 
 
 // get all blocked orders
