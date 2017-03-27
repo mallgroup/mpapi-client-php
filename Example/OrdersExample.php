@@ -9,20 +9,33 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $mpapiClient = new Client('your_client_id');
 
-$logger = new Logger('loggerName');
-$logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
-// set logger into MP API client
-$mpapiClient->setLogger($logger);
+if (class_exists('Logger')) {
+	$logger = new Logger('loggerName');
+	$logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
+	// set logger into MP API client
+	$mpapiClient->setLogger($logger);
+}
 
 // initialize orders synchronizer
 $orders = new Orders($mpapiClient);
 
-// get all open orders, it means all that are not close (that is delivered, returned, cancelled) and so they can have status from blocked to shipped
+// #####################################
+// Get list of order IDs in status open
+// #####################################
 $openOrders = $orders->get()->open();
 // print open orders
 foreach ($openOrders as $orderId) {
 	print('Open order: ' . $orderId . PHP_EOL);
 }
+
+// ####################################
+// Get list of orders with basic data
+// Use filter to modify response
+// ####################################
+$openOrdersBasicData = $orders->setFilter(Orders::FILTER_TYPE_BASIC)->get()->open();
+var_dump($openOrdersBasicData);
+// to get only ids you can remove the filter
+$orders->removeFilter();
 
 // get all blocked orders
 $blockedOrders = $orders->get()->blocked();

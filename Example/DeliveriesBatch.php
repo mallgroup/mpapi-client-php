@@ -9,11 +9,13 @@ use MPAPI\Entity\GeneralDelivery;
 require __DIR__ . '/../vendor/autoload.php';
 
 $mpapiClient = new Client('your_client_id');
-$logger = new Logger('loggerName');
-$logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
 
-// set logger into MP API client
-$mpapiClient->setLogger($logger);
+if (class_exists('Logger')) {
+	$logger = new Logger('loggerName');
+	$logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
+	// set logger into MP API client
+	$mpapiClient->setLogger($logger);
+}
 
 /* @var $deliveries Deliveries */
 $deliveries = new MPAPI\Services\Deliveries($mpapiClient);

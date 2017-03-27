@@ -9,14 +9,15 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $mpApiClient = new Client('your_client_id');
 
-/**
- * Create instance of monolog logger
- */
-$logger = new Logger('loggerName');
-$logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
-
-// set logger into MP API client
-$mpApiClient->setLogger($logger);
+if (class_exists('Logger')) {
+	/**
+	 * Create instance of monolog logger
+	 */
+	$logger = new Logger('loggerName');
+	$logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
+	// set logger into MP API client
+	$mpApiClient->setLogger($logger);
+}
 
 // initialize product synchronization
 $productSynchronizer = new Products($mpApiClient);

@@ -326,13 +326,13 @@ class Client
 	}
 
 	/**
-	 * Set specific arguments for requests
+	 * Set specific argument for requests
 	 *
 	 * @param string $name
 	 * @param string $value
 	 * @return Client
 	 */
-	public function setArguments($name, $value)
+	public function setArgument($name, $value)
 	{
 		if (empty($name) || empty($value)) {
 			throw new ApplicationException(self::MSG_BAD_ARGUMENTS_DATA);
@@ -347,13 +347,23 @@ class Client
 	 * @param string $name
 	 * @return string
 	 */
-	public function getArguments($name)
+	public function getArgument($name)
 	{
 		$retval = '';
 		if (isset($this->arguments[$name])) {
 			$retval = $this->arguments[$name];
 		}
 		return $retval;
+	}
+
+	/**
+	 * Get all arguments
+	 * 
+	 * @return array
+	 */
+	public function getArguments()
+	{
+		return $this->arguments;
 	}
 
 	/**

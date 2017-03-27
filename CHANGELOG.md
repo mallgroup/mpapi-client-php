@@ -1,5 +1,9 @@
 # Marketplace API client - change log
 
+## 2.6.0
+- updated composer - moved monolog logger to required-dev dependencies
+- updated order endpoints - enabled filtering to get either list of ids or list of basic data for each status
+
 ## 2.5.0
 - extended variant media with 'switch', that marks media as variant color switch (method addMedia has been extended with optional parameter 'switch')
 - changed Product/Variant entity method addMedia; second parameter 'main' is now optional and default value is false
