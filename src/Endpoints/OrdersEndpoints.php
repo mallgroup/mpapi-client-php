@@ -2,9 +2,10 @@
 namespace MPAPI\Endpoints;
 
 use GuzzleHttp\Psr7\Response;
-use MPAPI\Services\Client;
-use MPAPI\Lib\DataCollector;
 use MPAPI\Entity\Order;
+use MPAPI\Lib\DataCollector;
+use MPAPI\Services\Client;
+use MPAPI\Services\Orders;
 
 /**
  *
@@ -206,7 +207,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	{
 		$dataCollector = new DataCollector($this->client, $response, false);
 		$filter = $this->client->getArgument('filter');
-		if ($filter === \MPAPI\Services\Orders::FILTER_TYPE_BASIC) {
+		if ($filter ===  Orders::FILTER_TYPE_BASIC) {
 			$dataSection = null;
 		} else {
 			$dataSection = 'ids';
