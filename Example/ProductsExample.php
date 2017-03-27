@@ -9,14 +9,14 @@ use MPAPI\Services\Products;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+$mpapiClient = new Client('your_client_id');
+
 if (class_exists('Logger')) {
-	$mpapiClient = new Client('your_client_id');
 	$logger = new Logger('loggerName');
 	$logger->pushHandler(new StreamHandler('./elog.log', Logger::INFO));
+	// set logger into MP API client
+	$mpapiClient->setLogger($logger);
 }
-
-// set logger into MP API client
-$mpapiClient->setLogger($logger);
 
 $products = new Products($mpapiClient);
 

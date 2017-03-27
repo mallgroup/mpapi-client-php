@@ -19,13 +19,9 @@ if (class_exists('Logger')) {
 // initialize orders synchronizer
 $orders = new Orders($mpapiClient);
 
-// #######################
-// Get list of order IDs
-//
-// get all open orders, it means all that are not close
-// (that is delivered, returned, cancelled)
-// and so they can have status from blocked to shipped
-// #######################
+// #####################################
+// Get list of order IDs in status open
+// #####################################
 $openOrders = $orders->get()->open();
 // print open orders
 foreach ($openOrders as $orderId) {
@@ -38,7 +34,8 @@ foreach ($openOrders as $orderId) {
 // ####################################
 $openOrdersBasicData = $orders->setFilter(Orders::FILTER_TYPE_BASIC)->get()->open();
 var_dump($openOrdersBasicData);
-
+// to get only ids you can remove the filter
+$orders->removeFilter();
 
 // get all blocked orders
 $blockedOrders = $orders->get()->blocked();
