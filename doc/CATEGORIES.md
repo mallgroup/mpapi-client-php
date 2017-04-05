@@ -110,5 +110,24 @@ The response contains an array of found parameters:
 
 ```
 
+#### Get parameter values
+Get all available parameter values for specific parameter in category:
+```
+...
+$response = $categories->get()->parameterValues('NA020', 'BASKETBALL_TEAM'); 
+... 
+```
+
+The response contains an array of found parameters:
+```
+[
+    "Alba Berlin",
+    "Barcelona",
+    "Bayern Munchen"
+    ...
+]
+
+```
+
 ##### See more:
 > **/root/vendor/mallgroup/mpapi-client/Example/CategoriesExample.php**

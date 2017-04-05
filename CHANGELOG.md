@@ -1,6 +1,9 @@
 # Marketplace API client - change log
 
 ## 2.6.0
+- added new endpoint parameter values to categories 
+
+## 2.6.0
 - updated composer - moved monolog logger to required-dev dependencies
 - updated order endpoints - enabled filtering to get either list of ids or list of basic data for each status
 
