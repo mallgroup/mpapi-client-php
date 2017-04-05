@@ -32,3 +32,7 @@ var_dump($response);
 // get category parameters
 $response = $categories->get()->categoryParameters('MP002PL');
 var_dump($response);
+
+// get parameter values by the parameter id
+$response = $categories->get()->parameterValues('NA020', 'BASKETBALL_TEAM');
+var_dump($response);

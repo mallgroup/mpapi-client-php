@@ -36,6 +36,12 @@ class CategoriesEndpoints extends AbstractEndpoints
 
 	/**
 	 *
+	 * @var string
+	 */
+	const ENDPOINT_PARAMETER_VALUES = '%s/%s/params/%s';
+
+	/**
+	 *
 	 * @var Client
 	 */
 	protected $client;
@@ -87,6 +93,20 @@ class CategoriesEndpoints extends AbstractEndpoints
 	public function categoryParameters($categoryId)
 	{
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PARAMETERS, self::ENDPOINT_PATH, $categoryId), 'GET');
+		$dataCollector = new DataCollector($this->client, $response);
+		return $dataCollector->getData();
+	}
+
+	/**
+	 * Get list of parameter values by the parameter id
+	 *
+	 * @param string $categoryId
+	 * @param string $paramId
+	 * @return array|null
+	 */
+	public function parameterValues($categoryId, $paramId)
+	{
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_PARAMETER_VALUES, self::ENDPOINT_PATH, $categoryId, $paramId), 'GET');
 		$dataCollector = new DataCollector($this->client, $response);
 		return $dataCollector->getData();
 	}
