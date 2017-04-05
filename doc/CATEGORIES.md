@@ -12,6 +12,9 @@ use MPAPI\Services\Categories;
 
 $categories = new Categories($mpapiClient);
 ...
+// category and parameter IDs
+$categoryId = 'some_category_id';
+$paramId = 'some_param_id';
 ``` 
 
 #### All partner categories
@@ -86,7 +89,7 @@ The response contains an array of found categories:
 Get all available parameters for specific category:
 ```
 ...
-$response = $categories->get()->categoryParameters('MPCAT01'); 
+$response = $categories->get()->categoryParameters($categoryId); 
 ... 
 ```
 
@@ -114,16 +117,16 @@ The response contains an array of found parameters:
 Get all available parameter values for specific parameter in category:
 ```
 ...
-$response = $categories->get()->parameterValues('NA020', 'BASKETBALL_TEAM'); 
+$response = $categories->get()->parameterValues($categoryId, $paramId); 
 ... 
 ```
 
 The response contains an array of found parameters:
 ```
 [
-    "Alba Berlin",
-    "Barcelona",
-    "Bayern Munchen"
+    "černá",
+    "modrá",
+    "bílá"
     ...
 ]
 
