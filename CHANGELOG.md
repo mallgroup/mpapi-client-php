@@ -1,6 +1,6 @@
 # Marketplace API client - change log
 
-## 2.6.0
+## 2.7.0
 - added new endpoint parameter values to categories 
 
 ## 2.6.0
