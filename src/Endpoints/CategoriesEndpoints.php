@@ -49,7 +49,7 @@ class CategoriesEndpoints extends AbstractEndpoints
 	/**
 	 * Get list of categories
 	 *
-	 * @return array|null
+	 * @return array
 	 */
 	public function categories()
 	{
@@ -62,7 +62,7 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 * Search categories
 	 *
 	 * @param string $phrase
-	 * @return array|null
+	 * @return array
 	 */
 	public function searchCategories($phrase)
 	{
@@ -75,7 +75,7 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 * Search categories by prefix
 	 *
 	 * @param string $prefix
-	 * @return array|null
+	 * @return array
 	 */
 	public function categoriesByPrefix($prefix)
 	{
@@ -88,7 +88,7 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 * Get list of parameters for specific category
 	 *
 	 * @param string $categoryId
-	 * @return array|null
+	 * @return array
 	 */
 	public function categoryParameters($categoryId)
 	{
@@ -98,11 +98,11 @@ class CategoriesEndpoints extends AbstractEndpoints
 	}
 
 	/**
-	 * Get list of parameter values by the parameter id
+	 * Get list of parameter values by parameter id
 	 *
 	 * @param string $categoryId
 	 * @param string $paramId
-	 * @return array|null
+	 * @return array
 	 */
 	public function parameterValues($categoryId, $paramId)
 	{

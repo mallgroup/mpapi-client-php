@@ -16,6 +16,9 @@ if (class_exists('Logger')) {
 }
 
 $categories = new Categories($mpapiClient);
+// category and parameter IDs
+$categoryId = 'some_category_id';
+$paramId = 'some_param_id';
 
 // // get all categories
 $response = $categories->get()->categories();
@@ -30,9 +33,9 @@ $response = $categories->get()->searchCategories('desky');
 var_dump($response);
 
 // get category parameters
-$response = $categories->get()->categoryParameters('MP002PL');
+$response = $categories->get()->categoryParameters($categoryId);
 var_dump($response);
 
-// get parameter values by the parameter id
-$response = $categories->get()->parameterValues('NA020', 'BASKETBALL_TEAM');
+// get parameter values by parameter id
+$response = $categories->get()->parameterValues($categoryId, $paramId);
 var_dump($response);
