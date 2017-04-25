@@ -71,6 +71,12 @@ class OrdersEndpoints extends AbstractEndpoints
 	 *
 	 * @var string
 	 */
+	const ENDPOINT_STATS = 'stats';
+
+	/**
+	 *
+	 * @var string
+	 */
 	const MERGE_ENDPOINTS = '%s/%s';
 
 	/**
@@ -193,6 +199,23 @@ class OrdersEndpoints extends AbstractEndpoints
 		$responseData = json_decode($response->getBody(), true);
 		if (isset($responseData['data']) && !empty($responseData['data'])) {
 			$retval = new Order($responseData['data']);
+		}
+		return $retval;
+	}
+
+	/**
+	 * Get statistics
+	 *
+	 * @return array
+	 */
+	public function stats()
+	{
+		$retval = [];
+		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_STATS), 'GET');
+		$responseData = json_decode($response->getBody(), true);
+
+		if (isset($responseData['data'])) {
+			$retval = $responseData['data'];
 		}
 		return $retval;
 	}

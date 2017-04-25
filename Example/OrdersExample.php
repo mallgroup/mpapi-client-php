@@ -7,7 +7,7 @@ use MPAPI\Entity\Order;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('your_client_id');
+$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
 
 if (class_exists('Logger')) {
 	$logger = new Logger('loggerName');
@@ -18,6 +18,13 @@ if (class_exists('Logger')) {
 
 // initialize orders synchronizer
 $orders = new Orders($mpapiClient);
+
+// ##################################
+// Get orders statistics
+// ##################################
+$statistics = $orders->get()->stats();
+print('Order statistics:');
+var_dump($statistics);
 
 // #####################################
 // Get list of order IDs in status open
