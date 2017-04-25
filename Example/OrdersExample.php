@@ -23,8 +23,11 @@ $orders = new Orders($mpapiClient);
 // Get orders statistics
 // ##################################
 $statistics = $orders->get()->stats();
-print('Order statistics:');
+print('Order statistics last 30 days:');
 var_dump($statistics);
+$last7Days = $orders->get()->stats(7);
+print('Order statistics last 7 days:');
+var_dump($last7Days);
 
 // #####################################
 // Get list of order IDs in status open

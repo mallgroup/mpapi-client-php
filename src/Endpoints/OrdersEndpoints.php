@@ -206,11 +206,15 @@ class OrdersEndpoints extends AbstractEndpoints
 	/**
 	 * Get statistics
 	 *
+	 * @param int $days = 30
 	 * @return array
 	 */
-	public function stats()
+	public function stats($days = 30)
 	{
 		$retval = [];
+		// set days filter
+		$this->client->setArgument('days', (int)$days);
+		// send request
 		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_STATS), 'GET');
 		$responseData = json_decode($response->getBody(), true);
 

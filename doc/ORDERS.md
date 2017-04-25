@@ -12,7 +12,26 @@ $orders = new Orders($mpapiClient);
 
 #### Available methods:
 **GET**  
-You can get either information about specific order or about all orders or you can get list of orders by status:
+You can get information about:  
+ - specific order  
+ - all orders  
+ - list of orders by status  
+ - statistics information in specific period  
+
+***Get order statistics***
+```
+...
+// get order statistics; default period is 30 days  
+$allOrders = $orders->get()->stats();
+```
+
+```
+...
+// get last 7 days order statistics  
+$allOrders = $orders->get()->stats(7);
+```
+
+***Get all orders***
 ```
 ...
 // get all orders
