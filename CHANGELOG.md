@@ -1,7 +1,7 @@
 # Marketplace API client - change log
 
 ## 2.8.0
-- endpoint GET order extended with 'stats' method, that provides order statistics
+- endpoint GET order extended with 'stats' method that provides order statistics
 
 ## 2.7.0
 - added new endpoint parameter values to categories

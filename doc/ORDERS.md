@@ -16,7 +16,7 @@ You can get information about:
  - specific order  
  - all orders  
  - list of orders by status  
- - statistics information in specific period  
+ - statistics information for given period  
 
 ***Get order statistics***
 ```
