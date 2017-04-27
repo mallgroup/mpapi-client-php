@@ -9,7 +9,7 @@ use MPAPI\Services\Products;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('your_client_id');
+$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw', false);
 
 if (class_exists('Logger')) {
 	$logger = new Logger('loggerName');
@@ -89,24 +89,41 @@ $variant->setRecommended([]);
 
 $product->addVariant($variant);
 
-// Create new product
-$response = $products->post($product);
-var_dump($response);
+try {
+	// Create new product
+	$response = $products->post($product);
+	var_dump($response);
 
-// Update product
-$response = $products->put('pTU00_test', $product);
-var_dump($response);
+	// Update product
+	$response = $products->put('pTU00_test', $product);
+	var_dump($response);
+} catch (\Exception $ex) {
+	var_dump($ex->getMessage());
+}
 
 // Product with big different price
 try {
 	$product->setVariableParameters([]);
 	$product->setVariants([]);
-	$product->setPrice(800);
+	$product->setPrice(110);
 	$response = $products->put('pTU00_test', $product);
 } catch (ForceTokenException $ex) {
 	print('Product update failed. To confirm price difference use force token: ');
 	var_export($ex->getForceToken());
 	print(PHP_EOL);
+}
+
+// ####################################
+// Update product in asynchronous mode
+// ####################################
+try {
+	$products->asynchronous()->put('pTU00_test', $product);
+	foreach ($products->getRequestHash() as $hash) {
+		print(sprintf('Asynchronous request (hash %s) result:', $hash));
+		var_dump($products->getAsynchronouseStatus($hash));
+	}
+} catch (\Exception $ex) {
+	var_dump($ex->getMessage());
 }
 
 // Delete product

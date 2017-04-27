@@ -34,6 +34,12 @@ class Variants extends AbstractVariantsService
 	private $endpoints;
 
 	/**
+	 *
+	 * @var array
+	 */
+	private $requestHash = [];
+
+	/**
 	 * Variants constructor.
 	 *
 	 * @param Client $client
@@ -101,6 +107,12 @@ class Variants extends AbstractVariantsService
 				'entity' => $variant->getData(),
 				'response' => json_decode($response->getBody(), true)
 			];
+		} elseif (
+			$response->getStatusCode() == 202
+			&& $this->client->getArgument(self::ASYNCHRONOUS_PARAMETER) === true
+		) {
+			$response = json_decode($response->getBody(), true);
+			$this->requestHash[] = $response['data']['hash'];
 		}
 
 		if (!empty($errors)) {
@@ -121,6 +133,18 @@ class Variants extends AbstractVariantsService
 	 */
 	public function put($productId, Variant $variant)
 	{
-		return $this->endpoints->update($productId, $variant);
+		$status = $this->endpoints->update($productId, $variant);
+		$this->requestHash[] = $this->endpoints->getRequestHash();
+		return $status;
+	}
+
+	/**
+	 * Get list of asynchronous request identification hash
+	 *
+	 * @return array
+	 */
+	public function getRequestHash()
+	{
+		return $this->requestHash;
 	}
 }

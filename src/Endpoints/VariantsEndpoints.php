@@ -31,6 +31,12 @@ class VariantsEndpoints
 
 	/**
 	 *
+	 * @var string
+	 */
+	private $requestHash;
+
+	/**
+	 *
 	 * @param Client $client
 	 */
 	public function __construct(Client $client)
@@ -83,6 +89,12 @@ class VariantsEndpoints
 				'entity' => $variant->getData(),
 				'response' => json_decode($response->getBody(), true)
 			];
+		} elseif (
+			$response->getStatusCode() == 202
+			&& $this->client->getArgument(self::ASYNCHRONOUS_PARAMETER) === true
+		) {
+			$response = json_decode($response->getBody(), true);
+			$this->requestHash = $response['data']['hash'];
 		}
 
 		if (!empty($error)) {
@@ -151,5 +163,15 @@ class VariantsEndpoints
 	public function supplyDelay($productId, $variantId)
 	{
 		return new SupplyDelayEndpoints($this->client, $productId, $variantId);
+	}
+
+	/**
+	 * Get request hash
+	 * 
+	 * @return string
+	 */
+	public function getRequestHash()
+	{
+		return $this->requestHash;
 	}
 }

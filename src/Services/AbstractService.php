@@ -20,6 +20,18 @@ abstract class AbstractService extends AbstractServiceFilter implements ServiceI
 
 	/**
 	 *
+	 * @var string
+	 */
+	const ASYNCHRONOUS_PARAMETER = 'async';
+
+	/**
+	 *
+	 * @var string
+	 */
+	const ENDPOINT_STATUS = 'status/%s';
+
+	/**
+	 *
 	 * @var AbstractEntity[]
 	 */
 	protected $entities;
@@ -101,5 +113,39 @@ abstract class AbstractService extends AbstractServiceFilter implements ServiceI
 	public function getEntities()
 	{
 		return $this->entities;
+	}
+
+	/**
+	 * Enable or disable asynchronous request processing
+	 *
+	 * @param bool $status
+	 * @return AbstractService
+	 */
+	public function asynchronous($status = true)
+	{
+		$this->client->setArgument(self::ASYNCHRONOUS_PARAMETER, $status);
+		return $this;
+	}
+
+	/**
+	 * Get asynchronous request status
+	 *
+	 * @param string $hash
+	 * @return array
+	 */
+	public function getAsynchronouseStatus($hash)
+	{
+		$retval = [];
+		// call API
+		/* @var GuzzleHttp\Psr7\Response $response */
+		$response = $this->client->sendRequest(
+			sprintf(self::ENDPOINT_STATUS, $hash),
+			'GET'
+		);
+
+		if ($response->getStatusCode() == 200) {
+			$retval = json_decode((string)$response->getBody(), true);
+		}
+		return $retval;
 	}
 }

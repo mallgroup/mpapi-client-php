@@ -40,6 +40,12 @@ class Products extends AbstractService
 	protected $entities = [];
 
 	/**
+	 *
+	 * @var array
+	 */
+	private $requestHash = [];
+
+	/**
 	 * Products constructor.
 	 *
 	 * @param Client $client
@@ -152,6 +158,12 @@ class Products extends AbstractService
 					'entity' => $data,
 					'response' => (string) $response->getBody()
 				];
+			} elseif (
+				$response->getStatusCode() == 202
+				&& $this->client->getArgument(self::ASYNCHRONOUS_PARAMETER) === true
+			) {
+				$response = json_decode($response->getBody(), true);
+				$this->requestHash[] = $response['data']['hash'];
 			}
 		}
 
@@ -190,6 +202,12 @@ class Products extends AbstractService
 						'entity' => $productEntity->getData(),
 						'response' => json_decode($response->getBody(), true)
 					];
+				} elseif (
+					$response->getStatusCode() == 202
+					&& $this->client->getArgument(self::ASYNCHRONOUS_PARAMETER) === true
+				) {
+					$response = json_decode($response->getBody(), true);
+					$this->requestHash[] = $response['data']['hash'];
 				}
 			}
 		} else {
@@ -199,6 +217,12 @@ class Products extends AbstractService
 					'entity' => $entity->getData(),
 					'response' => json_decode($response->getBody(), true)
 				];
+			} elseif (
+					$response->getStatusCode() == 202
+					&& $this->client->getArgument(self::ASYNCHRONOUS_PARAMETER) === true
+			) {
+				$response = json_decode($response->getBody(), true);
+				$this->requestHash[] = $response['data']['hash'];
 			}
 		}
 
@@ -242,6 +266,16 @@ class Products extends AbstractService
 	public function supplyDelay($productId)
 	{
 		return new SupplyDelayEndpoints($this->client, $productId);
+	}
+
+	/**
+	 * Get list of asynchronous request identification hash
+	 *
+	 * @return array
+	 */
+	public function getRequestHash()
+	{
+		return $this->requestHash;
 	}
 
 	/**
