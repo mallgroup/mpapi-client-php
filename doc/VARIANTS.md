@@ -41,6 +41,13 @@ Use post method to create new variant.
 ```
 $createStatus = $variants->post($productId, $variant);
 ```
+For a large number of products you can use asynchronous request processing (also for PUT method)
+```
+$requestHash = $variants->asynchronous()->post($productId, $variant);
+
+// check status of request processing
+$processingStatus = $variants->getAsynchronouseStatus($requestHash);
+```
  
 **PUT**  
 Use put method to update variant.

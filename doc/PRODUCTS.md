@@ -81,6 +81,33 @@ $productSynchronizer->add($product1)
 					...
 					->post();
 ```
+For a large number of products you can use asynchronous request processing (also for PUT method).
+```
+// create more products
+$product1 = new Product();
+$product1->setId('pTU00_test')
+		 ->setTitle('Testing product title')
+		 ->setShortdesc('Some short description')
+		...
+
+$product2 = new Product();
+$product2->setId('pTU00_test2')
+		->setTitle('Testing product title 2')
+		->setShortdesc('Short description')
+		...
+
+$requestHash = $productSynchronizer->add($product1) 
+					->add($product2) 
+					...
+					->asynchronous()
+					->post();
+
+// check status of request processing
+foreach ($requestHash as $hash) {
+ var_dump($variants->getAsynchronouseStatus($hash));
+}
+
+```
  
 **PUT**  
 To update products, send put request for one or more products: 
