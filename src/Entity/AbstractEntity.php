@@ -15,7 +15,7 @@ abstract class AbstractEntity
 
 	/**
 	 *
-	 * @param array $variantData
+	 * @param array $data
 	 */
 	public function __construct(array $data = [])
 	{

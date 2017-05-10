@@ -203,6 +203,20 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	const KEY_DELIVERY_DELAY = 'delivery_delay';
 
 	/**
+	 *
+	 * @var string
+	 */
+	const KEY_FREE_DELIVERY = 'free_delivery';
+
+	/**
+	 *
+	 * @var array
+	 */
+	protected $data = [
+		self::KEY_FREE_DELIVERY => false
+	];
+
+	/**
 	 * Get variant ID
 	 *
 	 * @return string
@@ -933,6 +947,30 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	{
 		if ((int) $value !== $this->getDeliveryDelay() || !isset($this->data[self::KEY_DELIVERY_DELAY])) {
 			$this->data[self::KEY_DELIVERY_DELAY] = $value;
+		}
+		return $this;
+	}
+
+	/**
+	 * Check has free delivery
+	 *
+	 * @return bool
+	 */
+	public function hasFreeDelivery()
+	{
+		return (bool)$this->data[self::KEY_FREE_DELIVERY];
+	}
+
+	/**
+	 * Set free delivery
+	 *
+	 * @param bool $status
+	 * @return AbstractArticleEntity
+	 */
+	public function setFreeDelivery($status)
+	{
+		if ((bool) $status !== $this->hasFreeDelivery()) {
+			$this->data[self::KEY_FREE_DELIVERY] = (bool) $status;
 		}
 		return $this;
 	}
