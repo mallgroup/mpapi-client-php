@@ -168,6 +168,7 @@ __dimensions__ (array) - dimensions of the product or variant; if the product ha
 __availability*__ (array) - availability of the product/variant (if the product has variants, use this attribute only in the variant data structure): status* (string) - status of product availability, in_stock* (number) - amount of items available in stock (max. 9999),  
 __recommended__ (array) - ids of recommended products; if the product has variants, use this attribute only in the variant data structure); max. limit of recommended products/variants is 30,  
 __delivery_delay__ (number) - number of days the delivery will be delayed for the product or its variants; value 0 means the item can be delivered the same day; if the product has variants and they have different value, use this attribute in the variant data structure; if the value is the same for all variants, it is enough to use the attribute only in the product data structure. To add an extra delay because of stock-taking or vacation, you can use [supply delay](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/SUPPLY_DELAY.md);
+__free_delivery__ (boolean) - activate / deactivate free delivery for the whole purchase (package)
 
 *Those attributes marked with * are required.* 
 
