@@ -85,6 +85,8 @@ $variant->addPromotion(1700, '2015-07-19 00:00:00', '2018-11-16 23:59:59');
 $variant->setStatus(Product::STATUS_ACTIVE);
 $variant->setInStock(10);
 $variant->setRecommended([]);
+// enable free delivery
+$variant->setFreeDelivery(true);
 
 
 /**
@@ -103,6 +105,8 @@ print(PHP_EOL);
  * ##########################
  */
 $variant->setTitle('Changed variant title');
+// disable free delivery
+$variant->setFreeDelivery(false);
 $updateStatus = $variants->put($productId, $variant);
 print('Variant updated: ');
 var_export($updateStatus);

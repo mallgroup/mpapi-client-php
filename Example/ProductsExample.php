@@ -64,6 +64,7 @@ $product->addLabel('SALE', '2015-07-19 00:00:00', '2018-11-14 23:59:59');
 $product->setDeliverySetup(null);
 $product->setRecommended([]);
 $product->setBrandId('Samsung');
+$product->setFreeDelivery(true);
 
 // add Variants
 $variant = new Variant();
