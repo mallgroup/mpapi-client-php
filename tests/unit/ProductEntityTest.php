@@ -189,7 +189,7 @@ class ProductTest extends \Codeception\Test\Unit
 	{
 		$this->object->addLabel('SALE', '2016-12-31 00:00:00', '2020-12-31 00:00:00');
 		$labels = $this->object->getLabels();
-		
+
 		$found = false;
 		foreach ($labels as $label) {
 			if ($label['label'] == 'SALE') {
@@ -197,7 +197,18 @@ class ProductTest extends \Codeception\Test\Unit
 				break;
 			}
 		}
-		
+
 		$this->assertTrue($found);
+	}
+
+	public function testHasFreeDelivery()
+	{
+		$this->assertFalse($this->object->hasFreeDelivery());
+	}
+
+	public function testSetFreeDelivery()
+	{
+		$this->object->setFreeDelivery(true);
+		$this->assertTrue($this->object->hasFreeDelivery());
 	}
 }

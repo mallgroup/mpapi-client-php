@@ -330,4 +330,15 @@ class VariantTest extends \Codeception\Test\Unit
 		$this->object->setDeliveryDelay($newDelay);
 		$this->assertEquals($newDelay, $this->object->getDeliveryDelay());
 	}
+
+	public function testHasFreeDelivery()
+	{
+		$this->assertFalse($this->object->hasFreeDelivery());
+	}
+
+	public function testSetFreeDelivery()
+	{
+		$this->object->setFreeDelivery(true);
+		$this->assertTrue($this->object->hasFreeDelivery());
+	}
 }

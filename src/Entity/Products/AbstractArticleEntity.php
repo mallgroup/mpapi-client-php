@@ -958,6 +958,9 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	public function hasFreeDelivery()
 	{
+		if (!isset($this->data[self::KEY_FREE_DELIVERY])) {
+			(bool)$this->data[self::KEY_FREE_DELIVERY] = false;
+		}
 		return (bool)$this->data[self::KEY_FREE_DELIVERY];
 	}
 
