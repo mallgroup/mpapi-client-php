@@ -2,6 +2,7 @@
 
 ## 2.9.0
 - product and variant entity extended with option 'free delivery' that set delivery price to zero for purchase where is contained
+- added missing item in order detail 'payment_type'
 
 ## 2.8.0
 - endpoint GET order extended with 'stats' method that provides order statistics

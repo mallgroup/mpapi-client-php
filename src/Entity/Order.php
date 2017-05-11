@@ -307,6 +307,7 @@ class Order extends AbstractEntity
 			'delivery_price' => (float)$this->getDeliveryPrice(),
 			'cod_price' => (float)$this->getCodPrice(),
 			'discount' => (float)$this->getDiscount(),
+			'payment_type' => $this->getPaymentType(),
 			'delivery_method' => $this->getDeliveryMethod(),
 			'delivery_method_id' => (int)$this->getDeliveryMethodId(),
 			'tracking_number' => $this->getTrackingNumber(),
