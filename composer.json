@@ -33,9 +33,5 @@
     "name" : "Martin Drlik",
     "email" : "martin.drlik@mall.cz",
     "role" : "Developer"
-  }, {
-    "name" : "Martin Hrdlicka",
-    "email" : "martin.hrdlicka@mall.cz",
-    "role" : "Developer"
-  } ]
+  }]
 }
