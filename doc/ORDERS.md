@@ -11,23 +11,23 @@ $orders = new Orders($mpapiClient);
 ```
 
 #### Available methods:
-**GET**  
-You can get information about:  
- - specific order  
- - all orders  
- - list of orders by status  
- - statistics information for given period  
+**GET**
+You can get information about:
+ - specific order
+ - all orders
+ - list of orders by status
+ - statistics information for given period
 
 ***Get order statistics***
 ```
 ...
-// get order statistics; default period is 30 days  
+// get order statistics; default period is 30 days
 $allOrders = $orders->get()->stats();
 ```
 
 ```
 ...
-// get last 7 days order statistics  
+// get last 7 days order statistics
 $allOrders = $orders->get()->stats(7);
 ```
 
@@ -37,12 +37,13 @@ $allOrders = $orders->get()->stats(7);
 // get all orders
 $allOrders = $orders->get()->all();
 ```
-The response contains basic data of all orders:  
+The response contains basic data of all orders:
 ```
 [
     [
 		"id": 12345675,
 		"purchase_id": 98653274,
+		"customer_id": 1111111111,
 		"customer": "John Doe",
 		"cod": 25,
 		"ship_date": "2016-12-10",
@@ -53,6 +54,7 @@ The response contains basic data of all orders:
     [
 		"id": 9876543,
 		"purchase_id": 12457896,
+		"customer_id": 1111111112,
 		"customer": "Jane Doe",
 		"cod": 0,
 		"ship_date": "2016-10-21",
@@ -95,11 +97,11 @@ $cancelledOrders = $orders->get()->cancelled();
 $unconfirmedOrders = $orders->get()->unconfirmed();
 
 ...
-// get order detail 
+// get order detail
 $response = $orders->get()->detail('yourOrderId');
 ```
 
-The response contains order details:  
+The response contains order details:
 ```
 [
     "id" => 89591350,
@@ -116,7 +118,8 @@ The response contains order details:
     "ship_date" => "2015-10-05",
     "cod" => 409,
     "address" => [
-        "name" => "John Doe",
+        "customer_id" => 1111111111,
+		"name" => "John Doe",
         "company" => "Company J. D.",
         "phone" => "+420296245025",
         "email" => "john@doe.tld",
@@ -140,15 +143,15 @@ The response contains order details:
 ]
 ```
 
-**PUT**  
-You can confirm a specific order or set new order status. 
-The order entity has following constants for relevant statuses:  
-STATUS_OPEN  
-STATUS_CANCELLED  
-STATUS_SHIPPING  
-STATUS_SHIPPED  
-STATUS_DELIVERED  
-STATUS_RETURNED  
+**PUT**
+You can confirm a specific order or set new order status.
+The order entity has following constants for relevant statuses:
+STATUS_OPEN
+STATUS_CANCELLED
+STATUS_SHIPPING
+STATUS_SHIPPED
+STATUS_DELIVERED
+STATUS_RETURNED
 
 You will change the status of the order with its order ID as the first and status constant as the second parameter:
 ```
