@@ -119,7 +119,7 @@ The response contains order details:
     "cod" => 409,  
     "address" => [  
         "customer_id" => 1111111111,  
-		"name" => "John Doe",  
+        "name" => "John Doe",  
         "company" => "Company J. D.",  
         "phone" => "+420296245025",  
         "email" => "john@doe.tld",  

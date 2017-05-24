@@ -1,7 +1,7 @@
 {
   "name" : "mallgroup/mpapi-client",
   "description" : "Mall marketplace API client",
-  "version" : "2.9.0",
+  "version" : "2.10.0",
   "require" : {
     "php" : "^5.5 || ^7.0",
     "guzzlehttp/guzzle" : ">=6.2.3",
