@@ -292,6 +292,7 @@ class Order extends AbstractEntity
 	 * @var array
 	 */
 	protected $data;
+
 	/**
 	 * Get data for output
 	 *
@@ -315,6 +316,7 @@ class Order extends AbstractEntity
 			'delivery_date' => $this->getDeliveryDate(),
 			'cod' => (float)$this->getCod(),
 			'address' => [
+				'customer_id' => (int)$this->getCustomerId(),
 				'name' => $this->getName(),
 				'company' => $this->getCompany(),
 				'phone' => $this->getPhone(),
@@ -616,8 +618,8 @@ class Order extends AbstractEntity
 	public function getCustomerId()
 	{
 		$retval = null;
-		if (isset($this->data[self::KEY_CUSTOMER_ID])) {
-			$retval = $this->data[self::KEY_CUSTOMER_ID];
+		if (isset($this->data[self::KEY_ADDRESS][self::KEY_CUSTOMER_ID])) {
+			$retval = $this->data[self::KEY_ADDRESS][self::KEY_CUSTOMER_ID];
 		}
 		return $retval;
 	}
