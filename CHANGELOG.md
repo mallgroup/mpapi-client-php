@@ -1,8 +1,11 @@
 # Marketplace API client - change log
 
+## 2.10.0
+- extended order detail and orders basic data with customer ID
+
 ## 2.9.0
-- product and variant entity extended with option 'free delivery' that set delivery price to zero for purchase where is contained
-- added missing item in order detail 'payment_type'
+- extended product and variant entity with option 'free delivery' that sets delivery price to zero for the whole purchase where it is contained
+- added 'payment_type' info into order detail
 
 ## 2.8.0
 - endpoint GET order extended with 'stats' method that provides order statistics

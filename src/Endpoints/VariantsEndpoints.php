@@ -45,8 +45,9 @@ class VariantsEndpoints
 	}
 
 	/**
-	 * Get list of all variants.
+	 * Get list of all variants
 	 *
+	 * @param string $productId
 	 * @return Response
 	 */
 	public function variantsList($productId)
@@ -167,7 +168,7 @@ class VariantsEndpoints
 
 	/**
 	 * Get request hash
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getRequestHash()
