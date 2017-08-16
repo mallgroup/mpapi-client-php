@@ -161,7 +161,7 @@ $variant = [
 			[
 				'url' => 'https://i.cdn.nrholding.net/15880228',
 				'main' => true,
-				'switch' => true
+				'switch' => 'MP_ATR_TEST1_CHAR'
 			]
 		],
 		'promotions' => [],
