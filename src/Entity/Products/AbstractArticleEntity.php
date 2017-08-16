@@ -533,15 +533,15 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 *
 	 * @param string $url
 	 * @param boolean $main
-	 * @param boolean $switch
+	 * @param string|null $switch
 	 * @return AbstractArticleEntity
 	 */
-	public function addMedia($url, $main = false, $switch = false)
+	public function addMedia($url, $main = false, $switch = null)
 	{
 		$mediaCurrent = [
 			self::KEY_URL => $url,
 			self::KEY_MAIN => (bool)$main,
-			self::KEY_SWITCH => (bool)$switch
+			self::KEY_SWITCH => $switch
 		];
 		if (!isset($this->data[self::KEY_MEDIA])) {
 			$this->data[self::KEY_MEDIA][] = $mediaCurrent;

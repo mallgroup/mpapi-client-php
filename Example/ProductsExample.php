@@ -53,9 +53,9 @@ $product->setRrpPrice(0);
 $product->setDeliveryDelay(3);
 $product->addMedia('http://i.cdn.nrholding.net/15880228', true);
 $product->addPromotion(1700, '2015-07-19 00:00:00', '2018-11-15 23:59:59');
-$product->addParameter("MP_COLOR", "blue");
+$product->addParameter('MP_COLOR', 'blue');
 $product->addVariableParameters([
-	"MP_COLOR"
+	'MP_COLOR'
 ]);
 $product->addDimensions(30,90,50,35);
 $product->setStatus(Product::STATUS_ACTIVE);
@@ -77,12 +77,13 @@ $variant->setBarcode('0000619262110');
 $variant->setPrice(400);
 $variant->setRrpPrice(229);
 $variant->setDeliveryDelay(4);
-$variant->addParameter("MP_COLOR", "blue");
-$variant->addParameter("MP_TYPE", "wood");
-$variant->addParameter("MP_TYPE", "iron");
+$variant->addParameter('MP_COLOR', 'blue');
+$variant->addParameter('MP_TYPE', 'wood');
+$variant->addParameter('MP_TYPE', 'iron');
 $variant->addLabel('NEW', '2015-07-19 00:00:00', '2018-11-14 23:59:59');
 $variant->addDimensions(25,95,45,30);
 $variant->addMedia('http://i.cdn.nrholding.net/15880228', true);
+$variant->addMedia('http://i.cdn.nrholding.net/15880229', false, 'MP_COLOR');
 $variant->addPromotion(1700, '2015-07-19 00:00:00', '2018-11-16 23:59:59');
 $variant->setStatus(Product::STATUS_ACTIVE);
 $variant->setInStock(10);
