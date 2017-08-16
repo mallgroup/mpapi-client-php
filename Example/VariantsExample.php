@@ -78,7 +78,7 @@ $variant->addDimensions(25,95,45,30);
 // add main media
 $variant->addMedia('http://i.cdn.nrholding.net/15880228', true);
 // add media used as variant switch (using parameter id MP_COLOR as a switch)
-// For switch you can use only parameters which has been set as 'variable_parameters' in product data
+// for switch you can use only parameters which has been set as 'variable_parameters' in product data
 $variant->addMedia('http://i.cdn.nrholding.net/15880229', false, 'MP_COLOR');
 // add ordinary media (with no special usage)
 $variant->addMedia('http://i.cdn.nrholding.net/15880230');
