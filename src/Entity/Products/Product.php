@@ -54,6 +54,12 @@ class Product extends AbstractArticleEntity
 	 *
 	 * @var string
 	 */
+	const ARG_FORCE_TOKEN = 'force_token';
+
+	/**
+	 *
+	 * @var string
+	 */
 	protected $data;
 
 	/**
@@ -300,6 +306,11 @@ class Product extends AbstractArticleEntity
 		return $this->data;
 	}
 
+	/**
+	 * Set product data
+	 *
+	 * @param array $data
+	 */
 	public function setData($data)
 	{
 		$this->data = $data;

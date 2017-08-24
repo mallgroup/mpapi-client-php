@@ -358,7 +358,7 @@ class Client
 
 	/**
 	 * Get all arguments
-	 * 
+	 *
 	 * @return array
 	 */
 	public function getArguments()

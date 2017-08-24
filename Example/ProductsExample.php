@@ -110,8 +110,13 @@ try {
 	$response = $products->put('pTU00_test', $product);
 } catch (ForceTokenException $ex) {
 	print('Product update failed. To confirm price difference use force token: ');
-	var_export($ex->getForceToken());
+	// get force token
+	$forceToken = $ex->getForceToken();
+	var_export($forceToken);
 	print(PHP_EOL);
+	// set token to the client args and repeat product update
+	$mpapiClient->setArgument(Product::ARG_FORCE_TOKEN, $forceToken);
+	$response = $products->put('pTU00_test', $product);
 }
 
 // ####################################
