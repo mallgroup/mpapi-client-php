@@ -77,8 +77,9 @@ $variant->addLabel('NEW', '2015-07-19 00:00:00', '2018-11-14 23:59:59');
 $variant->addDimensions(25,95,45,30);
 // add main media
 $variant->addMedia('http://i.cdn.nrholding.net/15880228', true);
-// add media used as variant switch
-$variant->addMedia('http://i.cdn.nrholding.net/15880229', false, true);
+// add media used as variant switch (using parameter id MP_COLOR as a switch)
+// for switch you can use only parameters which has been set as 'variable_parameters' in product data
+$variant->addMedia('http://i.cdn.nrholding.net/15880229', false, 'MP_COLOR');
 // add ordinary media (with no special usage)
 $variant->addMedia('http://i.cdn.nrholding.net/15880230');
 $variant->addPromotion(1700, '2015-07-19 00:00:00', '2018-11-16 23:59:59');

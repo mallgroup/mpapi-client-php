@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 2.11.0
+- changed variant media switch to string; now is media tied to variable parameters; put one of the variable parameters
+
 ## 2.10.0
 - extended order detail and orders basic data with customer ID
 

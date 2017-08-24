@@ -199,7 +199,7 @@ class VariantTest extends \Codeception\Test\Unit
 		$media = $this->object->getMedia();
 		$this->assertNotEmpty($media);
 		$this->assertTrue($media[0]['main']);
-		$this->assertTrue($media[0]['switch']);
+		$this->assertEquals(Fixtures::get('variant')['media'][0]['switch'], $media[0]['switch']);
 	}
 
 	public function testSetMedia()
