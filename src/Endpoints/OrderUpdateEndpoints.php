@@ -40,14 +40,20 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 	 * @param string $status
 	 * @param boolean $confirmed
 	 * @param string $trackingNumber
-	 * @return boolean
+	 * @param \DateTimeInterface|null $deliveredAt
+	 * @return bool
 	 */
-	public function status($orderId, $status, $confirmed = true, $trackingNumber = '')
+	public function status($orderId, $status, $confirmed = true, $trackingNumber = '', \DateTimeInterface $deliveredAt = null)
 	{
 		$requestData = [
 			'status' => $status,
 			'confirmed' => $confirmed
 		];
+
+		if ($deliveredAt !== null) {
+			$requestData['delivered_at'] = $deliveredAt;
+		}
+
 		if (!empty($trackingNumber)) {
 			$requestData['tracking_number'] = $trackingNumber;
 		}
@@ -58,7 +64,7 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 
 	/**
 	 * Update tracking number
-	 * 
+	 *
 	 * @param integer $orderId
 	 * @param string $trackingNumber
 	 * @return boolean

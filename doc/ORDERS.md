@@ -161,12 +161,20 @@ $responseStatus = $orders->put()->status('yourOrderId', Order::STATUS_SHIPPING);
 ...  
 ```
 
+When you want to set when the order was delivered to customer, use 5th parameter of status call.
+Pass this only with Order::STATUS_DELIVERED, you will recieve 400 Bad request otherwise.
+
+```
+$responseStatus = $order->put->status($order->getOrderId(), Order::STATUS_DELIVERED, true, '', $dateTimeOfDelivery);
+```
+
 You will set the tracking number of the order with its order ID as the first and tracking number as the second parameter:  
 ```
 ...  
 $responseStatus = $orders->put()->trackingNumber($order->getOrderId(), 'T9999999999');  
 ...  
 ```
+
 
 ##### See more:  
 > **/root/vendor/mallgroup/mpapi-client/Example/OrdersExample.php**
