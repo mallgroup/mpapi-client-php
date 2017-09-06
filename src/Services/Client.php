@@ -153,6 +153,12 @@ class Client
 
 	/**
 	 *
+	 * @var bool
+	 */
+	private $autoDataCollecting = true;
+
+	/**
+	 *
 	 * @param string $clientId
 	 * @param boolean $useErrorHandler
 	 */
@@ -217,6 +223,29 @@ class Client
 		set_exception_handler($handler);
 		return $this;
 	}
+
+	/**
+	 * Enable/disable auto data collecting
+	 *
+	 * @param bool $state
+	 * @return $this
+	 */
+	public function setAutoDataCollecting($state)
+	{
+		$this->autoDataCollecting = (bool)$state;
+		return $this;
+	}
+
+	/**
+	 * Return state of auto data collecting
+	 *
+	 * @return bool
+	 */
+	public function autoCollecting()
+	{
+		return $this->autoDataCollecting;
+	}
+
 
 	/**
 	 *

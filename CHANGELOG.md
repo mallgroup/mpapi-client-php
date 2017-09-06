@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 2.12.0
+- added the option to enable (default) or disable auto data collecting
+
 ## 2.11.0
 - changed variant media switch to string; now is media tied to variable parameters; put one of the variable parameters
 

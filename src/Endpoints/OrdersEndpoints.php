@@ -92,8 +92,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	 */
 	public function open()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_OPEN), 'GET');
-		return $this->dataCollector($response);
+		return $this->getOrdersByStatus(self::ENDPOINT_OPEN);
 	}
 
 	/**
@@ -103,8 +102,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	 */
 	public function blocked()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_BLOCKED), 'GET');
-		return $this->dataCollector($response);
+		return $this->getOrdersByStatus(self::ENDPOINT_BLOCKED);
 	}
 
 	/**
@@ -114,8 +112,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	 */
 	public function shipping()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_SHIPPING), 'GET');
-		return $this->dataCollector($response);
+		return $this->getOrdersByStatus(self::ENDPOINT_SHIPPING);
 	}
 
 	/**
@@ -125,8 +122,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	 */
 	public function shipped()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_SHIPPED), 'GET');
-		return $this->dataCollector($response);
+		return $this->getOrdersByStatus(self::ENDPOINT_SHIPPED);
 	}
 
 	/**
@@ -136,8 +132,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	 */
 	public function delivered()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_DELIVERED), 'GET');
-		return $this->dataCollector($response);
+		return $this->getOrdersByStatus(self::ENDPOINT_DELIVERED);
 	}
 
 	/**
@@ -147,8 +142,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	 */
 	public function returned()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_RETURNED), 'GET');
-		return $this->dataCollector($response);
+		return $this->getOrdersByStatus(self::ENDPOINT_RETURNED);
 	}
 
 	/**
@@ -158,8 +152,7 @@ class OrdersEndpoints extends AbstractEndpoints
 	 */
 	public function cancelled()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_CANCELLED), 'GET');
-		return $this->dataCollector($response);
+		return $this->getOrdersByStatus(self::ENDPOINT_CANCELLED);
 	}
 
 	/**
@@ -169,8 +162,25 @@ class OrdersEndpoints extends AbstractEndpoints
 	 */
 	public function unconfirmed()
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, self::ENDPOINT_UNCONFIRMED), 'GET');
-		return $this->dataCollector($response);
+		return $this->getOrdersByStatus(self::ENDPOINT_UNCONFIRMED);
+	}
+
+	/**
+	 * Get orders by status
+	 *
+	 * @param $orderStatus
+	 * @return array
+	 */
+	private function getOrdersByStatus($orderStatus)
+	{
+		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, $orderStatus), 'GET');
+		if ($this->client->autoCollecting()) {
+			$retval = $this->dataCollector($response);
+		} else {
+			$orders = json_decode($response->getBody(), true);
+			$retval = !empty($orders) && isset($orders['data']['ids']) ? $orders['data']['ids'] : $orders['data'];
+		}
+		return $retval;
 	}
 
 	/**
@@ -181,8 +191,14 @@ class OrdersEndpoints extends AbstractEndpoints
 	public function all()
 	{
 		$response = $this->client->sendRequest(self::ENDPOINT_PATH, 'GET');
-		$dataCollector = new DataCollector($this->client, $response, false);
-		return $dataCollector->getData();
+		if ($this->client->autoCollecting()) {
+			$dataCollector = new DataCollector($this->client, $response, false);
+			$retval = $dataCollector->getData();
+		} else {
+			$orders = json_decode($response->getBody(), true);
+			$retval = !empty($orders) && isset($orders['data']['ids']) ? $orders['data']['ids'] : $orders['data'];
+		}
+		return $retval;
 	}
 
 
