@@ -1,7 +1,7 @@
 {
   "name" : "mallgroup/mpapi-client",
   "description" : "Mall marketplace API client",
-  "version" : "2.11.0",
+  "version" : "2.11.5",
   "require" : {
     "php" : "^5.5 || ^7.0",
     "guzzlehttp/guzzle" : ">=6.2.3",
@@ -24,10 +24,6 @@
   "authors" : [ {
     "name" : "Jan Blaha",
     "email" : "jan.blaha@mall.cz",
-    "role" : "Developer"
-  }, {
-    "name" : "Jonas Habr",
-    "email" : "jonas.habr@mall.cz",
     "role" : "Developer"
   }, {
     "name" : "Martin Drlik",

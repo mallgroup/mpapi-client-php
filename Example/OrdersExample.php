@@ -118,6 +118,11 @@ if (!empty($openOrders)) {
 	var_dump($responseStatus);
 	print(PHP_EOL);
 
+	$responseStatus = $orders->put()->status($order->getOrderId(), Order::STATUS_SHIPPED);
+	print('New order status: ');
+	var_dump($responseStatus);
+	print(PHP_EOL);
+
 	/**
 	 * ##################################
 	 * Set tracking number
@@ -125,6 +130,17 @@ if (!empty($openOrders)) {
 	 */
 	$responseStatus = $orders->put()->trackingNumber($order->getOrderId(), 'T9999999999');
 	print('Order tracking number: ');
+	var_dump($responseStatus);
+	print(PHP_EOL);
+
+	/**
+	 * ##################################
+	 * Update order status with delivered at datetime
+	 * ##################################
+	 */
+	$deliveredToCustomer = new \DateTime('2017-08-30 12:03:32');
+	$responseStatus = $orders->put()->status($order->getOrderId(), Order::STATUS_DELIVERED, true, '', $deliveredToCustomer);
+	print('New order status: ');
 	var_dump($responseStatus);
 	print(PHP_EOL);
 }

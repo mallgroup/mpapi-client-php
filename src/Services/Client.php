@@ -299,6 +299,7 @@ class Client
 				'client_id' => $this->clientId
 			]);
 			$responseData = json_decode($e->getResponse()->getBody()->getContents(), true);
+			$e->getResponse()->getBody()->rewind();
 			$responseData = isset($responseData['data']) ? $responseData['data'] : $responseData;
 			if (isset($responseData['forceToken']) || isset($responseData['data']['forceToken'])) {
 				$forceToken = isset($responseData['forceToken']) ? $responseData['forceToken'] : $responseData['data']['forceToken'];
@@ -387,7 +388,7 @@ class Client
 
 	/**
 	 * Get all arguments
-	 * 
+	 *
 	 * @return array
 	 */
 	public function getArguments()
