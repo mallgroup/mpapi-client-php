@@ -23,4 +23,14 @@ class Variant extends AbstractArticleEntity
 	{
 		return $this->data;
 	}
+
+	/**
+	 * Set variant data
+	 *
+	 * @param array $data
+	 */
+	public function setData($data)
+	{
+		$this->data = $data;
+	}
 }
