@@ -249,6 +249,12 @@ class Order extends AbstractEntity
 	 *
 	 * @var string
 	 */
+	const STATUS_BLOCKED = 'blocked';
+
+	/**
+	 *
+	 * @var string
+	 */
 	const STATUS_OPEN = 'open';
 
 	/**
