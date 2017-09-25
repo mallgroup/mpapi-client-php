@@ -12,6 +12,12 @@ class BasicVariantIterator extends ObjectIterator implements \Iterator
 {
 	/**
 	 *
+	 * @var array
+	 */
+	protected $data = [];
+
+	/**
+	 *
 	 * @param array $basicData
 	 */
 	public function __construct(array $basicData)
