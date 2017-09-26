@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 2.13.0
+- Product/Variant entity extended with 'purchase_price', one of the 'price' or 'purchase_price' is required
+
 ## 2.12.0
 - added the option to enable (default) or disable auto data collecting
 

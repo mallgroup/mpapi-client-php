@@ -62,6 +62,12 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 *
 	 * @var string
 	 */
+	const KEY_PURCHASE_PRICE = 'purchase_price';
+
+	/**
+	 *
+	 * @var string
+	 */
 	const KEY_RRP_PRICE = 'rrp';
 
 	/**
@@ -438,6 +444,36 @@ abstract class AbstractArticleEntity extends AbstractEntity
 			$this->data[self::KEY_PRICE] = $value;
 		} elseif ((int)$value != (int) $this->getPrice()) {
 			$this->data[self::KEY_PRICE] = $value;
+		}
+		return $this;
+	}
+
+	/**
+	 * Get purchase price
+	 *
+	 * @return float
+	 */
+	public function getPurchasePrice()
+	{
+		$retval = 0;
+		if (isset($this->data[self::KEY_PURCHASE_PRICE])) {
+			$retval = (float) $this->data[self::KEY_PURCHASE_PRICE];
+		}
+		return $retval;
+	}
+
+	/**
+	 * Set purchase price
+	 *
+	 * @param float $value
+	 * @return AbstractArticleEntity
+	 */
+	public function setPurchasePrice($value)
+	{
+		if (function_exists('bccomp') && bccomp($value, $this->getPrice(), self::PRICE_PRECISION) !== 0) {
+			$this->data[self::KEY_PURCHASE_PRICE] = $value;
+		} elseif ((int)$value != (int) $this->getPrice()) {
+			$this->data[self::KEY_PURCHASE_PRICE] = $value;
 		}
 		return $this;
 	}
