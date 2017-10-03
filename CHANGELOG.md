@@ -1,5 +1,9 @@
 # Marketplace API client - change log
 
+## 2.13.0
+- added optional fourth arguments forcetoken into put method in Products service 
+- added optional third arguments forcetoken into put method in Variants service 
+
 ## 2.12.0
 - added the option to enable (default) or disable auto data collecting
 
