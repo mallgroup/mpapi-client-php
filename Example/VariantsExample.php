@@ -124,8 +124,7 @@ try {
 	var_export($forceToken);
 	print(PHP_EOL);
 	// set token to the client args and repeat variant update
-	$mpapiClient->setArgument(Product::ARG_FORCE_TOKEN, $forceToken);
-	$response = $variants->put($productId, $variant);
+	$response = $variants->put($productId, $variant, $forceToken);
 }
 
 /**

@@ -129,10 +129,16 @@ class Variants extends AbstractVariantsService
 	 *
 	 * @param string $productId
 	 * @param Variant $variant
-	 * @return boolean
+	 * @param bool $forceToken
+	 * @return bool
 	 */
-	public function put($productId, Variant $variant)
+	public function put($productId, Variant $variant, $forceToken = null)
 	{
+		if (!empty($forceToken)) {
+			$this->client->setArgument(AbstractService::ARG_FORCE_TOKEN, $forceToken);
+		} else {
+			$this->client->removeArgument(AbstractService::ARG_FORCE_TOKEN);
+		}
 		$status = $this->endpoints->update($productId, $variant);
 		$this->requestHash[] = $this->endpoints->getRequestHash();
 		return $status;

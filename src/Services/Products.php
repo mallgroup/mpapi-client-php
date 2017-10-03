@@ -182,13 +182,20 @@ class Products extends AbstractService
 	 * @param string $productId
 	 * @param AbstractEntity $entity
 	 * @param string $variantId
+	 * @param string $forceToken
 	 * @throws ApplicationException
 	 * @return boolean
 	 */
-	public function put($productId = null, AbstractEntity $entity = null, $variantId = null)
+	public function put($productId = null, AbstractEntity $entity = null, $variantId = null, $forceToken = null)
 	{
 		if ($entity !== null) {
 			list ($endpoint, $method) = $this->getEndpoint($entity, __METHOD__);
+		}
+
+		if (!empty($forceToken)) {
+			$this->client->setArgument(AbstractService::ARG_FORCE_TOKEN, $forceToken);
+		} else {
+			$this->client->removeArgument(AbstractService::ARG_FORCE_TOKEN);
 		}
 
 		$errors = [];
