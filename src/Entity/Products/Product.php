@@ -1,6 +1,8 @@
 <?php
 namespace MPAPI\Entity\Products;
 
+use MPAPI\Services\AbstractService;
+
 /**
  * Product entity
  *
@@ -54,7 +56,7 @@ class Product extends AbstractArticleEntity
 	 *
 	 * @var string
 	 */
-	const ARG_FORCE_TOKEN = 'force_token';
+	const ARG_FORCE_TOKEN = AbstractService::ARG_FORCE_TOKEN;
 
 	/**
 	 *

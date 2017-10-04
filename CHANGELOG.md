@@ -1,5 +1,9 @@
 # Marketplace API client - change log
 
+## 2.14.0
+- added optional fourth arguments forcetoken into put method in Products service 
+- added optional third arguments forcetoken into put method in Variants service 
+
 ## 2.13.0
 - Product/Variant entity extended with 'purchase_price', one of the 'price' or 'purchase_price' is required
 

@@ -32,6 +32,12 @@ abstract class AbstractService extends AbstractServiceFilter implements ServiceI
 
 	/**
 	 *
+	 * @var string
+	 */
+	const ARG_FORCE_TOKEN = 'force_token';
+
+	/**
+	 *
 	 * @var AbstractEntity[]
 	 */
 	protected $entities;
