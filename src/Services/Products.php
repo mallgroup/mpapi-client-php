@@ -192,7 +192,7 @@ class Products extends AbstractService
 			list ($endpoint, $method) = $this->getEndpoint($entity, __METHOD__);
 		}
 
-		if (!empty($forceToken)) {
+		if ($forceToken !== null) {
 			$this->client->setArgument(AbstractService::ARG_FORCE_TOKEN, $forceToken);
 		} else {
 			$this->client->removeArgument(AbstractService::ARG_FORCE_TOKEN);
