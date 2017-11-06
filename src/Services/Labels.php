@@ -1,6 +1,8 @@
 <?php
 namespace MPAPI\Services;
 
+use MPAPI\Lib\DataCollector;
+
 /**
  * Labels service
  *
@@ -39,7 +41,7 @@ class Labels extends AbstractService
 	public function get()
 	{
 		$response = $this->client->sendRequest(self::PATH, 'GET');
-		$responseBody = json_decode($response->getBody(), true);
-		return $responseBody['data'];
+		$dataCollector = new DataCollector($this->client, $response);
+		return $dataCollector->getData();
 	}
 }
