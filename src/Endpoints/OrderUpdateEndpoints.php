@@ -21,6 +21,8 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 	 */
 	const ENDPOINT_DETAIL = '%s/%s';
 
+	const DATETIME_FORMAT = 'Y-m-d H:i:s';
+
 	/**
 	 *
 	 * @var string
@@ -51,7 +53,7 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 		];
 
 		if ($deliveredAt !== null) {
-			$requestData['delivered_at'] = $deliveredAt;
+			$requestData['delivered_at'] = $deliveredAt->format(self::DATETIME_FORMAT);
 		}
 
 		if (!empty($trackingNumber)) {
