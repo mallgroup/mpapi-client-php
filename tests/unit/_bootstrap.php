@@ -203,6 +203,7 @@ $orderData = [
 	'tracking_number' => 'T9999999999',
 	'ship_date' => '2016-03-16',
 	'delivery_date' => '2016-03-16',
+	'delivered_at' => '2018-02-14 08:03:00',
 	'cod' => 71.98,
 	'address' => [
 		'name' => 'Fisrtname Lastname',
@@ -213,8 +214,8 @@ $orderData = [
 		'zip' => '10000',
 		'country' => 'CZ',
 	],
-	'confirmed' => false,
-	'status' => 'returned',
+	'confirmed' => true,
+	'status' => 'delivered',
 	'items' => [
 		[
 			'id' => 'productId1',

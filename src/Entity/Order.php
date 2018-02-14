@@ -458,7 +458,11 @@ class Order extends AbstractEntity
 	 */
 	public function getDeliveredAt()
 	{
-		return $this->data[self::KEY_DELIVERED_AT];
+		$retval = '';
+		if (isset($this->data[self::KEY_DELIVERED_AT])) {
+			$retval = $this->data[self::KEY_DELIVERED_AT];
+		}
+		return $retval;
 	}
 
 	/**
@@ -582,7 +586,7 @@ class Order extends AbstractEntity
 	 */
 	public function getTrackingNumber()
 	{
-		$retval = [];
+		$retval = '';
 		if (isset($this->data[self::KEY_TRACKING_NO])) {
 			$retval = $this->data[self::KEY_TRACKING_NO];
 		}
