@@ -75,6 +75,12 @@ class Order extends AbstractEntity
 	 *
 	 * @var string
 	 */
+	const KEY_DELIVERED_AT = 'delivered_at';
+
+	/**
+	 *
+	 * @var string
+	 */
 	const KEY_COD_PRICE = 'cod_price';
 
 	/**
@@ -320,6 +326,7 @@ class Order extends AbstractEntity
 			'tracking_number' => $this->getTrackingNumber(),
 			'ship_date' => $this->getDeliveryDate(),
 			'delivery_date' => $this->getDeliveryDate(),
+			'delivered_at' => $this->getDeliveredAt(),
 			'cod' => (float)$this->getCod(),
 			'address' => [
 				'customer_id' => (int)$this->getCustomerId(),
@@ -444,6 +451,14 @@ class Order extends AbstractEntity
 	public function getDeliveryDate()
 	{
 		return $this->data[self::KEY_DELIVERY_DATE];
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDeliveredAt()
+	{
+		return $this->data[self::KEY_DELIVERED_AT];
 	}
 
 	/**
