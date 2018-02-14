@@ -39,7 +39,7 @@ class BasicProductTest extends \Codeception\Test\Unit
 
 	public function testGetProductId()
 	{
-		$this->assertEquals($this->data['product_id'], $this->object->getProductId());
+		$this->assertEquals((int) $this->data['product_id'], $this->object->getProductId());
 	}
 
 	public function testGetCategoryId()

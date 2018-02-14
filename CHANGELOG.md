@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 2.15.0
+- delivered orders data was extended with 'delivered_at' field (list of basic orders data, order detail)
+
 ## 2.14.0
 - added optional fourth arguments forcetoken into put method in Products service 
 - added optional third arguments forcetoken into put method in Variants service 

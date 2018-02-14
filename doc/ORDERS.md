@@ -47,7 +47,8 @@ The response contains basic data of all orders:
 		"customer": "John Doe",  
 		"cod": 25,  
 		"ship_date": "2016-12-10",  
-		"status": "shipping",  
+		"delivered_at": "2018-02-14 08:13:00",  
+		"status": "delivered",  
 		"payment_type: "A",  
 		"confirmed": true  
     ],  
@@ -116,6 +117,7 @@ The response contains order details:
     "delivery_method_id" => "21",  
     "tracking_number": "T9999999999",  
     "ship_date" => "2015-10-05",  
+    "delivered_at": "2018-02-14 08:13:00",  
     "cod" => 409,  
     "address" => [  
         "customer_id" => 1111111111,  
