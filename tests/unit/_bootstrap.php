@@ -30,7 +30,6 @@ $product = [
 			'to' => '2027-10-11 00:00:00'
 		]
 	],
-	'delivery_setup' => 'testDelivery1',
 	'delivery_delay' => 2
 ];
 
@@ -237,56 +236,7 @@ $orderData = [
 ];
 Codeception\Util\Fixtures::add('orderData', $orderData);
 
-// delivery method data
-$deliveryMethodData = [
-	'id' => 'deliveryMethodId',
-	'title' => 'Delivery method title',
-	'price' => 150,
-	'cod_price' => 35,
-	'free_limit' => 1000,
-	'delivery_delay' => 3,
-	'is_pickup_point' => true
-];
-Codeception\Util\Fixtures::add('deliveryMethodData', $deliveryMethodData);
-Codeception\Util\Fixtures::add('updatedDeliveryMethodId', 'updatedDeliverMethodId');
-Codeception\Util\Fixtures::add('updatedDeliveryMethodTitle', 'Updated delivery method title');
-Codeception\Util\Fixtures::add('updatedDeliveryMethodPrice', 300);
-Codeception\Util\Fixtures::add('updatedDeliveryMethodCodPrice', 10);
-Codeception\Util\Fixtures::add('updatedDeliveryMethodFreeLimit', 0);
-Codeception\Util\Fixtures::add('updatedDeliveryMethodDeliveryDelay', 8);
-Codeception\Util\Fixtures::add('updatedDeliveryMethodPickupPoint', false);
-
-// delivery setup data
-$deliverySetupData = [
-	'id' => 'deliverySetupId',
-	'price' => 150,
-	'cod_price' => 22,
-	'free_limit' => 650,
-	'delivery_delay' => 4
-];
-
-Codeception\Util\Fixtures::add('deliverySetupId', 'deliverySetupId1');
-Codeception\Util\Fixtures::add('deliverySetupData', $deliverySetupData);
-
-$deliverySetupFinalStructure = [
-	'id' => Codeception\Util\Fixtures::get('deliverySetupId'),
-	'pricing' => [
-		[
-			'id' => 'deliverySetupId',
-			'price' => 150,
-			'cod_price' => 22,
-			'free_limit' => 650,
-			'delivery_delay' => 4
-		]
-	]
-];
-Codeception\Util\Fixtures::add('deliverySetupFinalStructure', $deliverySetupFinalStructure);
-Codeception\Util\Fixtures::add('updatedDeliverySetupId', 'updatedDeliverSetupId');
-Codeception\Util\Fixtures::add('updatedDeliverySetupPrice', 200);
-Codeception\Util\Fixtures::add('updatedDeliverySetupCodPrice', 10);
-Codeception\Util\Fixtures::add('updatedDeliverySetupFreeLimit', 0);
-Codeception\Util\Fixtures::add('updatedDeliverySetupDeliveryDelay', 8);
-
+// deliveries
 $partnerDelivery = [
 	'code' => 'new_delivery',
 	'title' => 'NEW delivery',
