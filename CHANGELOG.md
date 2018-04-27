@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.0.0
+- delivery settings removed, use deliveries instead of delivery settings
+
 ## 2.16.0
 - changed API URL to mallgroup.com
  
