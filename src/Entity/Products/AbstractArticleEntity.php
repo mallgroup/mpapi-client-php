@@ -1,7 +1,9 @@
 <?php
 namespace MPAPI\Entity\Products;
 
-use lib\Exception;use MPAPI\Entity\AbstractEntity;use MPAPI\Entity\PackageSize;
+use MPAPI\Entity\AbstractEntity;
+use MPAPI\Entity\PackageSize;
+use MPAPI\Exceptions\UnknownPackageSizeException;
 
 /**
  *
@@ -985,6 +987,9 @@ abstract class AbstractArticleEntity extends AbstractEntity
  	 */
 	public function setPackageSize($size)
 	{
+		if (!in_array($size, PackageSize::PACKAGES_LIST)) {
+			throw UnknownPackageSizeException::withPackageSize($size);
+		}
 		$this->data[self::KEY_PACKAGE_SIZE] = $size;
 		return $this;
 	}
