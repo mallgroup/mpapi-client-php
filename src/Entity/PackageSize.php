@@ -21,7 +21,7 @@ class PackageSize {
 	/**
 	 * @var array
  	 */
-	const PACKAGES_LIST = [
+	const PACKAGES_SIZE_LIST = [
 		self::SMALLBOX,
 		self::BIGBOX
 	];

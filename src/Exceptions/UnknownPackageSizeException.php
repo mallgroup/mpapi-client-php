@@ -22,6 +22,6 @@ class UnknownPackageSizeException extends \Exception
 	 */
 	public static function withPackageSize($size)
 	{
-		return new static(sprintf(self::MSG_UNKNOWN_PACKAGE_SIZE, $size, implode(' or ', PackageSize::PACKAGES_LIST)));
+		return new static(sprintf(self::MSG_UNKNOWN_PACKAGE_SIZE, $size, implode(' or ', PackageSize::PACKAGES_SIZE_LIST)));
 	}
 }

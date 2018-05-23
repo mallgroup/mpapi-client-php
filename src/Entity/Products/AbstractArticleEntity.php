@@ -987,7 +987,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
  	 */
 	public function setPackageSize($size)
 	{
-		if (!in_array($size, PackageSize::PACKAGES_LIST, true)) {
+		if (!in_array($size, PackageSize::PACKAGES_SIZE_LIST, true)) {
 			throw UnknownPackageSizeException::withPackageSize($size);
 		}
 		$this->data[self::KEY_PACKAGE_SIZE] = $size;
