@@ -1,7 +1,7 @@
 <?php
 namespace MPAPI\Entity\Products;
 
-use MPAPI\Entity\AbstractEntity;
+use lib\Exception;use MPAPI\Entity\AbstractEntity;use MPAPI\Entity\PackageSize;
 
 /**
  *
@@ -213,6 +213,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * @var string
 	 */
 	const KEY_FREE_DELIVERY = 'free_delivery';
+
+	/**
+	 * @var string
+ 	 */
+	const KEY_PACKAGE_SIZE = 'package_size';
 
 	/**
 	 *
@@ -956,6 +961,31 @@ abstract class AbstractArticleEntity extends AbstractEntity
 		$dimensions[self::KEY_LENGTH] = $length;
 		$this->setDimensions($dimensions);
 
+		return $this;
+	}
+
+	/**
+ 	 * Get package size (SMALLBOX or BIGBOX)
+ 	 *
+	 * @return string
+ 	 */
+	public function getPackageSize()
+	{
+		$retval = '';
+		if (isset($this->data[self::KEY_PACKAGE_SIZE])) {
+			$retval = $this->data[self::KEY_PACKAGE_SIZE];
+		}
+		return $retval;
+	}
+
+	/**
+ 	 * Set package size (SMALLBOX or BIGBOX)
+ 	 *
+	 * @return string
+ 	 */
+	public function setPackageSize($size)
+	{
+		$this->data[self::KEY_PACKAGE_SIZE] = $size;
 		return $this;
 	}
 

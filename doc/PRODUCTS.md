@@ -6,6 +6,7 @@
 use MPAPI\Services\Products;
 use MPAPI\Entity\Products\Product;
 use MPAPI\Entity\Products\Variant;
+use MPAPI\Entity\PackageSize;
 ...
 ```
 
@@ -56,6 +57,7 @@ $product = new Product();
 $product->setId('pTU00_test')
 		->setTitle('Testing product title')
 		->setShortdesc('Some short description')
+		->setPackageSize(PackageSize::SMALLBOX)
 		...
 
 $productsService = new Products($mpapiClient);
@@ -68,12 +70,14 @@ $product1 = new Product();
 $product1->setId('pTU00_test')
 		 ->setTitle('Testing product title')
 		 ->setShortdesc('Some short description')
+		 ->setPackageSize(PackageSize::SMALLBOX)
 		...
 
 $product2 = new Product();
 $product2->setId('pTU00_test2')
 		->setTitle('Testing product title 2')
 		->setShortdesc('Short description')
+		->setPackageSize(PackageSize::BIGBOX)
 		...
 
 $productSynchronizer->add($product1)
@@ -88,12 +92,14 @@ $product1 = new Product();
 $product1->setId('pTU00_test')
 		 ->setTitle('Testing product title')
 		 ->setShortdesc('Some short description')
+		 ->setPackageSize(PackageSize::BIGBOX)
 		...
 
 $product2 = new Product();
 $product2->setId('pTU00_test2')
 		->setTitle('Testing product title 2')
 		->setShortdesc('Short description')
+		->setPackageSize(PackageSize::SMALLBOX)
 		...
 
 $requestHash = $productSynchronizer->add($product1)
@@ -118,6 +124,7 @@ $product = new Product();
 $product->setId('pTU00_test')
 		->setTitle('Testing product title')
 		->setShortdesc('Some short description')
+		->setPackageSize(PackageSize::SMALLBOX)
 		...
 
 $productsService = new Products($mpapiClient);
@@ -130,12 +137,14 @@ $product1 = new Product();
 $product1->setId('pTU00_test')
 	->setTitle('Testing product title')
 	->setShortdesc('Some short description')
+	->setPackageSize(PackageSize::SMALLBOX)
 	...
 
 $product2 = new Product();
 $product2->setId('pTU00_test2')
 	->setTitle('Testing product title 2')
 	->setShortdesc('Short description')
+	->setPackageSize(PackageSize::BIGBOX)
 	...
 
 $productSynchronizer->add($product1)
@@ -169,7 +178,8 @@ __dimensions__ (array) - dimensions of the product or variant; if the product ha
 __availability*__ (array) - availability of the product/variant (if the product has variants, use this attribute only in the variant data structure): status* (string) - status of product availability, in_stock* (number) - amount of items available in stock (max. 9999),  
 __recommended__ (array) - ids of recommended products; if the product has variants, use this attribute only in the variant data structure); max. limit of recommended products/variants is 30,  
 __delivery_delay__ (number) - number of days the delivery will be delayed for the product or its variants; value 0 means the item can be delivered the same day; if the product has variants and they have different value, use this attribute in the variant data structure; if the value is the same for all variants, it is enough to use the attribute only in the product data structure. To add an extra delay because of stock-taking or vacation, you can use [supply delay](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/SUPPLY_DELAY.md),  
-__free_delivery__ (boolean) - activate / deactivate free delivery for the whole purchase (package)  
+__free_delivery__ (boolean) - activate / deactivate free delivery for the whole purchase (package)
+___package_size__ (string) - type of package size - there are just two options smallbox and bigbox  
 
 *Those attributes marked with * are required.*
 

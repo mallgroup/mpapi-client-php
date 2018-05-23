@@ -23,11 +23,9 @@
   },
   "authors" : [ {
     "name" : "Jan Blaha",
-    "email" : "jan.blaha@mall.cz",
     "role" : "Developer"
   }, {
     "name" : "Martin Drlik",
-    "email" : "martin.drlik@mall.cz",
     "role" : "Developer"
   }]
 }

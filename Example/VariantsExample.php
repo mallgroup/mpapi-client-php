@@ -1,6 +1,7 @@
 <?php
 use MPAPI\Services\Client;
 use MPAPI\Services\Variants;
+use MPAPI\Entity\PackageSize;
 use MPAPI\Entity\Products\Product;
 use MPAPI\Entity\Products\Variant;
 use MPAPI\Exceptions\ForceTokenException;
@@ -88,6 +89,7 @@ $variant->setInStock(10);
 $variant->setRecommended([]);
 // enable free delivery
 $variant->setFreeDelivery(true);
+$variant->setPackageSize(PackageSize::SMALLBOX);
 
 
 /**
