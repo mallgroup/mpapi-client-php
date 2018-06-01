@@ -1,8 +1,9 @@
 <?php
-use MPAPI\Services\Client;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use MPAPI\Services\Client;
 use MPAPI\Services\Deliveries;
+use MPAPI\Entity\PackageSize;
 use MPAPI\Entity\PartnerDelivery;
 use MPAPI\Entity\GeneralDelivery;
 
@@ -38,6 +39,8 @@ $partnerDelivery1->setWidthMax(4);
 $partnerDelivery1->setWeightMin(5);
 $partnerDelivery1->setWeightMax(6);
 $partnerDelivery1->setPriority(2);
+// setup delivery package size limitation
+$partnerDelivery->setPackageSize(PackageSize::BIGBOX);
 
 // Create entity for the second partner delivery
 $partnerDelivery2 = new PartnerDelivery();
@@ -57,6 +60,8 @@ $partnerDelivery2->setWidthMax(80);
 $partnerDelivery2->setWeightMin(0);
 $partnerDelivery2->setWeightMax(6);
 $partnerDelivery2->setPriority(1);
+// setup delivery package size limitation
+$partnerDelivery->setPackageSize(PackageSize::SMALLBOX);
 
 /**
  * During synchronization (POST, PUT, DELETE)

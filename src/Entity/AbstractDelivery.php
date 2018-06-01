@@ -1,6 +1,8 @@
 <?php
 namespace MPAPI\Entity;
 
+use MPAPI\Exceptions\UnknownPackageSizeException;
+
 /**
  * Delivery entity
  *
@@ -142,10 +144,17 @@ abstract class AbstractDelivery extends AbstractEntity
 	const KEY_DIMENSION_PATTERN = '%s_%s';
 
 	/**
+	 * @var string
+	 */
+	const KEY_PACKAGE_SIZE = 'package_size';
+
+	/**
 	 *
 	 * @var array
 	 */
-	protected $data = [];
+	protected $data = [
+		self::KEY_PACKAGE_SIZE => PackageSize::SMALLBOX
+	];
 
 	/**
 	 *
@@ -596,5 +605,31 @@ abstract class AbstractDelivery extends AbstractEntity
 	public function isChanged()
 	{
 		return !empty($this->changes);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPackageSize()
+	{
+		return $this->data[self::KEY_PACKAGE_SIZE];
+	}
+
+	/**
+	 * @param $packageSize
+	 * @return AbstractDelivery
+	 * @throws UnknownPackageSizeException
+	 */
+	public function setPackageSize($packageSize)
+	{
+		if (!in_array($packageSize, PackageSize::PACKAGES_SIZE_LIST, true)) {
+			throw UnknownPackageSizeException::withPackageSize($packageSize);
+		}
+
+		if ((double) $packageSize !== $this->getPackageSize() || !isset($this->data[self::KEY_PACKAGE_SIZE])) {
+			$this->changes[] = self::KEY_PACKAGE_SIZE;
+			$this->data[self::KEY_PACKAGE_SIZE] = $packageSize;
+		}
+		return $this;
 	}
 }
