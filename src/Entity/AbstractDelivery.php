@@ -616,7 +616,7 @@ abstract class AbstractDelivery extends AbstractEntity
 	}
 
 	/**
-	 * @param $packageSize
+	 * @param string $packageSize
 	 * @return AbstractDelivery
 	 * @throws UnknownPackageSizeException
 	 */
@@ -626,7 +626,7 @@ abstract class AbstractDelivery extends AbstractEntity
 			throw UnknownPackageSizeException::withPackageSize($packageSize);
 		}
 
-		if ((double) $packageSize !== $this->getPackageSize() || !isset($this->data[self::KEY_PACKAGE_SIZE])) {
+		if ($packageSize !== $this->getPackageSize() || !isset($this->data[self::KEY_PACKAGE_SIZE])) {
 			$this->changes[] = self::KEY_PACKAGE_SIZE;
 			$this->data[self::KEY_PACKAGE_SIZE] = $packageSize;
 		}
