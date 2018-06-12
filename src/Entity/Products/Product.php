@@ -38,12 +38,6 @@ class Product extends AbstractArticleEntity
 	 *
 	 * @var string
 	 */
-	const KEY_DELIVERY_SETUP = 'delivery_setup';
-
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_VARIANTS = 'variants';
 
 	/**
@@ -168,34 +162,6 @@ class Product extends AbstractArticleEntity
 	{
 		if (bccomp($value, $this->getVat(), self::PRICE_PRECISION) !== 0) {
 			$this->data[self::KEY_VAT] = $value;
-		}
-		return $this;
-	}
-
-	/**
-	 * Get delivery setup
-	 *
-	 * @return string
-	 */
-	public function getDeliverySetup()
-	{
-		$retval = '';
-		if (isset($this->data[self::KEY_DELIVERY_SETUP])) {
-			$retval = $this->data[self::KEY_DELIVERY_SETUP];
-		}
-		return $retval;
-	}
-
-	/**
-	 * Set delivery setup
-	 *
-	 * @param string $value
-	 * @return Product
-	 */
-	public function setDeliverySetup($value)
-	{
-		if ($value !== $this->getDeliverySetup()) {
-			$this->data[self::KEY_DELIVERY_SETUP] = $value;
 		}
 		return $this;
 	}

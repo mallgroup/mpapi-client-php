@@ -61,7 +61,6 @@ $product->addDimensions(30,90,50,35);
 $product->setStatus(Product::STATUS_ACTIVE);
 $product->setInStock(10);
 $product->addLabel('SALE', '2015-07-19 00:00:00', '2018-11-14 23:59:59');
-$product->setDeliverySetup(null);
 $product->setRecommended([]);
 $product->setBrandId('Samsung');
 $product->setFreeDelivery(true);

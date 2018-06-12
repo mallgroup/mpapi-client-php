@@ -1,5 +1,11 @@
 # Marketplace API client - change log
 
+## 3.0.0
+- delivery settings removed, use deliveries instead of delivery settings
+
+## 2.16.0
+- changed API URL to mallgroup.com
+ 
 ## 2.15.0
 - delivered orders data was extended with 'delivered_at' field (list of basic orders data, order detail)
 
