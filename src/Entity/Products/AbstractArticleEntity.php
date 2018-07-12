@@ -226,6 +226,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * @var array
 	 */
 	protected $data = [
+		self::KEY_PACKAGE_SIZE => PackageSize::SMALLBOX,
 		self::KEY_FREE_DELIVERY => false
 	];
 

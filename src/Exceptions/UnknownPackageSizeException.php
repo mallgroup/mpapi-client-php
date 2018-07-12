@@ -14,7 +14,7 @@ class UnknownPackageSizeException extends \Exception
 	 *
 	 * @var string
 	 */
-	const MSG_UNKNOWN_PACKAGE_SIZE = 'Unknown package size \'%s\'. You can use %s.';
+	const MSG_UNKNOWN_PACKAGE_SIZE = 'Unknown package size \'%s\', allowed are: %s.';
 
 	/**
 	 * @param $size
@@ -22,6 +22,6 @@ class UnknownPackageSizeException extends \Exception
 	 */
 	public static function withPackageSize($size)
 	{
-		return new static(sprintf(self::MSG_UNKNOWN_PACKAGE_SIZE, $size, implode(' or ', PackageSize::PACKAGES_SIZE_LIST)));
+		return new static(sprintf(self::MSG_UNKNOWN_PACKAGE_SIZE, $size, implode(', ', PackageSize::PACKAGES_SIZE_LIST)));
 	}
 }

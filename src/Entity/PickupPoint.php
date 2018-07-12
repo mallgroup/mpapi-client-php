@@ -144,7 +144,9 @@ class PickupPoint
 	 *
 	 * @var array
 	 */
-	private $data;
+	protected $data = [
+		self::KEY_PACKAGE_SIZE => PackageSize::SMALLBOX
+	];
 
 	/**
 	 *
@@ -610,7 +612,11 @@ class PickupPoint
 	 */
 	public function getPackageSize()
 	{
-		return $this->data[self::KEY_PACKAGE_SIZE];
+		$retval = '';
+		if (isset($this->data[self::KEY_PACKAGE_SIZE])) {
+			$retval = $this->data[self::KEY_PACKAGE_SIZE];
+		}
+		return $retval;
 	}
 
 	/**
