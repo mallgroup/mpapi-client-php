@@ -5,6 +5,7 @@ use Monolog\Handler\StreamHandler;
 use MPAPI\Services\Deliveries;
 use MPAPI\Entity\PartnerDelivery;
 use MPAPI\Entity\GeneralDelivery;
+use MPAPI\Entity\PackageSize;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -41,6 +42,8 @@ $partnerDelivery->setWidthMax(4);
 $partnerDelivery->setWeightMin(5);
 $partnerDelivery->setWeightMax(6);
 $partnerDelivery->setPriority(2);
+// setup delivery package size limitation
+$partnerDelivery->setPackageSize(PackageSize::BIGBOX);
 
 // Create new partner delivery
 $response = $deliveries->partner()->post($partnerDelivery);

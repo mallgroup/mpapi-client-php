@@ -69,7 +69,8 @@ The response contains an array of detail data:
       "min" => 0,
       "max" => 20
      ],
-     "priority" => 1
+     "priority" => 1,
+     "package_size" => "smallbox"
 ]
 ```
 
@@ -77,12 +78,17 @@ The response contains an array of detail data:
 **POST**  
 Use post method to create new partner delivery.
 ```
+<?php 
+...
+use MPAPI\Entity\PackageSize;
+use MPAPI\Entity\PartnerDelivery;
 ...
 // create one delivery
 $delivery = new PartnerDelivery();
-$delivery->setCode('newDelivery1');
-         ->setTitle('New delivery 1');
-         ->setPrice(90);
+$delivery->setCode('newDelivery1')
+         ->setTitle('New delivery 1')
+         ->setPrice(90)
+         ->setPackageSize(PackageSize::BIGBOX)
          ...
 
 $deliveries = new Deliveries($mpapiClient);  
@@ -92,15 +98,17 @@ $response = $deliveries->partner()->post($delivery);
 ```
 // create more deliveries
 $delivery1 = new PartnerDelivery();
-$delivery1->setCode('newDelivery1');
-          ->setTitle('New delivery 1');
-          ->setPrice(90);
+$delivery1->setCode('newDelivery1')
+          ->setTitle('New delivery 1')
+          ->setPrice(90)
+          ->setPackageSize(PackageSize::BIGBOX)
           ...
 
 $delivery2 = new PartnerDelivery();
-$delivery2->setCode('newDelivery2');
-          ->setTitle('New delivery 2');
-          ->setPrice(29);
+$delivery2->setCode('newDelivery2')
+          ->setTitle('New delivery 2')
+          ->setPrice(29)
+          ->setPackageSize(PackageSize::SMALLBOX)
           ...
 
 $deliveries->add($delivery1)
@@ -116,9 +124,10 @@ To update deliveries, send put request for one or more deliveries:
 ...
 // to update one delivery
 $delivery = new PartnerDelivery();
-$delivery->setCode('newUpdatedDelivery1');
-         ->setTitle('New updated delivery 1');
-         ->setPrice(80);
+$delivery->setCode('newUpdatedDelivery1')
+         ->setTitle('New updated delivery 1')
+         ->setPrice(80)
+         ->setPackageSize(PackageSize::SMALLBOX)
          ...
 
 $deliveries = new Deliveries($mpapiClient);  
@@ -128,15 +137,17 @@ $response = $deliveries->partner()->put($delivery);
 ```
 // update more deliveries
 $delivery1 = new PartnerDelivery();
-$delivery1->setCode('newUpdatedDelivery1');
-          ->setTitle('New updated delivery 1');
-          ->setPrice(80);
+$delivery1->setCode('newUpdatedDelivery1')
+          ->setTitle('New updated delivery 1')
+          ->setPrice(80)
+          ->setPackageSize(PackageSize::BIGBOX)
           ...
 
 $delivery2 = new PartnerDelivery();
-$delivery2->setCode('newUpdatedDelivery2');
-          ->setTitle('New updated delivery 2');
-          ->setPrice(0);
+$delivery2->setCode('newUpdatedDelivery2')
+          ->setTitle('New updated delivery 2')
+          ->setPrice(0)
+          ->setPackageSize(PackageSize::BIGBOX)
           ...
 
 $deliveries->add($delivery1)

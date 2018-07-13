@@ -1,5 +1,6 @@
 <?php
 namespace MPAPI\Entity;
+use MPAPI\Exceptions\UnknownPackageSizeException;
 
 /**
  * Pickup point entity
@@ -135,10 +136,17 @@ class PickupPoint
 	const KEY_WEIGHT = 'weight';
 
 	/**
+	 * @var string
+	 */
+	const KEY_PACKAGE_SIZE = 'package_size';
+
+	/**
 	 *
 	 * @var array
 	 */
-	private $data;
+	protected $data = [
+		self::KEY_PACKAGE_SIZE => PackageSize::SMALLBOX
+	];
 
 	/**
 	 *
@@ -175,7 +183,8 @@ class PickupPoint
 				self::KEY_WIDTH => $this->getWidthLimit(),
 				self::KEY_WEIGHT => $this->getWeightLimit()
 			],
-			self::KEY_PRIORITY => $this->getPriority()
+			self::KEY_PRIORITY => $this->getPriority(),
+			self::KEY_PACKAGE_SIZE => $this->getPackageSize()
 		];
 		return $retval;
 	}
@@ -595,6 +604,32 @@ class PickupPoint
 	public function setCode($code)
 	{
 		$this->data[self::KEY_CODE] = $code;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPackageSize()
+	{
+		$retval = '';
+		if (isset($this->data[self::KEY_PACKAGE_SIZE])) {
+			$retval = $this->data[self::KEY_PACKAGE_SIZE];
+		}
+		return $retval;
+	}
+
+	/**
+	 * @param $packageSize
+	 * @return $this
+	 * @throws UnknownPackageSizeException
+	 */
+	public function setPackageSize($packageSize)
+	{
+		if (!in_array($packageSize, PackageSize::PACKAGES_SIZE_LIST)) {
+			throw UnknownPackageSizeException::withPackageSize($packageSize);
+		}
+		$this->data[self::KEY_PACKAGE_SIZE] = $packageSize;
 		return $this;
 	}
 }

@@ -1,6 +1,7 @@
 <?php
 use MPAPI\Services\Client;
 use MPAPI\Services\Deliveries;
+use MPAPI\Entity\PackageSize;
 use MPAPI\Entity\PickupPoint;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -54,7 +55,8 @@ $pickupPointEntity->setTitle('First pickup point')
 			"hour_to" => "16:00"
 		]
 	])
-	->setPaymentMethods(["Visa", "MasterCard"]);
+	->setPaymentMethods(["Visa", "MasterCard"])
+	->setPackageSize(PackageSize::BIGBOX);
 $createdPickupPoint = $deliveries->partner()->pickupPoints($deliveryCode)->create($pickupPointEntity);
 var_dump($createdPickupPoint);
 

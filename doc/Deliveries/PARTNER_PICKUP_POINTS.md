@@ -5,6 +5,8 @@
 ```
 <?php 
 ...
+use MPAPI\Entity\PackageSize;
+use MPAPI\Entity\PickupPoint;
 use MPAPI\Services\Deliveries;
 ... 
 
@@ -25,6 +27,7 @@ This method creates partner's pickup point.
 $pickupPointEntity->setTitle('First pickup point')
 	              ->setCode('fpp')
 	              ->setDistrictCode('PR')
+	              ->setPackageSize(PackageSize::BIGBOX)
 	              ...
 
 // create pickup point  
@@ -75,6 +78,7 @@ __note__ (string, max. 500 chars) - additional information,
 __priority__ (number, max. 3 lenght) - priority of pickup point,  
 __opening_hours*__ (array) - opening hours,  
 __payment_methods*__ (array) - available payment methods  
+__package_size__ (string) - size limit of the package that a branch can accept - there are just two options "smallbox" or "bigbox"  
 
 *Those attributes marked with * are required.* 
 

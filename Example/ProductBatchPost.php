@@ -1,6 +1,7 @@
 <?php
 use MPAPI\Services\Client;
 use MPAPI\Services\Products;
+use MPAPI\Entity\PackageSize;
 use MPAPI\Entity\Products\Product;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -50,7 +51,8 @@ $product1->setId('pTU00_test')
 	->addParameter('MP_COLOR', 'blue')
 	->addDimensions(30,90,50,35)
 	->setStatus(Product::STATUS_ACTIVE)
-	->setInStock(10);
+	->setInStock(10)
+	->setPackageSize(PackageSize::SMALLBOX);
 
 // create entity for the second product
 $product2 = new Product();
@@ -80,7 +82,8 @@ $product2->setId('pTU00_test2')
 	->addParameter('MP_COLOR', 'red')
 	->setWeight(30)
 	->setStatus(Product::STATUS_ACTIVE)
-	->setInStock(15);
+	->setInStock(15)
+	->setPackageSize(PackageSize::BIGBOX);
 
 /**
  * During synchronization (POST, PUT, DELETE)

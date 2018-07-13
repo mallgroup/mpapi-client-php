@@ -6,6 +6,7 @@ use MPAPI\Entity\Products\Variant;
 use MPAPI\Exceptions\ForceTokenException;
 use MPAPI\Services\Client;
 use MPAPI\Services\Products;
+use MPAPI\Entity\PackageSize;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -64,6 +65,8 @@ $product->addLabel('SALE', '2015-07-19 00:00:00', '2018-11-14 23:59:59');
 $product->setRecommended([]);
 $product->setBrandId('Samsung');
 $product->setFreeDelivery(true);
+// set package size
+$product->setPackageSize(PackageSize::SMALLBOX);
 
 // add Variants
 $variant = new Variant();
@@ -87,6 +90,7 @@ $variant->addPromotion(1700, '2015-07-19 00:00:00', '2018-11-16 23:59:59');
 $variant->setStatus(Product::STATUS_ACTIVE);
 $variant->setInStock(10);
 $variant->setRecommended([]);
+$variant->setPackageSize(PackageSize::SMALLBOX);
 
 $product->addVariant($variant);
 

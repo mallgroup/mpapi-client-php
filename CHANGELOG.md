@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.1.0
+- added package size definition for product, variant, deliveries and pickup point, see [product documentation](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/PRODUCTS.md)
+
 ## 3.0.0
 - delivery settings removed, use deliveries instead of delivery settings
 
