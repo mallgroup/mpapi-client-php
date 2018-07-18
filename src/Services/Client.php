@@ -440,7 +440,7 @@ class Client
 	 */
 	private function getHttpClient()
 	{
-		if (!$this->httpClient instanceof Client) {
+		if (!$this->httpClient instanceof HttpClient) {
 			$config = $this->getConfig($this->getEnvironment());
 			/* @var GuzzleHttp\Client */
 			$this->httpClient = new HttpClient([
