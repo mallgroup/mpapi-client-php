@@ -711,6 +711,18 @@ abstract class AbstractArticleEntity extends AbstractEntity
 		}
 		return $this;
 	}
+	
+	 /**
+	 * Remove parameter
+	 *
+	 * @param $paramId
+	 * @return AbstractArticleEntity
+	 */
+	public function removeParameter($paramId)
+	{
+		unset($this->data[self::KEY_PARAMETERS][$paramId]);
+		return $this;
+	}
 
 	/**
 	 *
