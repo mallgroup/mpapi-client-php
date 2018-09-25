@@ -1,4 +1,5 @@
 <?php
+
 namespace MPAPI\Entity;
 
 use MPAPI\Entity\AbstractEntity;
@@ -603,7 +604,8 @@ class Order extends AbstractEntity
 	/**
 	 * @return string
 	 */
-	public function getTrackingUrl(){
+	public function getTrackingUrl()
+	{
 		$retval = '';
 		if (isset($this->data[self::KEY_TRACKING_URL])) {
 			$retval = $this->data[self::KEY_TRACKING_URL];

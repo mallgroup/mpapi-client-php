@@ -42,7 +42,7 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 	/**
 	 * @var string
 	 */
-	const ENDPOINT_TRACKING= '%s/%s/tracking';
+	const ENDPOINT_TRACKING = '%s/%s/tracking';
 
 	/**
 	 *
@@ -111,7 +111,7 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 		$requestData = [
 			self::TRACKING_URL_KEY => $trackingUrl
 		];
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_TRACKING, self::ENDPOINT_PATH, $orderId), 'PUT',$requestData);
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_TRACKING, self::ENDPOINT_PATH, $orderId), 'PUT', $requestData);
 		return $response->getStatusCode() == 200;
 	}
 }
