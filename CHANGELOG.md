@@ -1,5 +1,7 @@
 # Marketplace API client - change log
 
+## 3.2.0
+- added tracking url to order, changed tracking number endpoint
 ## 3.1.0
 - added package size definition for product, variant, deliveries and pickup point, see [product documentation](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/PRODUCTS.md)
 
