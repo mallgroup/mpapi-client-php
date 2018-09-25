@@ -148,6 +148,11 @@ class OrderTest extends \Codeception\Test\Unit
 		$this->assertNotEmpty($this->object->getTrackingNumber());
 	}
 
+	public function testGetTrackingUrl()
+	{
+		$this->assertEquals(Fixtures::get('orderData')['tracking_url'],$this->object->getTrackingUrl());
+	}
+
 	public function testGetDiscount()
 	{
 		$this->assertEmpty($this->object->getDiscount());

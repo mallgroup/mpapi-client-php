@@ -135,6 +135,16 @@ if (!empty($openOrders)) {
 
 	/**
 	 * ##################################
+	 * Set tracking url
+	 * ##################################
+	 */
+	$responseStatus = $orders->put()->trackingUrl($order->getOrderId(), 'http://example.example');
+	print('Order tracking url: ');
+	var_dump($responseStatus);
+	print(PHP_EOL);
+
+	/**
+	 * ##################################
 	 * Update order status with delivered at datetime
 	 * ##################################
 	 */
