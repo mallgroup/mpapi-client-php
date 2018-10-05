@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.2.0
+- added /transports endpoint, which provides list of available transport services to choose from
+
 ## 3.1.0
 - added package size definition for product, variant, deliveries and pickup point, see [product documentation](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/PRODUCTS.md)
 

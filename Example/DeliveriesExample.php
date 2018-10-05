@@ -20,13 +20,15 @@ if (class_exists('Logger')) {
 
 /* @var Deliveries $deliveries */
 $deliveries = new Deliveries($mpapiClient);
+$availableTransports = $deliveries->transports()->getAvailableTransportsList();
+$ids = array_keys($availableTransports);
 
 // Get partner deliveries
 $response = $deliveries->partner()->get();
 var_dump($response);
 
 $partnerDelivery = new PartnerDelivery();
-$partnerDelivery->setCode('newDelivery1');
+$partnerDelivery->setCode((string) reset($ids));
 $partnerDelivery->setTitle('New delivery 1');
 $partnerDelivery->setPrice(90);
 $partnerDelivery->setCodPrice(21);
