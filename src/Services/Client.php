@@ -287,6 +287,7 @@ class Client
 			if (empty($responseData)) {
 				$responseData = [];
 			}
+			$this->lastResponse->getBody()->rewind();
 			$this->getLogger()->info(sprintf(self::LOGGER_RESPONSE, $method, $path), $responseData);
 		} catch (ClientIdException $e) {
 			$this->getLogger()->error(sprintf(self::LOGGER_RESPONSE, $method, $path), ['message' => $e->getMessage()]);
