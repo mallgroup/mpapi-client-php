@@ -222,6 +222,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	const KEY_PACKAGE_SIZE = 'package_size';
 
 	/**
+	 * @var string
+	 */
+	const KEY_MALLBOX_ALLOWED = 'mallbox_allowed';
+
+	/**
 	 *
 	 * @var array
 	 */
@@ -982,10 +987,12 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	}
 
 	/**
- 	 * Set package size (SMALLBOX or BIGBOX)
- 	 *
-	 * @return string
- 	 */
+	 * Set package size (SMALLBOX or BIGBOX)
+	 *
+	 * @param $size
+	 * @return $this
+	 * @throws UnknownPackageSizeException
+	 */
 	public function setPackageSize($size)
 	{
 		if (!in_array($size, PackageSize::PACKAGES_SIZE_LIST, true)) {
@@ -1031,7 +1038,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	public function hasFreeDelivery()
 	{
 		if (!isset($this->data[self::KEY_FREE_DELIVERY])) {
-			(bool)$this->data[self::KEY_FREE_DELIVERY] = false;
+			$this->data[self::KEY_FREE_DELIVERY] = false;
 		}
 		return (bool)$this->data[self::KEY_FREE_DELIVERY];
 	}
@@ -1040,13 +1047,36 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set free delivery
 	 *
 	 * @param bool $status
-	 * @return AbstractArticleEntity
+	 * @return $this
 	 */
 	public function setFreeDelivery($status)
 	{
 		if ((bool) $status !== $this->hasFreeDelivery()) {
 			$this->data[self::KEY_FREE_DELIVERY] = (bool) $status;
 		}
+		return $this;
+	}
+
+	/**
+	 * Mallbox delivery allowed
+	 *
+	 * @return bool
+	 */
+	public function isMallboxAllowed()
+	{
+		if (isset($this->data[self::KEY_MALLBOX_ALLOWED])) {
+			return $this->data[self::KEY_MALLBOX_ALLOWED];
+		}
+		return false;
+	}
+
+	/**
+	 * @param bool $value
+	 * @return $this
+	 */
+	public function setMallboxAllowed($value)
+	{
+		$this->data[self::KEY_MALLBOX_ALLOWED] = (bool)$value;
 		return $this;
 	}
 }
