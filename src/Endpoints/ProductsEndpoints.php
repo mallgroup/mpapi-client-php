@@ -17,6 +17,11 @@ class ProductsEndpoints
 	const ENDPOINT_PRODUCTS = 'products';
 
 	/**
+	 * @var string
+	 */
+	const ENDPOINT_ACTIVATE = 'activate';
+
+	/**
 	 * @var Client
 	 */
 	private $client;
@@ -93,5 +98,21 @@ class ProductsEndpoints
 	public function putProduct($productId, array $data)
 	{
 		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId, 'PUT', $data);
+	}
+
+	/**
+	 * Activate product
+	 *
+	 * @param $productId
+	 *
+	 * @return Response|null
+	 *
+	 * @throws \MPAPI\Exceptions\ClientIdException
+	 * @throws \MPAPI\Exceptions\ForceTokenException
+	 */
+	public function activateProduct($productId)
+	{
+		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId . "/" . self::ENDPOINT_ACTIVATE, 'POST');
+
 	}
 }

@@ -9,8 +9,10 @@ use MPAPI\Entity\Products\BasicProductIterator;
 use MPAPI\Entity\Products\Product;
 use MPAPI\Entity\AbstractEntity;
 use MPAPI\Exceptions\ApplicationException;
+use MPAPI\Exceptions\ClientIdException;
 use MPAPI\Exceptions\EndpointNotfoundException;
 use MPAPI\Exceptions\EndpointNotContainMethod;
+use MPAPI\Exceptions\ForceTokenException;
 use MPAPI\Lib\DataCollector;
 
 /**
@@ -241,6 +243,31 @@ class Products extends AbstractService
 		}
 
 		return true;
+	}
+
+	/**
+	 * Activate product
+	 *
+	 * @param $productId
+	 *
+	 * @return bool
+	 *
+	 * @throws ApplicationException
+	 * @throws ClientIdException
+	 * @throws ForceTokenException
+	 */
+	public function activate($productId)
+	{
+		$response = $this->productsEndpoints->activateProduct($productId);
+
+		if ($response->getStatusCode() === 200) {
+			return true;
+		}
+
+		$exception = new ApplicationException();
+		$exception->setData(['response' => json_decode($response->getBody())]);
+
+		throw $exception;
 	}
 
 	/**

@@ -283,4 +283,13 @@ class Product extends AbstractArticleEntity
 	{
 		$this->data = $data;
 	}
+
+	public function getStage()
+	{
+		if (isset($this->data[self::KEY_STAGE])) {
+			return $this->data[self::KEY_STAGE];
+		}
+
+		return self::STAGE_DRAFT;
+	}
 }
