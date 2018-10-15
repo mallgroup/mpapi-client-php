@@ -106,6 +106,13 @@ try {
 	var_dump($ex->getMessage());
 }
 
+// activate product
+try {
+	$response = $products->activate($product->getId());
+} catch (\Exception $ex) {
+	var_dump($ex->getMessage());
+}
+
 // Product with big different price
 try {
 	$product->setVariableParameters([]);

@@ -222,6 +222,21 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	const KEY_PACKAGE_SIZE = 'package_size';
 
 	/**
+	 * @var string
+	 */
+	const KEY_STAGE = 'stage';
+
+	/**
+	 * @var string
+	 */
+	const STAGE_DRAFT = 'draft';
+
+	/**
+	 * @var string
+	 */
+	const STAGE_LIVE = 'live';
+
+	/**
 	 *
 	 * @var array
 	 */
