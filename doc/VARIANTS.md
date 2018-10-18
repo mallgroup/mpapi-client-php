@@ -103,7 +103,8 @@ __availability*__ (array) - availability of the variant. Structure:
 
 __recommended__ (array) - ids of recommended products or variants; max. limit of recommended products/variants is 30,  
 __delivery_delay__ (number) - number of days the delivery will be delayed for the variant; value 0 means the item can be delivered the same day; if the value is the same for all variants, it is enough to use the attribute only in the product data structure.  
-__free_delivery__ (boolean) - activate / deactivate free delivery for the whole purchase (package)
+__free_delivery__ (boolean) - activate / deactivate free delivery for the whole purchase (package)  
+__mallboxAllowed__ (bool) - allow usage with MALLBOX deliveries
 
 *Those attributes marked with * are required.* 
 

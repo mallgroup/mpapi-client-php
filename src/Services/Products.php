@@ -222,7 +222,7 @@ class Products extends AbstractService
 		} else {
 			$response = $endpoint->$method($productId, $entity->getData(), $variantId);
 			if ($response->getStatusCode() !== 200) {
-				$errors[$index] = [
+				$errors[] = [
 					'entity' => $entity->getData(),
 					'response' => json_decode($response->getBody(), true)
 				];
@@ -295,7 +295,7 @@ class Products extends AbstractService
 	 * Get endpoint for supply delay
 	 *
 	 * @param string $productId
-	 * @return MPAPI\Endpoints\Products\SupplayDelayEndpoints
+	 * @return SupplyDelayEndpoints
 	 */
 	public function supplyDelay($productId)
 	{

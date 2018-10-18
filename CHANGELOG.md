@@ -1,5 +1,11 @@
 # Marketplace API client - change log
 
+## 3.3.2
+- added `mallboxAllowed` attribute to product and variant
+
+## 3.3.1
+- update version
+
 ## 3.3.0
 - added new product activation method `MPAPI\Services\Products#activate($productId)`
 - added new product property `MPAPI\Entity\Products\Product#getStage()`
