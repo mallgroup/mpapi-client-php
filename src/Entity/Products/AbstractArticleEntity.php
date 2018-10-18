@@ -227,6 +227,21 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	const KEY_MALLBOX_ALLOWED = 'mallbox_allowed';
 
 	/**
+	 * @var string
+	 */
+	const KEY_STAGE = 'stage';
+
+	/**
+	 * @var string
+	 */
+	const STAGE_DRAFT = 'draft';
+
+	/**
+	 * @var string
+	 */
+	const STAGE_LIVE = 'live';
+
+	/**
 	 *
 	 * @var array
 	 */

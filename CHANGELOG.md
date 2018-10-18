@@ -1,5 +1,14 @@
 # Marketplace API client - change log
 
+## 3.3.1
+- added `mallboxAllowed` attribute to product and variant
+
+## 3.3.0
+- added new product activation method `MPAPI\Services\Products#activate($productId)`
+- added new product property `MPAPI\Entity\Products\Product#getStage()`
+
+please refer to [product documentation](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/PRODUCTS.md) for details of usage, and purpose of this change.
+
 ## 3.2.0
 - added /transports endpoint, which provides list of available transport services to choose from
 
