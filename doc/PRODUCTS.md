@@ -194,7 +194,7 @@ __recommended__ (array) - ids of recommended products; if the product has varian
 __delivery_delay__ (number) - number of days the delivery will be delayed for the product or its variants; value 0 means the item can be delivered the same day; if the product has variants and they have different value, use this attribute in the variant data structure; if the value is the same for all variants, it is enough to use the attribute only in the product data structure. To add an extra delay because of stock-taking or vacation, you can use [supply delay](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/SUPPLY_DELAY.md),  
 __free_delivery__ (boolean) - activate / deactivate free delivery for the whole purchase (package)
 __package_size__ (string) - type of package size - there are just two options "smallbox" or "bigbox"
-__stage__ (string, readonly) - integration stage of product. Product has two stages `draft` and `live`. 
+__stage__ (string, readonly) - integration stage of product. Product has two stages `draft` and `live`.  
 __mallboxAllowed__ (bool) - allow usage with MALLBOX deliveries  
 
 *Those attributes marked with * are required.*

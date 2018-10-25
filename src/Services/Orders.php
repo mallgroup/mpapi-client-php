@@ -3,6 +3,7 @@ namespace MPAPI\Services;
 
 use MPAPI\Endpoints\OrdersEndpoints;
 use MPAPI\Endpoints\OrderUpdateEndpoints;
+use MPAPI\Entity\Paging;
 
 /**
  * Orders service
@@ -46,4 +47,13 @@ class Orders extends AbstractService
 	{
 		return new OrderUpdateEndpoints($this->client);
 	}
+
+	/**
+	 * @return Paging
+	 */
+	public function getPaging()
+	{
+		return $this->client->getPaging();
+	}
+
 }

@@ -12,16 +12,9 @@ use phpDocumentor\Reflection\Types\Boolean;
 class DataCollector
 {
 	/**
-	 *
-	 * @var boolean
+	 * @var int
 	 */
-	private $isSeekable;
-
-	/**
-	 *
-	 * @var integer
-	 */
-	private $currentPage = 1;
+	const START_NEXT_PAGE = 2;
 
 	/**
 	 *
@@ -80,8 +73,8 @@ class DataCollector
 		// process response body
 		$this->processResponse($this->response);
 		// load next request data
-		while ($this->isSeekable === true) {
-			$this->nextPage();
+		for ($page = self::START_NEXT_PAGE; $page <= $this->pages; $page++) {
+			$this->nextPage($page);
 		}
 		return true;
 	}
@@ -110,7 +103,6 @@ class DataCollector
 		$body = json_decode($response->getBody(), true);
 		if (isset($body['paging'])) {
 			$this->pages = (int)$body['paging']['pages'];
-			$this->isSeekable =  $this->pages > 1;
 		}
 
 		if (isset($body['data']) && !empty($body['data'])) {
@@ -128,15 +120,13 @@ class DataCollector
 	/**
 	 * Load next page
 	 *
+	 * @var int $page
 	 * @return boolean
 	 */
-	private function nextPage()
+	private function nextPage($page)
 	{
-		$this->currentPage++;
-		if ($this->currentPage > $this->pages) {
-			$this->isSeekable = false;
-		} else {
-			$this->processResponse($this->client->repeatLastRequest(['page' => $this->currentPage]));
+		if ($page <= $this->pages) {
+			$this->processResponse($this->client->repeatLastRequest(['page' => $page]));
 		}
 		return true;
 	}
