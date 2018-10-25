@@ -2,6 +2,7 @@
 namespace MPAPI\Endpoints;
 
 use GuzzleHttp\Psr7\Response;
+use MPAPI\Entity\Paging;
 use MPAPI\Services\Client;
 
 /**
@@ -49,6 +50,23 @@ class ProductsEndpoints
 	public function getProducts()
 	{
 		$args = [];
+		if (!empty($this->filter)) {
+			$args[self::PARAMETER_FILTER] = $this->filter;
+		}
+		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS, 'GET', $args);
+	}
+
+	/**
+	 * @param int $page
+	 * @param int $size
+	 * @return Response
+	 */
+	public function getPaginated($page = 1, $size = 100)
+	{
+		$args = [
+			'page' => (int)$page,
+			'page_size' => (int)$size
+		];
 		if (!empty($this->filter)) {
 			$args[self::PARAMETER_FILTER] = $this->filter;
 		}
@@ -114,5 +132,13 @@ class ProductsEndpoints
 	{
 		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId . "/" . self::ENDPOINT_ACTIVATE, 'POST');
 
+	}
+
+	/**
+	 * @return Paging
+	 */
+	public function getPaging()
+	{
+		return $this->client->getPaging();
 	}
 }

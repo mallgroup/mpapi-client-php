@@ -201,6 +201,22 @@ class OrdersEndpoints extends AbstractEndpoints
 		return $retval;
 	}
 
+	/**
+	 * @param int $page
+	 * @param int $size
+	 */
+	public function getAllPaginated($page = 1, $size = 100)
+	{
+		$args = [
+			'page' => (int)$page,
+			'page_size' => (int)$size
+		];
+		$response = $this->client->sendRequest(self::ENDPOINT_PATH, 'GET', [], $args);
+
+		$orders = json_decode($response->getBody(), true);
+		$retval = !empty($orders) && isset($orders['data']['ids']) ? $orders['data']['ids'] : $orders['data'];
+		return $retval;
+	}
 
 	/**
 	 * Get order detail

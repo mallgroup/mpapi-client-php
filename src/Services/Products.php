@@ -5,6 +5,7 @@ use GuzzleHttp\Psr7\Response;
 use MPAPI\Endpoints\ProductsEndpoints;
 use MPAPI\Endpoints\VariantsEndpoints;
 use MPAPI\Endpoints\Products\SupplyDelayEndpoints;
+use MPAPI\Entity\Paging;
 use MPAPI\Entity\Products\BasicProductIterator;
 use MPAPI\Entity\Products\Product;
 use MPAPI\Entity\AbstractEntity;
@@ -84,6 +85,27 @@ class Products extends AbstractService
 			if (isset($responseData['data'])) {
 				$retval = new Product($responseData['data']);
 			}
+		}
+
+		return $retval;
+	}
+
+	/**
+	 * @param int $page
+	 * @param int $size
+	 * @return BasicProductIterator|array
+	 */
+	public function getPaginated($page = 1, $size = 100)
+	{
+		$response = $this->productsEndpoints->getPaginated($page, $size);
+		$responseData = json_decode($response->getBody(), true);
+
+		switch ($this->getFilter()) {
+			case self::FILTER_TYPE_BASIC:
+				$retval = new BasicProductIterator($responseData['data']);
+				break;
+			default:
+				$retval = $responseData['data']['ids'];
 		}
 
 		return $retval;
@@ -310,6 +332,14 @@ class Products extends AbstractService
 	public function getRequestHash()
 	{
 		return $this->requestHash;
+	}
+
+	/**
+	 * @return Paging
+	 */
+	public function getPaging()
+	{
+		return $this->productsEndpoints->getPaging();
 	}
 
 	/**
