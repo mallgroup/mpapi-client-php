@@ -119,6 +119,15 @@ class BasicProduct extends AbstractArticleEntity
 		return (int) $retval;
 	}
 
+	public function getStage()
+	{
+		if (isset($this->data[self::KEY_STAGE])) {
+			return $this->data[self::KEY_STAGE];
+		}
+
+		return self::STAGE_DRAFT;
+	}
+
 	/**
 	 * @see \MPAPI\Entity\AbstractEntity::getData()
 	 */
@@ -132,7 +141,8 @@ class BasicProduct extends AbstractArticleEntity
 			self::KEY_HAS_VARIANTS => $this->hasVariants(),
 			self::KEY_VARIANTS_COUNT => $this->getVariantsCount(),
 			self::KEY_STATUS => $this->getStatus(),
-			self::KEY_IN_STOCK => $this->getInStock()
+			self::KEY_IN_STOCK => $this->getInStock(),
+			self::KEY_STAGE => $this->getStage(),
 		];
 	}
 
@@ -147,4 +157,6 @@ class BasicProduct extends AbstractArticleEntity
 		$this->data = $data;
 		return $this;
 	}
+
+
 }

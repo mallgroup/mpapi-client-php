@@ -1,7 +1,26 @@
 # Marketplace API client - change log
 
-## 3.2.0
+## 3.5.0
 - added tracking url to order, changed tracking number endpoint
+
+## 3.4.0
+- option to turn off data collector
+
+## 3.3.2
+- added `mallboxAllowed` attribute to product and variant
+
+## 3.3.1
+- update version
+
+## 3.3.0
+- added new product activation method `MPAPI\Services\Products#activate($productId)`
+- added new product property `MPAPI\Entity\Products\Product#getStage()`
+
+please refer to [product documentation](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/PRODUCTS.md) for details of usage, and purpose of this change.
+
+## 3.2.0
+- added /transports endpoint, which provides list of available transport services to choose from
+
 ## 3.1.0
 - added package size definition for product, variant, deliveries and pickup point, see [product documentation](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/PRODUCTS.md)
 

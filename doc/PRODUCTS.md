@@ -153,6 +153,20 @@ $productSynchronizer->add($product1)
 					->post();
 ```
 
+**Activation**
+
+- Product __must__ be activated to be visible for all visitors of market place. 
+- Default stage of product after uploading to market place is `draft`.
+- Partner can activate product ( and all of it's associated variants ) with invoking `#activate($productId)` method. Invoking this method will switch product stage to `live`, this action is irreversible. Product in `live` stage can't be switched back to `draft`.
+- Partner can invoke this method only if has allowed this action by onboarding team. Invoking this method wihtout permission to do so will not change product stage.
+
+```
+...
+$productService = new Products($mpapiClient);
+
+$productService->activate('pTU00_test');
+``` 
+
 List of attributes:
 
 __id*__ (string, max. 20 chars) - id of product,  
@@ -179,7 +193,9 @@ __availability*__ (array) - availability of the product/variant (if the product 
 __recommended__ (array) - ids of recommended products; if the product has variants, use this attribute only in the variant data structure); max. limit of recommended products/variants is 30,  
 __delivery_delay__ (number) - number of days the delivery will be delayed for the product or its variants; value 0 means the item can be delivered the same day; if the product has variants and they have different value, use this attribute in the variant data structure; if the value is the same for all variants, it is enough to use the attribute only in the product data structure. To add an extra delay because of stock-taking or vacation, you can use [supply delay](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/SUPPLY_DELAY.md),  
 __free_delivery__ (boolean) - activate / deactivate free delivery for the whole purchase (package)
-___package_size__ (string) - type of package size - there are just two options "smallbox" or "bigbox"  
+__package_size__ (string) - type of package size - there are just two options "smallbox" or "bigbox"
+__stage__ (string, readonly) - integration stage of product. Product has two stages `draft` and `live`.  
+__mallboxAllowed__ (bool) - allow usage with MALLBOX deliveries  
 
 *Those attributes marked with * are required.*
 

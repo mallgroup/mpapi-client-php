@@ -2,6 +2,7 @@
 namespace MPAPI\Endpoints;
 
 use GuzzleHttp\Psr7\Response;
+use MPAPI\Entity\Paging;
 use MPAPI\Services\Client;
 
 /**
@@ -15,6 +16,11 @@ class ProductsEndpoints
 	 * @var string
 	 */
 	const ENDPOINT_PRODUCTS = 'products';
+
+	/**
+	 * @var string
+	 */
+	const ENDPOINT_ACTIVATE = 'activate';
 
 	/**
 	 * @var Client
@@ -44,6 +50,23 @@ class ProductsEndpoints
 	public function getProducts()
 	{
 		$args = [];
+		if (!empty($this->filter)) {
+			$args[self::PARAMETER_FILTER] = $this->filter;
+		}
+		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS, 'GET', $args);
+	}
+
+	/**
+	 * @param int $page
+	 * @param int $size
+	 * @return Response
+	 */
+	public function getPaginated($page = 1, $size = 100)
+	{
+		$args = [
+			'page' => (int)$page,
+			'page_size' => (int)$size
+		];
 		if (!empty($this->filter)) {
 			$args[self::PARAMETER_FILTER] = $this->filter;
 		}
@@ -93,5 +116,29 @@ class ProductsEndpoints
 	public function putProduct($productId, array $data)
 	{
 		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId, 'PUT', $data);
+	}
+
+	/**
+	 * Activate product
+	 *
+	 * @param $productId
+	 *
+	 * @return Response|null
+	 *
+	 * @throws \MPAPI\Exceptions\ClientIdException
+	 * @throws \MPAPI\Exceptions\ForceTokenException
+	 */
+	public function activateProduct($productId)
+	{
+		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId . "/" . self::ENDPOINT_ACTIVATE, 'POST');
+
+	}
+
+	/**
+	 * @return Paging
+	 */
+	public function getPaging()
+	{
+		return $this->client->getPaging();
 	}
 }

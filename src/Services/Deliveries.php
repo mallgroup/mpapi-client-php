@@ -1,6 +1,7 @@
 <?php
 namespace MPAPI\Services;
 
+use MPAPI\Endpoints\TransportsEndpoints;
 use MPAPI\Entity\AbstractEntity;
 use MPAPI\Endpoints\Deliveries\DistrictsEndpoints;
 use MPAPI\Endpoints\Deliveries\GeneralEndpoints;
@@ -87,6 +88,14 @@ class Deliveries extends AbstractService
 	public function districts()
 	{
 		return new DistrictsEndpoints($this->client, $this);
+	}
+
+	/**
+	 * @return TransportsEndpoints
+	 */
+	public function transports()
+	{
+		return new TransportsEndpoints($this->client);
 	}
 
 	/**

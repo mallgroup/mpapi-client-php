@@ -5,6 +5,7 @@ use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
+use MPAPI\Entity\Paging;
 use MPAPI\Exceptions\ApplicationException;
 use MPAPI\Exceptions\ClientIdException;
 use MPAPI\Exceptions\ForceTokenException;
@@ -37,7 +38,7 @@ class Client
 	 *
 	 * @var string
 	 */
-	const APPLICATION_NAME = 'mpapic-v3.1.0';
+	const APPLICATION_NAME = 'mpapic-v3.5.0';
 
 	/**
 	 *
@@ -156,6 +157,11 @@ class Client
 	 * @var bool
 	 */
 	private $autoDataCollecting = true;
+
+	/**
+	 * @var Paging
+	 */
+	private $paging;
 
 	/**
 	 *
@@ -287,6 +293,13 @@ class Client
 			if (empty($responseData)) {
 				$responseData = [];
 			}
+
+			if (isset($responseData['paging']['total'])) {
+				unset($this->paging);
+				$this->paging = Paging::fromResponse($this->lastResponse);
+			}
+
+			$this->lastResponse->getBody()->rewind();
 			$this->getLogger()->info(sprintf(self::LOGGER_RESPONSE, $method, $path), $responseData);
 		} catch (ClientIdException $e) {
 			$this->getLogger()->error(sprintf(self::LOGGER_RESPONSE, $method, $path), ['message' => $e->getMessage()]);
@@ -408,6 +421,17 @@ class Client
 			unset($this->arguments[$name]);
 		}
 		return $this;
+	}
+
+	/**
+	 * @return Paging
+	 */
+	public function getPaging()
+	{
+		if (!$this->paging instanceof Paging) {
+			$this->paging = new Paging();
+		}
+		return $this->paging;
 	}
 
 	/**

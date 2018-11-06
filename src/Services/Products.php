@@ -5,12 +5,15 @@ use GuzzleHttp\Psr7\Response;
 use MPAPI\Endpoints\ProductsEndpoints;
 use MPAPI\Endpoints\VariantsEndpoints;
 use MPAPI\Endpoints\Products\SupplyDelayEndpoints;
+use MPAPI\Entity\Paging;
 use MPAPI\Entity\Products\BasicProductIterator;
 use MPAPI\Entity\Products\Product;
 use MPAPI\Entity\AbstractEntity;
 use MPAPI\Exceptions\ApplicationException;
+use MPAPI\Exceptions\ClientIdException;
 use MPAPI\Exceptions\EndpointNotfoundException;
 use MPAPI\Exceptions\EndpointNotContainMethod;
+use MPAPI\Exceptions\ForceTokenException;
 use MPAPI\Lib\DataCollector;
 
 /**
@@ -82,6 +85,27 @@ class Products extends AbstractService
 			if (isset($responseData['data'])) {
 				$retval = new Product($responseData['data']);
 			}
+		}
+
+		return $retval;
+	}
+
+	/**
+	 * @param int $page
+	 * @param int $size
+	 * @return BasicProductIterator|array
+	 */
+	public function getPaginated($page = 1, $size = 100)
+	{
+		$response = $this->productsEndpoints->getPaginated($page, $size);
+		$responseData = json_decode($response->getBody(), true);
+
+		switch ($this->getFilter()) {
+			case self::FILTER_TYPE_BASIC:
+				$retval = new BasicProductIterator($responseData['data']);
+				break;
+			default:
+				$retval = $responseData['data']['ids'];
 		}
 
 		return $retval;
@@ -220,7 +244,7 @@ class Products extends AbstractService
 		} else {
 			$response = $endpoint->$method($productId, $entity->getData(), $variantId);
 			if ($response->getStatusCode() !== 200) {
-				$errors[$index] = [
+				$errors[] = [
 					'entity' => $entity->getData(),
 					'response' => json_decode($response->getBody(), true)
 				];
@@ -241,6 +265,31 @@ class Products extends AbstractService
 		}
 
 		return true;
+	}
+
+	/**
+	 * Activate product
+	 *
+	 * @param $productId
+	 *
+	 * @return bool
+	 *
+	 * @throws ApplicationException
+	 * @throws ClientIdException
+	 * @throws ForceTokenException
+	 */
+	public function activate($productId)
+	{
+		$response = $this->productsEndpoints->activateProduct($productId);
+
+		if ($response->getStatusCode() === 200) {
+			return true;
+		}
+
+		$exception = new ApplicationException();
+		$exception->setData(['response' => json_decode($response->getBody())]);
+
+		throw $exception;
 	}
 
 	/**
@@ -268,7 +317,7 @@ class Products extends AbstractService
 	 * Get endpoint for supply delay
 	 *
 	 * @param string $productId
-	 * @return MPAPI\Endpoints\Products\SupplayDelayEndpoints
+	 * @return SupplyDelayEndpoints
 	 */
 	public function supplyDelay($productId)
 	{
@@ -283,6 +332,14 @@ class Products extends AbstractService
 	public function getRequestHash()
 	{
 		return $this->requestHash;
+	}
+
+	/**
+	 * @return Paging
+	 */
+	public function getPaging()
+	{
+		return $this->productsEndpoints->getPaging();
 	}
 
 	/**
