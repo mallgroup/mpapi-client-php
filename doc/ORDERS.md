@@ -116,6 +116,7 @@ The response contains order details:
     "delivery_method" => "pplCz",  
     "delivery_method_id" => "21",  
     "tracking_number": "T9999999999",  
+    "tracking_url": "http://tracking.tracking/tracking?test=1",  
     "ship_date" => "2015-10-05",  
     "delivered_at": "2018-02-14 08:13:00",  
     "cod" => 409,  
@@ -174,6 +175,12 @@ You will set the tracking number of the order with its order ID as the first and
 ```
 ...  
 $responseStatus = $orders->put()->trackingNumber($order->getOrderId(), 'T9999999999');  
+...  
+```
+In a similar way we can set the tracking url:
+```
+...  
+$responseStatus = $orders->put()->trackingUrl($order->getOrderId(), 'http://mytrackingurl');  
 ...  
 ```
 

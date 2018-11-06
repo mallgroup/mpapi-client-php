@@ -24,10 +24,25 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 	const DATETIME_FORMAT = 'Y-m-d H:i:s';
 
 	/**
+	 * @var string
+	 */
+	const TRACKING_URL_KEY = 'tracking_url';
+
+	/**
+	 * @var string
+	 */
+	const TRACKING_NUMBER_KEY = 'tracking_number';
+
+	/**
 	 *
 	 * @var string
 	 */
 	const ENDPOINT_TRACKING_NUMBER = '%s/%s/tracking-number/%s';
+
+	/**
+	 * @var string
+	 */
+	const ENDPOINT_TRACKING = '%s/%s/tracking';
 
 	/**
 	 *
@@ -70,10 +85,33 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 	 * @param integer $orderId
 	 * @param string $trackingNumber
 	 * @return boolean
+	 * @throws \MPAPI\Exceptions\ClientIdException
+	 * @throws \MPAPI\Exceptions\ForceTokenException
 	 */
 	public function trackingNumber($orderId, $trackingNumber)
 	{
-		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_TRACKING_NUMBER, self::ENDPOINT_PATH, $orderId, $trackingNumber), 'PUT');
+		$requestData = [
+			self::TRACKING_NUMBER_KEY => $trackingNumber
+		];
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_TRACKING, self::ENDPOINT_PATH, $orderId), 'PUT', $requestData);
+		return $response->getStatusCode() == 200;
+	}
+
+	/**
+	 * Update order tracking url
+	 *
+	 * @param $orderId
+	 * @param $trackingUrl
+	 * @return bool
+	 * @throws \MPAPI\Exceptions\ClientIdException
+	 * @throws \MPAPI\Exceptions\ForceTokenException
+	 */
+	public function trackingUrl($orderId, $trackingUrl)
+	{
+		$requestData = [
+			self::TRACKING_URL_KEY => $trackingUrl
+		];
+		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_TRACKING, self::ENDPOINT_PATH, $orderId), 'PUT', $requestData);
 		return $response->getStatusCode() == 200;
 	}
 }

@@ -1,5 +1,11 @@
 # Marketplace API client - change log
 
+## 3.5.0
+- added tracking url to order, changed tracking number endpoint
+
+## 3.4.0
+- option to turn off data collector
+
 ## 3.3.2
 - added `mallboxAllowed` attribute to product and variant
 

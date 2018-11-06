@@ -200,6 +200,7 @@ $orderData = [
 	'delivery_method' => 'partner_delivery_id',
 	'delivery_method_id' => 1111,
 	'tracking_number' => 'T9999999999',
+	'tracking_url' => 'http://test.test',
 	'ship_date' => '2016-03-16',
 	'delivery_date' => '2016-03-16',
 	'delivered_at' => '2018-02-14 08:03:00',

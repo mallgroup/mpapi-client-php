@@ -129,7 +129,17 @@ if (!empty($openOrders)) {
 	 * ##################################
 	 */
 	$responseStatus = $orders->put()->trackingNumber($order->getOrderId(), 'T9999999999');
-	print('Order tracking number: ');
+	print('Order tracking number status: ');
+	var_dump($responseStatus);
+	print(PHP_EOL);
+
+	/**
+	 * ##################################
+	 * Set tracking url
+	 * ##################################
+	 */
+	$responseStatus = $orders->put()->trackingUrl($order->getOrderId(), 'http://example.example');
+	print('Order tracking url status: ');
 	var_dump($responseStatus);
 	print(PHP_EOL);
 

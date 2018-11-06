@@ -1,4 +1,5 @@
 <?php
+
 namespace MPAPI\Entity;
 
 use MPAPI\Entity\AbstractEntity;
@@ -171,6 +172,12 @@ class Order extends AbstractEntity
 	 *
 	 * @var string
 	 */
+	const KEY_TRACKING_URL = 'tracking_url';
+
+	/**
+	 *
+	 * @var string
+	 */
 	const KEY_EXTERNAL_ORDER_ID = 'external_order_id';
 
 	/**
@@ -324,6 +331,7 @@ class Order extends AbstractEntity
 			'delivery_method' => $this->getDeliveryMethod(),
 			'delivery_method_id' => (int)$this->getDeliveryMethodId(),
 			'tracking_number' => $this->getTrackingNumber(),
+			'tracking_url' => $this->getTrackingUrl(),
 			'ship_date' => $this->getDeliveryDate(),
 			'delivery_date' => $this->getDeliveryDate(),
 			'delivered_at' => $this->getDeliveredAt(),
@@ -589,6 +597,18 @@ class Order extends AbstractEntity
 		$retval = '';
 		if (isset($this->data[self::KEY_TRACKING_NO])) {
 			$retval = $this->data[self::KEY_TRACKING_NO];
+		}
+		return $retval;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTrackingUrl()
+	{
+		$retval = '';
+		if (isset($this->data[self::KEY_TRACKING_URL])) {
+			$retval = $this->data[self::KEY_TRACKING_URL];
 		}
 		return $retval;
 	}
