@@ -38,7 +38,7 @@ class Client
 	 *
 	 * @var string
 	 */
-	const APPLICATION_NAME = 'mpapic-v3.5.0';
+	const APPLICATION_NAME = 'mpapic-v3.5.1';
 
 	/**
 	 *
@@ -164,6 +164,11 @@ class Client
 	private $paging;
 
 	/**
+	 * @var string
+	 */
+	private $applicationTag;
+
+	/**
 	 *
 	 * @param string $clientId
 	 * @param boolean $useErrorHandler
@@ -283,7 +288,8 @@ class Client
 			/* @var Response $response */
 			$this->lastResponse = $this->getHttpClient()->request($method, $path, [
 				'headers' => [
-					'X-Application-Name' => self::APPLICATION_NAME
+					'X-Application-Name' => self::APPLICATION_NAME,
+					'X-Application-Tag' => $this->applicationTag
 				],
 				'json' => $body,
 				'query' => $query
@@ -432,6 +438,16 @@ class Client
 			$this->paging = new Paging();
 		}
 		return $this->paging;
+	}
+
+	/**
+	 * @param string $tag
+	 * @return Client
+	 */
+	public function setApplicationTag(string $tag)
+	{
+		$this->applicationTag = $tag;
+		return $this;
 	}
 
 	/**

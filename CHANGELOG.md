@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.5.1
+- added option to set application tag
+
 ## 3.5.0
 - added tracking url to order, changed tracking number endpoint
 
