@@ -33,6 +33,14 @@ $product = [
 	'delivery_delay' => 2
 ];
 
+$deliveryError = [
+	'code' => 'TEST_CODE',
+	'msg' => 'Test msg',
+	'value' => 'testValue',
+	'attribute' => 'testAttribute',
+	'articles' => [3, 7, 4]
+];
+
 $media = [
 	[
 		'url' => 'https://i.cdn.nrholding.net/15880228',
@@ -65,6 +73,7 @@ Codeception\Util\Fixtures::add('status', $product['availability']['status']);
 Codeception\Util\Fixtures::add('media', $media);
 Codeception\Util\Fixtures::add('ordinaryMedia', $ordinaryMedia);
 Codeception\Util\Fixtures::add('mainMedia', $mainMedia);
+Codeception\Util\Fixtures::add('deliveryError', $deliveryError);
 
 $variants = [
 	[
@@ -142,35 +151,35 @@ Codeception\Util\Fixtures::add('product', $product);
 Codeception\Util\Fixtures::add('variantData', $variants[0]);
 
 $variant = [
-		'id' => 'cdcept-v0123',
-		'article_id' => 100000342798,
-		'title' => 'Title of Product - codeception variant',
-		'shortdesc' => 'Short decription of codeception variant of product.',
-		'longdesc' => 'This codeception variant has long description. It can also contain simple formatting like <strong>bold text</strong>.',
-		'priority' => 1,
-		'barcode' => '22677170992',
-		'price' => 185,
-		'rrp' => 229,
-		'parameters' => [
-			'MP_ATR_TEST1_CHAR' => 'test char value',
-			'MP_ATR_TEST2_NUM' => 'test num value'
-		],
-		'labels' => [],
-		'media' => [
-			[
-				'url' => 'https://i.cdn.nrholding.net/15880228',
-				'main' => true,
-				'switch' => 'MP_ATR_TEST1_CHAR'
-			]
-		],
-		'promotions' => [],
-		'dimensions' => [],
-		'availability' => [
-			'status' => 'A',
-			'in_stock' => 10
-		],
-		'recommended' => [],
-		'delivery_delay' => 2
+	'id' => 'cdcept-v0123',
+	'article_id' => 100000342798,
+	'title' => 'Title of Product - codeception variant',
+	'shortdesc' => 'Short decription of codeception variant of product.',
+	'longdesc' => 'This codeception variant has long description. It can also contain simple formatting like <strong>bold text</strong>.',
+	'priority' => 1,
+	'barcode' => '22677170992',
+	'price' => 185,
+	'rrp' => 229,
+	'parameters' => [
+		'MP_ATR_TEST1_CHAR' => 'test char value',
+		'MP_ATR_TEST2_NUM' => 'test num value'
+	],
+	'labels' => [],
+	'media' => [
+		[
+			'url' => 'https://i.cdn.nrholding.net/15880228',
+			'main' => true,
+			'switch' => 'MP_ATR_TEST1_CHAR'
+		]
+	],
+	'promotions' => [],
+	'dimensions' => [],
+	'availability' => [
+		'status' => 'A',
+		'in_stock' => 10
+	],
+	'recommended' => [],
+	'delivery_delay' => 2
 ];
 Codeception\Util\Fixtures::add('variant', $variant);
 Codeception\Util\Fixtures::add('variantInStock', $variant['availability']['in_stock']);
@@ -183,10 +192,10 @@ $promotions = [
 ];
 Codeception\Util\Fixtures::add('promotions', $promotions);
 $labels = [
-			'label' => 'NEW',
-			'from' => '2018-01-01 00:00:00',
-			'to' => '2020-03-01 00:00:00'
-		];
+	'label' => 'NEW',
+	'from' => '2018-01-01 00:00:00',
+	'to' => '2020-03-01 00:00:00'
+];
 Codeception\Util\Fixtures::add('labels', $labels);
 
 $orderData = [
