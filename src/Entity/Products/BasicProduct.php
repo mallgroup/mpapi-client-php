@@ -119,6 +119,9 @@ class BasicProduct extends AbstractArticleEntity
 		return (int) $retval;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getStage()
 	{
 		if (isset($this->data[self::KEY_STAGE])) {

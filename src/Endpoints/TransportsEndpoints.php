@@ -50,7 +50,6 @@ class TransportsEndpoints
 				'isPickupPoint' => $transport['isPickupPoint'],
 			];
 		}
-
 		return $res;
 	}
 }

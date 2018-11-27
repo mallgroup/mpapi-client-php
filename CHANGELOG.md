@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.6.0
+- added `checks` endpoint 
+
 ## 3.5.1
 - added option to set application tag
 
