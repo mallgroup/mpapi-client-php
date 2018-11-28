@@ -281,15 +281,15 @@ abstract class AbstractDelivery extends AbstractEntity
 	/**
 	 * Get delivery free limit
 	 *
-	 * @return double
+	 * @return double|null
 	 */
 	public function getFreeLimit()
 	{
-		$retval = 0;
+		$retval = null;
 		if (isset($this->data[self::KEY_FREE_LIMIT])) {
-			$retval = $this->data[self::KEY_FREE_LIMIT];
+			$retval = (double) $this->data[self::KEY_FREE_LIMIT];
 		}
-		return (double) $retval;
+		return $retval;
 	}
 
 	/**
