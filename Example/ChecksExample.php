@@ -6,7 +6,7 @@ use Monolog\Handler\StreamHandler;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$mpapiClient = new Client('mp_mpapi_test_SAqqD_dGVzdHw0MDAw');
+$mpapiClient = new Client('nonExistsClientId');
 
 if (class_exists('Logger')) {
 	$logger = new Logger('loggerName');
@@ -34,3 +34,23 @@ foreach ($checks->deliveries()->errors() as $error){
 	echo 'Articles:';
 	var_dump($error->getArticles());
 };
+
+
+// get media errors error
+foreach ($checks->media()->errors() as $error){
+	echo 'Code:';
+	var_dump($error->getCode());
+
+	echo 'Msg:';
+	var_dump($error->getMessage());
+
+	echo 'Attribute:';
+	var_dump($error->getAttribute());
+
+	echo 'Value:';
+	var_dump($error->getValue());
+
+	echo 'Articles:';
+	var_dump($error->getArticles());
+};
+

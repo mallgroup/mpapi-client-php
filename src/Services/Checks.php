@@ -3,6 +3,7 @@
 namespace MPAPI\Services;
 
 use MPAPI\Endpoints\Checks\CheckDeliveriesEndpoints;
+use MPAPI\Endpoints\Checks\CheckMediaEndpoints;
 
 class Checks extends AbstractService
 {
@@ -28,5 +29,13 @@ class Checks extends AbstractService
 	public function deliveries()
 	{
 		return new CheckDeliveriesEndpoints($this->client);
+	}
+
+	/**
+	 * @return CheckMediaEndpoints
+	 */
+	public function media()
+	{
+		return new CheckMediaEndpoints($this->client);
 	}
 }

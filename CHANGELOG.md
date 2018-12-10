@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.7.0
+- added `checks\media` endpoint 
+
 ## 3.6.0
 - added `checks` endpoint 
 

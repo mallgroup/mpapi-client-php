@@ -2,15 +2,19 @@
 
 namespace MPAPI\Endpoints\Checks;
 
+use MPAPI\Endpoints\AbstractEndpoints;
 use MPAPI\Entity\Checks\DeliveryError;
+use MPAPI\Entity\Checks\MediaError;
 use MPAPI\Exceptions\ApplicationException;
+use MPAPI\Services\Client;
 
-class CheckDeliveriesEndpoints extends AbstractChecksEndpoint
+class CheckMediaEndpoints extends AbstractChecksEndpoint
 {
 	/**
 	 * @var string
 	 */
-	const ENDPOINT_PATH = 'checks/deliveries';
+	const ENDPOINT_PATH = 'checks/media';
+
 
 	/**
 	 * Return list of delivery check errors
@@ -18,12 +22,12 @@ class CheckDeliveriesEndpoints extends AbstractChecksEndpoint
 	 * @throws ApplicationException
 	 * @throws \MPAPI\Exceptions\ClientIdException
 	 * @throws \MPAPI\Exceptions\ForceTokenException
-	 * @return DeliveryError[]|array
+	 * @return MediaError[]|array
 	 */
 	public function errors()
 	{
 		return $this->sendCheckRequest(self::ENDPOINT_PATH, function ($errorData) {
-			return new DeliveryError($errorData);
+			return new MediaError($errorData);
 		});
 	}
 }
