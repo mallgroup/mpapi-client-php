@@ -145,6 +145,16 @@ if (!empty($openOrders)) {
 
 	/**
 	 * ##################################
+	 * Set serial numbers
+	 * ##################################
+	 */
+	$responseStatus = $orders->put()->serialNumbers($order->getOrderId(), $order->getItems()[0]['id'], [289981984885]);
+	print('Order set serial numbers status: ');
+	var_dump($responseStatus);
+	print(PHP_EOL);
+
+	/**
+	 * ##################################
 	 * Update order status with delivered at datetime
 	 * ##################################
 	 */

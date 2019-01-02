@@ -184,6 +184,16 @@ $responseStatus = $orders->put()->trackingUrl($order->getOrderId(), 'http://mytr
 ...  
 ```
 
+#### Order item serial numbers  
+Set serial numbers per item  
+```
+...  
+$orderId = 123456789;
+$orderItemId = 'abc123';
+$serialNumbers = [123456789];
+$responseStatus = $orders->put()->serialNumbers($orderId, $orderItemId, $serialNumbers);  
+...  
+```
 
 ##### See more:  
 > **/root/vendor/mallgroup/mpapi-client/Example/OrdersExample.php**
