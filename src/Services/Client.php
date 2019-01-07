@@ -38,7 +38,7 @@ class Client
 	 *
 	 * @var string
 	 */
-	const APPLICATION_NAME = 'mpapic-v3.7.1';
+	const APPLICATION_NAME = 'mpapic-v3.8.0';
 
 	/**
 	 *
@@ -480,7 +480,7 @@ class Client
 	 */
 	private function getHttpClient()
 	{
-		if (!$this->httpClient instanceof Client) {
+		if (!$this->httpClient instanceof HttpClient) {
 			$config = $this->getConfig($this->getEnvironment());
 			/* @var GuzzleHttp\Client */
 			$this->httpClient = new HttpClient([

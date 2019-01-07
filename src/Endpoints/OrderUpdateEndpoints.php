@@ -45,6 +45,11 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 	const ENDPOINT_TRACKING = '%s/%s/tracking';
 
 	/**
+	 * @var string
+	 */
+	const ENDPOINT_SERIAL_NUMBERS = '%s/%d/items/%s/serial-numbers';
+
+	/**
 	 *
 	 * @var Client
 	 */
@@ -112,6 +117,26 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 			self::TRACKING_URL_KEY => $trackingUrl
 		];
 		$response = $this->client->sendRequest(sprintf(self::ENDPOINT_TRACKING, self::ENDPOINT_PATH, $orderId), 'PUT', $requestData);
+		return $response->getStatusCode() == 200;
+	}
+
+	/**
+	 * @param integer $orderId
+	 * @param string $itemId
+	 * @param array  $serialNumbers
+	 */
+	public function serialNumbers($orderId, $itemId, array $serialNumbers)
+	{
+		$response = $this->client->sendRequest(
+			sprintf(
+				self::ENDPOINT_SERIAL_NUMBERS,
+				self::ENDPOINT_PATH,
+				(int)$orderId,
+				$itemId
+			),
+			'PUT',
+			$serialNumbers
+		);
 		return $response->getStatusCode() == 200;
 	}
 }

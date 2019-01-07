@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.8.0
+- added `serial-numbers` endpoint ([orders documentation](#markdown-header-order-item-serial-numbers))
+
 ## 3.7.0
 - added `checks\media` endpoint 
 
