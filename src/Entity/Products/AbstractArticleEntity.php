@@ -139,6 +139,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	const STATUS_INACTIVE = 'N';
 
 	/**
+	 * @var string
+	 */
+	const STATUS_NOT_FOR_RESALE = 'X';
+
+	/**
 	 *
 	 * @var string
 	 */
