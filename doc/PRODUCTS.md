@@ -195,7 +195,8 @@ __delivery_delay__ (number) - number of days the delivery will be delayed for th
 __free_delivery__ (boolean) - activate / deactivate free delivery for the whole purchase (package)
 __package_size__ (string) - type of package size - there are just two options "smallbox" or "bigbox"
 __stage__ (string, readonly) - integration stage of product. Product has two stages `draft` and `live`.  
-__mallboxAllowed__ (bool) - allow usage with MALLBOX deliveries  
+__mallbox_allowed__ (bool) - allow usage with MALLBOX deliveries  
+__partner_title__ (string) - alternative partner title (used on web as Supplied by)  
 
 *Those attributes marked with * are required.*
 

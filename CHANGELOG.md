@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.9.0
+- added new field `partner_title` in product  
+
 ## 3.8.0
 - added `serial-numbers` endpoint ([orders documentation](#markdown-header-order-item-serial-numbers))
 
