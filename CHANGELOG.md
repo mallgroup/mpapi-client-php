@@ -1,7 +1,10 @@
 # Marketplace API client - change log
 
+## 3.8.3
+- add option to include testing orders into orders list [orders documentation](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/ORDERS.md#get-all-orders-include-testing-orders)
+
 ## 3.8.0
-- added `serial-numbers` endpoint ([orders documentation](#markdown-header-order-item-serial-numbers))
+- added `serial-numbers` endpoint ([orders documentation](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/ORDERS.md#order-item-serial-numbers))
 
 ## 3.7.0
 - added `checks\media` endpoint 

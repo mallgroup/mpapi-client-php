@@ -86,6 +86,21 @@ class OrdersEndpoints extends AbstractEndpoints
 	protected $client;
 
 	/**
+	 * @var bool
+	 */
+	private $includeTestOrders = false;
+
+	/**
+	 * @param bool $state
+	 * @return OrdersEndpoints
+	 */
+	public function includeTestOrders($state)
+	{
+		$this->includeTestOrders = (bool)$state;
+		return $this;
+	}
+
+	/**
 	 * Get list of open orders
 	 *
 	 * @return array
@@ -173,7 +188,14 @@ class OrdersEndpoints extends AbstractEndpoints
 	 */
 	private function getOrdersByStatus($orderStatus)
 	{
-		$response = $this->client->sendRequest(sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, $orderStatus), 'GET');
+		$response = $this->client->sendRequest(
+			sprintf(self::MERGE_ENDPOINTS, self::ENDPOINT_PATH, $orderStatus),
+			'GET',
+			[],
+			[
+				'test' => $this->includeTestOrders
+			]
+		);
 		if ($this->client->autoCollecting()) {
 			$retval = $this->dataCollector($response);
 		} else {
@@ -190,7 +212,14 @@ class OrdersEndpoints extends AbstractEndpoints
 	 */
 	public function all()
 	{
-		$response = $this->client->sendRequest(self::ENDPOINT_PATH, 'GET');
+		$response = $this->client->sendRequest(
+			self::ENDPOINT_PATH,
+			'GET',
+			[],
+			[
+				'test' => $this->includeTestOrders
+			]
+		);
 		if ($this->client->autoCollecting()) {
 			$dataCollector = new DataCollector($this->client, $response, false);
 			$retval = $dataCollector->getData();
@@ -209,7 +238,8 @@ class OrdersEndpoints extends AbstractEndpoints
 	{
 		$args = [
 			'page' => (int)$page,
-			'page_size' => (int)$size
+			'page_size' => (int)$size,
+			'test' => $this->includeTestOrders
 		];
 		$response = $this->client->sendRequest(self::ENDPOINT_PATH, 'GET', [], $args);
 
