@@ -65,7 +65,62 @@ The response contains basic data of all orders:
     ],  
     ...  
 ]  
+```
 
+##### Get all orders include testing orders    
+```
+...  
+// get all orders include testing orders  
+$allOrders = $orders->get()->includeTestOrders(true)->all();  
+```
+The response contains basic data of all orders:  
+```
+[  
+    [  
+		"id": 12345675,  
+		"purchase_id": 98653274,  
+		"customer_id": 1111111111,  
+		"customer": "John Doe",  
+		"cod": 25,  
+		"ship_date": "2016-12-10",  
+		"delivered_at": "2018-02-14 08:13:00",  
+		"status": "delivered",  
+		"payment_type: "A",  
+		"confirmed": true,
+		"test": false  
+    ],  
+    [  
+		"id": 2345675,  
+		"purchase_id": 98653274,  
+		"customer_id": 1111111111,  
+		"customer": "John Doe",  
+		"cod": 25,  
+		"ship_date": "2016-12-10",  
+		"delivered_at": "2018-02-14 08:13:00",  
+		"status": "delivered",  
+		"payment_type: "A",  
+		"confirmed": true,
+		"test": true  
+    ],  
+    [  
+		"id": 9876543,  
+		"purchase_id": 12457896,  
+		"customer_id": 1111111112,  
+		"customer": "Jane Doe",  
+		"cod": 0,  
+		"ship_date": "2016-10-21",  
+		"status": "cancelled",  
+		"payment_type": "B",  
+		"confirmed": false,
+		"test": true  
+    ],  
+    ...  
+]  
+```
+
+
+##### Get orders by status    
+```
 ...  
 // get all open orders, it means all that are not close (that is delivered, returned, cancelled) and so they can have status from blocked to shipped  
 $openOrders = $orders->get()->open();  
@@ -96,8 +151,11 @@ $cancelledOrders = $orders->get()->cancelled();
 ...  
 // get all unconfirmed orders  
 $unconfirmedOrders = $orders->get()->unconfirmed();  
+```
 
-...  
+
+##### Get order detail    
+```
 // get order detail  
 $response = $orders->get()->detail('yourOrderId');  
 ```

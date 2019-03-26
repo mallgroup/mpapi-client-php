@@ -101,6 +101,11 @@ $ordersList = $orders->get()->all();
 // print list of all orders data
 var_dump($ordersList);
 
+// get all orders data include testing
+$ordersListTesting = $orders->get()->includeTestOrders(true)->all();
+// print list of all orders data
+var_dump($ordersListTesting);
+
 if (!empty($openOrders)) {
 	// get order detail
 	/* @var MPAPI\Entity\Order $order */
