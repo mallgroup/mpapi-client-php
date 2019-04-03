@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.9.0
+- added new field `partner_title` in product  
+
 ## 3.8.3
 - add option to include testing orders into orders list [orders documentation](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/ORDERS.md#get-all-orders-include-testing-orders)
 

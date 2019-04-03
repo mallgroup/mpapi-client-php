@@ -247,6 +247,11 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	const STAGE_LIVE = 'live';
 
 	/**
+	 * @var string
+	 */
+	const KEY_PARTNER_TITLE = 'partner_title';
+
+	/**
 	 *
 	 * @var array
 	 */
@@ -1097,6 +1102,29 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	public function setMallboxAllowed($value)
 	{
 		$this->data[self::KEY_MALLBOX_ALLOWED] = (bool)$value;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPartnerTitle()
+	{
+		if (isset($this->data[self::KEY_PARTNER_TITLE])) {
+			return $this->data[self::KEY_PARTNER_TITLE];
+		}
+		return '';
+	}
+
+	/**
+	 * @param $partnerTitle
+	 * @return $this
+	 */
+	public function setPartnerTitle($partnerTitle)
+	{
+		if ($partnerTitle !== $this->getPartnerTitle()) {
+			$this->data[self::KEY_PARTNER_TITLE] = $partnerTitle;
+		}
 		return $this;
 	}
 }
