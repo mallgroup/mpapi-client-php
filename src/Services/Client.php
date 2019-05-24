@@ -26,25 +26,7 @@ class Client
 	 *
 	 * @var string
 	 */
-	const ENVIRONMENT_TEST = 'test';
-
-	/**
-	 *
-	 * @var string
-	 */
-	const ENVIRONMENT_PRODUCTION = 'prod';
-
-	/**
-	 *
-	 * @var string
-	 */
-	const APPLICATION_NAME = 'mpapic-v3.8.3';
-
-	/**
-	 *
-	 * @var string
-	 */
-	const CONFIG_FILE = '/../config/config.ini';
+	const APPLICATION_NAME = 'mpapic-v3.9.1';
 
 	/**
 	 *
@@ -118,21 +100,7 @@ class Client
 	 *
 	 * @var array
 	 */
-	private $config;
-
-	/**
-	 *
-	 * @var array
-	 */
 	private $errors = [];
-
-	/**
-	 * @var array
-	 */
-	private $allowedEnvironment = [
-		self::ENVIRONMENT_TEST,
-		self::ENVIRONMENT_PRODUCTION
-	];
 
 	/**
 	 *
@@ -169,22 +137,27 @@ class Client
 	private $applicationTag;
 
 	/**
-	 *
+	 * @var string
+	 */
+	private $baseUrl;
+
+	/**
 	 * @param string $clientId
 	 * @param boolean $useErrorHandler
+	 * @param string $baseUrl
 	 */
-	public function __construct($clientId, $useErrorHandler = true)
+	public function __construct($clientId, $useErrorHandler = true, $baseUrl = 'https://mpapi.mallgroup.com/v1/')
 	{
 		if (empty($clientId)) {
 			throw new ClientIdException(ClientIdException::MSG_MISSING_CLIENT_ID);
 		}
 		$this->clientId = $clientId;
-		$this->environment = self::ENVIRONMENT_TEST;
 
 		// set default exception handler
 		if ($useErrorHandler === true) {
 			$this->setExceptionHandler(new ExceptionHandler($this->getLogger()));
 		}
+		$this->baseUrl = $baseUrl;
 	}
 
 	/**
@@ -451,29 +424,6 @@ class Client
 	}
 
 	/**
-	 * Get configuration
-	 *
-	 * @param string $environment
-	 * @return string
-	 */
-	private function getConfig($environment)
-	{
-		$retval = null;
-		if (file_exists(__DIR__ . self::CONFIG_FILE)) {
-			$this->config = parse_ini_file(__DIR__ . self::CONFIG_FILE, true);
-		}
-
-		if (!in_array($environment, $this->allowedEnvironment)) {
-			throw new ClientIdException(sprintf(ClientIdException::MSG_UNKNOWN_ENVIRONMENT, $environment));
-		}
-
-		if (isset($this->config[$environment])) {
-			$retval = $this->config[$environment];
-		}
-		return $retval;
-	}
-
-	/**
 	 * Get client for network communication
 	 *
 	 * @return HttpClient
@@ -481,25 +431,13 @@ class Client
 	private function getHttpClient()
 	{
 		if (!$this->httpClient instanceof HttpClient) {
-			$config = $this->getConfig($this->getEnvironment());
 			/* @var GuzzleHttp\Client */
 			$this->httpClient = new HttpClient([
-				'base_uri' => $config['url'],
+				'base_uri' => $this->baseUrl,
 				'timeout' => 0,
 				'allow_redirects' => false
 			]);
 		}
 		return $this->httpClient;
-	}
-
-	/**
-	 * Get environment from client id
-	 *
-	 * @return string
-	 */
-	private function getEnvironment()
-	{
-		$parser = new ClientIdParser($this->clientId);
-		return $parser->getEnvironment();
 	}
 }
