@@ -160,8 +160,11 @@ class Product extends AbstractArticleEntity
 	 */
 	public function setVat($value)
 	{
-		if (bccomp($value, $this->getVat(), self::PRICE_PRECISION) !== 0) {
-			$this->data[self::KEY_VAT] = $value;
+		if (
+			bccomp($value, $this->getVat(), self::PRICE_PRECISION) !== 0
+			|| (!isset($this->data[self::KEY_VAT]) && (float)$value >= 0)
+		) {
+			$this->data[self::KEY_VAT] = (float)$value;
 		}
 		return $this;
 	}
