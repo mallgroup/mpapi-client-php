@@ -1,4 +1,5 @@
 <?php
+
 namespace MPAPI\Services;
 
 use GuzzleHttp\Client as HttpClient;
@@ -262,7 +263,7 @@ class Client
 			$this->lastResponse = $this->getHttpClient()->request($method, $path, [
 				'headers' => [
 					'X-Application-Name' => self::APPLICATION_NAME,
-					'X-Application-Tag' => $this->applicationTag
+					'X-Application-Tag' => isset($this->applicationTag) ? $this->applicationTag : ""
 				],
 				'json' => $body,
 				'query' => $query
@@ -417,7 +418,7 @@ class Client
 	 * @param string $tag
 	 * @return Client
 	 */
-	public function setApplicationTag(string $tag)
+	public function setApplicationTag($tag)
 	{
 		$this->applicationTag = $tag;
 		return $this;
