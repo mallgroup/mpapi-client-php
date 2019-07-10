@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.9.3
+- fix type hint in `setApplicationTag` method
+
 ## 3.9.0
 - added new field `partner_title` in product  
 
