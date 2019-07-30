@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.10.0
+- added new field `mdp` in order
+
 ## 3.9.3
 - fix type hint in `setApplicationTag` method
 

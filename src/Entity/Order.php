@@ -259,6 +259,11 @@ class Order extends AbstractEntity
 	const KEY_ITEM_VAT = 'vat';
 
 	/**
+	 * @var string
+	 */
+	const KEY_MDP = 'mdp';
+
+	/**
 	 *
 	 * @var string
 	 */
@@ -349,7 +354,8 @@ class Order extends AbstractEntity
 			],
 			'confirmed' => $this->getConfirmed(),
 			'status' => $this->getStatus(),
-			'items' => $this->getItems()
+			'items' => $this->getItems(),
+			'mdp' => $this->getMdp(),
 		];
 	}
 
@@ -667,6 +673,14 @@ class Order extends AbstractEntity
 			$retval = $this->data[self::KEY_ADDRESS][self::KEY_CUSTOMER_ID];
 		}
 		return $retval;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getMdp()
+	{
+		return (bool)$this->data[self::KEY_MDP];
 	}
 
 	/**

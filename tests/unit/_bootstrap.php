@@ -242,7 +242,8 @@ $orderData = [
 			'vat' => 21,
 			'commission' => 11.5
 		]
-	]
+	],
+	'mdp' => false,
 ];
 Codeception\Util\Fixtures::add('orderData', $orderData);
 
