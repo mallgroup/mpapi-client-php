@@ -172,4 +172,9 @@ class OrderTest extends \Codeception\Test\Unit
 	{
 		$this->assertEmpty($this->object->getCustomerId());
 	}
+
+	public function testGetMdp()
+	{
+		$this->assertFalse($this->object->getMdp());
+	}
 }

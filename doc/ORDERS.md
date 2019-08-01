@@ -50,7 +50,8 @@ The response contains basic data of all orders:
 		"delivered_at": "2018-02-14 08:13:00",  
 		"status": "delivered",  
 		"payment_type: "A",  
-		"confirmed": true  
+		"confirmed": true,
+		"mdp": true
     ],  
     [  
 		"id": 9876543,  
@@ -61,7 +62,8 @@ The response contains basic data of all orders:
 		"ship_date": "2016-10-21",  
 		"status": "cancelled",  
 		"payment_type": "B"  
-		"confirmed": false  
+		"confirmed": false,
+		"mdp": false
     ],  
     ...  
 ]  
@@ -87,6 +89,7 @@ The response contains basic data of all orders:
 		"status": "delivered",  
 		"payment_type: "A",  
 		"confirmed": true,
+		"mdp": true,
 		"test": false  
     ],  
     [  
@@ -100,6 +103,7 @@ The response contains basic data of all orders:
 		"status": "delivered",  
 		"payment_type: "A",  
 		"confirmed": true,
+		"mdp": true,
 		"test": true  
     ],  
     [  
@@ -112,6 +116,7 @@ The response contains basic data of all orders:
 		"status": "cancelled",  
 		"payment_type": "B",  
 		"confirmed": false,
+		"mdp": false,
 		"test": true  
     ],  
     ...  
@@ -200,7 +205,8 @@ The response contains order details:
             "vat" => 21,  
             "commission" => 16  
         ]  
-    ]  
+    ],
+    "mdp": false
 ]  
 ```
 
