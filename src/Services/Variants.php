@@ -105,7 +105,8 @@ class Variants extends AbstractVariantsService
 		if ($response->getStatusCode() !== 201) {
 			$errors = [
 				'entity' => $variant->getData(),
-				'response' => json_decode($response->getBody(), true)
+				'response' => json_decode($response->getBody(), true),
+				'responseCode' => $response->getStatusCode()
 			];
 		} elseif (
 			$response->getStatusCode() == 202

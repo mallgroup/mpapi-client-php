@@ -128,7 +128,8 @@ class Products extends AbstractService
 				if ($response->getStatusCode() !== 204) {
 					$errors[$index] = [
 						'entity' => $productEntity->getData(),
-						'response' => json_decode($response->getBody(), true)
+						'response' => json_decode($response->getBody(), true),
+						'responseCode' => $response->getStatusCode()
 					];
 				}
 			}
@@ -136,7 +137,8 @@ class Products extends AbstractService
 			$response = $this->productsEndpoints->deleteProduct($productId);
 			if ($response->getStatusCode() !== 204) {
 				$errors[] = [
-					'response' => json_decode($response->getBody(), true)
+					'response' => json_decode($response->getBody(), true),
+					'responseCode' => $response->getStatusCode()
 				];
 			}
 		}
@@ -168,7 +170,8 @@ class Products extends AbstractService
 				if ($response->getStatusCode() !== 201) {
 					$errors[$index] = [
 						'entity' => $productEntity->getData(),
-						'response' => json_decode($response->getBody(), true)
+						'response' => json_decode($response->getBody(), true),
+						'responseCode' => $response->getStatusCode()
 					];
 				}
 			}
@@ -180,7 +183,8 @@ class Products extends AbstractService
 			if (json_decode($response->getBody(), true) == null || $response->getStatusCode() !== 201) {
 				$errors[] = [
 					'entity' => $data,
-					'response' => (string) $response->getBody()
+					'response' => (string) $response->getBody(),
+					'responseCode' => $response->getStatusCode()
 				];
 			} elseif (
 				$response->getStatusCode() == 202
@@ -231,7 +235,8 @@ class Products extends AbstractService
 				if ($response->getStatusCode() !== 200) {
 					$errors[$index] = [
 						'entity' => $productEntity->getData(),
-						'response' => json_decode($response->getBody(), true)
+						'response' => json_decode($response->getBody(), true),
+						'responseCode' => $response->getStatusCode()
 					];
 				} elseif (
 					$response->getStatusCode() == 202
@@ -246,7 +251,8 @@ class Products extends AbstractService
 			if ($response->getStatusCode() !== 200) {
 				$errors[] = [
 					'entity' => $entity->getData(),
-					'response' => json_decode($response->getBody(), true)
+					'response' => json_decode($response->getBody(), true),
+					'responseCode' => $response->getStatusCode()
 				];
 			} elseif (
 					$response->getStatusCode() == 202
