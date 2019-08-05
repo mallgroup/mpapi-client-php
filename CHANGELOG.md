@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.10.1
+- added `responseCode` into ApplicationException to Products and Variants service
+
 ## 3.10.0
 - added new field `mdp` in order
 
