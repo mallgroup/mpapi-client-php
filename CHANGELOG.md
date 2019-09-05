@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.11.0
+- added support for new `pricing` endpoints for Products and Variants
+
 ## 3.10.1
 - added `responseCode` into ApplicationException to Products and Variants service
 

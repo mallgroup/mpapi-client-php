@@ -207,19 +207,18 @@ class Products extends AbstractService
 	/**
 	 * Put data
 	 *
-	 * @param string $productId
+	 * @param string         $productId
 	 * @param AbstractEntity $entity
-	 * @param string $variantId
-	 * @param string $forceToken
-	 * @throws ApplicationException
+	 * @param string         $variantId
+	 * @param string         $forceToken
+	 *
 	 * @return boolean
+	 * @throws ApplicationException
+	 * @throws EndpointNotContainMethod
+	 * @throws EndpointNotfoundException
 	 */
 	public function put($productId = null, AbstractEntity $entity = null, $variantId = null, $forceToken = null)
 	{
-		if ($entity !== null) {
-			list ($endpoint, $method) = $this->getEndpoint($entity, __METHOD__);
-		}
-
 		if ($forceToken !== null) {
 			$this->client->setArgument(AbstractService::ARG_FORCE_TOKEN, $forceToken);
 		} else {
@@ -247,6 +246,7 @@ class Products extends AbstractService
 				}
 			}
 		} else {
+			list ($endpoint, $method) = $this->getEndpoint($entity, __METHOD__);
 			$response = $endpoint->$method($productId, $entity->getData(), $variantId);
 			if ($response->getStatusCode() !== 200) {
 				$errors[] = [
@@ -301,6 +301,8 @@ class Products extends AbstractService
 	/**
 	 * Add product for batch operation
 	 *
+	 * @param AbstractEntity $entity
+	 * @return self
 	 * @see \MPAPI\Services\AbstractService::add()
 	 */
 	public function add(AbstractEntity $entity)
@@ -316,7 +318,7 @@ class Products extends AbstractService
 	 */
 	public function variants()
 	{
-		return new VariantsEndpoints($this->client, $this);
+		return new VariantsEndpoints($this->client);
 	}
 
 	/**
@@ -375,8 +377,10 @@ class Products extends AbstractService
 	 * Get endpoint for specific entity
 	 *
 	 * @param AbstractEntity $entity
-	 * @throws \Exception
-	 * @return Object
+	 * @param string         $method
+	 * @return array
+	 * @throws EndpointNotContainMethod
+	 * @throws EndpointNotfoundException
 	 */
 	private function getEndpoint(AbstractEntity $entity, $method)
 	{
