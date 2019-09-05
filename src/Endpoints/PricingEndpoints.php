@@ -32,19 +32,19 @@ class PricingEndpoints
 
 	/**
 	 * @param string      $productId
-	 * @param Pricing     $pricing
+	 * @param array       $data result of Pricing->getData()
 	 * @param string|null $variantId
 	 *
 	 * @return \GuzzleHttp\Psr7\Response|null
 	 * @throws \MPAPI\Exceptions\ClientIdException
 	 * @throws \MPAPI\Exceptions\ForceTokenException
 	 */
-	public function putPricing($productId, Pricing $pricing, $variantId = null)
+	public function putPricing($productId, array $data, $variantId = null)
 	{
 		if ($variantId == null) {
-			return $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $productId), 'PUT', $pricing->getData());
+			return $this->client->sendRequest(sprintf(self::ENDPOINT_PATH, $productId), 'PUT', $data);
 		} else {
-			return $this->client->sendRequest(sprintf(self::ENDPOINT_PATH_VARIANT, $productId, $variantId), 'PUT', $pricing->getData());
+			return $this->client->sendRequest(sprintf(self::ENDPOINT_PATH_VARIANT, $productId, $variantId), 'PUT', $data);
 		}
 	}
 }

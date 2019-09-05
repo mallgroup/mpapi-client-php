@@ -46,59 +46,59 @@ class Pricing extends AbstractEntity
 	}
 
 	/**
-	 * @return float
+	 * @return int
 	 */
 	public function getPrice()
 	{
-		return (float) $this->data[self::KEY_PRICE];
+		return $this->data[self::KEY_PRICE];
 	}
 
 	/**
-	 * @param float $price
+	 * @param int $price
 	 *
 	 * @return self
 	 */
 	public function setPrice($price)
 	{
-		$this->data[self::KEY_PRICE] = $price;
+		$this->data[self::KEY_PRICE] = (int) $price;
 		return $this;
 	}
 
 	/**
-	 * @return float
+	 * @return int
 	 */
 	public function getPurchasePrice()
 	{
-		return (float) $this->data[self::KEY_PURCHASE_PRICE];
+		return $this->data[self::KEY_PURCHASE_PRICE];
 	}
 
 	/**
-	 * @param float $purchasePrice
+	 * @param int $purchasePrice
 	 *
 	 * @return self
 	 */
 	public function setPurchasePrice($purchasePrice)
 	{
-		$this->data[self::KEY_PURCHASE_PRICE] = $purchasePrice;
+		$this->data[self::KEY_PURCHASE_PRICE] = (int) $purchasePrice;
 		return $this;
 	}
 
 	/**
-	 * @return float
+	 * @return int
 	 */
 	public function getRrp()
 	{
-		return (float) $this->data[self::KEY_RRP_PRICE];
+		return $this->data[self::KEY_RRP_PRICE];
 	}
 
 	/**
-	 * @param float $rrp
+	 * @param int $rrp
 	 *
 	 * @return self
 	 */
 	public function setRrp($rrp)
 	{
-		$this->data[self::KEY_RRP_PRICE] = $rrp;
+		$this->data[self::KEY_RRP_PRICE] = (int) $rrp;
 		return $this;
 	}
 }

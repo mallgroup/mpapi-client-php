@@ -17,7 +17,7 @@ class PricingTest extends \Codeception\Test\Unit
 
 	protected function _before()
 	{
-		$this->object = new Pricing(99.99, 114.99, 130);
+		$this->object = new Pricing(100, 115, 130);
 	}
 
 	protected function _after()
@@ -33,8 +33,8 @@ class PricingTest extends \Codeception\Test\Unit
 	public function testGetPrice()
 	{
 		$this->assertNotEmpty($this->object->getPrice());
-		$this->assertEquals(99.99, $this->object->getPrice());
-		$this->assertInternalType('float', $this->object->getPrice());
+		$this->assertEquals(100, $this->object->getPrice());
+		$this->assertInternalType('int', $this->object->getPrice());
 	}
 
 	public function testSetPrice()
@@ -44,31 +44,31 @@ class PricingTest extends \Codeception\Test\Unit
 		$this->object->setPrice($price);
 		$this->assertNotEmpty($this->object->getPrice());
 		$this->assertEquals($price, $this->object->getPrice());
-		$this->assertInternalType('float', $this->object->getPrice());
+		$this->assertInternalType('int', $this->object->getPrice());
 	}
 
 	public function testGetPurchasePrice()
 	{
 		$this->assertNotEmpty($this->object->getPurchasePrice());
-		$this->assertEquals(114.99, $this->object->getPurchasePrice());
-		$this->assertInternalType('float', $this->object->getPurchasePrice());
+		$this->assertEquals(115, $this->object->getPurchasePrice());
+		$this->assertInternalType('int', $this->object->getPurchasePrice());
 	}
 
 	public function testSetPurchasePrice()
 	{
-		$price = 126.6;
+		$price = 125;
 		$this->assertNotEquals($this->object->getPurchasePrice(), $price);
 		$this->object->setPurchasePrice($price);
 		$this->assertNotEmpty($this->object->getPurchasePrice());
 		$this->assertEquals($price, $this->object->getPurchasePrice());
-		$this->assertInternalType('float', $this->object->getPurchasePrice());
+		$this->assertInternalType('int', $this->object->getPurchasePrice());
 	}
 
 	public function testGetRrp()
 	{
 		$this->assertNotEmpty($this->object->getRrp());
 		$this->assertEquals(130, $this->object->getRrp());
-		$this->assertInternalType('float', $this->object->getRrp());
+		$this->assertInternalType('int', $this->object->getRrp());
 	}
 
 	public function testSetRrp()
@@ -78,6 +78,6 @@ class PricingTest extends \Codeception\Test\Unit
 		$this->object->setRrp($rrp);
 		$this->assertNotEmpty($this->object->getRrp());
 		$this->assertEquals($rrp, $this->object->getRrp());
-		$this->assertInternalType('float', $this->object->getRrp());
+		$this->assertInternalType('int', $this->object->getRrp());
 	}
 }
