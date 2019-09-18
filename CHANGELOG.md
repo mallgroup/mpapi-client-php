@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.11.1
+- updated logging of request errors, they are no longer truncated after 120 characters
+
 ## 3.11.0
 - added support for new `pricing` endpoints for Products and Variants
 

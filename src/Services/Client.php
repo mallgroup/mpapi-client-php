@@ -4,6 +4,7 @@ namespace MPAPI\Services;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
 use MPAPI\Entity\Paging;
@@ -27,7 +28,7 @@ class Client
 	 *
 	 * @var string
 	 */
-	const APPLICATION_NAME = 'mpapic-v3.11.0';
+	const APPLICATION_NAME = 'mpapic-v3.11.1';
 
 	/**
 	 *
@@ -291,7 +292,8 @@ class Client
 				'body' => $body,
 				'client_id' => $this->clientId
 			]);
-			$responseData = json_decode($e->getResponse()->getBody()->getContents(), true);
+			$response = $e->getResponse()->getBody()->getContents();
+			$responseData = json_decode($response, true);
 			$e->getResponse()->getBody()->rewind();
 			$responseData = isset($responseData['data']) ? $responseData['data'] : $responseData;
 			if (isset($responseData['forceToken']) || isset($responseData['data']['forceToken'])) {
@@ -301,6 +303,18 @@ class Client
 				$exception->setForceToken($forceToken);
 				throw $exception;
 			}
+
+			// RequestException truncates the output to 120 chars., which does not fit some of our error messages (ie. media Content-Length)
+			if ($e instanceof RequestException) {
+				$message = $e->getMessage();
+				$pos = strpos($message, "` response:\n");
+				if ($pos !== false) {
+					// Replace the truncated response with full contents of the body
+					$message = substr_replace($message, $response . "\n", $pos + 12);
+					throw new \Exception($message, $e->getCode(), $e);
+				}
+			}
+
 			throw $e;
 		}
 		return $this->lastResponse;
