@@ -11,7 +11,6 @@ use MPAPI\Entity\Paging;
 use MPAPI\Exceptions\ApplicationException;
 use MPAPI\Exceptions\ClientIdException;
 use MPAPI\Exceptions\ForceTokenException;
-use MPAPI\Lib\ClientIdParser;
 use MPAPI\Lib\Handlers\ExceptionHandler;
 use MPAPI\Lib\Logger;
 use Psr\Log\LoggerInterface;
@@ -28,7 +27,7 @@ class Client
 	 *
 	 * @var string
 	 */
-	const APPLICATION_NAME = 'mpapic-v3.11.4';
+	const APPLICATION_NAME = 'mpapic-v3.11.5';
 
 	/**
 	 *
@@ -292,8 +291,7 @@ class Client
 				'body' => $body,
 				'client_id' => $this->clientId
 			]);
-			$response = $e->getResponse()->getBody()->getContents();
-			$responseData = json_decode($response, true);
+			$responseData = json_decode($e->getResponse()->getBody()->getContents(), true);
 			$e->getResponse()->getBody()->rewind();
 			$responseData = isset($responseData['data']) ? $responseData['data'] : $responseData;
 			if (isset($responseData['forceToken']) || isset($responseData['data']['forceToken'])) {
@@ -302,17 +300,6 @@ class Client
 				$exception->setData($responseData);
 				$exception->setForceToken($forceToken);
 				throw $exception;
-			}
-
-			// RequestException truncates the output to 120 chars., which does not fit some of our error messages (ie. media Content-Length)
-			if ($e instanceof RequestException) {
-				$message = $e->getMessage();
-				$pos = strpos($message, "` response:\n");
-				if ($pos !== false) {
-					// Replace the truncated response with full contents of the body
-					$message = substr_replace($message, $response . "\n", $pos + 12);
-					throw new RequestException($message, $e->getRequest(), $e->getResponse(), $e);
-				}
 			}
 
 			throw $e;
