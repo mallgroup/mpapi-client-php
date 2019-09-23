@@ -28,7 +28,7 @@ class Client
 	 *
 	 * @var string
 	 */
-	const APPLICATION_NAME = 'mpapic-v3.11.2';
+	const APPLICATION_NAME = 'mpapic-v3.11.3';
 
 	/**
 	 *
