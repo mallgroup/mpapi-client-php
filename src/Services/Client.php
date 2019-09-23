@@ -28,7 +28,7 @@ class Client
 	 *
 	 * @var string
 	 */
-	const APPLICATION_NAME = 'mpapic-v3.11.3';
+	const APPLICATION_NAME = 'mpapic-v3.11.4';
 
 	/**
 	 *
@@ -311,7 +311,7 @@ class Client
 				if ($pos !== false) {
 					// Replace the truncated response with full contents of the body
 					$message = substr_replace($message, $response . "\n", $pos + 12);
-					throw new RequestException($message, $e->getCode(), $e);
+					throw new RequestException($message, $e->getRequest(), $e->getResponse(), $e);
 				}
 			}
 
