@@ -311,7 +311,7 @@ class Client
 				if ($pos !== false) {
 					// Replace the truncated response with full contents of the body
 					$message = substr_replace($message, $response . "\n", $pos + 12);
-					throw new \Exception($message, $e->getCode(), $e);
+					throw new RequestException($message, $e->getCode(), $e);
 				}
 			}
 
