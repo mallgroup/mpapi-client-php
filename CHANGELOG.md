@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.11.2
+- fixed 3.11.1
+
 ## 3.11.1
 - updated logging of request errors, they are no longer truncated after 120 characters
 
