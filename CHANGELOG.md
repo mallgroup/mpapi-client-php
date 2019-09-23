@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.11.5
+- reverted the changes from 3.11.1 - 3.11.4
+
 ## 3.11.4
 - fixed 3.11.2
 
