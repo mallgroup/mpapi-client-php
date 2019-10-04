@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.11.6
+- added support for `first_delivery_attempt` order field
+
 ## 3.11.5
 - reverted the changes from 3.11.1 - 3.11.4
 
