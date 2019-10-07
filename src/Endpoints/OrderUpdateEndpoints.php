@@ -58,22 +58,36 @@ class OrderUpdateEndpoints extends AbstractEndpoints
 	/**
 	 * Update order status
 	 *
-	 * @param integer $orderId
-	 * @param string $status
-	 * @param boolean $confirmed
-	 * @param string $trackingNumber
+	 * @param integer                 $orderId
+	 * @param string                  $status
+	 * @param boolean                 $confirmed
+	 * @param string                  $trackingNumber
 	 * @param \DateTimeInterface|null $deliveredAt
+	 * @param \DateTimeInterface|null $firstDeliveryAttempt
 	 * @return bool
+	 * @throws \MPAPI\Exceptions\ClientIdException
+	 * @throws \MPAPI\Exceptions\ForceTokenException
 	 */
-	public function status($orderId, $status, $confirmed = true, $trackingNumber = '', \DateTimeInterface $deliveredAt = null)
+	public function status(
+		$orderId,
+		$status,
+		$confirmed = true,
+		$trackingNumber = '',
+		\DateTimeInterface $deliveredAt = null,
+		\DateTimeInterface $firstDeliveryAttempt = null
+	)
 	{
 		$requestData = [
-			'status' => $status,
-			'confirmed' => $confirmed
+			'status'    => $status,
+			'confirmed' => $confirmed,
 		];
 
 		if ($deliveredAt !== null) {
 			$requestData['delivered_at'] = $deliveredAt->format(self::DATETIME_FORMAT);
+		}
+
+		if ($firstDeliveryAttempt !== null) {
+			$requestData['first_delivery_attempt'] = $firstDeliveryAttempt->format(self::DATETIME_FORMAT);
 		}
 
 		if (!empty($trackingNumber)) {

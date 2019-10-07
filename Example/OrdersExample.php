@@ -160,11 +160,12 @@ if (!empty($openOrders)) {
 
 	/**
 	 * ##################################
-	 * Update order status with delivered at datetime
+	 * Update order status with delivered at and first delivery attempt datetime
 	 * ##################################
 	 */
+	$firstDeliveryAttempt = new \DateTime('2017-08-29 10:09:25');
 	$deliveredToCustomer = new \DateTime('2017-08-30 12:03:32');
-	$responseStatus = $orders->put()->status($order->getOrderId(), Order::STATUS_DELIVERED, true, '', $deliveredToCustomer);
+	$responseStatus = $orders->put()->status($order->getOrderId(), Order::STATUS_DELIVERED, true, '', $deliveredToCustomer, $firstDeliveryAttempt);
 	print('New order status: ');
 	var_dump($responseStatus);
 	print(PHP_EOL);
