@@ -2,7 +2,7 @@
 
 namespace MPAPI\Entity;
 
-use MPAPI\Entity\AbstractEntity;
+use MPAPI\Lib\Helpers\InputDataHelper;
 
 /**
  * Order entity
@@ -264,6 +264,81 @@ class Order extends AbstractEntity
 	const KEY_MDP = 'mdp';
 
 	/**
+	 * @var string
+	 */
+	const KEY_BRANCHES = 'branches';
+
+	/**
+	 * @var string
+	 */
+	const KEY_BRANCH_ID = 'branch_id';
+
+	/**
+	 * @var string
+	 */
+	const KEY_SECONDARY_BRANCH_ID = 'secondary_branch_id';
+
+	/**
+	 * @var string
+	 */
+	const KEY_OVERRIDDEN = 'overridden';
+
+	/**
+	 * @var string
+	 */
+	const KEY_LAST_CHANGE = 'last_change';
+
+	/**
+	 * @var string
+	 */
+	const KEY_FIRST_DELIVERY_ATTEMPT = 'first_delivery_attempt';
+
+	/**
+	 * @var string
+	 */
+	const KEY_READY_TO_RETURN = 'ready_to_return';
+
+	/**
+	 * @var string
+	 */
+	const KEY_SHIPPED = 'shipped';
+
+	/**
+	 * @var string
+	 */
+	const KEY_OPEN = 'open';
+
+	/**
+	 * @var string
+	 */
+	const KEY_BLOCKED = 'blocked';
+
+	/**
+	 * @var string
+	 */
+	const KEY_LOST = 'lost';
+
+	/**
+	 * @var string
+	 */
+	const KEY_RETURNED = 'returned';
+
+	/**
+	 * @var string
+	 */
+	const KEY_CANCELLED = 'cancelled';
+
+	/**
+	 * @var string
+	 */
+	const KEY_DELIVERED = 'delivered';
+
+	/**
+	 * @var string
+	 */
+	const KEY_SHIPPING = 'shipping';
+
+	/**
 	 *
 	 * @var string
 	 */
@@ -356,6 +431,23 @@ class Order extends AbstractEntity
 			'status' => $this->getStatus(),
 			'items' => $this->getItems(),
 			'mdp' => $this->getMdp(),
+			'branch_id' => $this->getBranchId(),
+			'branches' => [
+				'branch_id' => $this->getMainBranchId(),
+				'secondary_branch_id' => $this->getSecondaryBranchId(),
+				'overridden' => $this->isBranchOverridden(),
+				'last_change' => $this->getBranchLastChange(),
+			],
+			'first_delivery_attempt' => $this->getFirstDeliveryAttempt(),
+			'ready_to_return' => $this->isReadyToReturn(),
+			'shipped' => $this->getShippedStatus(),
+			'open' => $this->getOpenStatus(),
+			'blocked' => $this->getBlockedStatus(),
+			'lost' => $this->getLostStatus(),
+			'returned' => $this->getReturnedStatus(),
+			'cancelled' => $this->getCancelledStatus(),
+			'delivered' => $this->getDeliveredStatus(),
+			'shipping' => $this->getShippingStatus(),
 		];
 	}
 
@@ -378,7 +470,7 @@ class Order extends AbstractEntity
 	/**
 	 * Get order items
 	 *
-	 * @return OrderItem[]
+	 * @return array Order items
 	 */
 	public function getItems()
 	{
@@ -388,21 +480,17 @@ class Order extends AbstractEntity
 	/**
 	 * Get partner id
 	 *
-	 * return integer
+	 * @return int
 	 */
 	public function getPartnerId()
 	{
-		$retval = 0;
-		if (isset($this->data[self::KEY_PARTNER_ID])) {
-			$retval = (int)$this->data[self::KEY_PARTNER_ID];
-		}
-		return $retval;
+		return InputDataHelper::getInt($this->data, [self::KEY_PARTNER_ID]);
 	}
 
 	/**
 	 * Set partner id
 	 *
-	 * @param integer $partnerId
+	 * @param int $partnerId
 	 * @return Order
 	 */
 	public function setPartnerId($partnerId)
@@ -412,7 +500,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return integer
+	 * @return int
 	 */
 	public function getPurchaseId()
 	{
@@ -420,7 +508,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getCurrencyId()
 	{
@@ -428,7 +516,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return integer
+	 * @return int
 	 */
 	public function getDeliveryPrice()
 	{
@@ -436,7 +524,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getDeliveryMethod()
 	{
@@ -444,7 +532,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return integer
+	 * @return int
 	 */
 	public function getDeliveryMethodId()
 	{
@@ -452,7 +540,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return integer
+	 * @return int
 	 */
 	public function getDeliveryPosition()
 	{
@@ -460,7 +548,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getDeliveryDate()
 	{
@@ -472,15 +560,11 @@ class Order extends AbstractEntity
 	 */
 	public function getDeliveredAt()
 	{
-		$retval = '';
-		if (isset($this->data[self::KEY_DELIVERED_AT])) {
-			$retval = $this->data[self::KEY_DELIVERED_AT];
-		}
-		return $retval;
+		return InputDataHelper::getString($this->data, [self::KEY_DELIVERED_AT]);
 	}
 
 	/**
-	 * return double
+	 * @return float
 	 */
 	public function getCod()
 	{
@@ -488,7 +572,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getName()
 	{
@@ -496,19 +580,15 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getCompany()
 	{
-		$retval = '';
-		if (!empty($this->data[self::KEY_ADDRESS][self::KEY_COMPANY])) {
-			$retval = $this->data[self::KEY_ADDRESS][self::KEY_COMPANY];
-		}
-		return $retval;
+		return InputDataHelper::getString($this->data, [self::KEY_ADDRESS, self::KEY_COMPANY]);
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getPhone()
 	{
@@ -516,7 +596,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getEmail()
 	{
@@ -524,7 +604,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getStreet()
 	{
@@ -532,7 +612,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getCity()
 	{
@@ -540,7 +620,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getZip()
 	{
@@ -548,7 +628,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getCountry()
 	{
@@ -556,7 +636,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getConfirmed()
 	{
@@ -564,7 +644,7 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getStatus()
 	{
@@ -572,39 +652,27 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return double
+	 * @return double
 	 */
 	public function getCodPrice()
 	{
-		$retval = 0;
-		if (!empty($this->data[self::KEY_COD_PRICE])) {
-			$retval = $this->data[self::KEY_COD_PRICE];
-		}
-		return $retval;
+		return InputDataHelper::getFloat($this->data, [self::KEY_COD_PRICE]);
 	}
 
 	/**
-	 * return integer
+	 * @return int
 	 */
 	public function getTransportId()
 	{
-		$retval = [];
-		if (isset($this->data[self::KEY_TRANSPORT_ID])) {
-			$retval = $this->data[self::KEY_TRANSPORT_ID];
-		}
-		return $retval;
+		return InputDataHelper::getInt($this->data, [self::KEY_TRANSPORT_ID]);
 	}
 
 	/**
-	 * return string
+	 * @return string
 	 */
 	public function getTrackingNumber()
 	{
-		$retval = '';
-		if (isset($this->data[self::KEY_TRACKING_NO])) {
-			$retval = $this->data[self::KEY_TRACKING_NO];
-		}
-		return $retval;
+		return InputDataHelper::getString($this->data, [self::KEY_TRACKING_NO]);
 	}
 
 	/**
@@ -612,15 +680,11 @@ class Order extends AbstractEntity
 	 */
 	public function getTrackingUrl()
 	{
-		$retval = '';
-		if (isset($this->data[self::KEY_TRACKING_URL])) {
-			$retval = $this->data[self::KEY_TRACKING_URL];
-		}
-		return $retval;
+		return InputDataHelper::getString($this->data, [self::KEY_TRACKING_URL]);
 	}
 
 	/**
-	 * return integer
+	 * @return int
 	 */
 	public function getExternalOrderId()
 	{
@@ -628,51 +692,35 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * return integer
+	 * @return int
 	 */
 	public function getDiscount()
 	{
-		$retval = 0;
-		if (isset($this->data[self::KEY_DISCOUNT])) {
-			$retval = $this->data[self::KEY_DISCOUNT];
-		}
-		return $retval;
+		return InputDataHelper::getInt($this->data, [self::KEY_DISCOUNT]);
 	}
 
 	/**
-	 * return integer
+	 * @return int|null
 	 */
 	public function getPaymentType()
 	{
-		$retval = null;
-		if (isset($this->data[self::KEY_PAYMENT_TYPE])) {
-			$retval = $this->data[self::KEY_PAYMENT_TYPE];
-		}
-		return $retval;
+		return InputDataHelper::getNullableInt($this->data, [self::KEY_PAYMENT_TYPE]);
 	}
 
 	/**
-	 * return date
+	 * @return string|null
 	 */
 	public function getCreated()
 	{
-		$retval = null;
-		if (isset($this->data[self::KEY_CREATED])) {
-			$retval = $this->data[self::KEY_CREATED];
-		}
-		return $retval;
+		return InputDataHelper::getNullableString($this->data, [self::KEY_CREATED]);
 	}
 
 	/**
-	 * return integer
+	 * @return int|null
 	 */
 	public function getCustomerId()
 	{
-		$retval = null;
-		if (isset($this->data[self::KEY_ADDRESS][self::KEY_CUSTOMER_ID])) {
-			$retval = $this->data[self::KEY_ADDRESS][self::KEY_CUSTOMER_ID];
-		}
-		return $retval;
+		return InputDataHelper::getNullableInt($this->data, [self::KEY_ADDRESS, self::KEY_CUSTOMER_ID]);
 	}
 
 	/**
@@ -680,7 +728,7 @@ class Order extends AbstractEntity
 	 */
 	public function getMdp()
 	{
-		return (bool)$this->data[self::KEY_MDP];
+		return (bool) $this->data[self::KEY_MDP];
 	}
 
 	/**
@@ -706,4 +754,125 @@ class Order extends AbstractEntity
 		$this->data[self::KEY_CONFIRMED] = $confirmed;
 		return $this;
 	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getBranchId()
+	{
+		return InputDataHelper::getNullableInt($this->data, [self::KEY_BRANCH_ID]);
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getMainBranchId()
+	{
+		return InputDataHelper::getNullableInt($this->data, [self::KEY_BRANCHES, self::KEY_BRANCH_ID]);
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getSecondaryBranchId()
+	{
+		return InputDataHelper::getNullableInt($this->data, [self::KEY_BRANCHES, self::KEY_SECONDARY_BRANCH_ID]);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isBranchOverridden()
+	{
+		return (bool) $this->data[self::KEY_BRANCHES][self::KEY_OVERRIDDEN];
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getBranchLastChange()
+	{
+		return InputDataHelper::getNullableString($this->data, [self::KEY_BRANCHES, self::KEY_LAST_CHANGE]);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getFirstDeliveryAttempt()
+	{
+		return InputDataHelper::getNullableString($this->data, [self::KEY_FIRST_DELIVERY_ATTEMPT]);
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isReadyToReturn()
+	{
+		return (bool) $this->data[self::KEY_READY_TO_RETURN];
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getShippedStatus()
+	{
+		return InputDataHelper::getNullableString($this->data, [self::KEY_SHIPPED]);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getOpenStatus()
+	{
+		return InputDataHelper::getNullableString($this->data, [self::KEY_OPEN]);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getBlockedStatus()
+	{
+		return InputDataHelper::getNullableString($this->data, [self::KEY_BLOCKED]);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getLostStatus()
+	{
+		return InputDataHelper::getNullableString($this->data, [self::KEY_LOST]);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getReturnedStatus()
+	{
+		return InputDataHelper::getNullableString($this->data, [self::KEY_RETURNED]);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCancelledStatus()
+	{
+		return InputDataHelper::getNullableString($this->data, [self::KEY_CANCELLED]);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getDeliveredStatus()
+	{
+		return InputDataHelper::getNullableString($this->data, [self::KEY_DELIVERED]);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getShippingStatus()
+	{
+		return InputDataHelper::getNullableString($this->data, [self::KEY_SHIPPING]);
+	}
+
 }

@@ -54,7 +54,7 @@ class Product extends AbstractArticleEntity
 
 	/**
 	 *
-	 * @var string
+	 * @var array
 	 */
 	protected $data;
 

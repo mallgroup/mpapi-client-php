@@ -10,9 +10,9 @@ use MPAPI\Entity\ObjectIterator;
  */
 class BasicProductIterator extends ObjectIterator implements \Iterator
 {
+
 	/**
-	 *
-	 * @var array
+	 * @var BasicProduct[]
 	 */
 	protected $data = [];
 	
@@ -35,7 +35,6 @@ class BasicProductIterator extends ObjectIterator implements \Iterator
 	public function getOutputData()
 	{
 		$retval = [];
-		/* @var BasicProduct $basicItem */
 		foreach ($this->data as $basicItem) {
 			$retval[] = $basicItem->getData();
 		}

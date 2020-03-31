@@ -292,7 +292,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set variant ID
 	 *
 	 * @param string $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setId($value)
 	{
@@ -320,7 +320,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set product title
 	 *
 	 * @param string $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setTitle($value)
 	{
@@ -362,7 +362,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set short description of product
 	 *
 	 * @param string $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setShortdesc($value)
 	{
@@ -390,7 +390,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set long description of variant
 	 *
 	 * @param string $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setLongdesc($value)
 	{
@@ -474,7 +474,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set price
 	 *
 	 * @param float $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setPrice($value)
 	{
@@ -504,7 +504,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set purchase price
 	 *
 	 * @param float $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setPurchasePrice($value)
 	{
@@ -534,7 +534,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set rrp price
 	 *
 	 * @param float $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setRrpPrice($value)
 	{
@@ -564,7 +564,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set in stock quantity
 	 *
 	 * @param integer $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setInStock($value)
 	{
@@ -592,7 +592,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set media
 	 *
 	 * @param array $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setMedia(array $value)
 	{
@@ -605,10 +605,10 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	/**
 	 * Add media
 	 *
-	 * @param string $url
-	 * @param boolean $main
+	 * @param string      $url
+	 * @param boolean     $main
 	 * @param string|null $switch
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function addMedia($url, $main = false, $switch = null)
 	{
@@ -653,7 +653,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set promotions
 	 *
 	 * @param array $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setPromotions($value)
 	{
@@ -669,7 +669,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * @param double $price
 	 * @param string $from
 	 * @param string $to
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function addPromotion($price, $from, $to)
 	{
@@ -714,9 +714,9 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	/**
 	 * Set parameter value(s)
 	 *
-	 * @param $paramId
-	 * @param $values
-	 * @return AbstractArticleEntity
+	 * @param string $paramId
+	 * @param array  $values
+	 * @return self
 	 */
 	public function setParameter($paramId, $values)
 	{
@@ -727,9 +727,9 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	/**
 	 * Add parameter
 	 *
-	 * @param string $paramId
+	 * @param string        $paramId
 	 * @param string|number $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function addParameter($paramId, $value)
 	{
@@ -743,9 +743,8 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	}
 
 	/**
-	 *
 	 * @param string $status
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setStatus($status = self::STATUS_ACTIVE)
 	{
@@ -799,7 +798,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set recommended variants
 	 *
 	 * @param array $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setRecommended($value)
 	{
@@ -813,7 +812,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Add recommended products
 	 *
 	 * @param array $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function addRecommended(array $value)
 	{
@@ -843,7 +842,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set labels
 	 *
 	 * @param array $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setLabels(array $value)
 	{
@@ -859,7 +858,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * @param string $labelName
 	 * @param string $from
 	 * @param string $to
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function addLabel($labelName, $from, $to)
 	{
@@ -922,7 +921,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * @param double $width
 	 * @param double $height
 	 * @param double $length
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function addDimensions($weight, $width, $height, $length)
 	{
@@ -941,7 +940,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * set dimension weight
 	 *
 	 * @param double $weight
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setWeight($weight)
 	{
@@ -956,7 +955,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * set dimension width
 	 *
 	 * @param double $width
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setWidth($width)
 	{
@@ -971,7 +970,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * set dimension height
 	 *
 	 * @param double $height
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setHeight($height)
 	{
@@ -986,7 +985,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * set dimension length
 	 *
 	 * @param double $length
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setLength($length)
 	{
@@ -1014,8 +1013,8 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	/**
 	 * Set package size (SMALLBOX or BIGBOX)
 	 *
-	 * @param $size
-	 * @return $this
+	 * @param string $size
+	 * @return self
 	 * @throws UnknownPackageSizeException
 	 */
 	public function setPackageSize($size)
@@ -1045,7 +1044,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set delivery delay
 	 *
 	 * @param integer $value
-	 * @return AbstractArticleEntity
+	 * @return self
 	 */
 	public function setDeliveryDelay($value)
 	{
@@ -1072,7 +1071,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 * Set free delivery
 	 *
 	 * @param bool $status
-	 * @return $this
+	 * @return self
 	 */
 	public function setFreeDelivery($status)
 	{
@@ -1097,7 +1096,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 
 	/**
 	 * @param bool $value
-	 * @return $this
+	 * @return self
 	 */
 	public function setMallboxAllowed($value)
 	{
@@ -1117,8 +1116,8 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	}
 
 	/**
-	 * @param $partnerTitle
-	 * @return $this
+	 * @param string $partnerTitle
+	 * @return self
 	 */
 	public function setPartnerTitle($partnerTitle)
 	{

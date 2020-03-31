@@ -1,4 +1,5 @@
 <?php
+
 namespace MPAPI\Entity\Products;
 
 /**
@@ -8,9 +9,9 @@ namespace MPAPI\Entity\Products;
  */
 class Variant extends AbstractArticleEntity
 {
+
 	/**
-	 *
-	 * @var string
+	 * @var array
 	 */
 	protected $data;
 

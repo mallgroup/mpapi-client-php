@@ -1,14 +1,14 @@
 <?php
 namespace MPAPI\Tests\Unit;
 
+use Codeception\Test\Unit;
 use Codeception\Util\Fixtures;
 use MPAPI\Entity\Order;
 
-class OrderTest extends \Codeception\Test\Unit
+class OrderTest extends Unit
 {
 
 	/**
-	 *
 	 * @var Order
 	 */
 	private $object;
@@ -177,4 +177,15 @@ class OrderTest extends \Codeception\Test\Unit
 	{
 		$this->assertFalse($this->object->getMdp());
 	}
+
+	public function testIsReadyToReturn()
+	{
+		$this->assertFalse($this->object->isReadyToReturn());
+	}
+
+	public function testIsBranchOverridden()
+	{
+		$this->assertFalse($this->object->isBranchOverridden());
+	}
+
 }

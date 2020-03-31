@@ -8,7 +8,10 @@ use MPAPI\Services\Client;
  */
 class TransportsEndpoints
 {
-	/** @var string  */
+
+	/**
+	 * @var string
+	 */
 	const ENDPOINT_TRANSPORTS = '/v1/transports';
 
 	/**
