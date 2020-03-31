@@ -12,13 +12,20 @@ use MPAPI\Entity\Products\AbstractArticleEntity;
  */
 class Pricing extends AbstractEntity
 {
-	/** @var string */
+
+	/**
+	 * @var string
+	 */
 	const KEY_PRICE = AbstractArticleEntity::KEY_PRICE;
 
-	/** @var string */
+	/**
+	 * @var string
+	 */
 	const KEY_RRP_PRICE = AbstractArticleEntity::KEY_RRP_PRICE;
 
-	/** @var string */
+	/**
+	 * @var string
+	 */
 	const KEY_PURCHASE_PRICE = AbstractArticleEntity::KEY_PURCHASE_PRICE;
 
 	/**

@@ -13,13 +13,20 @@ use MPAPI\Services\Client;
  */
 class PricingEndpoints
 {
-	/** @var string */
+
+	/**
+	 * @var string
+	 */
 	const ENDPOINT_PATH = 'products/%s/pricing';
 
-	/** @var string */
+	/**
+	 * @var string
+	 */
 	const ENDPOINT_PATH_VARIANT = 'products/%s/variants/%s/pricing';
 
-	/** @var Client */
+	/**
+	 * @var Client
+	 */
 	private $client;
 
 	/**

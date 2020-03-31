@@ -1,7 +1,6 @@
 <?php
-namespace MPAPI\Entity\Products;
 
-use MPAPI\Entity\Products\AbstractArticleEntity;
+namespace MPAPI\Entity\Products;
 
 /**
  * Basic product entity
@@ -153,13 +152,12 @@ class BasicProduct extends AbstractArticleEntity
 	 * Set product data
 	 *
 	 * @param array $data
-	 * @return BasicProduct
+	 * @return self
 	 */
 	public function setData(array $data)
 	{
 		$this->data = $data;
 		return $this;
 	}
-
 
 }

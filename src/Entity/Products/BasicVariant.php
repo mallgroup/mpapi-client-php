@@ -96,7 +96,7 @@ class BasicVariant extends AbstractArticleEntity
 	 * Set product data
 	 *
 	 * @param array $data
-	 * @return BasicProduct
+	 * @return self
 	 */
 	public function setData(array $data)
 	{

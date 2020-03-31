@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.12.0
+- added support for `branches` order field + missing order fields
+
 ## 3.11.6
 - added support for `first_delivery_attempt` order field
 

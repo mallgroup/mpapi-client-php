@@ -244,6 +244,10 @@ $orderData = [
 		]
 	],
 	'mdp' => false,
+	'branches' => [
+		'overridden' => false,
+	],
+	'ready_to_return' => false,
 ];
 Codeception\Util\Fixtures::add('orderData', $orderData);
 
