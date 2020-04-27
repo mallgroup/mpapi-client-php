@@ -29,7 +29,7 @@ class ExceptionHandler
 	 * @param \Exception $exception
 	 * @return ExceptionHandler
 	 */
-	public function __invoke(\Exception $exception)
+	public function __invoke($exception)
 	{
 		$this->logger->error($exception->getMessage());
 		print($exception->getMessage() . PHP_EOL);
