@@ -232,7 +232,7 @@ When you want to set when the order was delivered to customer, use 5th parameter
 Pass this only with Order::STATUS_DELIVERED, you will recieve 400 Bad request otherwise.
 
 ```
-$responseStatus = $orders->put()->status($order->getOrderId(), Order::STATUS_DELIVERED, true, '', $dateTimeOfDelivery);
+$responseStatus = $orders->put()->status($order->getOrderId(), Order::STATUS_DELIVERED, true, '', new \DateTime('2017-08-29 10:09:25'));
 ```
 
 You will set the tracking number of the order with its order ID as the first and tracking number as the second parameter:  
