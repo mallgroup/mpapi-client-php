@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.12.1
+- added support for `ulozenka_status_history` order field
+
 ## 3.12.0
 - added support for `branches` order field + missing order fields
 

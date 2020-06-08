@@ -13,5 +13,11 @@ $mpApiClient->setExceptionHandler(function (\Exception $exception) {
 	file_put_contents('exceptions.log', date('Y-m-d H:i:s') . ': ' . $exception->getMessage() . PHP_EOL, FILE_APPEND);
 });
 
+// PHP >= 7.0 version with Logger
+$mpApiClient->setExceptionHandler(function (\Throwable $err) use ($mpApiClient) {
+	$mpApiClient->getLogger()->error($err->getMessage());
+	print($err->getMessage() . PHP_EOL);
+});
+
 // send request with custom exception handler
 $mpApiClient->sendRequest('products', RequestMethods::GET);

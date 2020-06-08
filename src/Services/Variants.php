@@ -118,7 +118,8 @@ class Variants extends AbstractVariantsService
 
 		if (!empty($errors)) {
 			$this->client->getLogger()->error('Error during post variants', $errors);
-			$exception = new ApplicationException('Error during post variants ' . implode(', ', $errors));
+			$exception = new ApplicationException('Error during variants post');
+			$exception->setData($errors);
 			throw $exception;
 		}
 
