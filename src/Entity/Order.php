@@ -2,6 +2,8 @@
 
 namespace MPAPI\Entity;
 
+use Exception;
+use MPAPI\Entity\Orders\UlozenkaConsignmentStatusIterator;
 use MPAPI\Lib\Helpers\InputDataHelper;
 
 /**
@@ -12,382 +14,142 @@ use MPAPI\Lib\Helpers\InputDataHelper;
 class Order extends AbstractEntity
 {
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_ORDER_ID = 'order_id';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_ID = 'id';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_PARTNER_ID = 'partner_id';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_PURCHASE_ID = 'purchase_id';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_CURRENCY_ID = 'currency';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_DELIVERY_PRICE = 'delivery_price';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_DELIVERY_METHOD = 'delivery_method';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_DELIVERY_METHOD_ID = 'delivery_method_id';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_DELIVERY_DPOSITION = 'delivery_position';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_DELIVERY_DATE = 'delivery_date';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_DELIVERED_AT = 'delivered_at';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_COD_PRICE = 'cod_price';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_ADDRESS = 'address';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_NAME = 'name';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_COMPANY = 'company';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_PHONE = 'phone';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_EMAIL = 'email';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_STREET = 'street';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_CITY = 'city';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_ZIP = 'zip';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_COUNTRY = 'country';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_CONFIRMED = 'confirmed';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_STATUS = 'status';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_COD = 'cod';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_TRANSPORT_ID = 'transport_id';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_TRACKING_NO = 'tracking_number';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_TRACKING_URL = 'tracking_url';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_EXTERNAL_ORDER_ID = 'external_order_id';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_DISCOUNT = 'discount';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_PAYMENT_TYPE = 'payment_type';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_CREATED = 'created';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_CUSTOMER_ID = 'customer_id';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const URI_ORDERS_TYPE_UNCONFIRMED = 'unconfirmed';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const URI_ORDERS_TYPE_OPEN = 'open';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_TRACKING = 'tracking';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_TRACKING_NUMBER = 'tracking_number';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_ITEMS = 'items';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_ITEM_ID = 'product_id';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_ITEM_QUANTITY = 'quantity';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_ITEM_PRICE = 'price';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const KEY_ITEM_VAT = 'vat';
 
-	/**
-	 * @var string
-	 */
 	const KEY_MDP = 'mdp';
 
-	/**
-	 * @var string
-	 */
 	const KEY_BRANCHES = 'branches';
 
-	/**
-	 * @var string
-	 */
 	const KEY_BRANCH_ID = 'branch_id';
 
-	/**
-	 * @var string
-	 */
 	const KEY_SECONDARY_BRANCH_ID = 'secondary_branch_id';
 
-	/**
-	 * @var string
-	 */
 	const KEY_OVERRIDDEN = 'overridden';
 
-	/**
-	 * @var string
-	 */
 	const KEY_LAST_CHANGE = 'last_change';
 
-	/**
-	 * @var string
-	 */
 	const KEY_FIRST_DELIVERY_ATTEMPT = 'first_delivery_attempt';
 
-	/**
-	 * @var string
-	 */
 	const KEY_READY_TO_RETURN = 'ready_to_return';
 
-	/**
-	 * @var string
-	 */
 	const KEY_SHIPPED = 'shipped';
 
-	/**
-	 * @var string
-	 */
 	const KEY_OPEN = 'open';
 
-	/**
-	 * @var string
-	 */
 	const KEY_BLOCKED = 'blocked';
 
-	/**
-	 * @var string
-	 */
 	const KEY_LOST = 'lost';
 
-	/**
-	 * @var string
-	 */
 	const KEY_RETURNED = 'returned';
 
-	/**
-	 * @var string
-	 */
 	const KEY_CANCELLED = 'cancelled';
 
-	/**
-	 * @var string
-	 */
 	const KEY_DELIVERED = 'delivered';
 
-	/**
-	 * @var string
-	 */
 	const KEY_SHIPPING = 'shipping';
 
-	/**
-	 *
-	 * @var string
-	 */
+	const KEY_ULOZENKA_STATUS_HISTORY = 'ulozenka_status_history';
+
 	const STATUS_BLOCKED = 'blocked';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const STATUS_OPEN = 'open';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const STATUS_SHIPPING = 'shipping';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const STATUS_SHIPPED = 'shipped';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const STATUS_DELIVERED = 'delivered';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const STATUS_RETURNED = 'returned';
 
-	/**
-	 *
-	 * @var string
-	 */
 	const STATUS_CANCELLED = 'cancelled';
 
 	/**
-	 *
 	 * @var array
 	 */
 	private $changes = [];
 
 	/**
-	 *
 	 * @var array
 	 */
 	protected $data;
@@ -396,58 +158,60 @@ class Order extends AbstractEntity
 	 * Get data for output
 	 *
 	 * @return array
+	 * @throws Exception
 	 */
 	public function getData()
 	{
 		return [
-			'id' => (int)$this->getOrderId(),
-			'purchase_id' => (int)$this->getPurchaseId(),
-			'external_order_id' => (int)$this->getExternalOrderId(),
-			'currency' => $this->getCurrencyId(),
-			'delivery_price' => (float)$this->getDeliveryPrice(),
-			'cod_price' => (float)$this->getCodPrice(),
-			'discount' => (float)$this->getDiscount(),
-			'payment_type' => $this->getPaymentType(),
-			'delivery_method' => $this->getDeliveryMethod(),
-			'delivery_method_id' => (int)$this->getDeliveryMethodId(),
-			'tracking_number' => $this->getTrackingNumber(),
-			'tracking_url' => $this->getTrackingUrl(),
-			'ship_date' => $this->getDeliveryDate(),
-			'delivery_date' => $this->getDeliveryDate(),
-			'delivered_at' => $this->getDeliveredAt(),
-			'cod' => (float)$this->getCod(),
-			'address' => [
-				'customer_id' => (int)$this->getCustomerId(),
-				'name' => $this->getName(),
-				'company' => $this->getCompany(),
-				'phone' => $this->getPhone(),
-				'email' => $this->getEmail(),
-				'street' => $this->getStreet(),
-				'city' => $this->getCity(),
-				'zip' => $this->getZip(),
-				'country' => $this->getCountry()
+			'id'                      => (int) $this->getOrderId(),
+			'purchase_id'             => (int) $this->getPurchaseId(),
+			'external_order_id'       => (int) $this->getExternalOrderId(),
+			'currency'                => $this->getCurrencyId(),
+			'delivery_price'          => (float) $this->getDeliveryPrice(),
+			'cod_price'               => (float) $this->getCodPrice(),
+			'discount'                => (float) $this->getDiscount(),
+			'payment_type'            => $this->getPaymentType(),
+			'delivery_method'         => $this->getDeliveryMethod(),
+			'delivery_method_id'      => (int) $this->getDeliveryMethodId(),
+			'tracking_number'         => $this->getTrackingNumber(),
+			'tracking_url'            => $this->getTrackingUrl(),
+			'ship_date'               => $this->getDeliveryDate(),
+			'delivery_date'           => $this->getDeliveryDate(),
+			'delivered_at'            => $this->getDeliveredAt(),
+			'cod'                     => (float) $this->getCod(),
+			'address'                 => [
+				'customer_id' => (int) $this->getCustomerId(),
+				'name'        => $this->getName(),
+				'company'     => $this->getCompany(),
+				'phone'       => $this->getPhone(),
+				'email'       => $this->getEmail(),
+				'street'      => $this->getStreet(),
+				'city'        => $this->getCity(),
+				'zip'         => $this->getZip(),
+				'country'     => $this->getCountry(),
 			],
-			'confirmed' => $this->getConfirmed(),
-			'status' => $this->getStatus(),
-			'items' => $this->getItems(),
-			'mdp' => $this->getMdp(),
-			'branch_id' => $this->getBranchId(),
-			'branches' => [
-				'branch_id' => $this->getMainBranchId(),
+			'confirmed'               => $this->getConfirmed(),
+			'status'                  => $this->getStatus(),
+			'items'                   => $this->getItems(),
+			'mdp'                     => $this->getMdp(),
+			'branch_id'               => $this->getBranchId(),
+			'branches'                => [
+				'branch_id'           => $this->getMainBranchId(),
 				'secondary_branch_id' => $this->getSecondaryBranchId(),
-				'overridden' => $this->isBranchOverridden(),
-				'last_change' => $this->getBranchLastChange(),
+				'overridden'          => $this->isBranchOverridden(),
+				'last_change'         => $this->getBranchLastChange(),
 			],
-			'first_delivery_attempt' => $this->getFirstDeliveryAttempt(),
-			'ready_to_return' => $this->isReadyToReturn(),
-			'shipped' => $this->getShippedStatus(),
-			'open' => $this->getOpenStatus(),
-			'blocked' => $this->getBlockedStatus(),
-			'lost' => $this->getLostStatus(),
-			'returned' => $this->getReturnedStatus(),
-			'cancelled' => $this->getCancelledStatus(),
-			'delivered' => $this->getDeliveredStatus(),
-			'shipping' => $this->getShippingStatus(),
+			'first_delivery_attempt'  => $this->getFirstDeliveryAttempt(),
+			'ready_to_return'         => $this->isReadyToReturn(),
+			'shipped'                 => $this->getShippedStatus(),
+			'open'                    => $this->getOpenStatus(),
+			'blocked'                 => $this->getBlockedStatus(),
+			'lost'                    => $this->getLostStatus(),
+			'returned'                => $this->getReturnedStatus(),
+			'cancelled'               => $this->getCancelledStatus(),
+			'delivered'               => $this->getDeliveredStatus(),
+			'shipping'                => $this->getShippingStatus(),
+			'ulozenka_status_history' => $this->getUlozenkaStatusHistory()->toArray(),
 		];
 	}
 
@@ -873,6 +637,16 @@ class Order extends AbstractEntity
 	public function getShippingStatus()
 	{
 		return InputDataHelper::getNullableString($this->data, [self::KEY_SHIPPING]);
+	}
+
+	/**
+	 * @return UlozenkaConsignmentStatusIterator
+	 * @throws Exception
+	 */
+	public function getUlozenkaStatusHistory()
+	{
+		$data = isset($this->data[self::KEY_ULOZENKA_STATUS_HISTORY]) ? $this->data[self::KEY_ULOZENKA_STATUS_HISTORY] : [];
+		return UlozenkaConsignmentStatusIterator::createFromArray($data);
 	}
 
 }

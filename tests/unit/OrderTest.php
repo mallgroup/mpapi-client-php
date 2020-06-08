@@ -4,6 +4,7 @@ namespace MPAPI\Tests\Unit;
 use Codeception\Test\Unit;
 use Codeception\Util\Fixtures;
 use MPAPI\Entity\Order;
+use MPAPI\Entity\Orders\UlozenkaConsignmentStatusIterator;
 
 class OrderTest extends Unit
 {
@@ -186,6 +187,12 @@ class OrderTest extends Unit
 	public function testIsBranchOverridden()
 	{
 		$this->assertFalse($this->object->isBranchOverridden());
+	}
+
+	public function testGetUlozenkaStatusHistory()
+	{
+		$this->assertInstanceOf(UlozenkaConsignmentStatusIterator::class, $this->object->getUlozenkaStatusHistory());
+		$this->assertEmpty($this->object->getUlozenkaStatusHistory()->toArray());
 	}
 
 }

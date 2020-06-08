@@ -197,7 +197,8 @@ class Products extends AbstractService
 
 		if (!empty($errors)) {
 			$this->client->getLogger()->error('Failed to post products', $errors);
-			$exception = new ApplicationException('Failed to post products: ' . implode(', ', $errors));
+			$exception = new ApplicationException('Failed to post products');
+			$exception->setData($errors);
 			throw $exception;
 		}
 
