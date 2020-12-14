@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.12.2
+- fixed incorrect return type for `Order::getPaymentType` from `?int` to `?string`
+
 ## 3.12.1
 - added support for `ulozenka_status_history` order field
 
