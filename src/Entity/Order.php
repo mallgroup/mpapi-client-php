@@ -464,11 +464,11 @@ class Order extends AbstractEntity
 	}
 
 	/**
-	 * @return int|null
+	 * @return string|null
 	 */
 	public function getPaymentType()
 	{
-		return InputDataHelper::getNullableInt($this->data, [self::KEY_PAYMENT_TYPE]);
+		return InputDataHelper::getNullableString($this->data, [self::KEY_PAYMENT_TYPE]);
 	}
 
 	/**

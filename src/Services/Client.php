@@ -4,7 +4,6 @@ namespace MPAPI\Services;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
 use MPAPI\Entity\Paging;
@@ -27,7 +26,7 @@ class Client
 	 *
 	 * @var string
 	 */
-	const APPLICATION_NAME = 'mpapic-v3.12.1';
+	const APPLICATION_NAME = 'mpapic-v3.12.2';
 
 	/**
 	 *
