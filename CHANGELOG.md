@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.12.3
+- added support for `energy_label` and `information_list` fields of media
+
 ## 3.12.2
 - fixed incorrect return type for `Order::getPaymentType` from `?int` to `?string`
 

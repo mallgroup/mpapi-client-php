@@ -52,20 +52,26 @@ $media = [
 	[
 		'url' => 'https://i.cdn.nrholding.net/15880666',
 		'main' => false,
-		'switch' => true
+		'switch' => true,
+		'energy_label' => false,
+		'information_list' => false
 	]
 ];
 
 $ordinaryMedia = [
 	'url' => 'https://i.cdn.nrholding.net/15880666',
 	'main' => false,
-	'switch' => false
+	'switch' => false,
+	'energy_label' => false,
+	'information_list' => false
 ];
 
 $mainMedia = [
 	'url' => 'https://i.cdn.nrholding.net/15880228',
 	'main' => true,
-	'switch' => false
+	'switch' => false,
+	'energy_label' => false,
+	'information_list' => false
 ];
 
 Codeception\Util\Fixtures::add('inStock', $product['availability']['in_stock']);
@@ -126,11 +132,15 @@ $variants = [
 		'media' => [
 			[
 				'url' => 'https://i.cdn.nrholding.net/15880228',
-				'main' => true
+				'main' => true,
+				'energy_label' => false,
+				'information_list' => false
 			],
 			[
 				'url' => 'https://i.cdn.nrholding.net/15880666',
-				'main' => false
+				'main' => false,
+				'energy_label' => true,
+				'information_list' => false
 			]
 		],
 		'promotions' => [
@@ -169,7 +179,9 @@ $variant = [
 		[
 			'url' => 'https://i.cdn.nrholding.net/15880228',
 			'main' => true,
-			'switch' => 'MP_ATR_TEST1_CHAR'
+			'switch' => 'MP_ATR_TEST1_CHAR',
+			'energy_label' => false,
+			'information_list' => false
 		]
 	],
 	'promotions' => [],

@@ -79,7 +79,9 @@ __parameters__ (array) - an array of parameters; each parameter can contain one 
 __media*__ (array) - variant media; supported types are: JPEG, GIF, PNG, the format of pictures can be either 4:3 (max. width 2000px) or 3:4 (max. height 2000px), max. size 1.5 MB; the picture will be updated only when the URL is different from the previous version - use some parameter, e.g. timestamp, in the URL to update your pictures; parameters:  
  - __url*__ (string, max. 200 chars) - the media URL is validated – the picture must be available from this URL when the variant is sent via API,  
  - __main*__ (boolean) - identifies the main picture; just one image has to be set main,  
- - __switch__ (string) default null - identifies the media used as a variant switch - put one of the variable parameters  
+ - __switch__ (string) default null - identifies the media used as a variant switch - put one of the variable parameters
+ - __energy_label__ (boolean) - identifies the picture as energy label,
+ - __information_list__ (boolean) - identifies the picture as information list,
 
 __promotions__ (array) - promotions data of variant. Promotion is highlighted on the product list/detail of product.  parameters:  
  - __price*__ (number) - promotion price,  
