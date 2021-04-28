@@ -102,6 +102,18 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	const KEY_SWITCH = 'switch';
 
+    /**
+     *
+     * @var string
+     */
+    const KEY_ENERGY_LABEL = 'energy_label';
+
+    /**
+     *
+     * @var string
+     */
+    const KEY_INFORMATION_LIST = 'information_list';
+
 	/**
 	 *
 	 * @var string
@@ -605,17 +617,21 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	/**
 	 * Add media
 	 *
-	 * @param string      $url
-	 * @param boolean     $main
+	 * @param string $url
+	 * @param boolean $main
 	 * @param string|null $switch
+	 * @param boolean $energyLabel
+	 * @param boolean $informationList
 	 * @return self
 	 */
-	public function addMedia($url, $main = false, $switch = null)
+	public function addMedia($url, $main = false, $switch = null, $energyLabel = false, $informationList = false)
 	{
 		$mediaCurrent = [
 			self::KEY_URL => $url,
 			self::KEY_MAIN => (bool)$main,
-			self::KEY_SWITCH => $switch
+			self::KEY_SWITCH => $switch,
+			self::KEY_ENERGY_LABEL => $energyLabel,
+			self::KEY_INFORMATION_LIST => $informationList
 		];
 		if (!isset($this->data[self::KEY_MEDIA])) {
 			$this->data[self::KEY_MEDIA][] = $mediaCurrent;

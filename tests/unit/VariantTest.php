@@ -239,7 +239,7 @@ class VariantTest extends \Codeception\Test\Unit
 		$media = Fixtures::get('media');
 		$this->object->setMedia([]);
 		$this->assertEmpty($this->object->getMedia());
-		$this->object->addMedia($media[2]['url'], $media[2]['main'], $media[2]['switch']);
+		$this->object->addMedia($media[2]['url'], $media[2]['main'], $media[2]['switch'], $media[2]['energy_label'], $media[2]['information_list']);
 		$this->assertEquals($media[2], current($this->object->getMedia()));
 	}
 
