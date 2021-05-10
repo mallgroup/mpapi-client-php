@@ -20,6 +20,12 @@ class CategoriesEndpoints extends AbstractEndpoints
 	 *
 	 * @var string
 	 */
+	const ENDPOINT_TREE = '%s/tree/%s';
+
+	/**
+	 *
+	 * @var string
+	 */
 	const ENDPOINT_SEARCH = '%s/search/%s';
 
 	/**
@@ -54,6 +60,20 @@ class CategoriesEndpoints extends AbstractEndpoints
 	public function categories()
 	{
 		$response = $this->client->sendRequest(self::ENDPOINT_PATH, 'GET');
+		$dataCollector = new DataCollector($this->client, $response);
+		return $dataCollector->getData();
+	}
+
+	/**
+	 * Get menu of categories
+	 *
+	 * @param string $shopId
+	 *
+	 * @return array
+	 */
+	public function tree($shopId)
+	{
+		$response      = $this->client->sendRequest(sprintf(self::ENDPOINT_TREE, self::ENDPOINT_PATH, $shopId), 'GET');
 		$dataCollector = new DataCollector($this->client, $response);
 		return $dataCollector->getData();
 	}
