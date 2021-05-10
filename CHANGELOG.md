@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.13.0
+- added support for `energy_label` and `information_list` fields of media
+
 ## 3.12.3
 - added support for `energy_label` and `information_list` fields of media
 
