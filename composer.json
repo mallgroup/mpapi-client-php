@@ -3,9 +3,9 @@
   "description" : "Mall marketplace API client",
   "version" : "3.12.4",
   "require" : {
-    "php" : "^5.5 || ^7.0",
+    "php" : "^5.5 || ^7.0 || ^8.0",
     "guzzlehttp/guzzle" : ">=6.2.3",
-    "psr/log" : "~1.0.2",
+    "psr/log" : "^1.0.2",
     "ext-json": "*",
     "ext-bcmath": "*"
   },
