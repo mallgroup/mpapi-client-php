@@ -148,6 +148,14 @@ class ProductTest extends \Codeception\Test\Unit
 		$this->assertContains('MP_COLOR', array_keys($this->object->getParameters()));
 	}
 
+	public function testRemoveParameter()
+	{
+		$this->object->addParameter('MP_COLOR', 'blue');
+		$this->assertContains('MP_COLOR', array_keys($this->object->getParameters()));
+		$this->object->removeParameter('MP_COLOR');
+		$this->assertNotContains('MP_COLOR', array_keys($this->object->getParameters()));
+	}
+
 	public function testGetRecommended()
 	{
 		$this->assertEmpty($this->object->getRecommended());
