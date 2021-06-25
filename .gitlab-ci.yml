@@ -1,0 +1,120 @@
+.cache:
+  - .: &composer-cache
+      key:
+        prefix: composer-cache
+        files:
+          - composer.lock
+      paths:
+        - vendor/
+      policy: pull
+
+stages:
+  - init
+  - lint
+  - analysis
+  - testing
+
+# Install composer only once at the beginning, then only use the cached file
+init:
+  image: registry.mallgroup.com/di/php:7.4-alpine
+  stage: init
+  cache:
+    key:
+      prefix: composer-cache
+      files:
+        - composer.lock
+    paths:
+      - vendor/
+  script:
+    - composer2 validate --strict
+    - composer2 install --prefer-dist --no-ansi --no-interaction
+  tags:
+    - docker
+
+phpmd:
+  image: registry.mallgroup.com/di/php:7.4-alpine
+  stage: lint
+  needs:
+    - init
+  cache:
+    - *composer-cache
+  script:
+    - $(pwd)/vendor/bin/phpmd ./src text ./phpmd.xml
+  tags:
+    - docker
+
+CS:
+  image: registry.mallgroup.com/di/php:7.4-alpine
+  stage: lint
+  needs:
+    - init
+  cache:
+    - *composer-cache
+  script:
+    - $(pwd)/vendor/bin/phpcs --standard=phpcs-ruleset.xml -d memory_limit=-1 --extensions=php --colors -sp ./src
+  only:
+    - branches
+  tags:
+    - docker
+
+phpstan:
+  image: registry.mallgroup.com/di/php:7.4-alpine
+  stage: analysis
+  needs:
+    - init
+  cache:
+    - *composer-cache
+    - key: phpstan-cache
+      paths:
+        - tmp/phpstan
+  before_script:
+    - mkdir -p $(pwd)/tmp/phpstan
+    - touch $(pwd)/.env
+  script:
+    - $(pwd)/vendor/bin/codecept build
+    - $(pwd)/vendor/bin/phpstan analyse -c ./phpstan.neon --no-progress --memory-limit=-1
+  only:
+    - branches
+  tags:
+    - docker
+
+psalm:
+  image: registry.mallgroup.com/di/php:7.4-alpine
+  stage: analysis
+  needs:
+    - init
+  cache:
+    - *composer-cache
+  script:
+    - $(pwd)/vendor/bin/psalm
+  only:
+    - branches
+  tags:
+    - docker
+
+unit-tests:
+  image: registry.mallgroup.com/di/php:7.4-extras
+  stage: testing
+  cache:
+    - *composer-cache
+  script:
+    - touch $(pwd)/.env # .env file must exist, even if envs are taken from environment and not .env file
+    - php $(pwd)/vendor/bin/codecept run unit --env dev --no-colors
+  only:
+    - branches
+  tags:
+    - docker
+
+coverage:
+  image: registry.mallgroup.com/di/php:7.4-extras
+  stage: testing
+  cache:
+    - *composer-cache
+  script:
+    - touch $(pwd)/.env # .env file must exist, even if envs are taken from environment and not .env file
+    # run all codeception tests with coverage enabled
+    - php -d pcov.exclude="~vendor~" $(pwd)/vendor/bin/codecept run --env dev --coverage-xml --phpunit-xml --no-colors
+  only:
+    - branches
+  tags:
+    - docker

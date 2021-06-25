@@ -1,0 +1,11 @@
+# Codeception Test Suite Configuration
+#
+# Suite for unit or integration tests.
+
+actor: UnitTester
+namespace: MpApiClient\Tests\_support
+modules:
+    enabled:
+        - Asserts
+        - MpApiClient\Tests\_support\Helper\Unit
+    step_decorators: ~        

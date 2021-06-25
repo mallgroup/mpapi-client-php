@@ -1,0 +1,31 @@
+parameters:
+    inferPrivatePropertyTypeFromConstructor: false
+    checkGenericClassInNonGenericObjectType: false
+    tmpDir: tmp/phpstan
+    level: max
+    bootstrapFiles:
+        - src/MpApiClient.php
+    paths:
+        - src
+        - tests
+
+    # Exclude auto generated codeception files from static analysis
+    excludes_analyse:
+        - */tests/_data/*
+        - */tests/_support/_generated/*
+        # Ignore functional tests, because PHPStan does not support Codeception Asserts module in Functional test suite
+        - */tests/functional/*
+
+    ignoreErrors:
+        -
+            # we do not know what is the exact content of the response (it can be single object, or list of objects etc.)
+            message: '#Method MpApiClient\\Common\\AbstractMpApiClient::sendQueryRequest\(\) return type has no value type specified in iterable type array#'
+            path: src/Common/AbstractMpApiClient.php
+        -
+            # we do not know what is the exact content of the request (it can be single object, or list of objects etc.)
+            message: '#Method MpApiClient\\Common\\AbstractMpApiClient::sendJson\(\) has parameter \$content with no value type specified in iterable type array#'
+            path: src/Common/AbstractMpApiClient.php
+        -
+            # we do not know what is the exact content of the response (it can be single object, or list of objects etc.)
+            message: '#Method MpApiClient\\Common\\AbstractMpApiClient::sendJson\(\) return type has no value type specified in iterable type array#'
+            path: src/Common/AbstractMpApiClient.php

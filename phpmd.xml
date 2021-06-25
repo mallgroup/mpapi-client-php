@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<ruleset name="mpapi-client"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+
+    <rule ref="rulesets/cleancode.xml">
+        <description>Allow "else" expression.</description>
+        <exclude name="ElseExpression"/>
+        <description>Allow factory methods.</description>
+        <exclude name="StaticAccess"/>
+        <description>Allow DTOs and Entities that contain bool properties (there is no way to add exceptions).</description>
+        <exclude name="BooleanArgumentFlag"/>
+    </rule>
+
+    <rule ref="rulesets/naming.xml">
+        <description>Exclude variable and method length restriction to allow custom length definition.</description>
+        <exclude name="ShortVariable"/>
+        <exclude name="LongVariable"/>
+    </rule>
+    <rule ref="rulesets/naming.xml/ShortVariable">
+        <description>Allow variables with name length of 2 characters (e.g. $id, $to).</description>
+        <properties>
+            <property name="minimum" value="2"/>
+            <property name="exceptions" value="e"/>
+        </properties>
+    </rule>
+    <rule ref="rulesets/naming.xml/LongVariable">
+        <description>Allow variables with name length up to 30 characters.</description>
+        <properties>
+            <property name="maximum" value="30"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/codesize.xml">
+        <description>Allow entities with more than 10 parameters.</description>
+        <exclude name="ExcessiveParameterList"/>
+        <description>Allow entities with more than 15 fields.</description>
+        <exclude name="TooManyFields"/>
+        <description>Allow clients with more public methods.</description>
+        <exclude name="TooManyPublicMethods"/>
+    </rule>
+    <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
+        <properties>
+            <property name="maxmethods" value="15"/>
+            <property name="ignorepattern" value="(^(set|get|is|has))i"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/controversial.xml"/>
+
+    <rule ref="rulesets/design.xml">
+        <exclude name="CouplingBetweenObjects"/>
+    </rule>
+    <rule ref="rulesets/design.xml/CouplingBetweenObjects">
+        <description>Allow MpApiClient itself, which couples all domain clients together.</description>
+        <properties>
+            <property name="maximum" value="22"/>
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/unusedcode.xml"/>
+
+</ruleset>

@@ -1,0 +1,22 @@
+namespace: MpApiClient\Tests
+paths:
+    tests: tests
+    output: tests/_output
+    data: tests/_data
+    support: tests/_support
+    envs: tests/_envs
+actor_suffix:
+settings:
+    colors: true
+    error_level: E_ALL
+    memory_limit: 1024M
+extensions:
+    enabled:
+        - Codeception\Extension\RunFailed
+coverage:
+    enabled: true
+    include:
+        - src/*
+params:
+    - .env
+    - env # prefer environment values over .env file
