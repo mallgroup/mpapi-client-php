@@ -1,0 +1,21 @@
+# Codeception Test Suite Configuration
+#
+# Suite for functional tests
+# Emulate web requests and make application process them
+# Include one of framework modules (Symfony2, Yii2, Laravel5, Phalcon4) to use it
+# Remove this suite if you don't use frameworks
+
+actor: FunctionalTester
+namespace: MpApiClient\Tests\_support
+bootstrap: bootstrap.php
+modules:
+    enabled:
+        # add a framework module here
+        - MpApiClient\Tests\_support\Helper\Functional
+        - Asserts
+    config:
+        MpApiClient\Tests\_support\Helper\Functional:
+            base_uri: %API_PATH%
+            client_id: %CLIENT_ID%
+
+    step_decorators: ~

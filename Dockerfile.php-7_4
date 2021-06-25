@@ -1,0 +1,21 @@
+FROM composer:2 AS composer
+
+FROM php:7.4-cli-alpine
+
+RUN apk add --no-cache \
+    bash~=5.1 \
+    # install build dependencies
+    && apk add --no-cache --virtual \
+    build_deps \
+    autoconf~=2 \
+    build-base~=0.5 \
+    # install PCOV
+    && pecl install pcov-1.0.9 \
+    && docker-php-ext-enable pcov \
+    # create user to run as
+    && adduser -D php
+
+# install composer
+COPY --from=composer --chown=php /usr/bin/composer /usr/local/bin/composer
+
+USER php
