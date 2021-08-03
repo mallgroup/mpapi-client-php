@@ -49,7 +49,7 @@ The response contains basic data of all orders:
 		"ship_date": "2016-12-10",
 		"delivered_at": "2018-02-14 08:13:00",
 		"status": "delivered",
-		"payment_type: "A",
+		"payment_type": "A",
 		"confirmed": true,
 		"mdp": true
     ],
@@ -87,7 +87,7 @@ The response contains basic data of all orders:
 		"ship_date": "2016-12-10",
 		"delivered_at": "2018-02-14 08:13:00",
 		"status": "delivered",
-		"payment_type: "A",
+		"payment_type": "A",
 		"confirmed": true,
 		"mdp": true,
 		"test": false  
@@ -101,7 +101,7 @@ The response contains basic data of all orders:
 		"ship_date": "2016-12-10",
 		"delivered_at": "2018-02-14 08:13:00",
 		"status": "delivered",
-		"payment_type: "A",
+		"payment_type": "A",
 		"confirmed": true,
 		"mdp": true,
 		"test": true  
