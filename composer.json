@@ -1,5 +1,5 @@
 {
-  "name" : "mallgroup/mpapi-client",
+  "name" : "qwerin/mpapi-client",
   "description" : "Mall marketplace API client",
   "version" : "3.13.0",
   "require" : {
@@ -28,6 +28,9 @@
     "role" : "Developer"
   }, {
     "name" : "Martin Drlik",
+    "role" : "Developer"
+  }, {
+    "name" : "Jan Svoboda",
     "role" : "Developer"
   }]
 }
