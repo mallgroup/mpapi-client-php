@@ -9,6 +9,7 @@ use MPAPI\Entity\Paging;
 use MPAPI\Entity\Products\BasicProductIterator;
 use MPAPI\Entity\Products\Product;
 use MPAPI\Entity\AbstractEntity;
+use MPAPI\Entity\Products\Variant;
 use MPAPI\Exceptions\ApplicationException;
 use MPAPI\Exceptions\ClientIdException;
 use MPAPI\Exceptions\EndpointNotfoundException;
@@ -273,6 +274,56 @@ class Products extends AbstractService
 
 		return true;
 	}
+
+    /**
+     * Availability/Batch update of product/variant availability
+     *
+     * @param null $forceToken
+     * @return bool
+     * @throws ApplicationException
+     */
+    public function availabilityBatch( $forceToken = null ) {
+        if ($forceToken !== null) {
+            $this->client->setArgument(AbstractService::ARG_FORCE_TOKEN, $forceToken);
+        } else {
+            $this->client->removeArgument(AbstractService::ARG_FORCE_TOKEN);
+        }
+
+        $data = [];
+        $i = 0;
+        if (!empty($this->entities)) {
+            foreach ($this->entities as $productEntity) {
+                $data[] = [
+                    'id' => $productEntity->getId(),
+                    "status" => $productEntity->getStatus(),
+                    'in_stock' => $productEntity->getInStock(),
+                ];
+                foreach ($productEntity->getVariants() as $variantData) {
+                    $variant = new Variant();
+                    $variant->setData($variantData);
+                    $data[] = [
+                        'id' => $variant->getId(),
+                        "status" => $variant->getStatus(),
+                        'in_stock' => $variant->getInStock(),
+                    ];
+                }
+            }
+
+            $limitData = array_chunk($data, 999);
+            foreach ($limitData as $dataToSend) {
+                $response = $this->productsEndpoints->availabilityBatchsProducts($data);
+                if ($response->getStatusCode() === 204) {
+                    continue;
+                } else {
+                    $exception = new ApplicationException();
+                    $exception->setData(['response' => json_decode($response->getBody())]);
+
+                    throw $exception;
+                }
+            }
+        }
+        return true;
+    }
 
 	/**
 	 * Activate product
