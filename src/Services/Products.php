@@ -311,7 +311,7 @@ class Products extends AbstractService
 
             $limitData = array_chunk($data, 999);
             foreach ($limitData as $dataToSend) {
-                $response = $this->productsEndpoints->availabilityBatchsProducts($data);
+                $response = $this->productsEndpoints->availabilityBatchProducts($data);
                 if ($response->getStatusCode() === 204) {
                     continue;
                 } else {
