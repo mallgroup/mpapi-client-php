@@ -45,8 +45,9 @@ There are 2 main ways to initialize the client
 ```php
 <?php declare(strict_types=1);
 
+use MpApiClient\Common\Authenticators\ClientIdAuthenticator;
 use MpApiClient\MpApiClient;
-use MpApiClient\Common\Authenticators\ClientIdAuthenticator;use MpApiClient\MpApiClientOptions;
+use MpApiClient\MpApiClientOptions;
 
 require 'vendor/autoload.php';
 
@@ -74,9 +75,9 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\HandlerStack;
 use MpApiClient\Brand\BrandClient;
+use MpApiClient\Common\Authenticators\ClientIdAuthenticator;
 use MpApiClient\MpApiClient;
 use MpApiClient\MpApiClientOptions;
-use MpApiClient\Common\Authenticators\ClientIdAuthenticator;
 
 require 'vendor/autoload.php';
 

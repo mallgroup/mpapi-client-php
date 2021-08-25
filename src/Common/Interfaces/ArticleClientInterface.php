@@ -20,7 +20,6 @@ interface ArticleClientInterface
 
     /**
      * @throws MpApiException
-     * @throws Exception
      */
     public function listProducts(?Filter $filter): BasicProductList;
 
@@ -38,7 +37,6 @@ interface ArticleClientInterface
 
     /**
      * @throws MpApiException
-     * @throws Exception
      */
     public function updateProduct(ProductRequest $product): void;
 
@@ -49,7 +47,6 @@ interface ArticleClientInterface
 
     /**
      * @throws MpApiException
-     * @throws Exception
      */
     public function getProductAvailability(string $productId): Availability;
 
@@ -66,7 +63,6 @@ interface ArticleClientInterface
 
     /**
      * @throws MpApiException
-     * @throws Exception
      */
     public function listProductVariants(string $productId, ?Filter $filter): BasicVariantList;
 
@@ -84,7 +80,6 @@ interface ArticleClientInterface
 
     /**
      * @throws MpApiException
-     * @throws Exception
      */
     public function updateVariant(string $productId, VariantRequest $variant): void;
 
@@ -95,7 +90,6 @@ interface ArticleClientInterface
 
     /**
      * @throws MpApiException
-     * @throws Exception
      */
     public function getVariantAvailability(string $productId, string $variantId): Availability;
 

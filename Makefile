@@ -1,7 +1,7 @@
 include .env
 
 MOUNT_PATH=/tmp/client
-DOCKER_IMAGE=ghcr.io/mallgroup/mpapi-client-php/php:7.4-alpine # TODO: `docker build -t "ghcr.io/mallgroup/mpapi-client-php/php:7.4-alpine" -f Dockerfile.php-7_4 .`
+DOCKER_IMAGE=ghcr.io/mallgroup/mpapi-client-php/php-74-composer:1.0
 DOCKER_RUN=docker run -it --rm -w $(MOUNT_PATH) -v ${PWD}:$(MOUNT_PATH) $(DOCKER_IMAGE)
 
 help:
