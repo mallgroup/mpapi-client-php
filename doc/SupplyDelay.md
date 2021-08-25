@@ -96,7 +96,7 @@ $supplyDelay = $supplyDelayClient->upsertForProduct(
         new DateTime('now + 1month'),
     )
 );
-var_dump($supplyDelay);
+echo json_encode($supplyDelay, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 ```
 
 Example above prints out
@@ -153,7 +153,7 @@ $supplyDelay = $supplyDelayClient->upsertForVariant(
         new DateTime('now + 1month'),
     )
 );
-var_dump($supplyDelay);
+echo json_encode($supplyDelay, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 ```
 
 Example above prints out
