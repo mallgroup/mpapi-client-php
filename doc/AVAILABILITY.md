@@ -32,5 +32,4 @@ $products->put('productId', $availability, 'variantId');
 
 ``` 
 
-See more:
-> **/root/vendor/mallgroup/mpapi-client/Example/AvailabilityExample.php**  
+See more: [AvailabilityExample.php](../Example/AvailabilityExample.php)  

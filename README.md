@@ -1,3 +1,10 @@
+# New v4 beta version available
+- branch with code is available [here](https://github.com/mallgroup/mpapi-client-php/tree/client-v4-beta)
+- release is available [here](https://github.com/mallgroup/mpapi-client-php/releases/tag/v4.0.0-beta)
+- please, provide your feedback and suggestions [here](https://github.com/mallgroup/mpapi-client-php/issues/25)
+
+---
+
 # Mall marketplace API Client
 
 ## Description
