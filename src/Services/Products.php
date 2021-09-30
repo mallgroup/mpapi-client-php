@@ -9,6 +9,7 @@ use MPAPI\Entity\Paging;
 use MPAPI\Entity\Products\BasicProductIterator;
 use MPAPI\Entity\Products\Product;
 use MPAPI\Entity\AbstractEntity;
+use MPAPI\Entity\Products\Variant;
 use MPAPI\Exceptions\ApplicationException;
 use MPAPI\Exceptions\ClientIdException;
 use MPAPI\Exceptions\EndpointNotfoundException;
@@ -271,6 +272,59 @@ class Products extends AbstractService
 			throw $exception;
 		}
 
+		return true;
+	}
+
+	/**
+	 * Availability/Batch update of product/variant availability
+	 *
+	 * @param Product[]|null $products
+	 * @return bool
+	 * @throws ApplicationException
+	 * @throws ClientIdException
+	 */
+	public function availabilityBatch(array $products = null)
+	{
+		if ($products === null) {
+			$products = $this->entities;
+		}
+		if (empty($products)) {
+			return true;
+		}
+
+		$data = [];
+		foreach ($products as $productEntity) {
+			$data[] = [
+				'id'       => $productEntity->getId(),
+				'status'   => $productEntity->getStatus(),
+				'in_stock' => $productEntity->getInStock(),
+			];
+			foreach ($productEntity->getVariants() as $variantData) {
+				$variant = new Variant();
+				$variant->setData($variantData);
+				$data[] = [
+					'id'       => $variant->getId(),
+					'status'   => $variant->getStatus(),
+					'in_stock' => $variant->getInStock(),
+				];
+			}
+		}
+
+		$limitData = array_chunk($data, 999);
+		foreach ($limitData as $dataToSend) {
+			$response = $this->productsEndpoints->availabilityBatchProducts($dataToSend);
+			if ($response->getStatusCode() === 204) {
+				continue;
+			}
+
+			$exception = new ApplicationException();
+			$exception->setData([
+				'response'     => json_decode($response->getBody()),
+				'responseCode' => $response->getStatusCode(),
+			]);
+
+			throw $exception;
+		}
 		return true;
 	}
 

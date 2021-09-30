@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.14.0
+- added support for batch `availability` endpoint
+
 ## 3.13.0
 - added support for `energy_label` and `information_list` fields of media
 

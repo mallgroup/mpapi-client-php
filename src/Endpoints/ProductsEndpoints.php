@@ -23,6 +23,11 @@ class ProductsEndpoints
 	const ENDPOINT_ACTIVATE = 'activate';
 
 	/**
+	 * @var string
+	 */
+	const ENDPOINT_AVAILABILITY = 'availability';
+
+	/**
 	 * @var Client
 	 */
 	private $client;
@@ -132,6 +137,18 @@ class ProductsEndpoints
 	{
 		return $this->client->sendRequest(self::ENDPOINT_PRODUCTS . "/" . $productId . "/" . self::ENDPOINT_ACTIVATE, 'POST');
 
+	}
+
+	/**
+	 * POST product
+	 *
+	 * @param array $data
+	 * @return Response
+	 * @throws \MPAPI\Exceptions\ClientIdException
+	 */
+	public function availabilityBatchProducts(array $data)
+	{
+		return $this->client->sendRequest(self::ENDPOINT_AVAILABILITY, 'POST', $data);
 	}
 
 	/**
