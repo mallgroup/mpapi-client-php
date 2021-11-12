@@ -113,6 +113,7 @@ final class CategoryClientCest
             $I->assertIsInt($menuItem->getMenuItemId());
             $I->assertIsString($menuItem->getTitle());
             $I->assertIsString($menuItem->getUrl());
+            $I->assertIsBool($menuItem->isPhe());
             $I->assertInstanceOf(TreeSapCategoryIterator::class, $menuItem->getSapCategories());
 
             $this->assertTreeSapCategories($I, $menuItem->getSapCategories());

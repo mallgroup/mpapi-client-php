@@ -148,7 +148,8 @@ Example above prints out
                     "segment": "MP"
                   }
                 ],
-                "url": "https://www.mall.cz/darkove-kose-pro-deti"
+                "url": "https://www.mall.cz/darkove-kose-pro-deti",
+                "isPhe": false
               },
               ...
             ]

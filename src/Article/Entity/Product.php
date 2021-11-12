@@ -27,6 +27,7 @@ final class Product extends AbstractArticle
     protected array   $variableParameters;
     protected ?string $partnerTitle;
     protected ?string $brandId;
+    protected ?float  $weeeFee;
 
     /**
      * @param string            $id
@@ -59,6 +60,7 @@ final class Product extends AbstractArticle
      * @param bool              $mallboxAllowed
      * @param string|null       $partnerTitle
      * @param string|null       $brandId
+     * @param float|null        $weeeFee
      */
     private function __construct(
         string $id,
@@ -90,7 +92,8 @@ final class Product extends AbstractArticle
         PackageSizeEnum $packageSize,
         bool $mallboxAllowed,
         ?string $partnerTitle,
-        ?string $brandId
+        ?string $brandId,
+        ?float $weeeFee
     ) {
         parent::__construct(
             $id,
@@ -124,6 +127,7 @@ final class Product extends AbstractArticle
         $this->variableParameters = $variableParameters;
         $this->partnerTitle       = $partnerTitle;
         $this->brandId            = $brandId;
+        $this->weeeFee            = $weeeFee;
     }
 
     /**
@@ -165,6 +169,7 @@ final class Product extends AbstractArticle
             (bool) $data['mallbox_allowed'],
             InputDataUtil::getNullableString($data, 'partner_title'),
             InputDataUtil::getNullableString($data, 'brand_id'),
+            InputDataUtil::getNullableFloat($data, 'weee_fee'),
         );
     }
 
@@ -204,6 +209,11 @@ final class Product extends AbstractArticle
     public function getBrandId(): ?string
     {
         return $this->brandId;
+    }
+
+    public function getWeeeFee(): ?float
+    {
+        return $this->weeeFee;
     }
 
 }

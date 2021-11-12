@@ -257,8 +257,8 @@ Fixtures::add(
 Fixtures::add(
     'article-media',
     new MediaIterator(
-        new Media('https://i.cdn.nrholding.net/21749465', true),
         new Media('https://i.cdn.nrholding.net/21749466', false, null, true, false),
+        new Media('https://i.cdn.nrholding.net/21749465', true),
     ),
 );
 

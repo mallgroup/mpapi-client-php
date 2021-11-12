@@ -595,6 +595,7 @@ final class ArticleClientCest
         $I->assertEquals($productRequest->getPrice(), $product->getPrice());
         $I->assertEquals($productRequest->getPartnerTitle(), $product->getPartnerTitle());
         $I->assertEquals($productRequest->getBrandId(), $product->getBrandId());
+        $I->assertEquals($productRequest->getWeeeFee(), $product->getWeeeFee());
         $I->assertEquals($productRequest->getAvailability()->getStatus(), $product->getAvailability()->getStatus());
         $I->assertEquals($productRequest->getAvailability()->getInStock(), $product->getAvailability()->getInStock());
     }

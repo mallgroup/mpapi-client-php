@@ -15,14 +15,16 @@ final class TreeMenuItem implements JsonSerializable
     private bool                    $categoryVisible;
     private TreeSapCategoryIterator $sapCategories;
     private string                  $url;
+    private bool                    $isPhe;
 
-    private function __construct(int $menuItemId, string $title, bool $categoryVisible, TreeSapCategoryIterator $sapCategories, string $url)
+    private function __construct(int $menuItemId, string $title, bool $categoryVisible, TreeSapCategoryIterator $sapCategories, string $url, bool $isPhe)
     {
         $this->menuItemId      = $menuItemId;
         $this->title           = $title;
         $this->categoryVisible = $categoryVisible;
         $this->sapCategories   = $sapCategories;
         $this->url             = $url;
+        $this->isPhe           = $isPhe;
     }
 
     /**
@@ -38,6 +40,7 @@ final class TreeMenuItem implements JsonSerializable
             (bool) $data['categoryVisible'],
             TreeSapCategoryIterator::createFromApi($data['sapCategories']),
             (string) $data['url'],
+            (bool) $data['isPhe'],
         );
     }
 
@@ -64,6 +67,11 @@ final class TreeMenuItem implements JsonSerializable
     public function getUrl(): string
     {
         return $this->url;
+    }
+
+    public function isPhe(): bool
+    {
+        return $this->isPhe;
     }
 
 }

@@ -21,6 +21,7 @@ final class ProductRequest extends AbstractArticleRequest
     private array   $variableParameters = [];
     private ?string $partnerTitle       = null;
     private ?string $brandId            = null;
+    private ?float  $weeeFee            = null;
 
     public function __construct(string $id, string $title, string $shortDesc, string $longDesc, string $categoryId, int $vat, int $priority)
     {
@@ -62,6 +63,7 @@ final class ProductRequest extends AbstractArticleRequest
         $self->setVariableParameters(...$product->getVariableParameters());
         $self->setPartnerTitle($product->getPartnerTitle());
         $self->setBrandId($product->getBrandId());
+        $self->setWeeeFee($product->getWeeeFee());
 
         /** @var Variant $variant - PHPStan false positive fix */
         foreach ($product->getVariants() as $variant) {
@@ -185,6 +187,16 @@ final class ProductRequest extends AbstractArticleRequest
     public function setBrandId(?string $brandId): void
     {
         $this->brandId = $brandId;
+    }
+
+    public function getWeeeFee(): ?float
+    {
+        return $this->weeeFee;
+    }
+
+    public function setWeeeFee(?float $weeeFee): void
+    {
+        $this->weeeFee = $weeeFee;
     }
 
 }
