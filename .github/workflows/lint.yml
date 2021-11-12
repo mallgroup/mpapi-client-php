@@ -1,4 +1,4 @@
-name: phpcs
+name: lint
 
 on:
   push:
@@ -31,6 +31,10 @@ jobs:
           version: 2
           args: --prefer-dist --no-ansi --no-interaction
 
-      - name: lint
+      - name: phpcs
         run: |
           vendor/bin/phpcs --standard=phpcs-ruleset.xml -d memory_limit=-1 --extensions=php --colors -sp ./src
+
+      - name: phpmd
+        run: |
+          vendor/bin/phpmd ./src text ./phpmd.xml

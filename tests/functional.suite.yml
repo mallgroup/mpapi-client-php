@@ -15,7 +15,7 @@ modules:
         - Asserts
     config:
         MpApiClient\Tests\_support\Helper\Functional:
-            base_uri: %API_PATH%
-            client_id: %CLIENT_ID%
+            base_uri: '%API_PATH%'
+            client_id: '%CLIENT_ID%'
 
     step_decorators: ~
