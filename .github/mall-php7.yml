@@ -1,0 +1,23 @@
+name: custom-image
+
+on:
+  push:
+    branches:
+      - "client-v4-ci"
+
+jobs:
+  php74composer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Log into registry
+        run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build custom PHP 7 image with Composer
+        uses: docker/build-push-action@v2.5.0
+        with:
+          file: Dockerfile.php-7_4
+          push: true
+          tags: ghcr.io/${{ github.repository }}/php-74-composer:1.0
