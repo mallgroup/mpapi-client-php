@@ -31,7 +31,7 @@ final class OrderClient extends AbstractMpApiClient implements OrderClientInterf
     public function list(?Filter $filter): BasicOrderList
     {
         $filter ??= new Filter();
-        // client supports only list of basic orders (there is no reason to list ID's only from MPAPI)
+        // client supports only list of basic orders (there is no reason to list IDs only from MPAPI)
         $filter->addFilterItem(FilterItem::create('filter', 'basic', FilterOperatorEnum::EMPTY()));
 
         return BasicOrderList::createWithCallback(

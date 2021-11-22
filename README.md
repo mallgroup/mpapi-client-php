@@ -8,6 +8,10 @@
 
 MPAPI client is a tool created to help Internet Mall, a. s. partners easily manage article catalogue, deliveries, orders etc. using Mall Marketplace API.
 
+## Requirements
+- `64bit` version of `PHP 7.4` or `PHP 8`
+- Guzzle 7
+
 ## Installation
 
 To install the client using [Composer](https://getcomposer.org/doc/00-intro.md) run following command in your repository
@@ -127,9 +131,9 @@ List of custom Exceptions thrown in this client can be found [here](doc/Exceptio
 
 ## ⚠ Warning
 
-- client does not include support for deprecated endpoints (i.e., deliveries or gifts), that will be changed, replaced or removed in the future
+- client does not include support for deprecated endpoints (i.e., `/v1/deliveries` or `/v1/gifts`), that will be changed, replaced or removed in the future
 
-### This is still a Beta release, and some documentation and examples are missing or incomplete
+### This is still a Beta release, and some features are missing or incomplete
 
-- [ ] Article client documentation
 - [ ] Order client documentation and examples
+- [ ] Transports v2 support

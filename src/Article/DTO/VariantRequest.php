@@ -90,7 +90,7 @@ final class VariantRequest extends AbstractArticleRequest
             fn($value): bool => !is_null($value)
         );
 
-        return array_merge($mandatory, $optional);
+        return $mandatory + $optional;
     }
 
     public function getPrice(): float

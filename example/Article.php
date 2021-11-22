@@ -65,7 +65,7 @@ try {
         echo PHP_EOL;
     }
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, while loading product list: ' . $e->getMessage();
+    echo 'Unexpected error occurred while loading product list: ' . $e->getMessage();
 }
 
 //
@@ -88,13 +88,14 @@ try {
     $productRequest->setAvailability(new Availability(StatusEnum::ACTIVE(), 1));
     $productRequest->setMedia(
         new MediaIterator(
-            new Media('https://cdn.my-domain.com/my-product-id-1.jpeg', true),
-            new Media('https://cdn.my-domain.com/my-product-id-energy-label.jpeg', false, null, true, false),
+            new Media('https://cdn.my-domain.com/my-product-id-1.jpg', true),
+            new Media('https://cdn.my-domain.com/my-product-id-energy-label.jpg', false, null, true, false),
         ),
     );
     $productRequest->setPrice(69);
 
     // Add optional data
+    $productRequest->setDimensions(new Dimensions(2, 20, 5, 20));
     $productRequest->setBrandId('BRAND_ID');
     $productRequest->setBarcode('0000123456789');
 
@@ -111,7 +112,7 @@ try {
     // Get product as array
     var_dump($createdProduct->jsonSerialize());
 } catch (MpApiException | Exception $e) {
-    echo 'Unexpected error occurred, during product creation: ' . $e->getMessage();
+    echo 'Unexpected error occurred during product creation: ' . $e->getMessage();
 }
 
 //
@@ -130,6 +131,8 @@ try {
         1,
     );
 
+    // There is an option to create request from existing Product entity -> ProductRequest::createFromProduct($product)
+
     // Add optional data
     $productRequest->setBrandId('BRAND_ID');
     $productRequest->setBarcode('0000123456789');
@@ -139,7 +142,7 @@ try {
     // - that's why client does not return anything (you already have data you sent in `$productRequest` variable)
     $client->article()->updateProduct($productRequest);
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, during product update: ' . $e->getMessage();
+    echo 'Unexpected error occurred during product update: ' . $e->getMessage();
 }
 
 //
@@ -163,7 +166,7 @@ try {
     echo 'Status: ' . $productDetail->getAvailability()->getStatus() . PHP_EOL;
     echo PHP_EOL;
 } catch (MpApiException | Exception $e) {
-    echo 'Unexpected error occurred, while loading product detail: ' . $e->getMessage();
+    echo 'Unexpected error occurred while loading product detail: ' . $e->getMessage();
 }
 
 //
@@ -173,7 +176,7 @@ try {
 try {
     $client->article()->deleteProduct('my-product-id');
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, during product deletion: ' . $e->getMessage();
+    echo 'Unexpected error occurred during product deletion: ' . $e->getMessage();
 }
 
 //
@@ -194,7 +197,7 @@ try {
     echo 'In stock: ' . $productAvailability->getInStock() . PHP_EOL;
     echo PHP_EOL;
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, while loading product availability: ' . $e->getMessage();
+    echo 'Unexpected error occurred while loading product availability: ' . $e->getMessage();
 }
 
 //
@@ -216,7 +219,7 @@ try {
     echo 'Purchase price: ' . $productPricing->getPurchasePrice() . PHP_EOL;
     echo PHP_EOL;
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, while loading product pricing: ' . $e->getMessage();
+    echo 'Unexpected error occurred while loading product pricing: ' . $e->getMessage();
 }
 
 //
@@ -229,7 +232,7 @@ try {
         new Pricing(99.9, 112.0, 80.5)
     );
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, during product pricing update: ' . $e->getMessage();
+    echo 'Unexpected error occurred during product pricing update: ' . $e->getMessage();
 }
 
 //
@@ -259,7 +262,7 @@ try {
         echo PHP_EOL;
     }
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, while loading variant list: ' . $e->getMessage();
+    echo 'Unexpected error occurred while loading variant list: ' . $e->getMessage();
 }
 
 //
@@ -276,8 +279,8 @@ try {
         1,
         20,
         new MediaIterator(
-            new Media('https://cdn.my-domain.com/my-variant-id-1.jpeg', true),
-            new Media('https://cdn.my-domain.com/my-variant-id-energy-label.jpeg', false, null, true, false),
+            new Media('https://cdn.my-domain.com/my-variant-id-1.jpg', true),
+            new Media('https://cdn.my-domain.com/my-variant-id-energy-label.jpg', false, null, true, false),
         ),
         new ParameterIterator(
             Parameter::create('MP_PARAMETER', 'a', 'b', 'c'),
@@ -301,7 +304,7 @@ try {
     // Get variant as array
     var_dump($createdVariant->jsonSerialize());
 } catch (MpApiException | Exception $e) {
-    echo 'Unexpected error occurred, during variant creation: ' . $e->getMessage();
+    echo 'Unexpected error occurred during variant creation: ' . $e->getMessage();
 }
 
 //
@@ -318,13 +321,15 @@ try {
         1,
         20,
         new MediaIterator(
-            new Media('https://cdn.my-domain.com/my-variant-id-1.jpeg', true),
-            new Media('https://cdn.my-domain.com/my-variant-id-energy-label.jpeg', false, null, true, false),
+            new Media('https://cdn.my-domain.com/my-variant-id-1.jpg', true),
+            new Media('https://cdn.my-domain.com/my-variant-id-energy-label.jpg', false, null, true, false),
         ),
         new ParameterIterator(
             Parameter::create('MP_PARAMETER', 'a', 'b', 'c'),
         ),
     );
+
+    // There is an option to create request from existing Variant entity -> VariantRequest::createFromVariant($variant)
 
     // Add optional data
     $variantRequest->setDimensions(new Dimensions(2, 20, 5, 20));
@@ -335,7 +340,7 @@ try {
     // - that's why client does not return anything (you already have data you sent in `$variantRequest` variable)
     $client->article()->updateVariant('my-product-id', $variantRequest);
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, during variant update: ' . $e->getMessage();
+    echo 'Unexpected error occurred during variant update: ' . $e->getMessage();
 }
 
 //
@@ -358,7 +363,7 @@ try {
     echo 'Status: ' . $variantDetail->getAvailability()->getStatus() . PHP_EOL;
     echo PHP_EOL;
 } catch (MpApiException | Exception $e) {
-    echo 'Unexpected error occurred, while loading variant detail: ' . $e->getMessage();
+    echo 'Unexpected error occurred while loading variant detail: ' . $e->getMessage();
 }
 
 //
@@ -368,7 +373,7 @@ try {
 try {
     $client->article()->deleteVariant('my-product-id', 'my-variant-id');
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, during variant deletion: ' . $e->getMessage();
+    echo 'Unexpected error occurred during variant deletion: ' . $e->getMessage();
 }
 
 //
@@ -389,7 +394,7 @@ try {
     echo 'In stock: ' . $variantAvailability->getInStock() . PHP_EOL;
     echo PHP_EOL;
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, while loading variant availability: ' . $e->getMessage();
+    echo 'Unexpected error occurred while loading variant availability: ' . $e->getMessage();
 }
 
 //
@@ -411,7 +416,7 @@ try {
     echo 'Purchase price: ' . $variantPricing->getPurchasePrice() . PHP_EOL;
     echo PHP_EOL;
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, while loading variant pricing: ' . $e->getMessage();
+    echo 'Unexpected error occurred while loading variant pricing: ' . $e->getMessage();
 }
 
 //
@@ -425,7 +430,7 @@ try {
         new Pricing(99.9, 112.0, 80.5)
     );
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, during variant pricing update: ' . $e->getMessage();
+    echo 'Unexpected error occurred during variant pricing update: ' . $e->getMessage();
 }
 
 //
@@ -440,7 +445,7 @@ try {
         )
     );
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, during batch availability update: ' . $e->getMessage();
+    echo 'Unexpected error occurred during batch availability update: ' . $e->getMessage();
 }
 
 //
@@ -450,7 +455,7 @@ try {
 try {
     $client->article()->activateAllProducts();
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, during activation of all products: ' . $e->getMessage();
+    echo 'Unexpected error occurred during activation of all products: ' . $e->getMessage();
 }
 
 //
@@ -460,5 +465,5 @@ try {
 try {
     $client->article()->activateSelectedProducts('my-product-id-1', 'my-product-id-2', 'my-product-id-3');
 } catch (MpApiException $e) {
-    echo 'Unexpected error occurred, during activation of selected products: ' . $e->getMessage();
+    echo 'Unexpected error occurred during activation of selected products: ' . $e->getMessage();
 }

@@ -17,16 +17,16 @@ use MpApiClient\Common\Util\InputDataUtil;
 final class Product extends AbstractArticle
 {
 
-    private ProductStageEnum $stage;
-    private string           $categoryId;
-    private int              $vat;
-    private VariantIterator  $variants;
+    protected ProductStageEnum $stage;
+    protected string           $categoryId;
+    protected int              $vat;
+    protected VariantIterator  $variants;
     /**
      * @var string[]
      */
-    private array   $variableParameters;
-    private ?string $partnerTitle;
-    private ?string $brandId;
+    protected array   $variableParameters;
+    protected ?string $partnerTitle;
+    protected ?string $brandId;
 
     /**
      * @param string            $id
