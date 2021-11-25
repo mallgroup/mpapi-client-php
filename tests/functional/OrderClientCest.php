@@ -77,6 +77,8 @@ final class OrderClientCest
             $I->assertIsBool($order->isConfirmed());
             $I->assertIsBool($order->isTest());
             $I->assertIsBool($order->isMdp());
+            $I->assertIsBool($order->isMdpClassic());
+            $I->assertIsBool($order->isMdpSpectrum());
         }
     }
 
@@ -145,6 +147,8 @@ final class OrderClientCest
 
         $I->assertEquals($orderArr['test'], $order->isTest());
         $I->assertEquals($orderArr['mdp'], $order->isMdp());
+        $I->assertEquals($orderArr['mdp_classic'], $order->isMdpClassic());
+        $I->assertEquals($orderArr['mdp_spectrum'], $order->isMdpSpectrum());
         $I->assertEquals($orderArr['ready_to_return'], $order->isReadyToReturn());
         $I->assertEquals($orderArr['shipped'] ?? null, $order->getShipped());
         $I->assertEquals($orderArr['open'] ?? null, $order->getOpen());

@@ -135,5 +135,4 @@ List of custom Exceptions thrown in this client can be found [here](doc/Exceptio
 
 ### This is still a Beta release, and some features are missing or incomplete
 
-- [ ] Order client documentation and examples
 - [ ] Transports v2 support

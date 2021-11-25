@@ -27,6 +27,8 @@ final class BasicOrder implements JsonSerializable
     private bool               $confirmed;
     private bool               $test;
     private bool               $mdp;
+    private bool               $mdpSpectrum;
+    private bool               $mdpClassic;
 
     private function __construct(
         int $id,
@@ -42,7 +44,9 @@ final class BasicOrder implements JsonSerializable
         StatusEnum $status,
         bool $confirmed,
         bool $test,
-        bool $mdp
+        bool $mdp,
+        bool $mdpClassic,
+        bool $mdpSpectrum
     ) {
         $this->id             = $id;
         $this->purchaseId     = $purchaseId;
@@ -58,6 +62,8 @@ final class BasicOrder implements JsonSerializable
         $this->confirmed      = $confirmed;
         $this->test           = $test;
         $this->mdp            = $mdp;
+        $this->mdpClassic     = $mdpClassic;
+        $this->mdpSpectrum    = $mdpSpectrum;
     }
 
     /**
@@ -83,6 +89,8 @@ final class BasicOrder implements JsonSerializable
             (bool) $data['confirmed'],
             (bool) $data['test'],
             (bool) $data['mdp'],
+            (bool) $data['mdp_classic'],
+            (bool) $data['mdp_spectrum'],
         );
     }
 
@@ -154,6 +162,16 @@ final class BasicOrder implements JsonSerializable
     public function isMdp(): bool
     {
         return $this->mdp;
+    }
+
+    public function isMdpSpectrum(): bool
+    {
+        return $this->mdpSpectrum;
+    }
+
+    public function isMdpClassic(): bool
+    {
+        return $this->mdpClassic;
     }
 
 }

@@ -243,6 +243,8 @@ Fixtures::add(
         ],
         'test'                    => false,
         'mdp'                     => false,
+        'mdp_classic'             => false,
+        'mdp_spectrum'            => false,
         'ready_to_return'         => true,
         'shipped'                 => new DateTime('2020-01-09 12:08:56'),
         'open'                    => new DateTime('2020-01-09 13:33:49'),

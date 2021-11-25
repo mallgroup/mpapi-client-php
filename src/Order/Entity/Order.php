@@ -37,6 +37,8 @@ final class Order implements JsonSerializable
     private ItemIterator              $items;
     private bool                      $test;
     private bool                      $mdp;
+    private bool                      $mdpClassic;
+    private bool                      $mdpSpectrum;
     private bool                      $readyToReturn;
     private ?DateTimeInterface        $shipped;
     private ?DateTimeInterface        $open;
@@ -73,6 +75,8 @@ final class Order implements JsonSerializable
         ItemIterator $items,
         bool $test,
         bool $mdp,
+        bool $mdpClassic,
+        bool $mdpSpectrum,
         bool $readyToReturn,
         ?DateTimeInterface $shipped,
         ?DateTimeInterface $open,
@@ -108,6 +112,8 @@ final class Order implements JsonSerializable
         $this->items                 = $items;
         $this->test                  = $test;
         $this->mdp                   = $mdp;
+        $this->mdpClassic            = $mdpClassic;
+        $this->mdpSpectrum           = $mdpSpectrum;
         $this->readyToReturn         = $readyToReturn;
         $this->shipped               = $shipped;
         $this->open                  = $open;
@@ -153,6 +159,8 @@ final class Order implements JsonSerializable
             ItemIterator::createFromApi($data['items']),
             (bool) $data['test'],
             (bool) $data['mdp'],
+            (bool) $data['mdp_classic'],
+            (bool) $data['mdp_spectrum'],
             (bool) $data['ready_to_return'],
             InputDataUtil::getNullableDate($data, 'shipped'),
             InputDataUtil::getNullableDate($data, 'open'),
@@ -284,6 +292,16 @@ final class Order implements JsonSerializable
     public function isMdp(): bool
     {
         return $this->mdp;
+    }
+
+    public function isMdpClassic(): bool
+    {
+        return $this->mdpClassic;
+    }
+
+    public function isMdpSpectrum(): bool
+    {
+        return $this->mdpSpectrum;
     }
 
     public function isReadyToReturn(): bool
