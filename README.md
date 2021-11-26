@@ -131,8 +131,8 @@ List of custom Exceptions thrown in this client can be found [here](doc/Exceptio
 
 ## ⚠ Warning
 
-- client does not include support for deprecated endpoints (i.e., `/v1/deliveries` or `/v1/gifts`), that will be changed, replaced or removed in the future
+- client does not include support for deprecated endpoints that will be changed, replaced or removed in the future (i.e., `/v1/deliveries` or `/v1/gifts`)
 
-### This is still a Beta release, and some features are missing or incomplete
+## ℹ Known missing or incomplete features
 
-- [ ] Transports v2 support
+- [ ] Support for `/v2/transports` endpoints
