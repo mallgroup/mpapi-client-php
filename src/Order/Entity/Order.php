@@ -13,42 +13,43 @@ final class Order implements JsonSerializable
 
     use JsonSerializeEntityTrait;
 
-    private int                       $id;
-    private int                       $purchaseId;
-    private string                    $currency;
-    private float                     $deliveryPrice;
-    private float                     $codPrice;
-    private float                     $cod;
-    private float                     $discount;
-    private string                    $paymentType;
-    private string                    $deliveryMethod;
-    private string                    $deliveryMethodId;
-    private ?int                      $branchId;
-    private Branches                  $branches;
-    private ?string                   $trackingNumber;
-    private ?string                   $trackingUrl;
-    private ?DateTimeInterface        $shipDate;
-    private ?DateTimeInterface        $deliveryDate;
-    private ?DateTimeInterface        $deliveredAt;
-    private ?DateTimeInterface        $firstDeliveryAttempt;
-    private Customer                  $customer; // returned from API as address, but represents a customer
-    private bool                      $confirmed;
-    private StatusEnum                $status;
-    private ItemIterator              $items;
-    private bool                      $test;
-    private bool                      $mdp;
-    private bool                      $mdpClassic;
-    private bool                      $mdpSpectrum;
-    private bool                      $readyToReturn;
-    private ?DateTimeInterface        $shipped;
-    private ?DateTimeInterface        $open;
-    private ?DateTimeInterface        $blocked;
-    private ?DateTimeInterface        $lost;
-    private ?DateTimeInterface        $returned;
-    private ?DateTimeInterface        $cancelled;
-    private ?DateTimeInterface        $delivered;
-    private ?DateTimeInterface        $shipping;
-    private ConsignmentStatusIterator $ulozenkaStatusHistory;
+    private int                              $id;
+    private int                              $purchaseId;
+    private string                           $currency;
+    private float                            $deliveryPrice;
+    private float                            $codPrice;
+    private float                            $cod;
+    private float                            $discount;
+    private string                           $paymentType;
+    private string                           $deliveryMethod;
+    private string                           $deliveryMethodId;
+    private ?int                             $branchId;
+    private Branches                         $branches;
+    private ?string                          $trackingNumber;
+    private ?string                          $trackingUrl;
+    private ?DateTimeInterface               $shipDate;
+    private ?DateTimeInterface               $deliveryDate;
+    private ?DateTimeInterface               $deliveredAt;
+    private ?DateTimeInterface               $firstDeliveryAttempt;
+    private Customer                         $customer; // returned from API as address, but represents a customer
+    private bool                             $confirmed;
+    private StatusEnum                       $status;
+    private ItemIterator                     $items;
+    private bool                             $test;
+    private bool                             $mdp;
+    private bool                             $mdpClassic;
+    private bool                             $mdpSpectrum;
+    private bool                             $readyToReturn;
+    private ?DateTimeInterface               $shipped;
+    private ?DateTimeInterface               $open;
+    private ?DateTimeInterface               $blocked;
+    private ?DateTimeInterface               $lost;
+    private ?DateTimeInterface               $returned;
+    private ?DateTimeInterface               $cancelled;
+    private ?DateTimeInterface               $delivered;
+    private ?DateTimeInterface               $shipping;
+    private ConsignmentStatusIterator        $ulozenkaStatusHistory;
+    private ConsignmentStatusHistoryIterator $consignmentStatusHistory;
 
     private function __construct(
         int $id,
@@ -86,44 +87,46 @@ final class Order implements JsonSerializable
         ?DateTimeInterface $cancelled,
         ?DateTimeInterface $delivered,
         ?DateTimeInterface $shipping,
-        ConsignmentStatusIterator $ulozenkaStatusHistory
+        ConsignmentStatusIterator $ulozenkaStatusHistory,
+        ConsignmentStatusHistoryIterator $consignmentStatusHistory
     ) {
-        $this->id                    = $id;
-        $this->purchaseId            = $purchaseId;
-        $this->currency              = $currency;
-        $this->deliveryPrice         = $deliveryPrice;
-        $this->codPrice              = $codPrice;
-        $this->cod                   = $cod;
-        $this->discount              = $discount;
-        $this->paymentType           = $paymentType;
-        $this->deliveryMethod        = $deliveryMethod;
-        $this->deliveryMethodId      = $deliveryMethodId;
-        $this->branchId              = $branchId;
-        $this->branches              = $branches;
-        $this->trackingNumber        = $trackingNumber;
-        $this->trackingUrl           = $trackingUrl;
-        $this->shipDate              = $shipDate;
-        $this->deliveryDate          = $deliveryDate;
-        $this->deliveredAt           = $deliveredAt;
-        $this->firstDeliveryAttempt  = $firstDeliveryAttempt;
-        $this->customer              = $address;
-        $this->confirmed             = $confirmed;
-        $this->status                = $status;
-        $this->items                 = $items;
-        $this->test                  = $test;
-        $this->mdp                   = $mdp;
-        $this->mdpClassic            = $mdpClassic;
-        $this->mdpSpectrum           = $mdpSpectrum;
-        $this->readyToReturn         = $readyToReturn;
-        $this->shipped               = $shipped;
-        $this->open                  = $open;
-        $this->blocked               = $blocked;
-        $this->lost                  = $lost;
-        $this->returned              = $returned;
-        $this->cancelled             = $cancelled;
-        $this->delivered             = $delivered;
-        $this->shipping              = $shipping;
-        $this->ulozenkaStatusHistory = $ulozenkaStatusHistory;
+        $this->id                       = $id;
+        $this->purchaseId               = $purchaseId;
+        $this->currency                 = $currency;
+        $this->deliveryPrice            = $deliveryPrice;
+        $this->codPrice                 = $codPrice;
+        $this->cod                      = $cod;
+        $this->discount                 = $discount;
+        $this->paymentType              = $paymentType;
+        $this->deliveryMethod           = $deliveryMethod;
+        $this->deliveryMethodId         = $deliveryMethodId;
+        $this->branchId                 = $branchId;
+        $this->branches                 = $branches;
+        $this->trackingNumber           = $trackingNumber;
+        $this->trackingUrl              = $trackingUrl;
+        $this->shipDate                 = $shipDate;
+        $this->deliveryDate             = $deliveryDate;
+        $this->deliveredAt              = $deliveredAt;
+        $this->firstDeliveryAttempt     = $firstDeliveryAttempt;
+        $this->customer                 = $address;
+        $this->confirmed                = $confirmed;
+        $this->status                   = $status;
+        $this->items                    = $items;
+        $this->test                     = $test;
+        $this->mdp                      = $mdp;
+        $this->mdpClassic               = $mdpClassic;
+        $this->mdpSpectrum              = $mdpSpectrum;
+        $this->readyToReturn            = $readyToReturn;
+        $this->shipped                  = $shipped;
+        $this->open                     = $open;
+        $this->blocked                  = $blocked;
+        $this->lost                     = $lost;
+        $this->returned                 = $returned;
+        $this->cancelled                = $cancelled;
+        $this->delivered                = $delivered;
+        $this->shipping                 = $shipping;
+        $this->ulozenkaStatusHistory    = $ulozenkaStatusHistory;
+        $this->consignmentStatusHistory = $consignmentStatusHistory;
     }
 
     /**
@@ -171,6 +174,7 @@ final class Order implements JsonSerializable
             InputDataUtil::getNullableDate($data, 'delivered'),
             InputDataUtil::getNullableDate($data, 'shipping'),
             ConsignmentStatusIterator::createFromApi($data['ulozenka_status_history']),
+            ConsignmentStatusHistoryIterator::createFromApi($data['consignment_status_history']),
         );
     }
 
@@ -352,6 +356,11 @@ final class Order implements JsonSerializable
     public function getUlozenkaStatusHistory(): ConsignmentStatusIterator
     {
         return $this->ulozenkaStatusHistory;
+    }
+
+    public function getConsignmentStatusHistory(): ConsignmentStatusHistoryIterator
+    {
+        return $this->consignmentStatusHistory;
     }
 
 }

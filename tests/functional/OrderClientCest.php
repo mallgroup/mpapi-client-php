@@ -160,6 +160,8 @@ final class OrderClientCest
         $I->assertEquals($orderArr['shipping'] ?? null, $order->getShipping());
         $I->assertEquals(0, $order->getUlozenkaStatusHistory()->count());
         $I->assertEquals($orderArr['ulozenka_status_history'], $order->getUlozenkaStatusHistory()->jsonSerialize());
+        $I->assertEquals(0, $order->getConsignmentStatusHistory()->count());
+        $I->assertEquals($orderArr['consignment_status_history'], $order->getConsignmentStatusHistory()->jsonSerialize());
     }
 
     public function _testConfirmOrder(): void

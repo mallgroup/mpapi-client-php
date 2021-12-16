@@ -158,7 +158,8 @@ Example above prints out
     "cancelled": null,
     "delivered": null,
     "shipping": null,
-    "ulozenkaStatusHistory": []
+    "ulozenkaStatusHistory": [],
+    "consignmentStatusHistory": []
 }
 ```
 
