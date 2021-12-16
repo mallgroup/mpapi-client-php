@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - `consignmentStatusHistory` attribute to `Order` entity used for MDP Spectrum orders
 
+### Changed
+
+- updated dependencies to latest versions
+
 ## 4.0.0 - 2021-11-26
 
 ### Added
