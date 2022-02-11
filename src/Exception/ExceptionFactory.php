@@ -39,7 +39,7 @@ final class ExceptionFactory
                 return TooManyRequestsException::createFromGuzzle($message, $code, $e);
             default:
                 /** @psalm-suppress PossiblyInvalidArgument - https://github.com/vimeo/psalm/issues/4295 */
-                return BadResponseException::createFromGuzzle($message, $code, $e, $body['errorCodes'] ?? []);
+                return BadResponseException::createFromGuzzle($message, $code, $e, $body);
         }
     }
 

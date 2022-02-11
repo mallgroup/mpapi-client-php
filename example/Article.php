@@ -15,6 +15,7 @@ use MpApiClient\Article\Entity\Common\Pricing;
 use MpApiClient\Article\Entity\Common\StatusEnum;
 use MpApiClient\Common\Authenticators\ClientIdAuthenticator;
 use MpApiClient\Exception\MpApiException;
+use MpApiClient\Exception\PriceProtectionException;
 use MpApiClient\Filter\Filter;
 use MpApiClient\Filter\FilterItem;
 use MpApiClient\Filter\FilterOperatorEnum;
@@ -231,6 +232,16 @@ try {
         'my-product-id',
         new Pricing(99.9, 112.0, 80.5)
     );
+} catch (PriceProtectionException $e) {
+    try {
+        $client->article()->updateProductPricing(
+            'my-product-id',
+            new Pricing(99.9, 112.0, 80.5),
+            $e->getForceToken()
+        );
+    } catch (MpApiException $e) {
+        echo 'Unexpected error occurred during product pricing update with force token: ' . $e->getMessage();
+    }
 } catch (MpApiException $e) {
     echo 'Unexpected error occurred during product pricing update: ' . $e->getMessage();
 }
@@ -429,6 +440,17 @@ try {
         'my-variant-id',
         new Pricing(99.9, 112.0, 80.5)
     );
+} catch (PriceProtectionException $e) {
+    try {
+        $client->article()->updateVariantPricing(
+            'my-product-id',
+            'my-variant-id',
+            new Pricing(99.9, 112.0, 80.5),
+            $e->getForceToken()
+        );
+    } catch (MpApiException $e) {
+        echo 'Unexpected error occurred during variant pricing update with force token: ' . $e->getMessage();
+    }
 } catch (MpApiException $e) {
     echo 'Unexpected error occurred during variant pricing update: ' . $e->getMessage();
 }

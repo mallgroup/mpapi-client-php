@@ -87,9 +87,13 @@ final class ArticleClient extends AbstractMpApiClient implements ArticleClientIn
         );
     }
 
-    public function updateProductPricing(string $productId, Pricing $pricing): void
+    public function updateProductPricing(string $productId, Pricing $pricing, ?string $forceToken = null): void
     {
-        $this->sendJson('PUT', sprintf(self::PRODUCT_PRICING, $productId), $pricing->getArrayForApi());
+        $url = sprintf(self::PRODUCT_PRICING, $productId);
+        if ($forceToken !== null) {
+            $url = sprintf('%s?force_token=%s', $url, $forceToken);
+        }
+        $this->sendJson('PUT', $url, $pricing->getArrayForApi());
     }
 
     public function listProductVariants(string $productId, ?Filter $filter): BasicVariantList
@@ -144,9 +148,13 @@ final class ArticleClient extends AbstractMpApiClient implements ArticleClientIn
         );
     }
 
-    public function updateVariantPricing(string $productId, string $variantId, Pricing $pricing): void
+    public function updateVariantPricing(string $productId, string $variantId, Pricing $pricing, ?string $forceToken = null): void
     {
-        $this->sendJson('PUT', sprintf(self::VARIANT_PRICING, $productId, $variantId), $pricing->getArrayForApi());
+        $url = sprintf(self::VARIANT_PRICING, $productId, $variantId);
+        if ($forceToken !== null) {
+            $url = sprintf('%s?force_token=%s', $url, $forceToken);
+        }
+        $this->sendJson('PUT', $url, $pricing->getArrayForApi());
     }
 
     public function updateBatchAvailability(BatchAvailabilityIterator $availability): void

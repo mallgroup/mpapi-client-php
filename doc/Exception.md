@@ -4,7 +4,7 @@ Client contains custom exceptions, for easier error handling in your application
 
 All custom exceptions extend generic `MpApiException`.
 
-Some methods might throw other native PHP exceptions (i.e., `InvalidArgumentException`), which do not extend `MpApiException`. Such methods always have
+Some methods might throw other native PHP exceptions (e.g., `InvalidArgumentException`, `LogicException`), which do not extend `MpApiException`. Such methods always have
 appropriate `@throws` tags.
 
 ## [MpApiException](../src/Exception/MpApiException.php)
@@ -13,25 +13,36 @@ appropriate `@throws` tags.
 
 ## [IncorrectDataTypeException](../src/Exception/IncorrectDataTypeException.php)
 
+- Extends [MpApiException](#mpapiexception)
 - Thrown when method called expects data of a specific type, but received a different one
 
 ## [BadResponseException](../src/Exception/BadResponseException.php)
 
+- Extends [MpApiException](#mpapiexception)
 - Thrown when API responded with `4xx` or `5xx` status code that could not be translated to more specific exceptions
-- Usually indicates an unknown/unexpected error occurred
+- Usually indicates, that an unknown/unexpected error occurred
+
+## [PriceProtectionException](../src/Exception/PriceProtectionException.php)
+
+- Extends [BadResponseException](#badresponseexception)
+- Thrown when price protection mechanism is tripped during an article price update
+- Contains `getForceToken` method, that may be used to force the price change using a provided token
 
 ## [ForbiddenException](../src/Exception/ForbiddenException.php)
 
+- Extends [BadResponseException](#badresponseexception)
 - Thrown when API returns `403` status code
 - Usually returned on endpoints your account does not have access to
 
 ## [NotFoundException](../src/Exception/NotFoundException.php)
 
+- Extends [BadResponseException](#badresponseexception)
 - Thrown when API returns `404` status code
-- This exception should never be thrown for endpoints with static url (i.e., enums/lists)
+- This exception should never be thrown for endpoints with static url (e.g., enums/lists)
 
 ## [UnauthorizedException](../src/Exception/UnauthorizedException.php)
 
+- Extends [BadResponseException](#badresponseexception)
 - Thrown when API returns `401` status code
 - Reasons might include
     - you forgot to provide authenticator middleware
@@ -40,16 +51,18 @@ appropriate `@throws` tags.
 
 ## [TooManyRequestsException](../src/Exception/TooManyRequestsException.php)
 
+- Extends [BadResponseException](#badresponseexception)
 - Thrown when API returns `429` status code
 - In that case, you have been rate limited by the API and should slow down your request rate
-- API returns rate limit information as part of response headers, which you can easily check
+- API returns rate limit information as part of response headers, which can be easily checked
 
 ### Example of handling some errors
 
 ```php
 <?php declare(strict_types=1);
 
-use MpApiClient\Common\Interfaces\ChecksClientInterface;use MpApiClient\Exception\BadResponseException;
+use MpApiClient\Common\Interfaces\ChecksClientInterface;
+use MpApiClient\Exception\BadResponseException;
 use MpApiClient\Exception\IncorrectDataTypeException;
 use MpApiClient\Exception\MpApiException;
 use MpApiClient\Exception\TooManyRequestsException;
