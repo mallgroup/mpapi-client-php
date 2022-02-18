@@ -90,6 +90,7 @@ try {
         new MediaIterator(
             new Media('https://cdn.my-domain.com/my-product-id-1.jpg', true),
             new Media('https://cdn.my-domain.com/my-product-id-energy-label.jpg', false, null, true, false),
+            new Media('https://cdn.my-domain.com/my-product-id-information-list.pdf', false, null, false, true),
         ),
     );
     $productRequest->setPrice(69);
@@ -281,6 +282,7 @@ try {
         new MediaIterator(
             new Media('https://cdn.my-domain.com/my-variant-id-1.jpg', true),
             new Media('https://cdn.my-domain.com/my-variant-id-energy-label.jpg', false, null, true, false),
+            new Media('https://cdn.my-domain.com/my-variant-id-information-list.pdf', false, null, false, true),
         ),
         new ParameterIterator(
             Parameter::create('MP_PARAMETER', 'a', 'b', 'c'),
@@ -323,6 +325,7 @@ try {
         new MediaIterator(
             new Media('https://cdn.my-domain.com/my-variant-id-1.jpg', true),
             new Media('https://cdn.my-domain.com/my-variant-id-energy-label.jpg', false, null, true, false),
+            new Media('https://cdn.my-domain.com/my-variant-id-information-list.pdf', false, null, false, true),
         ),
         new ParameterIterator(
             Parameter::create('MP_PARAMETER', 'a', 'b', 'c'),
