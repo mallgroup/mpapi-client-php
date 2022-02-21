@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 4.2.0 - 2022-02-10
+
+### Added
+
+- support for `forceToken` parameter for `updateProductPricing` and `updateVariantPricing` methods of `Article` client
+- new `PriceProtectionException` thrown when API returns error with `PRICE_PROTECTION_ERROR` code, used to obtain force token using `getForceToken` method
+- `getBody` method to `BadResponseException`, which returns API response as an array
+
 ## 4.1.0 - 2021-12-16
 
 ### Added

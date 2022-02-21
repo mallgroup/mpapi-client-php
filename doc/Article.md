@@ -317,7 +317,7 @@ Example above prints out
 
 ## Update product pricing
 
-Method expects `product` ID and [Pricing](../src/Article/Entity/Common/Pricing.php) entity and does not return anything.
+Method expects `product` ID, [Pricing](../src/Article/Entity/Common/Pricing.php) entity and an optional `forceToken` and does not return anything.
 
 ```php
 /** @var MpApiClient\Common\Interfaces\ArticleClientInterface $articleClient */
@@ -638,14 +638,16 @@ Example above prints out
 
 ## Update variant pricing
 
-Method expects `product` and `variant` IDs and [Pricing](../src/Article/Entity/Common/Pricing.php) entity and does not return anything.
+Method expects `product` and `variant` IDs, [Pricing](../src/Article/Entity/Common/Pricing.php) entity and an optional `forceToken` and does not return anything.
 
 ```php
 /** @var MpApiClient\Common\Interfaces\ArticleClientInterface $articleClient */
+/** @var MpApiClient\Exception\PriceProtectionException $e */
 $articleClient->updateVariantPricing(
     'my-product-id',
     'my-variant-id',
-    new Pricing(99.9, 112.0, 80.5)
+    new Pricing(99.9, 112.0, 80.5),
+    $e->getForceToken()
 );
 ```
 

@@ -16,32 +16,54 @@ class BadResponseException extends MpApiException
     private array $errorCodes;
 
     /**
-     * @param string         $message
-     * @param int            $code
-     * @param Throwable|null $previous
-     * @param ErrorCode[]    $errorCodes
+     * @var array<string, mixed>
      */
-    final private function __construct(string $message = '', int $code = 0, Throwable $previous = null, array $errorCodes = [])
+    private array $body;
+
+    /**
+     * @param string               $message
+     * @param int                  $code
+     * @param Throwable|null       $previous
+     * @param array<string, mixed> $body
+     * @param ErrorCode[]          $errorCodes
+     */
+    final private function __construct(string $message = '', int $code = 0, Throwable $previous = null, array $body = [], array $errorCodes = [])
     {
         parent::__construct($message, $code, $previous);
+        $this->body       = $body;
         $this->errorCodes = $errorCodes;
     }
 
     /**
-     * @param string                           $message
-     * @param int                              $code
-     * @param GuzzleBadResponseException       $previous
-     * @param array<int, array<string, mixed>> $errorCodes
-     * @return static
+     * @param string                     $message
+     * @param int                        $code
+     * @param GuzzleBadResponseException $previous
+     * @param array<string, mixed>       $body
+     * @return BadResponseException
+     *
+     * @internal
      */
-    public static function createFromGuzzle(string $message, int $code, GuzzleBadResponseException $previous, array $errorCodes = []): BadResponseException
+    public static function createFromGuzzle(string $message, int $code, GuzzleBadResponseException $previous, array $body = []): BadResponseException
     {
-        return new static(
-            $message,
-            $code,
-            $previous,
-            array_map(fn(array $item): ErrorCode => ErrorCode::createFromApi($item), $errorCodes),
-        );
+        $errorCodes = array_map(fn(array $item): ErrorCode => ErrorCode::createFromApi($item), $body['errorCodes'] ?? []);
+        if ($errorCodes === []) {
+            return new static($message, $code, $previous, $body);
+        }
+
+        switch ($errorCodes[0]->getCode()) {
+            case PriceProtectionException::ERROR_CODE:
+                return new PriceProtectionException($message, $code, $previous, $body, $errorCodes);
+            default:
+                return new static($message, $code, $previous, $body, $errorCodes);
+        }
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getBody(): array
+    {
+        return $this->body;
     }
 
     /**

@@ -28,17 +28,17 @@ Client consists of one main client and multiple, separate, domain clients.
 
 The main client groups all domain clients under one object, for easier implementation, but every domain client can be initialized and used by itself.
 
-Every client provides an interface that SHOULD be used as parameter types in code, instead of client classes themselves (i.e., use `MpApiClientInterface $client`
+Every client provides an interface that SHOULD be used as parameter types in code, instead of client classes themselves (e.g., use `MpApiClientInterface $client`
 or `BrandsClientInterface $client` instead of `MpApiClient $client` or `BrandsClient $client`).
 
 When initializing the client, you MUST provide
 
 1. an authenticator implementing [AuthMiddlewareInterface](src/Common/Interfaces/AuthMiddlewareInterface.php)
     - currently, only [ClientIdAuthenticator](src/Common/Authenticators/ClientIdAuthenticator.php), which accepts `my-client-id`, is provided
-    - in the future, new authenticators will be released (i.e., OAuth)
+    - in the future, new authenticators will be released (e.g., OAuth)
 2. name of the app using the API
     - it is sent with every request to Mall API for easier request identification and debugging of reported issues
-    - please provide a simple, yet meaningful name, i.e., `MyAppName CRM` or `MyAppName Order sync` instead of a random string
+    - please provide a simple, yet meaningful name (e.g., `MyAppName CRM` or `MyAppName Order sync`), instead of a random string
 
 ### Examples
 
@@ -131,7 +131,7 @@ List of custom Exceptions thrown in this client can be found [here](doc/Exceptio
 
 ## ⚠ Warning
 
-- client does not include support for deprecated endpoints that will be changed, replaced or removed in the future (i.e., `/v1/deliveries` or `/v1/gifts`)
+- client does not include support for deprecated endpoints that will be changed, replaced or removed in the future (e.g., `/v1/deliveries` or `/v1/gifts`)
 
 ## ℹ Known missing or incomplete features
 

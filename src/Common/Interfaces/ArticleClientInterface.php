@@ -59,7 +59,7 @@ interface ArticleClientInterface
      * @throws MpApiException
      * @deprecated Will be replaced with batch endpoint, similar to BatchAvailability
      */
-    public function updateProductPricing(string $productId, Pricing $pricing): void;
+    public function updateProductPricing(string $productId, Pricing $pricing, ?string $forceToken = null): void;
 
     /**
      * @throws MpApiException
@@ -102,7 +102,7 @@ interface ArticleClientInterface
      * @throws MpApiException
      * @deprecated Will be replaced with batch endpoint, similar to BatchAvailability
      */
-    public function updateVariantPricing(string $productId, string $variantId, Pricing $pricing): void;
+    public function updateVariantPricing(string $productId, string $variantId, Pricing $pricing, ?string $forceToken = null): void;
 
     /**
      * @throws MpApiException
