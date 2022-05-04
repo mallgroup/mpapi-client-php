@@ -8,6 +8,7 @@ use MpApiClient\Common\Util\AbstractIntKeyIterator;
 /**
  * @extends AbstractIntKeyIterator<Promotion>
  * @property Promotion[] $data
+ * @deprecated
  */
 final class PromotionIterator extends AbstractIntKeyIterator
 {

@@ -25,6 +25,7 @@ final class Variant extends AbstractArticle
      */
     public static function createFromApi(array $data): self
     {
+        /** @psalm-suppress DeprecatedClass */
         return new self(
             (string) $data['id'],
             (int) $data['article_id'],

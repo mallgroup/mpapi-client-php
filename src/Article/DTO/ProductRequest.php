@@ -50,6 +50,7 @@ final class ProductRequest extends AbstractArticleRequest
         $self->setPurchasePrice($product->getPurchasePrice());
         $self->setRrp($product->getRrp());
         $self->setMedia($product->getMedia());
+        /** @psalm-suppress DeprecatedMethod */
         $self->setPromotions($product->getPromotions());
         $self->setParameters($product->getParameters());
         $self->setDimensions($product->getDimensions());
@@ -78,6 +79,7 @@ final class ProductRequest extends AbstractArticleRequest
      */
     public function getArrayForApi(): array
     {
+        /** @psalm-suppress DeprecatedMethod */
         $mandatory = [
             'id'                  => $this->getId(),
             'title'               => $this->getTitle(),

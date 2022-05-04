@@ -23,6 +23,9 @@ abstract class AbstractArticle implements JsonSerializable
     protected float             $purchasePrice;
     protected float             $rrp;
     protected MediaIterator     $media;
+    /**
+     * @deprecated
+     */
     protected PromotionIterator $promotions;
     protected ParameterIterator $parameters;
     protected Dimensions        $dimensions;
@@ -188,6 +191,9 @@ abstract class AbstractArticle implements JsonSerializable
         return $this->media;
     }
 
+    /**
+     * @deprecated
+     */
     public function getPromotions(): PromotionIterator
     {
         return $this->promotions;

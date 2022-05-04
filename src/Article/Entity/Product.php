@@ -30,6 +30,7 @@ final class Product extends AbstractArticle
     protected ?float  $weeeFee;
 
     /**
+     * @psalm-suppress DeprecatedClass
      * @param string            $id
      * @param int               $articleId
      * @param ProductStageEnum  $stage
@@ -141,6 +142,7 @@ final class Product extends AbstractArticle
      */
     public static function createFromApi(array $data): self
     {
+        /** @psalm-suppress DeprecatedClass */
         return new self(
             (string) $data['id'],
             (int) $data['article_id'],

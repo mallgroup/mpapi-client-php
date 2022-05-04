@@ -43,6 +43,7 @@ final class VariantRequest extends AbstractArticleRequest
         $self->setBarcode($variant->getBarcode());
         $self->setPurchasePrice($variant->getPurchasePrice());
         $self->setRrp($variant->getRrp());
+        /** @psalm-suppress DeprecatedMethod */
         $self->setPromotions($variant->getPromotions());
         $self->setDimensions($variant->getDimensions());
         $self->setAvailability($variant->getAvailability());
@@ -61,6 +62,7 @@ final class VariantRequest extends AbstractArticleRequest
      */
     public function getArrayForApi(): array
     {
+        /** @psalm-suppress DeprecatedMethod */
         $mandatory = [
             'id'         => $this->getId(),
             'title'      => $this->getTitle(),
