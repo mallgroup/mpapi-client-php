@@ -5,6 +5,7 @@
 
 ## 3.15.0
 - added `external_id` attribute to orders
+- `promotions` attribute is deprecated
 
 ## 3.14.0
 - added support for batch `availability` endpoint

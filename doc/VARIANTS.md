@@ -83,7 +83,7 @@ __media*__ (array) - variant media; supported types are: JPEG, GIF, PNG, the for
  - __energy_label__ (boolean) - identifies the picture as energy label,
  - __information_list__ (boolean) - identifies the picture as information list,
 
-__promotions__ (array) - promotions data of variant. Promotion is highlighted on the product list/detail of product.  parameters:  
+__promotions__ (deprecated) (array) - promotions data of variant. Promotion is highlighted on the product list/detail of product.  parameters:  
  - __price*__ (number) - promotion price,  
  - __from*__ (string, Y-m-d H:i:s) - date and time of promotion start,  
  - __to*__ (string, Y-m-d H:i:s) - date and time of promotion end,  
