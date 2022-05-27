@@ -35,6 +35,7 @@ final class Variant extends AbstractArticle
             (int) $data['priority'],
             InputDataUtil::getNullableString($data, 'barcode'),
             (float) $data['price'],
+            isset($data['fair_price']) ? (float) $data['fair_price'] : null,
             (float) $data['purchase_price'],
             (float) $data['rrp'],
             MediaIterator::createFromApi($data['media']),

@@ -41,6 +41,7 @@ final class Product extends AbstractArticle
      * @param int               $priority
      * @param string|null       $barcode
      * @param float             $price
+     * @param ?float            $fairPrice
      * @param float             $purchasePrice
      * @param int               $vat
      * @param float             $rrp
@@ -74,6 +75,7 @@ final class Product extends AbstractArticle
         int $priority,
         ?string $barcode,
         float $price,
+        ?float $fairPrice,
         float $purchasePrice,
         int $vat,
         float $rrp,
@@ -105,6 +107,7 @@ final class Product extends AbstractArticle
             $priority,
             $barcode,
             $price,
+            $fairPrice,
             $purchasePrice,
             $rrp,
             $media,
@@ -150,6 +153,7 @@ final class Product extends AbstractArticle
             (int) $data['priority'],
             InputDataUtil::getNullableString($data, 'barcode'),
             (float) $data['price'],
+            isset($data['fair_price']) ? (float)$data['fair_price'] : null,
             (float) $data['purchase_price'],
             (int) $data['vat'],
             (float) $data['rrp'],

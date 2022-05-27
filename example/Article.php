@@ -60,6 +60,7 @@ try {
         echo 'In stock: ' . $product->getInStock() . PHP_EOL;
         echo 'Rrp: ' . $product->getRrp() . PHP_EOL;
         echo 'Price: ' . $product->getPrice() . PHP_EOL;
+        echo 'Fair price: ' . $product->getFairPrice() . PHP_EOL;
         echo 'Purchase price: ' . $product->getPurchasePrice() . PHP_EOL;
         echo 'Variants count: ' . $product->getVariantsCount() . PHP_EOL;
         echo PHP_EOL;
@@ -218,6 +219,7 @@ try {
     echo 'Rrp: ' . $productPricing->getRrp() . PHP_EOL;
     echo 'Price: ' . $productPricing->getPrice() . PHP_EOL;
     echo 'Purchase price: ' . $productPricing->getPurchasePrice() . PHP_EOL;
+    echo 'Fair price: ' . $productPricing->getFairPrice() . PHP_EOL;
     echo PHP_EOL;
 } catch (MpApiException $e) {
     echo 'Unexpected error occurred while loading product pricing: ' . $e->getMessage();
@@ -259,6 +261,7 @@ try {
         echo 'In stock: ' . $variant->getInStock() . PHP_EOL;
         echo 'Rrp: ' . $variant->getRrp() . PHP_EOL;
         echo 'Price: ' . $variant->getPrice() . PHP_EOL;
+        echo 'Fair price: ' . $variant->getFairPrice() . PHP_EOL;
         echo 'Purchase price: ' . $variant->getPurchasePrice() . PHP_EOL;
         echo PHP_EOL;
     }
@@ -417,6 +420,7 @@ try {
     echo 'Rrp: ' . $variantPricing->getRrp() . PHP_EOL;
     echo 'Price: ' . $variantPricing->getPrice() . PHP_EOL;
     echo 'Purchase price: ' . $variantPricing->getPurchasePrice() . PHP_EOL;
+    echo 'Fair price: ' . $variantPricing->getFairPrice() . PHP_EOL;
     echo PHP_EOL;
 } catch (MpApiException $e) {
     echo 'Unexpected error occurred while loading variant pricing: ' . $e->getMessage();

@@ -13,12 +13,14 @@ final class Pricing implements JsonSerializable
     private float $price;
     private float $rrp;
     private float $purchasePrice;
+    private ?float $fairPrice;
 
-    public function __construct(float $price, float $rrp, float $purchasePrice)
+    public function __construct(float $price, float $rrp, float $purchasePrice, ?float $fairPrice = null)
     {
         $this->price         = $price;
         $this->rrp           = $rrp;
         $this->purchasePrice = $purchasePrice;
+        $this->fairPrice     = $fairPrice;
     }
 
     /**
@@ -32,6 +34,7 @@ final class Pricing implements JsonSerializable
             (float) $data['price'],
             (float) $data['rrp'],
             (float) $data['purchase_price'],
+            isset($data['fair_price']) ? (float) $data['fair_price'] : null
         );
     }
 
@@ -44,6 +47,7 @@ final class Pricing implements JsonSerializable
             'price'          => $this->getPrice(),
             'rrp'            => $this->getRrp(),
             'purchase_price' => $this->getPurchasePrice(),
+            'fair_price'     => $this->getFairPrice(),
         ];
     }
 
@@ -60,6 +64,11 @@ final class Pricing implements JsonSerializable
     public function getPurchasePrice(): float
     {
         return $this->purchasePrice;
+    }
+
+    public function getFairPrice(): ?float
+    {
+        return $this->fairPrice;
     }
 
 }

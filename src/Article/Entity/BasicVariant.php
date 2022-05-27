@@ -19,6 +19,7 @@ final class BasicVariant implements JsonSerializable
     private StatusEnum $status;
     private int        $inStock;
     private float      $price;
+    private ?float     $fairPrice;
     private float      $purchasePrice;
     private float      $rrp;
 
@@ -30,6 +31,7 @@ final class BasicVariant implements JsonSerializable
         StatusEnum $status,
         int $inStock,
         float $price,
+        ?float $fairPrice,
         float $purchasePrice,
         float $rrp
     ) {
@@ -40,6 +42,7 @@ final class BasicVariant implements JsonSerializable
         $this->status        = $status;
         $this->inStock       = $inStock;
         $this->price         = $price;
+        $this->fairPrice     = $fairPrice;
         $this->purchasePrice = $purchasePrice;
         $this->rrp           = $rrp;
     }
@@ -60,6 +63,7 @@ final class BasicVariant implements JsonSerializable
             new StatusEnum((string) $data[StatusEnum::KEY_NAME]),
             (int) $data['in_stock'],
             (float) $data['price'],
+            isset($data['fair_price']) ? (float) $data['fair_price'] : null,
             (float) $data['purchase_price'],
             (float) $data['rrp'],
         );
@@ -98,6 +102,11 @@ final class BasicVariant implements JsonSerializable
     public function getPrice(): float
     {
         return $this->price;
+    }
+
+    public function getFairPrice(): ?float
+    {
+        return $this->fairPrice;
     }
 
     public function getPurchasePrice(): float
