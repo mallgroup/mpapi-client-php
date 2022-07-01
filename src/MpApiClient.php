@@ -29,7 +29,7 @@ final class MpApiClient implements ClientInterface, MpApiClientInterface
 {
 
     const APP_NAME    = 'mp-api-client';
-    const APP_VERSION = '4.1.1';
+    const APP_VERSION = '4.1.2';
 
     private BrandClientInterface       $brandClient;
     private CategoryClientInterface    $categoryClient;
