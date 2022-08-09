@@ -14,6 +14,7 @@ final class BasicOrder implements JsonSerializable
     use JsonSerializeEntityTrait;
 
     private int                $id;
+    private ?string            $externalId;
     private int                $purchaseId;
     private int                $customerId;
     private string             $customer;
@@ -32,6 +33,7 @@ final class BasicOrder implements JsonSerializable
 
     private function __construct(
         int $id,
+        ?string $externalId,
         int $purchaseId,
         int $customerId,
         string $customer,
@@ -49,6 +51,7 @@ final class BasicOrder implements JsonSerializable
         bool $mdpSpectrum
     ) {
         $this->id             = $id;
+        $this->externalId     = $externalId;
         $this->purchaseId     = $purchaseId;
         $this->customerId     = $customerId;
         $this->customer       = $customer;
@@ -76,6 +79,7 @@ final class BasicOrder implements JsonSerializable
     {
         return new self(
             (int) $data['id'],
+            $data['external_id'] ?? null,
             (int) $data['purchase_id'],
             (int) $data['customer_id'],
             (string) $data['customer'],
@@ -97,6 +101,11 @@ final class BasicOrder implements JsonSerializable
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getExternalId(): ?string
+    {
+        return $this->externalId;
     }
 
     public function getPurchaseId(): int
