@@ -1,5 +1,8 @@
 # Marketplace API client - change log
 
+## 3.15.0
+- added `external_id` attribute to orders
+
 ## 3.14.0
 - added support for batch `availability` endpoint
 
