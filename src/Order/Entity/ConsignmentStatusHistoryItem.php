@@ -20,16 +20,19 @@ final class ConsignmentStatusHistoryItem implements JsonSerializable
      */
     private array $flags;
 
+    private string $trackingNumber;
+
     /**
      * @param DateTimeInterface           $date
      * @param ConsignmentStatusEnum       $code
      * @param ConsignmentStatusFlagEnum[] $flags
      */
-    private function __construct(ConsignmentStatusEnum $code, DateTimeInterface $date, array $flags)
+    private function __construct(ConsignmentStatusEnum $code, DateTimeInterface $date, array $flags, string $trackingNumber)
     {
         $this->code  = $code;
         $this->date  = $date;
         $this->flags = $flags;
+        $this->trackingNumber = $trackingNumber;
     }
 
     /**
@@ -44,6 +47,7 @@ final class ConsignmentStatusHistoryItem implements JsonSerializable
             new ConsignmentStatusEnum($data[ConsignmentStatusEnum::KEY_NAME]),
             new DateTime($data['date']),
             array_map(fn(string $flag): ConsignmentStatusFlagEnum => new ConsignmentStatusFlagEnum($flag), $data[ConsignmentStatusFlagEnum::KEY_NAME]),
+            $data['tracking_number']
         );
     }
 
@@ -63,6 +67,14 @@ final class ConsignmentStatusHistoryItem implements JsonSerializable
     public function getFlags(): array
     {
         return $this->flags;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTrackingNumber(): string
+    {
+        return $this->trackingNumber;
     }
 
 }
