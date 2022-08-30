@@ -14,6 +14,7 @@ final class Order implements JsonSerializable
     use JsonSerializeEntityTrait;
 
     private int                              $id;
+    private ?string                          $externalId;
     private int                              $purchaseId;
     private string                           $currency;
     private float                            $deliveryPrice;
@@ -53,6 +54,7 @@ final class Order implements JsonSerializable
 
     private function __construct(
         int $id,
+        ?string $externalId,
         int $purchaseId,
         string $currency,
         float $deliveryPrice,
@@ -91,6 +93,7 @@ final class Order implements JsonSerializable
         ConsignmentStatusHistoryIterator $consignmentStatusHistory
     ) {
         $this->id                       = $id;
+        $this->externalId               = $externalId;
         $this->purchaseId               = $purchaseId;
         $this->currency                 = $currency;
         $this->deliveryPrice            = $deliveryPrice;
@@ -139,6 +142,7 @@ final class Order implements JsonSerializable
     {
         return new self(
             (int) $data['id'],
+            $data['external_id'] ?? null,
             (int) $data['purchase_id'],
             (string) $data['currency'],
             (float) $data['delivery_price'],
@@ -181,6 +185,11 @@ final class Order implements JsonSerializable
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getExternalId(): ?string
+    {
+        return $this->externalId;
     }
 
     public function getPurchaseId(): int

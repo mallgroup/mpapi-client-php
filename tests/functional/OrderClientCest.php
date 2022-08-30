@@ -56,6 +56,9 @@ final class OrderClientCest
 
         foreach ($orders as $order) {
             $I->assertIsInt($order->getId());
+            if ($order->getExternalId() !== null) {
+                $I->assertIsString($order->getExternalId());
+            }
             $I->assertIsInt($order->getPurchaseId());
             $I->assertIsInt($order->getCustomerId());
             $I->assertIsString($order->getCustomer());
