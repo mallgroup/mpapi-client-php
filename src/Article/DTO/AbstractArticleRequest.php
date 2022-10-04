@@ -26,6 +26,7 @@ abstract class AbstractArticleRequest implements JsonSerializable
     protected ?float            $purchasePrice = null;
     protected ?float            $rrp           = null;
     protected MediaIterator     $media;
+    /** @deprecated */
     protected PromotionIterator $promotions;
     protected ParameterIterator $parameters;
     protected LabelIterator     $labels;
@@ -146,11 +147,17 @@ abstract class AbstractArticleRequest implements JsonSerializable
         $this->media = $media;
     }
 
+    /**
+     * @deprecated
+     */
     public function getPromotions(): PromotionIterator
     {
         return $this->promotions;
     }
 
+    /**
+     * @deprecated
+     */
     public function setPromotions(PromotionIterator $promotions): void
     {
         $this->promotions = $promotions;

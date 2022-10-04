@@ -9,6 +9,7 @@ use JsonSerializable;
 use MpApiClient\Common\Util\InputDataUtil;
 use MpApiClient\Common\Util\JsonSerializeEntityTrait;
 
+/** @deprecated  */
 final class Promotion implements JsonSerializable
 {
 

@@ -12,4 +12,20 @@
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
+    
+    <issueHandlers>
+        <DeprecatedClass>
+            <errorLevel type="suppress">
+                <file name="src/Article/Entity/Common/PromotionIterator.php"/>
+                <file name="src/Article/Entity/Common/AbstractArticle.php"/>
+                <file name="src/Article/DTO/AbstractArticleRequest.php"/>
+            </errorLevel>
+        </DeprecatedClass>
+        <DeprecatedProperty>
+            <errorLevel type="suppress">
+                <file name="src/Article/Entity/Common/AbstractArticle.php"/>
+                <file name="src/Article/DTO/AbstractArticleRequest.php"/>
+            </errorLevel>
+        </DeprecatedProperty>
+    </issueHandlers>
 </psalm>

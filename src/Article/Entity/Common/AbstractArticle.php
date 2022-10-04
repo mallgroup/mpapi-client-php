@@ -19,9 +19,13 @@ abstract class AbstractArticle implements JsonSerializable
     protected int               $priority;
     protected ?string           $barcode;
     protected float             $price;
+    protected ?float            $fairPrice;
     protected float             $purchasePrice;
     protected float             $rrp;
     protected MediaIterator     $media;
+    /**
+     * @deprecated
+     */
     protected PromotionIterator $promotions;
     protected ParameterIterator $parameters;
     protected Dimensions        $dimensions;
@@ -47,6 +51,7 @@ abstract class AbstractArticle implements JsonSerializable
      * @param int               $priority
      * @param string|null       $barcode
      * @param float             $price
+     * @param ?float            $fairPrice
      * @param float             $purchasePrice
      * @param float             $rrp
      * @param MediaIterator     $media
@@ -72,6 +77,7 @@ abstract class AbstractArticle implements JsonSerializable
         int $priority,
         ?string $barcode,
         float $price,
+        ?float $fairPrice,
         float $purchasePrice,
         float $rrp,
         MediaIterator $media,
@@ -96,6 +102,7 @@ abstract class AbstractArticle implements JsonSerializable
         $this->priority       = $priority;
         $this->barcode        = $barcode;
         $this->price          = $price;
+        $this->fairPrice      = $fairPrice;
         $this->purchasePrice  = $purchasePrice;
         $this->rrp            = $rrp;
         $this->media          = $media;
@@ -164,6 +171,11 @@ abstract class AbstractArticle implements JsonSerializable
         return $this->price;
     }
 
+    public function getFairPrice(): ?float
+    {
+        return $this->fairPrice;
+    }
+
     public function getPurchasePrice(): float
     {
         return $this->purchasePrice;
@@ -179,6 +191,9 @@ abstract class AbstractArticle implements JsonSerializable
         return $this->media;
     }
 
+    /**
+     * @deprecated
+     */
     public function getPromotions(): PromotionIterator
     {
         return $this->promotions;

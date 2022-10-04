@@ -20,6 +20,7 @@ final class BasicProduct implements JsonSerializable
     private int              $inStock;
     private string           $categoryId;
     private float            $price;
+    private ?float           $fairPrice;
     private float            $purchasePrice;
     private float            $rrp;
     private int              $variantsCount;
@@ -34,6 +35,7 @@ final class BasicProduct implements JsonSerializable
         int $inStock,
         string $categoryId,
         float $price,
+        ?float $fairPrice,
         float $purchasePrice,
         float $rrp,
         int $variantsCount,
@@ -47,6 +49,7 @@ final class BasicProduct implements JsonSerializable
         $this->inStock       = $inStock;
         $this->categoryId    = $categoryId;
         $this->price         = $price;
+        $this->fairPrice     = $fairPrice;
         $this->purchasePrice = $purchasePrice;
         $this->rrp           = $rrp;
         $this->variantsCount = $variantsCount;
@@ -70,6 +73,7 @@ final class BasicProduct implements JsonSerializable
             (int) $data['in_stock'],
             (string) $data['category_id'],
             (float) $data['price'],
+            isset($data['fair_price']) ? (float) $data['fair_price'] : null,
             (float) $data['purchase_price'],
             (float) $data['rrp'],
             (int) $data['variants_count'],
@@ -115,6 +119,11 @@ final class BasicProduct implements JsonSerializable
     public function getPrice(): float
     {
         return $this->price;
+    }
+
+    public function getFairPrice(): ?float
+    {
+        return $this->fairPrice;
     }
 
     public function getPurchasePrice(): float

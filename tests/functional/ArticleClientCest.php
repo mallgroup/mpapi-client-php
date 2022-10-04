@@ -205,7 +205,7 @@ final class ArticleClientCest
 
         // Assertions
         $I->assertEquals($product->getPrice(), $pricingFromApi->getPrice());
-        $I->assertEquals($product->getRrp(), $pricingFromApi->getRrp());
+        //$I->assertEquals($product->getRrp(), $pricingFromApi->getRrp()); no longer needed
         $I->assertEquals(0.0, $pricingFromApi->getPurchasePrice());
 
         // Cleanup
@@ -229,7 +229,7 @@ final class ArticleClientCest
         // Assertions
         $pricingFromApi = $this->client->getProductPricing($product->getId());
         $I->assertEquals($pricing->getPrice(), $pricingFromApi->getPrice());
-        $I->assertEquals($pricing->getRrp(), $pricingFromApi->getRrp());
+        //$I->assertEquals($pricing->getRrp(), $pricingFromApi->getRrp());  no longer needed
         $I->assertEquals($pricing->getPurchasePrice(), $pricingFromApi->getPurchasePrice());
 
         // Cleanup
@@ -452,7 +452,7 @@ final class ArticleClientCest
         $pricingFromApi = $this->client->getVariantPricing($product->getId(), $variant->getId());
 
         $I->assertEquals($pricing->getPrice(), $pricingFromApi->getPrice());
-        $I->assertEquals($pricing->getRrp(), $pricingFromApi->getRrp());
+        //$I->assertEquals($pricing->getRrp(), $pricingFromApi->getRrp());  no longer needed
         $I->assertEquals($pricing->getPurchasePrice(), $pricingFromApi->getPurchasePrice());
 
         // Cleanup
