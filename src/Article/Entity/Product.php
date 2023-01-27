@@ -19,7 +19,7 @@ final class Product extends AbstractArticle
 
     protected ProductStageEnum $stage;
     protected string           $categoryId;
-    protected int              $vat;
+    protected float            $vat;
     protected VariantIterator  $variants;
     /**
      * @var string[]
@@ -44,7 +44,7 @@ final class Product extends AbstractArticle
      * @param float             $price
      * @param ?float            $fairPrice
      * @param float             $purchasePrice
-     * @param int               $vat
+     * @param float             $vat
      * @param float             $rrp
      * @param MediaIterator     $media
      * @param PromotionIterator $promotions
@@ -78,7 +78,7 @@ final class Product extends AbstractArticle
         float $price,
         ?float $fairPrice,
         float $purchasePrice,
-        int $vat,
+        float $vat,
         float $rrp,
         MediaIterator $media,
         PromotionIterator $promotions,
@@ -157,7 +157,7 @@ final class Product extends AbstractArticle
             (float) $data['price'],
             isset($data['fair_price']) ? (float)$data['fair_price'] : null,
             (float) $data['purchase_price'],
-            (int) $data['vat'],
+            (float) $data['vat'],
             (float) $data['rrp'],
             MediaIterator::createFromApi($data['media']),
             PromotionIterator::createFromApi($data['promotions']),
@@ -189,7 +189,7 @@ final class Product extends AbstractArticle
         return $this->categoryId;
     }
 
-    public function getVat(): int
+    public function getVat(): float
     {
         return $this->vat;
     }
