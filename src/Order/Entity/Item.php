@@ -15,7 +15,7 @@ final class Item implements JsonSerializable
     private int    $articleId;
     private int    $quantity;
     private float  $price;
-    private int    $vat;
+    private float  $vat;
     private ?float $commission;
     private string $title;
     /**
@@ -28,12 +28,12 @@ final class Item implements JsonSerializable
      * @param int        $articleId
      * @param int        $quantity
      * @param float      $price
-     * @param int        $vat
+     * @param float      $vat
      * @param float|null $commission
      * @param string     $title
      * @param string[]   $serialNumbers
      */
-    private function __construct(string $id, int $articleId, int $quantity, float $price, int $vat, ?float $commission, string $title, array $serialNumbers)
+    private function __construct(string $id, int $articleId, int $quantity, float $price, float $vat, ?float $commission, string $title, array $serialNumbers)
     {
         $this->id            = $id;
         $this->articleId     = $articleId;
@@ -57,7 +57,7 @@ final class Item implements JsonSerializable
             (int) $data['article_id'],
             (int) $data['quantity'],
             (float) $data['price'],
-            (int) $data['vat'],
+            (float) $data['vat'],
             InputDataUtil::getNullableFloat($data, 'commission'),
             (string) $data['title'],
             $data['serial_numbers'],
@@ -84,7 +84,7 @@ final class Item implements JsonSerializable
         return $this->price;
     }
 
-    public function getVat(): int
+    public function getVat(): float
     {
         return $this->vat;
     }

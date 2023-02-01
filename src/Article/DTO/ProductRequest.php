@@ -12,7 +12,7 @@ final class ProductRequest extends AbstractArticleRequest
     use JsonSerializeEntityTrait;
 
     private string                 $categoryId;
-    private int                    $vat;
+    private float                  $vat;
     private ?float                 $price = null;
     private VariantRequestIterator $variants;
     /**
@@ -23,7 +23,7 @@ final class ProductRequest extends AbstractArticleRequest
     private ?string $brandId            = null;
     private ?float  $weeeFee            = null;
 
-    public function __construct(string $id, string $title, string $shortDesc, string $longDesc, string $categoryId, int $vat, int $priority)
+    public function __construct(string $id, string $title, string $shortDesc, string $longDesc, string $categoryId, float $vat, int $priority)
     {
         parent::__construct($id, $title, $shortDesc, $longDesc, $priority);
         $this->categoryId = $categoryId;
@@ -128,12 +128,12 @@ final class ProductRequest extends AbstractArticleRequest
         $this->categoryId = $categoryId;
     }
 
-    public function getVat(): int
+    public function getVat(): float
     {
         return $this->vat;
     }
 
-    public function setVat(int $vat): void
+    public function setVat(float $vat): void
     {
         $this->vat = $vat;
     }
