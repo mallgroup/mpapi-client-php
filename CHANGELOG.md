@@ -1,5 +1,12 @@
 # Marketplace API client - change log
 
+## 3.16.0
+- added `fairPrice` attribute to `Article entity`
+
+## 3.15.0
+- added `external_id` attribute to orders
+- `promotions` attribute is deprecated
+
 ## 3.14.0
 - added support for batch `availability` endpoint
 
@@ -46,7 +53,7 @@
 - fix type hint in `setApplicationTag` method
 
 ## 3.9.0
-- added new field `partner_title` in product  
+- added new field `partner_title` in product
 
 ## 3.8.3
 - add option to include testing orders into orders list [orders documentation](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/ORDERS.md#get-all-orders-include-testing-orders)
@@ -55,10 +62,10 @@
 - added `serial-numbers` endpoint ([orders documentation](https://github.com/mallgroup/mpapi-client-php/blob/master/doc/ORDERS.md#order-item-serial-numbers))
 
 ## 3.7.0
-- added `checks\media` endpoint 
+- added `checks\media` endpoint
 
 ## 3.6.0
-- added `checks` endpoint 
+- added `checks` endpoint
 
 ## 3.5.1
 - added option to set application tag
@@ -92,13 +99,13 @@ please refer to [product documentation](https://github.com/mallgroup/mpapi-clien
 
 ## 2.16.0
 - changed API URL to mallgroup.com
- 
+
 ## 2.15.0
 - delivered orders data was extended with 'delivered_at' field (list of basic orders data, order detail)
 
 ## 2.14.0
-- added optional fourth arguments forcetoken into put method in Products service 
-- added optional third arguments forcetoken into put method in Variants service 
+- added optional fourth arguments forcetoken into put method in Products service
+- added optional third arguments forcetoken into put method in Variants service
 
 ## 2.13.0
 - Product/Variant entity extended with 'purchase_price', one of the 'price' or 'purchase_price' is required

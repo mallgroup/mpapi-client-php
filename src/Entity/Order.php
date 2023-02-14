@@ -18,6 +18,8 @@ class Order extends AbstractEntity
 
 	const KEY_ID = 'id';
 
+	const KEY_EXTERNAL_ID = 'external_id';
+
 	const KEY_PARTNER_ID = 'partner_id';
 
 	const KEY_PURCHASE_ID = 'purchase_id';
@@ -164,6 +166,7 @@ class Order extends AbstractEntity
 	{
 		return [
 			'id'                      => (int) $this->getOrderId(),
+            'external_id'             => $this->getExternalId(),
 			'purchase_id'             => (int) $this->getPurchaseId(),
 			'external_order_id'       => (int) $this->getExternalOrderId(),
 			'currency'                => $this->getCurrencyId(),
@@ -230,6 +233,19 @@ class Order extends AbstractEntity
 		}
 		return $retval;
 	}
+
+    /**
+     * Get order external id
+     *
+     * @return string|null
+     */
+    public function getExternalId()
+    {
+        if (isset($this->data[self::KEY_EXTERNAL_ID])) {
+            return $this->data[self::KEY_EXTERNAL_ID];
+        }
+        return null;
+    }
 
 	/**
 	 * Get order items

@@ -60,6 +60,12 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	 */
 	const KEY_PRICE = 'price';
 
+    /**
+	 *
+	 * @var string
+	 */
+	const KEY_FAIR_PRICE = 'fair_price';
+
 	/**
 	 *
 	 * @var string
@@ -115,7 +121,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
     const KEY_INFORMATION_LIST = 'information_list';
 
 	/**
-	 *
+	 * @deprecated
 	 * @var string
 	 */
 	const KEY_PROMOTIONS = 'promotions';
@@ -498,6 +504,14 @@ abstract class AbstractArticleEntity extends AbstractEntity
 		return $this;
 	}
 
+    /**
+     * @return float|null
+     */
+    public function getFairPrice()
+    {
+        return isset($this->data[self::KEY_FAIR_PRICE]) ? (float) $this->data[self::KEY_FAIR_PRICE] : null;
+    }
+
 	/**
 	 * Get purchase price
 	 *
@@ -654,6 +668,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	/**
 	 * Get promotions
 	 *
+     * @deprecated
 	 * @return array
 	 */
 	public function getPromotions()
@@ -668,6 +683,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	/**
 	 * Set promotions
 	 *
+     * @deprecated
 	 * @param array $value
 	 * @return self
 	 */
@@ -682,6 +698,7 @@ abstract class AbstractArticleEntity extends AbstractEntity
 	/**
 	 * Add promotion
 	 *
+     * @deprecated
 	 * @param double $price
 	 * @param string $from
 	 * @param string $to
