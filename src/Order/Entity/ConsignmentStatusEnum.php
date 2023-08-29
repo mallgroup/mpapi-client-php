@@ -43,6 +43,6 @@ final class ConsignmentStatusEnum extends AbstractStringEnum
         self::LOST,
     ];
 
-    public const KEY_NAME = 'status';
+    public const KEY_NAME = 'code';
 
 }
