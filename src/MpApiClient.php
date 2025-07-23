@@ -19,17 +19,22 @@ use MpApiClient\Common\Interfaces\MpApiClientInterface;
 use MpApiClient\Common\Interfaces\OrderClientInterface;
 use MpApiClient\Common\Interfaces\ShopClientInterface;
 use MpApiClient\Common\Interfaces\SupplyDelayClientInterface;
+use MpApiClient\Common\Interfaces\TaricCodeClientInterface;
 use MpApiClient\Financial\FinancialClient;
 use MpApiClient\Label\LabelClient;
 use MpApiClient\Order\OrderClient;
 use MpApiClient\Shop\ShopClient;
 use MpApiClient\SupplyDelay\SupplyDelayClient;
+use MpApiClient\TaricCode\TaricCodeClient;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 final class MpApiClient implements ClientInterface, MpApiClientInterface
 {
 
     const APP_NAME    = 'mp-api-client';
-    const APP_VERSION = '5.0.0';
+    const APP_VERSION = '5.1.0';
 
     private BrandClientInterface       $brandClient;
     private CategoryClientInterface    $categoryClient;
@@ -40,6 +45,7 @@ final class MpApiClient implements ClientInterface, MpApiClientInterface
     private ArticleClientInterface     $articleClient;
     private ShopClientInterface        $shopClient;
     private SupplyDelayClientInterface $supplyDelayClient;
+    private TaricCodeClientInterface   $taricCodeClient;
 
     public function __construct(GuzzleClientInterface $client, string $appTag)
     {
@@ -52,6 +58,7 @@ final class MpApiClient implements ClientInterface, MpApiClientInterface
         $this->articleClient     = new ArticleClient($client, $appTag);
         $this->shopClient        = new ShopClient($client, $appTag);
         $this->supplyDelayClient = new SupplyDelayClient($client, $appTag);
+        $this->taricCodeClient   = new TaricCodeClient($client, $appTag);
     }
 
     public static function createFromOptions(string $appTag, MpApiClientOptions $options): self
@@ -102,6 +109,11 @@ final class MpApiClient implements ClientInterface, MpApiClientInterface
     public function supplyDelay(): SupplyDelayClientInterface
     {
         return $this->supplyDelayClient;
+    }
+
+    public function taricCode(): TaricCodeClientInterface
+    {
+        return $this->taricCodeClient;
     }
 
 }

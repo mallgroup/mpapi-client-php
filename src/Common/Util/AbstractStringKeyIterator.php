@@ -9,6 +9,7 @@ use JsonSerializable;
 /**
  * An iterator with values backed by their unique primary key (one item can exist only once in this iterator)...
  * @template TValue of JsonSerializable
+ * @SuppressWarnings(PHPMD.NumberOfChildren)
  */
 abstract class AbstractStringKeyIterator implements Iterator, Countable, JsonSerializable
 {

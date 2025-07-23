@@ -102,7 +102,7 @@ final class ArticleClientCest
         $product = $this->getNewProductRequest();
         $product->setId($this->productId);
         $product->setPartnerTitle('custom partner title');
-        $product->setBrandId('100TEST');
+        $product->setBrandId('SONY');
 
         $productFromApi = $this->client->createProduct($product);
         $this->assertProductValues($I, $product, $productFromApi);
@@ -647,6 +647,7 @@ final class ArticleClientCest
         $product->setAvailability(Fixtures::get('article-availability'));
         $product->setMedia(Fixtures::get('article-media'));
         $product->setPrice(69);
+        $product->setTaricCode('22030010');
 
         return $product;
     }

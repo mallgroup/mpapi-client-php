@@ -21,7 +21,8 @@ final class ProductRequest extends AbstractArticleRequest
     private array   $variableParameters = [];
     private ?string $partnerTitle       = null;
     private ?string $brandId            = null;
-    private ?float  $weeeFee            = null;
+    private ?float  $weeeFee             = null;
+    private ?string $taricCode          = null;
 
     public function __construct(string $id, string $title, string $shortDesc, string $longDesc, string $categoryId, float $vat, int $priority)
     {
@@ -65,6 +66,7 @@ final class ProductRequest extends AbstractArticleRequest
         $self->setPartnerTitle($product->getPartnerTitle());
         $self->setBrandId($product->getBrandId());
         $self->setWeeeFee($product->getWeeeFee());
+        $self->setTaricCode($product->getTaricCode());
 
         /** @var Variant $variant - PHPStan false positive fix */
         foreach ($product->getVariants() as $variant) {
@@ -111,6 +113,7 @@ final class ProductRequest extends AbstractArticleRequest
                 'mallbox_allowed' => $this->getMallboxAllowed(),
                 'partner_title'   => $this->getPartnerTitle(),
                 'brand_id'        => $this->getBrandId(),
+                'taric_code'      => $this->getTaricCode(),
             ],
             fn($value): bool => !is_null($value)
         );
@@ -199,6 +202,16 @@ final class ProductRequest extends AbstractArticleRequest
     public function setWeeeFee(?float $weeeFee): void
     {
         $this->weeeFee = $weeeFee;
+    }
+
+    public function getTaricCode(): ?string
+    {
+        return $this->taricCode;
+    }
+
+    public function setTaricCode(?string $taricCode): void
+    {
+        $this->taricCode = $taricCode;
     }
 
 }
