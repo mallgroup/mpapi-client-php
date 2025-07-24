@@ -100,6 +100,7 @@ try {
     $productRequest->setDimensions(new Dimensions(2, 20, 5, 20));
     $productRequest->setBrandId('BRAND_ID');
     $productRequest->setBarcode('0000123456789');
+    $productRequest->setTaricCode('22030010');
 
     // To create product with variants, variants may be specified during product creation using VariantRequest and VariantRequestIterator
     $productRequest->setVariants(new VariantRequestIterator());
@@ -138,6 +139,7 @@ try {
     // Add optional data
     $productRequest->setBrandId('BRAND_ID');
     $productRequest->setBarcode('0000123456789');
+    $productRequest->setTaricCode('22021000');
 
     // Update product
     // - API returns same data that were sent in, which is not the same as data returned by `getProduct` method

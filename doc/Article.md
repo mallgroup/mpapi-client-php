@@ -102,6 +102,7 @@ $productRequest->setPrice(69);
 $productRequest->setDimensions(new Dimensions(2, 20, 5, 20));
 $productRequest->setBrandId('BRAND_ID');
 $productRequest->setBarcode('0000123456789');
+$productRequest->setTaricCode('22030010');
 
 // Create product
 // - request returns full product detail, same as calling `getProduct` method
@@ -166,7 +167,8 @@ Example above prints out
     "deliveryDelay": 3,
     "freeDelivery": false,
     "packageSize": "smallbox",
-    "mallboxAllowed": false
+    "mallboxAllowed": false,
+    "taric_code": "22030010"
 }
 ```
 
@@ -189,6 +191,7 @@ $productRequest = new ProductRequest(
 // Add optional data
 $productRequest->setBrandId('BRAND_ID');
 $productRequest->setBarcode('0000123456789');
+$productRequest->setTaricCode('22030010');
 
 // Update product
 // - API returns same data that were sent in, which is not the same as data returned by `getProduct` method
@@ -263,7 +266,8 @@ Example above prints out
     "deliveryDelay": 3,
     "freeDelivery": false,
     "packageSize": "smallbox",
-    "mallboxAllowed": false
+    "mallboxAllowed": false,
+    "taric_code": "22030010"
 }
 ```
 

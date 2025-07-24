@@ -126,6 +126,7 @@ $brandClient = new BrandClient($httpClient, 'my-app-name')
 * [Order](doc/Order.md)
 * [Shop](doc/Shop.md)
 * [SupplyDelay](doc/SupplyDelay.md)
+* [TaricCode](doc/TaricCode.md)
 
 List of custom Exceptions thrown in this client can be found [here](doc/Exception.md)
 

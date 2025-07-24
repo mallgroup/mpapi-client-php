@@ -28,6 +28,7 @@ final class Product extends AbstractArticle
     protected ?string $partnerTitle;
     protected ?string $brandId;
     protected ?float  $weeeFee;
+    protected ?string $taricCode;
 
     /**
      * @psalm-suppress DeprecatedClass
@@ -63,6 +64,7 @@ final class Product extends AbstractArticle
      * @param string|null       $partnerTitle
      * @param string|null       $brandId
      * @param float|null        $weeeFee
+     * @param string|null      $taricCode
      */
     private function __construct(
         string $id,
@@ -96,7 +98,8 @@ final class Product extends AbstractArticle
         bool $mallboxAllowed,
         ?string $partnerTitle,
         ?string $brandId,
-        ?float $weeeFee
+        ?float $weeeFee,
+        ?string $taricCode
     ) {
         parent::__construct(
             $id,
@@ -132,6 +135,7 @@ final class Product extends AbstractArticle
         $this->partnerTitle       = $partnerTitle;
         $this->brandId            = $brandId;
         $this->weeeFee            = $weeeFee;
+        $this->taricCode          = $taricCode;
     }
 
     /**
@@ -176,6 +180,7 @@ final class Product extends AbstractArticle
             InputDataUtil::getNullableString($data, 'partner_title'),
             InputDataUtil::getNullableString($data, 'brand_id'),
             InputDataUtil::getNullableFloat($data, 'weee_fee'),
+            InputDataUtil::getNullableString($data, 'taric_code'),
         );
     }
 
@@ -220,6 +225,11 @@ final class Product extends AbstractArticle
     public function getWeeeFee(): ?float
     {
         return $this->weeeFee;
+    }
+
+    public function getTaricCode(): ?string
+    {
+        return $this->taricCode;
     }
 
 }
