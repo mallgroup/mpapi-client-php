@@ -9,9 +9,11 @@ use MpApiClient\Exception\NotFoundException;
 use MpApiClient\Filter\Filter;
 use MpApiClient\Order\Entity\BasicOrderList;
 use MpApiClient\Order\Entity\Branches;
+use MpApiClient\Order\Entity\BranchesV2;
 use MpApiClient\Order\Entity\Customer;
 use MpApiClient\Order\Entity\ItemIterator;
 use MpApiClient\Order\Entity\Order;
+use MpApiClient\Order\Entity\OrderV2;
 use MpApiClient\Order\Entity\StatusEnum;
 use MpApiClient\Order\OrderClient;
 use MpApiClient\Tests\_support\FunctionalTester;
@@ -88,6 +90,11 @@ final class OrderClientCest
     public function testGetNotFound(FunctionalTester $I): void
     {
         $I->expectThrowable(NotFoundException::class, fn() => $this->client->get(Functional::getRandomInt()));
+    }
+
+    public function testGetNotFoundV2(FunctionalTester $I): void
+    {
+        $I->expectThrowable(NotFoundException::class, fn() => $this->client->getV2(Functional::getRandomInt()));
     }
 
     /**
@@ -167,6 +174,80 @@ final class OrderClientCest
         $I->assertEquals($orderArr['consignment_status_history'], $order->getConsignmentStatusHistory()->jsonSerialize());
     }
 
+    /**
+     * @throws MpApiException
+     */
+    public function testGetV2(FunctionalTester $I): void
+    {
+        // Expected order to be returned, with all data types set correctly
+        $orderArr = Fixtures::get('orderV2');
+
+        $order = $this->client->getV2(Fixtures::get('orderId'));
+        $this->assertOrderClassesV2($I, $order);
+
+        $I->assertEquals($orderArr['id'], $order->getId());
+        $I->assertEquals($orderArr['purchase_id'], $order->getPurchaseId());
+        $I->assertEquals($orderArr['currency'], $order->getCurrency());
+        $I->assertEquals($orderArr['delivery_price'], $order->getDeliveryPrice());
+        $I->assertEquals($orderArr['cod_price'], $order->getCodPrice());
+        $I->assertEquals($orderArr['cod'], $order->getCod());
+        $I->assertEquals($orderArr['discount'], $order->getDiscount());
+        $I->assertEquals($orderArr['payment_type'], $order->getPaymentType());
+        $I->assertEquals($orderArr['delivery_method'], $order->getDeliveryMethod());
+        $I->assertEquals($orderArr['delivery_method_id'], $order->getDeliveryMethodId());
+        $I->assertEquals($orderArr['branch_id'] ?? null, $order->getBranchId());
+
+        $I->assertEquals($orderArr['branches']['overridden'], $order->getBranches()->isOverridden());
+        $I->assertEquals($orderArr['branches']['branch_id'] ?? null, $order->getBranches()->getBranchId());
+        $I->assertEquals($orderArr['branches']['branch_change_time'] ?? null, $order->getBranches()->getLastChange());
+        $I->assertEquals($orderArr['branches']['secondary_branch_id'] ?? null, $order->getBranches()->getSecondaryBranchId());
+
+        $I->assertEquals($orderArr['tracking_number'] ?? null, $order->getTrackingNumber());
+        $I->assertEquals($orderArr['tracking_url'] ?? null, $order->getTrackingUrl());
+
+        $I->assertEquals($orderArr['ship_date'] ?? null, $order->getShipDate());
+        $I->assertEquals($orderArr['delivery_date'] ?? null, $order->getDeliveryDate());
+        $I->assertEquals($orderArr['delivered_at'] ?? null, $order->getDeliveredAt());
+        $I->assertEquals($orderArr['first_delivery_attempt'] ?? null, $order->getFirstDeliveryAttempt());
+
+        $I->assertEquals($orderArr['address']['customer_id'], $order->getCustomer()->getCustomerId());
+        $I->assertEquals($orderArr['address']['name'], $order->getCustomer()->getName());
+        $I->assertEquals($orderArr['address']['company'] ?? null, $order->getCustomer()->getCompany());
+        $I->assertEquals($orderArr['address']['phone'], $order->getCustomer()->getPhone());
+        $I->assertEquals($orderArr['address']['email'], $order->getCustomer()->getEmail());
+        $I->assertEquals($orderArr['address']['street'], $order->getCustomer()->getStreet());
+        $I->assertEquals($orderArr['address']['city'], $order->getCustomer()->getCity());
+        $I->assertEquals($orderArr['address']['zip'], $order->getCustomer()->getZip());
+        $I->assertEquals($orderArr['address']['country'], $order->getCustomer()->getCountry());
+
+        $I->assertEquals($orderArr['confirmed'], $order->isConfirmed());
+        $I->assertEquals($orderArr['status'], $order->getStatus());
+
+        $I->assertEquals($orderArr['items'][0]['id'], $order->getItems()->current()->getId());
+        $I->assertEquals($orderArr['items'][0]['article_id'], $order->getItems()->current()->getArticleId());
+        $I->assertEquals($orderArr['items'][0]['quantity'], $order->getItems()->current()->getQuantity());
+        $I->assertEquals($orderArr['items'][0]['price'], $order->getItems()->current()->getPrice());
+        $I->assertEquals($orderArr['items'][0]['vat'], $order->getItems()->current()->getVat());
+        $I->assertEquals($orderArr['items'][0]['commission'] ?? null, $order->getItems()->current()->getCommission());
+        $I->assertEquals($orderArr['items'][0]['title'], $order->getItems()->current()->getTitle());
+        $I->assertEquals($orderArr['items'][0]['serial_numbers'], $order->getItems()->current()->getSerialNumbers());
+
+        $I->assertEquals($orderArr['test'], $order->isTest());
+        $I->assertEquals($orderArr['mdp'], $order->isMdp());
+        $I->assertEquals($orderArr['mdp_spectrum'], $order->isMdpSpectrum());
+        $I->assertEquals($orderArr['ready_to_return'], $order->isReadyToReturn());
+        $I->assertEquals($orderArr['shipped'] ?? null, $order->getShipped());
+        $I->assertEquals($orderArr['open'] ?? null, $order->getOpen());
+        $I->assertEquals($orderArr['blocked'] ?? null, $order->getBlocked());
+        $I->assertEquals($orderArr['lost'] ?? null, $order->getLost());
+        $I->assertEquals($orderArr['returned'] ?? null, $order->getReturned());
+        $I->assertEquals($orderArr['cancelled'] ?? null, $order->getCancelled());
+        $I->assertEquals($orderArr['delivered'] ?? null, $order->getDelivered());
+        $I->assertEquals($orderArr['shipping'] ?? null, $order->getShipping());
+        $I->assertEquals(0, $order->getConsignmentStatusHistory()->count());
+        $I->assertEquals($orderArr['consignment_status_history'], $order->getConsignmentStatusHistory()->jsonSerialize());
+    }
+
     public function _testConfirmOrder(): void
     {
         // TODO: implement me
@@ -200,6 +281,15 @@ final class OrderClientCest
     {
         $I->assertInstanceOf(Order::class, $order);
         $I->assertInstanceOf(Branches::class, $order->getBranches());
+        $I->assertInstanceOf(Customer::class, $order->getCustomer());
+        $I->assertInstanceOf(StatusEnum::class, $order->getStatus());
+        $I->assertInstanceOf(ItemIterator::class, $order->getItems());
+    }
+
+    private function assertOrderClassesV2(FunctionalTester $I, OrderV2 $order): void
+    {
+        $I->assertInstanceOf(OrderV2::class, $order);
+        $I->assertInstanceOf(BranchesV2::class, $order->getBranches());
         $I->assertInstanceOf(Customer::class, $order->getCustomer());
         $I->assertInstanceOf(StatusEnum::class, $order->getStatus());
         $I->assertInstanceOf(ItemIterator::class, $order->getItems());

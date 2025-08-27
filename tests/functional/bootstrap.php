@@ -259,6 +259,68 @@ Fixtures::add(
 );
 
 Fixtures::add(
+    'orderV2',
+    [
+        'id'                         => 3328201,
+        'purchase_id'                => 33282,
+        'external_order_id'          => 0,
+        'currency'                   => 'CZK',
+        'delivery_price'             => 99.1,
+        'cod_price'                  => 10,
+        'cod'                        => 111,
+        'discount'                   => 100.1,
+        'payment_type'               => 'A',
+        'delivery_method'            => '123',
+        'delivery_method_id'         => 123,
+        'branchID'                   => '123A',
+        'branches'                   => [
+            'branchID'               => '123A',
+            'overridden' => false,
+        ],
+        'tracking_number'            => 'ABRA0001',
+        'ship_date'                  => new DateTime('2025-06-10 00:00:00'),
+        'delivery_date'              => new DateTime('2025-06-10 00:00:00'),
+        'delivered_at'               => new DateTime('2025-06-10 00:00:00'),
+        'address'                    => [
+            'customer_id' => 1000929311,
+            'name'        => 'Josef Novák',
+            'company'     => 'U garáží 1',
+            'phone'       => '+420701000001',
+            'email'       => 'info@mall.cz',
+            'street'      => 'U garáží 1',
+            'city'        => 'Praha',
+            'zip'         => '17001',
+            'country'     => 'CZ',
+        ],
+        'confirmed'                  => true,
+        'status'                     => new OrderStatusEnum('returned'),
+        'items'                      => [
+            [
+                'id'             => '100000120663',
+                'article_id'     => 100000120663,
+                'quantity'       => 1,
+                'price'          => 1000.1,
+                'vat'            => 21,
+                'commission'     => 12.1,
+                'title'          => '',
+                'serial_numbers' => [],
+            ],
+        ],
+        'test'                       => false,
+        'mdp'                        => false,
+        'mdp_spectrum'               => false,
+        'ready_to_return'            => true,
+        'shipped'                    => new DateTime('2025-06-09 14:50:17'),
+        'open'                       => new DateTime('2025-06-09 14:44:34'),
+        'lost'                       => new DateTime('2025-06-09 15:20:36'),
+        'returned'                   => new DateTime('2025-06-09 15:20:43'),
+        'delivered'                  => new DateTime('2025-06-09 15:12:40'),
+        'shipping'                   => new DateTime('2025-06-09 14:48:54'),
+        'consignment_status_history' => [],
+    ],
+);
+
+Fixtures::add(
     'article-media',
     new MediaIterator(
         new Media('https://i.cdn.nrholding.net/21749465', true),

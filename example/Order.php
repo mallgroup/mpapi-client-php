@@ -68,7 +68,7 @@ try {
 //
 
 try {
-    $orderDetail = $client->orders()->get(1234567890);
+    $orderDetail = $client->orders()->getV2(1234567890); // or use $client->orders()->get(1234567890); for old V1 version
 
     // Print order as json object
     echo json_encode($orderDetail, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
