@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## 5.2.0 - 2025-08-27
+### Added
+
+- connect to V2 order detail endpoint
+
 ## 5.1.0 - 2025-07-23
 
 ### Added

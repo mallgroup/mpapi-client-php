@@ -84,7 +84,84 @@ Example above prints out
 }
 ```
 
-## Get order detail
+## Get order detail V2
+
+Method expects `order` ID and returns [OrderV2](../src/Order/Entity/OrderV2.php) entity.
+
+```php
+/** @var MpApiClient\Common\Interfaces\OrderClientInterface $orderClient */
+$orderDetail = $orderClient->getV2(12345678901);
+echo json_encode($orderDetail, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+```
+
+Example above prints out
+
+```json
+{
+    "id": 12345678901,
+    "purchaseId": 123456789,
+    "currency": "CZK",
+    "deliveryPrice": 29,
+    "codPrice": 39,
+    "cod": 1867,
+    "discount": 0,
+    "paymentType": "A",
+    "deliveryMethod": "20",
+    "deliveryMethodId": "23",
+    "branchId": "23A",
+    "branches": {
+        "branchId": "23A",
+        "secondaryBranchId": null,
+        "lastChange": null
+    },
+    "trackingNumber": null,
+    "trackingUrl": null,
+    "shipDate": "2019-07-25 00:00:00",
+    "deliveryDate": "2019-07-26 00:00:00",
+    "deliveredAt": null,
+    "firstDeliveryAttempt": null,
+    "customer": {
+        "customerId": 1101334728,
+        "name": "Firstname Surname",
+        "company": null,
+        "phone": "+420721123456",
+        "email": "a@a.com",
+        "street": "Pražská 121",
+        "city": "Pelhřimov",
+        "zip": "39301",
+        "country": "CZ"
+    },
+    "confirmed": false,
+    "status": "open",
+    "items": [
+        {
+            "id": "pCL00275",
+            "articleId": 100001054382,
+            "quantity": 1,
+            "price": 1799,
+            "vat": 21,
+            "commission": 15,
+            "title": "Chloé - EDP 75 ml",
+            "serialNumbers": []
+        }
+    ],
+    "test": false,
+    "mdp": true,
+    "mdpSpectrum": false,
+    "readyToReturn": false,
+    "shipped": null,
+    "open": "2019-07-25 16:12:14",
+    "blocked": "2019-07-25 16:07:31",
+    "lost": null,
+    "returned": null,
+    "cancelled": null,
+    "delivered": null,
+    "shipping": null,
+    "consignmentStatusHistory": []
+}
+```
+
+## Get order detail (deprecated use V2)
 
 Method expects `order` ID and returns [Order](../src/Order/Entity/Order.php) entity.
 

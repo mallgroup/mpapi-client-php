@@ -13,6 +13,7 @@ use MpApiClient\Order\DTO\StatusRequest;
 use MpApiClient\Order\Entity\BasicOrderList;
 use MpApiClient\Order\Entity\Labels;
 use MpApiClient\Order\Entity\Order;
+use MpApiClient\Order\Entity\OrderV2;
 use MpApiClient\Order\Entity\Stats;
 use MpApiClient\Order\Entity\Tracking;
 
@@ -24,6 +25,7 @@ final class OrderClient extends AbstractMpApiClient implements OrderClientInterf
     private const LABELS = '/v1/orders/labels';
 
     private const DETAIL   = '/v1/orders/%d';
+    private const DETAIL_V2   = '/v2/orders/%d';
     private const TRACKING = '/v1/orders/%d/tracking';
 
     private const ITEM_SERIAL_NUMBERS = '/v1/orders/%d/items/%d/serial-numbers';
@@ -46,6 +48,13 @@ final class OrderClient extends AbstractMpApiClient implements OrderClientInterf
     {
         return Order::createFromApi(
             $this->sendJson('GET', sprintf(self::DETAIL, $orderId))['data']
+        );
+    }
+
+    public function getV2(int $orderId): OrderV2
+    {
+        return OrderV2::createFromApi(
+            $this->sendJson('GET', sprintf(self::DETAIL_V2, $orderId))['data']
         );
     }
 

@@ -20,7 +20,7 @@ $client  = MpApiClient::createFromOptions('my-app-name', $options);
 //
 
 try {
-    $orderList = $client->orders()->get(1234567890);
+    $orderList = $client->orders()->getV2(1234567890); // or use $client->orders()->get(1234567890); for old V1 version
 } catch (UnauthorizedException $e) {
     // You provided invalid client id, or forgot to provide authenticator middleware altogether
     echo 'API authorization failed with error: ' . $e->getMessage();

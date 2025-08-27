@@ -10,6 +10,7 @@ use MpApiClient\Order\DTO\StatusRequest;
 use MpApiClient\Order\Entity\BasicOrderList;
 use MpApiClient\Order\Entity\Labels;
 use MpApiClient\Order\Entity\Order;
+use MpApiClient\Order\Entity\OrderV2;
 use MpApiClient\Order\Entity\Stats;
 use MpApiClient\Order\Entity\Tracking;
 
@@ -27,6 +28,12 @@ interface OrderClientInterface
      * @throws Exception
      */
     public function get(int $orderId): Order;
+
+    /**
+     * @throws MpApiException
+     * @throws Exception
+     */
+    public function getV2(int $orderId): OrderV2;
 
     /**
      * @throws MpApiException
